@@ -57,6 +57,20 @@
   --color-14: var(--color-dark-mode-14);
   --color-15: var(--color-dark-mode-15);
   --color-15-hover: var(--color-dark-mode-15-hover);
+
+  /* margins */
+  --margin-sm: 8px;
+  --margin-nm: 10px;
+  --margin-md: 15px;
+  --margin-lg: 20px;
+  --margin-xl: 30px;
+
+  /* paddings */
+  --padding-sm: 8px;
+  --padding-nm: 10px;
+  --padding-md: 15px;
+  --padding-lg: 20px;
+  --padding-xl: 30px;
 }
 
 html {
@@ -65,8 +79,8 @@ html {
 
 body {
   margin: 0;
-  font-size: var(--font-size-nm);
   font-family: var(--primary-font);
+  font-size: var(--font-size-nm);
   font-weight: var(--font-weight-regular);
   letter-spacing: 1px;
   color: #fff;
@@ -82,7 +96,9 @@ a {
 
 button {
   padding: 0;
-  font-family: inherit;
+  font-family: var(--primary-font);
+  font-size: var(--font-size-nm);
+  font-weight: var(--font-weight-regular);
   border: none;
   background: none;
   outline: none;
