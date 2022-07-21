@@ -1,0 +1,17 @@
+.PrimaryButton {
+  padding: 10px 17px;
+  min-width: 80px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-12);
+  background-color: var(--color-15);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-regular);
+  transition: all var(--transition-speed-normal) ease;
+}
+
+.PrimaryButton:hover {
+  background-color: var(--color-15-hover);
+}

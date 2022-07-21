@@ -8,7 +8,7 @@
 
 :root {
   /* global fonts variables */
-  --primary-font: "Catamaran", sans-serif;
+  --primary-font: 'Catamaran', sans-serif;
 
   --font-size-sm: 1.2rem; /* 12px */
   --font-size-nm: 1.4rem; /* 14px */
@@ -71,6 +71,11 @@
   --padding-md: 15px;
   --padding-lg: 20px;
   --padding-xl: 30px;
+
+  /* transitions */
+  --transition-speed-fast: 0.2s;
+  --transition-speed-normal: 0.3s;
+  --transition-speed-slow: 0.5s;
 }
 
 html {
@@ -106,6 +111,6 @@ button {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
