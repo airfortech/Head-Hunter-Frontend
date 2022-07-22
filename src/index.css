@@ -25,9 +25,11 @@
   /* colors dark mode */
   --color-dark-mode-1: #0a0a0a;
   --color-dark-mode-2: #1e1e1f;
+  --color-dark-mode-2-hover: hsl(240, 2%, 17%);
   --color-dark-mode-3: #202122;
   --color-dark-mode-4: #222224;
   --color-dark-mode-5: #292a2b;
+  --color-dark-mode-5-hover: hsl(228, 4%, 21%);
   --color-dark-mode-6: #333333;
   --color-dark-mode-7: #4d4d4d;
   --color-dark-mode-8: #666666;
@@ -37,15 +39,22 @@
   --color-dark-mode-12: #f7f7f7;
   --color-dark-mode-13: #0b8bd4;
   --color-dark-mode-14: #172a35;
+  --color-dark-mode-14-hover: hsl(202, 39%, 20%);
   --color-dark-mode-15: #e02735;
-  --color-dark-mode-15-hover: #f84f5d; /* example hover state variable */
+  --color-dark-mode-15-hover: hsl(
+    355,
+    75%,
+    62%
+  ); /* example hover state variable */
 
   /* colors (use this colors only in components!!!!) */
   --color-1: var(--color-dark-mode-1);
   --color-2: var(--color-dark-mode-2);
+  --color-2-hover: var(--color-dark-mode-2-hover);
   --color-3: var(--color-dark-mode-3);
   --color-4: var(--color-dark-mode-4);
   --color-5: var(--color-dark-mode-5);
+  --color-5-hover: var(--color-dark-mode-5-hover);
   --color-6: var(--color-dark-mode-6);
   --color-7: var(--color-dark-mode-7);
   --color-8: var(--color-dark-mode-8);
@@ -55,6 +64,7 @@
   --color-12: var(--color-dark-mode-12);
   --color-13: var(--color-dark-mode-13);
   --color-14: var(--color-dark-mode-14);
+  --color-14-hover: var(--color-dark-mode-14-hover);
   --color-15: var(--color-dark-mode-15);
   --color-15-hover: var(--color-dark-mode-15-hover);
 
@@ -99,7 +109,8 @@ a {
   text-decoration: none;
 }
 
-button {
+button,
+[type='submit'] {
   padding: 0;
   font-family: var(--primary-font);
   font-size: var(--font-size-nm);
