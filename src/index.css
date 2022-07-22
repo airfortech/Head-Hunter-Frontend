@@ -98,7 +98,7 @@ body {
   font-size: var(--font-size-nm);
   letter-spacing: 1px;
   color: #fff;
-  background-color: var(--color-1);
+  background-color: var(--color-4);
   -webkit-tap-highlight-color: transparent;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -111,13 +111,16 @@ a {
 button,
 [type='submit'] {
   padding: 0;
-  font-family: var(--primary-font);
-  font-size: var(--font-size-nm);
-  font-weight: var(--font-weight-regular);
   border: none;
   background: none;
   outline: none;
   cursor: pointer;
+}
+
+input {
+  font-family: var(--primary-font);
+  font-size: var(--font-size-nm);
+  font-weight: var(--font-weight-regular);
 }
 
 code {
