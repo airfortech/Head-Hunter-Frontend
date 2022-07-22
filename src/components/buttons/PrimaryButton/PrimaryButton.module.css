@@ -1,0 +1,56 @@
+.PrimaryButton {
+  padding: 10px 17px;
+  min-width: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-12);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-regular);
+  transition: all var(--transition-speed-normal) ease;
+  line-height: 100%;
+}
+
+.small {
+  height: 27px;
+}
+
+.normal {
+  height: 30px;
+}
+
+.large {
+  height: 40px;
+}
+
+.primary {
+  background-color: var(--color-15);
+}
+
+.primary:hover {
+  background-color: var(--color-15-hover);
+}
+
+.secondary {
+  background-color: var(--color-5);
+}
+
+.secondary:hover {
+  background-color: var(--color-5-hover);
+}
+
+.tertiary {
+  background-color: var(--color-2);
+}
+
+.tertiary:hover {
+  background-color: var(--color-2-hover);
+}
+
+.quaternary {
+  background-color: var(--color-14);
+}
+
+.quaternary:hover {
+  background-color: var(--color-14-hover);
+}

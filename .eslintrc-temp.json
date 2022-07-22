@@ -2,7 +2,7 @@
   "env": {
     "browser": true,
     "es6": true,
-    "jest": true
+    "node": true
   },
   "extends": [
     "react-app",
@@ -50,8 +50,6 @@
       {
         "labelAttributes": ["inputLabel"]
       }
-    ],
-    "react/prop-types": "off",
-    "react/require-default-props": "off"
+    ]
   }
 }
