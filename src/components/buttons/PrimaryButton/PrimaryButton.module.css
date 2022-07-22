@@ -1,15 +1,14 @@
 .PrimaryButton {
   padding: 10px 17px;
   min-width: 80px;
-  height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
   color: var(--color-12);
-
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-regular);
   transition: all var(--transition-speed-normal) ease;
+  line-height: 100%;
 }
 
 .small {
