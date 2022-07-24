@@ -8,19 +8,18 @@ interface Props {
   color?: 'primary' | 'secondary' | 'tertiary' | 'quaternary';
 }
 
-export const PrimaryButton = ({ children, type, color, size }: Props) => {
+export const PrimaryButton = ({
+  children,
+  type = 'button',
+  color,
+  size,
+}: Props) => {
   const sizeClass = size || 'normal';
   const colorClass = color || 'primary';
 
-  return type === 'submit' ? (
-    <input
-      type="submit"
-      value={children}
-      className={`${classes.PrimaryButton} ${classes[sizeClass]} ${classes[colorClass]}`}
-    />
-  ) : (
+  return (
     <button
-      type="button"
+      type={type}
       className={`${classes.PrimaryButton} ${classes[sizeClass]} ${classes[colorClass]}`}
     >
       {children}
