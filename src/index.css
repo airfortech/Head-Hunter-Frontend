@@ -114,6 +114,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+p {
+  font-family: var(--primary-font);
+}
+
 a {
   text-decoration: none;
 }
