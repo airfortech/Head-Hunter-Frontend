@@ -1,0 +1,52 @@
+.Menu {
+  position: relative;
+  cursor: pointer;
+}
+
+.Menu p {
+  color: var(--color-12);
+  font-size: var(--font-size-lg);
+  line-height: 100%;
+}
+
+.userInfo {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--color-2);
+}
+
+.userInfo i {
+  font-size: calc(var(--font-size-lg) * 1.3);
+  color: var(--color-10);
+  transition: color var(--transition-speed-normal) ease;
+}
+
+.userInfo:hover i {
+  color: var(--color-12);
+}
+
+.actions {
+  position: absolute;
+  width: 100%;
+  height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--color-2);
+}
+
+.actions p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 14px;
+  opacity: 0;
+  transition: background-color var(--transition-speed-normal) ease;
+}
+
+.actions p:hover {
+  background-color: var(--color-7);
+}

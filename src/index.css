@@ -86,6 +86,15 @@
   --transition-speed-fast: 0.2s;
   --transition-speed-normal: 0.3s;
   --transition-speed-slow: 0.5s;
+
+  /* sizes */
+  --content-max-width: 1430px;
+  --content-max-width: 630px;
+
+  --header-height: 80px;
+
+  --avatar-size-nm: 45px;
+  --avatar-size-lg: 150px;
 }
 
 html {
@@ -96,12 +105,17 @@ body {
   margin: 0;
   font-family: var(--primary-font);
   font-size: var(--font-size-nm);
+  font-weight: var(--font-weight-regular);
   letter-spacing: 1px;
   color: var(--color-12);
   background-color: var(--color-4);
   -webkit-tap-highlight-color: transparent;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+p {
+  font-family: var(--primary-font);
 }
 
 a {

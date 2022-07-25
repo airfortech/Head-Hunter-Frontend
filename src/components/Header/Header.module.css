@@ -1,0 +1,18 @@
+.Header {
+  background-color: var(--color-2);
+  width: 100%;
+  height: var(--header-height);
+  display: flex;
+  justify-content: center;
+}
+
+.wrapper {
+  width: var(--content-max-width);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  height: 80%;
+}

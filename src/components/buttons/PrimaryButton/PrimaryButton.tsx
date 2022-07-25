@@ -11,16 +11,13 @@ interface Props {
 export const PrimaryButton = ({
   children,
   type = 'button',
-  color,
-  size,
+  color = 'primary',
+  size = 'normal',
 }: Props) => {
-  const sizeClass = size || 'normal';
-  const colorClass = color || 'primary';
-
   return (
     <button
       type={type}
-      className={`${classes.PrimaryButton} ${classes[sizeClass]} ${classes[colorClass]}`}
+      className={`${classes.PrimaryButton} ${classes[size]} ${classes[color]}`}
     >
       {children}
     </button>
