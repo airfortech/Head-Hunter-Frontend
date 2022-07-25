@@ -86,6 +86,11 @@
   --transition-speed-fast: 0.2s;
   --transition-speed-normal: 0.3s;
   --transition-speed-slow: 0.5s;
+
+  /* sizes */
+  --content-max-width: 1430px;
+  --content-max-width: 630px;
+  --header-height: 80px;
 }
 
 html {
