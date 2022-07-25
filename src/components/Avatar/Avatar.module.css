@@ -1,0 +1,15 @@
+.Avatar {
+  display: block;
+  border-radius: 50%;
+  background-color: var(--color-10);
+}
+
+.normal {
+  width: var(--avatar-size-nm);
+  height: var(--avatar-size-nm);
+}
+
+.large {
+  width: var(--avatar-size-lg);
+  height: var(--avatar-size-lg);
+}

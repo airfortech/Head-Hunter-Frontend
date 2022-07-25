@@ -90,7 +90,11 @@
   /* sizes */
   --content-max-width: 1430px;
   --content-max-width: 630px;
+
   --header-height: 80px;
+
+  --avatar-size-nm: 45px;
+  --avatar-size-lg: 150px;
 }
 
 html {
