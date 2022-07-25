@@ -4,7 +4,7 @@ import classes from './Avatar.module.css';
 
 interface Props {
   src?: string;
-  name?: string;
+  name: string;
   size?: 'normal' | 'large';
 }
 
@@ -13,7 +13,7 @@ export const Avatar = ({ src, name, size = 'normal' }: Props) => {
     <img
       className={`${classes.Avatar} ${classes[size]}`}
       src={src || avatar}
-      alt={name || 'No avatar provided'}
+      alt={name}
     />
   );
 };
