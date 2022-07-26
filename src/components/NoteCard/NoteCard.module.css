@@ -1,4 +1,4 @@
-.PreferencesCard {
+.NoteCard {
   padding: 15px;
   min-height: 110px;
   display: flex;
@@ -8,14 +8,19 @@
   background-color: var(--color-3);
 }
 
-.PreferencesCard > h3 {
+.NoteCard > h3 {
   font-size: var(--font-size-sm);
   line-height: calc(var(--font-size-sm) * 1.25);
   font-weight: var(--font-weight-regular);
 }
 
-.PreferencesCard > p {
+.NoteCard > p {
   font-size: var(--font-size-md);
   line-height: 120%;
-  font-weight: var(--font-weight-bold);
+  letter-spacing: 3px;
+  font-weight: var(--font-weight-regular);
+}
+
+.NoteCard > p > span {
+  color: var(--color-10);
 }

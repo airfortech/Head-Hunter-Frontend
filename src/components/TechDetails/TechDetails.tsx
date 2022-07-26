@@ -3,10 +3,17 @@ import { TechInfo } from './TechInfo/TechInfo';
 import { ExternalLink } from '../ExternalLink/ExternalLink';
 import { PreferencesCard } from '../PreferencesCard/PreferencesCard';
 import classes from './TechDetails.module.css';
+import { NoteCard } from '../NoteCard/NoteCard';
 
 export const TechDetails = () => {
   return (
     <section className={classes.TechDetails}>
+      <TechInfo title="Oceny" cards>
+        <NoteCard title="Ocena przejścia kursu" note={5} />
+        <NoteCard title="Ocena aktywności i zaangażowania na kursie" note={4} />
+        <NoteCard title="Ocena kodu w projekcie własnym" note={5} />
+        <NoteCard title="Ocena pracy w zespole w Scrum" note={5} />
+      </TechInfo>
       <TechInfo title="Oczekiwanie w stosunku do zatrudnienia" cards>
         <PreferencesCard title="Preferowane miejsce pracy" value="Biuro" />
         <PreferencesCard
