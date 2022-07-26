@@ -1,0 +1,16 @@
+.PersonalDetails {
+  padding: 30px 22px;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  background-color: var(--color-5);
+}
+
+.PersonalDetails h1 {
+  font-size: var(--font-size-xxxl);
+  font-weight: var(--font-weight-medium);
+  line-height: 100%;
+  background-color: aqua;
+}
