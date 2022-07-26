@@ -9,8 +9,39 @@
 }
 
 .PersonalDetails h1 {
+  margin-top: 12px;
   font-size: var(--font-size-xxxl);
   font-weight: var(--font-weight-medium);
   line-height: 100%;
-  background-color: aqua;
+}
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-self: start;
+}
+
+.contact p {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: var(--font-size-md);
+  line-height: 150%;
+}
+
+.contact i {
+  font-size: calc(var(--font-size-md) * 1.4);
+  color: var(--color-7);
+}
+
+.about h2 {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-7);
+}
+
+.about p {
+  font-size: var(--font-size-md);
+  line-height: 150%;
 }

@@ -10,8 +10,12 @@ export const PersonalDetails = () => {
       <h1>Jan Kowalski</h1>
       <p>github: jankowalski</p>
       <div className={classes.contact}>
-        <p>+48 434 343 434</p>
-        <p>email@dlala.pl</p>
+        <p>
+          <i className="bx bxs-phone"></i>+48 434 343 434
+        </p>
+        <p>
+          <i className="bx bxs-envelope"></i>jankowalski@dlala.pl
+        </p>
       </div>
       <div className={classes.about}>
         <h2>O mnie</h2>
