@@ -7,7 +7,9 @@
 }
 
 .wrapper {
-  width: var(--content-max-width);
+  padding: 0 var(--content-container-padding);
+  width: 100%;
+  max-width: var(--content-max-width);
   display: flex;
   justify-content: space-between;
   align-items: center;
