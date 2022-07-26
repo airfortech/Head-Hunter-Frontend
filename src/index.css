@@ -18,7 +18,7 @@
   --font-size-xxl: 2.2rem; /* 22px */
   --font-size-xxxl: 2.4rem; /* 24px */
 
-  --font-weight-regular: 400;
+  --font-weight-regular: 300;
   --font-weight-medium: 500;
   --font-weight-bold: 700;
 
@@ -95,8 +95,6 @@
   --content-max-width: calc(
     1430px - calc(var(--content-container-padding) * 2)
   );
-
-  /* --content-max-width: 1430px; */
 
   --header-height: 80px;
 
