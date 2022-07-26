@@ -1,0 +1,17 @@
+.ExternalLink {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: var(--font-size-md);
+  line-height: 100%;
+  color: var(--color-13);
+  transition: all var(--transition-speed-fast) ease;
+}
+
+.ExternalLink:hover {
+  color: var(--color-13-hover);
+}
+
+.ExternalLink i {
+  font-size: calc(var(--font-size-md) * 1.4);
+}

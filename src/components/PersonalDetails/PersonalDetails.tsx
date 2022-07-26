@@ -1,6 +1,7 @@
 import React from 'react';
 import { Avatar } from '../Avatar/Avatar';
 import { PrimaryButton } from '../buttons/PrimaryButton/PrimaryButton';
+import { ExternalLink } from '../ExternalLink/ExternalLink';
 import classes from './PersonalDetails.module.css';
 
 export const PersonalDetails = () => {
@@ -8,7 +9,10 @@ export const PersonalDetails = () => {
     <section className={classes.PersonalDetails}>
       <Avatar name="Jan Kowalski" size="large" />
       <h1>Jan Kowalski</h1>
-      <p>github: jankowalski</p>
+      <ExternalLink href="/">
+        <i className="bx bxl-github"></i>
+        <p>jankowalski</p>
+      </ExternalLink>
       <div className={classes.contact}>
         <p>
           <i className="bx bxs-phone"></i>+48 434 343 434

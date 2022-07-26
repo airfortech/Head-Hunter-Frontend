@@ -38,6 +38,7 @@
   --color-dark-mode-11: #cfcfcf;
   --color-dark-mode-12: #f7f7f7;
   --color-dark-mode-13: #0b8bd4;
+  --color-dark-mode-13-hover: hsl(202, 90%, 54%);
   --color-dark-mode-14: #172a35;
   --color-dark-mode-14-hover: hsl(202, 39%, 20%);
   --color-dark-mode-15: #e02735;
@@ -63,6 +64,7 @@
   --color-11: var(--color-dark-mode-11);
   --color-12: var(--color-dark-mode-12);
   --color-13: var(--color-dark-mode-13);
+  --color-13-hover: var(--color-dark-mode-13-hover);
   --color-14: var(--color-dark-mode-14);
   --color-14-hover: var(--color-dark-mode-14-hover);
   --color-15: var(--color-dark-mode-15);
