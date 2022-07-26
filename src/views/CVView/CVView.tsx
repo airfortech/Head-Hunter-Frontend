@@ -1,6 +1,7 @@
 import React from 'react';
 import { Header } from '../../components/Header/Header';
 import { PersonalDetails } from '../../components/PersonalDetails/PersonalDetails';
+import { TechDetails } from '../../components/TechDetails/TechDetails';
 import classes from './CVView.module.css';
 
 export const CVView = () => {
@@ -9,9 +10,7 @@ export const CVView = () => {
       <Header />
       <div className={classes.wrapper}>
         <PersonalDetails />
-        <section className={classes.proffesionalDetails}>
-          <p>Oceny</p>
-        </section>
+        <TechDetails />
       </div>
     </div>
   );
