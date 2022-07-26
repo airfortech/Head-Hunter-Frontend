@@ -12,7 +12,7 @@ enum Icons {
   github = 'bx bxl-github',
 }
 
-export const ExternalLink = ({ href, icon = 'web', children }: Props) => {
+export const ExternalLink = ({ href, icon, children }: Props) => {
   return (
     <a href={href} className={classes.ExternalLink}>
       {icon && <i className={Icons[icon]}></i>}

@@ -10,5 +10,6 @@
   width: 100%;
   max-width: var(--content-max-width);
   display: flex;
+  align-items: flex-start;
   gap: 4px;
 }

@@ -1,9 +1,11 @@
 .PersonalDetails {
   padding: 30px 22px;
   width: 250px;
+  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-items: start;
   gap: 12px;
   background-color: var(--color-5);
 }

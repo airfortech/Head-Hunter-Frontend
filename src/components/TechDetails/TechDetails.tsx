@@ -25,15 +25,21 @@ export const TechDetails = () => {
         dignissimos quod.
       </TechInfo>
       <TechInfo title="Portfolio">
-        <ExternalLink href="https://loremipsum/dolor/sit/amet" />
+        <ExternalLink href="https://loremipsum/dolor/sit/amet" icon="web" />
       </TechInfo>
       <TechInfo title="Projekt w zespole Scrumowym">
-        <ExternalLink href="https://github.com/Ami777/MegaKursTest/commits?author=Ami777" />
-        <ExternalLink href="https://github.com/Ami777/MegaKursTest/pulls?q=is%3Apr+reviewed-by%3AAmi777" />
+        <ExternalLink
+          href="https://github.com/Ami777/MegaKursTest/commits?author=Ami777"
+          icon="web"
+        />
+        <ExternalLink
+          href="https://github.com/Ami777/MegaKursTest/pulls?q=is%3Apr+reviewed-by%3AAmi777"
+          icon="web"
+        />
       </TechInfo>
       <TechInfo title="Projekt na zaliczenie">
-        <ExternalLink href="https://Loremipsum/dolor/sit/amet" />
-        <ExternalLink href="https://Loremipsum/dolor/sit/amet" />
+        <ExternalLink href="https://Loremipsum/dolor/sit/amet" icon="web" />
+        <ExternalLink href="https://Loremipsum/dolor/sit/amet" icon="web" />
       </TechInfo>
     </section>
   );
