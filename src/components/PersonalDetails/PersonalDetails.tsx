@@ -9,9 +9,8 @@ export const PersonalDetails = () => {
     <section className={classes.PersonalDetails}>
       <Avatar name="Jan Kowalski" size="large" />
       <h1>Jan Kowalski</h1>
-      <ExternalLink href="/">
-        <i className="bx bxl-github"></i>
-        <p>jankowalski</p>
+      <ExternalLink href="/" icon="bx bxl-github">
+        jankowalski
       </ExternalLink>
       <div className={classes.contact}>
         <p>

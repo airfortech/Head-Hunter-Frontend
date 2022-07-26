@@ -5,7 +5,7 @@
   font-size: var(--font-size-md);
   line-height: 100%;
   color: var(--color-13);
-  transition: all var(--transition-speed-fast) ease;
+  transition: color var(--transition-speed-fast) ease;
 }
 
 .ExternalLink:hover {

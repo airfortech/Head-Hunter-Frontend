@@ -90,9 +90,13 @@
   --transition-speed-slow: 0.5s;
 
   /* sizes */
-  --content-max-width: 1430px;
-
   --content-container-padding: 14px;
+
+  --content-max-width: calc(
+    1430px - calc(var(--content-container-padding) * 2)
+  );
+
+  /* --content-max-width: 1430px; */
 
   --header-height: 80px;
 

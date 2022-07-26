@@ -1,9 +1,13 @@
 .CVView {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 26px;
 }
 
 .wrapper {
   padding: 0 var(--content-container-padding);
+  max-width: var(--content-max-width);
+  display: flex;
+  gap: 4px;
 }
