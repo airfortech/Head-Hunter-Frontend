@@ -9,11 +9,22 @@
   background-color: var(--color-5);
 }
 
-.TechInfo p {
+.TechInfo > p {
+  padding: 17px 26px 30px 26px;
+  font-size: var(--font-size-md);
+  line-height: 150%;
+}
+
+.TechInfo > div {
   padding: 17px 26px 30px 26px;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  font-size: var(--font-size-md);
-  line-height: 150%;
+}
+
+.TechInfo.cards > div {
+  padding: 0;
+  flex-direction: row;
+  gap: 2px;
+  background-color: var(--color-5);
 }

@@ -2,10 +2,38 @@ import React from 'react';
 import { TechInfo } from './TechInfo/TechInfo';
 import classes from './TechDetails.module.css';
 import { ExternalLink } from '../ExternalLink/ExternalLink';
+import { PreferencesCard } from '../PreferencesCard/PreferencesCard';
 
 export const TechDetails = () => {
   return (
     <section className={classes.TechDetails}>
+      <TechInfo title="Oczekiwanie w stosunku do zatrudnienia" cards>
+        <PreferencesCard title="Preferowane miejsce pracy" value="Biuro" />
+        <PreferencesCard
+          title="Docelowe miasto, gdzie chce pracować kandydat"
+          value="Warszawa"
+          flex={1.2}
+        />
+        <PreferencesCard
+          title="Oczekiwany typ kontraktu"
+          value="Umowa o pracę"
+        />
+        <PreferencesCard
+          title="Oczekiwane wynagrodzenie miesięczne netto"
+          value="8000 zł"
+          flex={1.2}
+        />
+        <PreferencesCard
+          title="Zgoda na odbycie bezpłatnych praktyk/stażu na początek"
+          value="TAK"
+          flex={1.4}
+        />
+        <PreferencesCard
+          title="Komercyjne doświadczenie w programowaniu"
+          value="6 miesięcy"
+          flex={1.2}
+        />
+      </TechInfo>
       <TechInfo title="Edukacja">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla sit
         voluptas id odio error tempora suscipit assumenda consequatur
