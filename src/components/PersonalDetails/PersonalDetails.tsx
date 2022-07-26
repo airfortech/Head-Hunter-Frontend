@@ -22,8 +22,12 @@ export const PersonalDetails = () => {
           numquam.
         </p>
       </div>
-      <PrimaryButton size="large">Brak zainteresowania</PrimaryButton>
-      <PrimaryButton size="large">Zatrudniony</PrimaryButton>
+      <PrimaryButton size="large" fullWidth>
+        Brak zainteresowania
+      </PrimaryButton>
+      <PrimaryButton size="large" fullWidth>
+        Zatrudniony
+      </PrimaryButton>
     </section>
   );
 };
