@@ -1,0 +1,21 @@
+.PreferencesCard {
+  padding: 15px;
+  min-height: 110px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--font-size-sm);
+  background-color: var(--color-3);
+}
+
+.PreferencesCard > h3 {
+  font-size: var(--font-size-sm);
+  line-height: calc(var(--font-size-sm) * 1.25);
+  font-weight: var(--font-weight-regular);
+}
+
+.PreferencesCard > p {
+  font-size: var(--font-size-md);
+  line-height: 120%;
+  font-weight: var(--font-weight-bold);
+}

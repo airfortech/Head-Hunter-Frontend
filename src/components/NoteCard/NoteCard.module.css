@@ -1,0 +1,40 @@
+.NoteCard {
+  padding: 15px;
+  min-height: 110px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--font-size-sm);
+  background-color: var(--color-3);
+}
+
+.NoteCard > h3 {
+  font-size: var(--font-size-sm);
+  line-height: calc(var(--font-size-sm) * 1.25);
+  font-weight: var(--font-weight-regular);
+}
+
+.note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.note > p {
+  font-size: var(--font-size-md);
+  line-height: 100%;
+  letter-spacing: 3px;
+  font-weight: var(--font-weight-regular);
+}
+
+.note > p > span {
+  color: var(--color-10);
+}
+
+.stars {
+  display: flex;
+  font-size: var(--font-size-lg);
+  background-clip: text;
+  background-image: linear-gradient(90deg, red, blue);
+  color: transparent;
+}

@@ -23,6 +23,10 @@
   height: 40px;
 }
 
+.fullWidth {
+  width: 100%;
+}
+
 .primary {
   background-color: var(--color-15);
 }
