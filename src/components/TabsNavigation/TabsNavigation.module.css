@@ -1,0 +1,29 @@
+.TabsNavigation {
+  background-color: var(--color-5);
+}
+
+.wrapper {
+  display: flex;
+  list-style: none;
+}
+
+.link {
+  padding: 0 34px;
+  height: 72px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: var(--font-size-lg);
+  color: var(--color-11);
+  cursor: pointer;
+  transition: all var(--transition-speed-fast) ease;
+}
+
+.link:hover {
+  background-color: var(--color-7);
+}
+
+.active {
+  color: var(--color-12);
+  font-weight: var(--font-weight-medium);
+}
