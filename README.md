@@ -44,9 +44,6 @@ In progress...
 @tippyjs/react
 https://www.npmjs.com/package/@tippyjs/react
 
-@vime/react
-https://www.npmjs.com/package/@vime/react
-
 gsap
 https://www.npmjs.com/package/gsap
 
@@ -56,8 +53,8 @@ https://www.npmjs.com/package/react-headless-pagination
 box-icons
 https://boxicons.com/
 
-react-custom-scroll
-https://www.npmjs.com/package/react-custom-scroll
+react-custom-scrollbars-2
+https://www.npmjs.com/package/react-custom-scrollbars-2
 
 react-select
 https://www.npmjs.com/package/react-select

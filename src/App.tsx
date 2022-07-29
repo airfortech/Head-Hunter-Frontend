@@ -9,7 +9,18 @@ import classes from './App.module.css';
 export const App = () => {
   return (
     <div className={classes.App}>
-      <Scrollbars autoHide style={{ width: '100%', height: '100vh' }}>
+      <Scrollbars
+        className={classes.scrollbar}
+        autoHide
+        autoHideTimeout={3000}
+        autoHideDuration={300}
+        renderThumbVertical={(props) => (
+          <div {...props} className={classes.ThumbVertical} />
+        )}
+        renderThumbHorizontal={(props) => (
+          <div {...props} className={classes.ThumbHorizontal} />
+        )}
+      >
         <Routes>
           <Route path="/" element={<LoginView />} />
           <Route path="/hr" element={<HRView />} />
