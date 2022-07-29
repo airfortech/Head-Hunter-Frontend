@@ -8,7 +8,7 @@ interface Props {
 
 export const Scrollbar = ({ children }: Props) => {
   const [hideScrollbar, setHideScrollbar] = useState(false);
-  const timeout: any = useRef(null);
+  const timeout = useRef<NodeJS.Timeout>();
 
   const handleMouseActivity = () => {
     setHideScrollbar(false);
@@ -19,6 +19,10 @@ export const Scrollbar = ({ children }: Props) => {
 
   useEffect(() => {
     timeout.current = setTimeout(() => setHideScrollbar(true), 2500);
+
+    return () => {
+      clearTimeout(timeout.current);
+    };
   }, []);
 
   return (
