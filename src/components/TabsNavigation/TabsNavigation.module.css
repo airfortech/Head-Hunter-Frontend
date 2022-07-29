@@ -1,4 +1,5 @@
 .TabsNavigation {
+  position: relative;
   background-color: var(--color-5);
 }
 
@@ -19,11 +20,14 @@
   transition: all var(--transition-speed-fast) ease;
 }
 
-.link:hover {
-  background-color: var(--color-7);
-}
-
 .active {
   color: var(--color-12);
-  font-weight: var(--font-weight-medium);
+}
+
+.bar {
+  position: absolute;
+  bottom: 0;
+  height: 3px;
+  background-color: var(--color-15);
+  transition: all var(--transition-speed-fast) ease;
 }
