@@ -12,6 +12,7 @@ export const StudentsListView = () => {
           routes={[
             { anchor: 'Dostępni kursanci', route: '/students' },
             { anchor: 'Do rozmowy', route: '/test' },
+            { anchor: 'Portfolio', route: '/test' },
           ]}
         />
       </div>

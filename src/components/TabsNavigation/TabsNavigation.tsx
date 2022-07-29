@@ -9,40 +9,41 @@ interface Props {
   }[];
 }
 
-interface IsLinkActiveProps {
+interface IsLinkActiveArgs {
   isActive: boolean;
 }
 
 export const TabsNavigation = ({ routes }: Props) => {
-  const itemsEls: any = useRef([]);
+  const itemsEls: any = useRef<HTMLLIElement[] | null[]>([]);
   const barRef = useRef<HTMLDivElement>(null);
   const [xPos, setXPos] = useState<number>();
   const [width, setWidth] = useState<number>();
 
-  const isLinkActive = ({ isActive }: IsLinkActiveProps): string => {
+  const isLinkActive = ({ isActive }: IsLinkActiveArgs): string => {
     return isActive ? `${classes.link} ${classes.active}` : classes.link;
   };
 
-  const handleClick = (itemIndex: number) => {
+  const setBarValues = (index: number): void => {
+    setWidth(itemsEls.current[index].clientWidth);
+    setXPos(itemsEls.current[index].offsetLeft);
+  };
+
+  const handleClick = (index: number): void => {
     if (!itemsEls?.current) return;
-    setWidth(itemsEls.current[itemIndex].clientWidth);
-    setXPos(itemsEls.current[itemIndex].offsetLeft);
+    setBarValues(index);
   };
 
   useEffect(() => {
     if (!itemsEls?.current) return;
-    console.log('1');
-    itemsEls.current.forEach((item: any, i: number) => {
+    itemsEls.current.forEach((item: any, index: number) => {
       if ([...item.children[0].classList].join('').includes('active')) {
-        setWidth(itemsEls.current[i].clientWidth);
-        setXPos(itemsEls.current[i].offsetLeft);
+        setBarValues(index);
       }
     });
   }, []);
 
   useEffect(() => {
-    if (!barRef?.current) return;
-    console.log(2);
+    if (!barRef.current) return;
     barRef.current.style.left = xPos + 'px';
     barRef.current.style.width = width + 'px';
   }, [xPos, width]);
@@ -53,7 +54,7 @@ export const TabsNavigation = ({ routes }: Props) => {
         {routes.map(({ anchor, route }, i) => (
           <li
             key={i}
-            ref={(element: any) => itemsEls.current.push(element)}
+            ref={(element) => (itemsEls.current[i] = element)}
             onClick={() => handleClick(i)}
           >
             <NavLink to={route} className={isLinkActive}>
