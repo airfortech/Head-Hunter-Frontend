@@ -14,28 +14,30 @@ interface IsLinkActiveArgs {
 }
 
 export const TabsNavigation = ({ routes }: Props) => {
-  const itemsEls: any = useRef<HTMLLIElement[] | null[]>([]);
+  const itemsEls = useRef<HTMLLIElement[]>([]);
   const barRef = useRef<HTMLDivElement>(null);
-  const [xPos, setXPos] = useState<number>();
-  const [width, setWidth] = useState<number>();
+  const [xPos, setXPos] = useState(0);
+  const [width, setWidth] = useState(0);
 
   const isLinkActive = ({ isActive }: IsLinkActiveArgs): string => {
     return isActive ? `${classes.link} ${classes.active}` : classes.link;
   };
 
   const setBarValues = (index: number): void => {
-    setWidth(itemsEls.current[index].clientWidth);
-    setXPos(itemsEls.current[index].offsetLeft);
+    const width = itemsEls?.current?.[index]?.clientWidth;
+    const posX = itemsEls?.current?.[index]?.offsetLeft;
+    if (width !== undefined && posX !== undefined) {
+      setWidth(width);
+      setXPos(posX);
+    }
   };
 
   const handleClick = (index: number): void => {
-    if (!itemsEls?.current) return;
     setBarValues(index);
   };
 
   useEffect(() => {
-    if (!itemsEls?.current) return;
-    itemsEls.current.forEach((item: any, index: number) => {
+    itemsEls.current.forEach((item, index) => {
       if ([...item.children[0].classList].join('').includes('active')) {
         setBarValues(index);
       }
@@ -54,7 +56,9 @@ export const TabsNavigation = ({ routes }: Props) => {
         {routes.map(({ anchor, route }, i) => (
           <li
             key={i}
-            ref={(element) => (itemsEls.current[i] = element)}
+            ref={(element) => {
+              if (!!element) itemsEls.current[i] = element;
+            }}
             onClick={() => handleClick(i)}
           >
             <NavLink to={route} className={isLinkActive}>
