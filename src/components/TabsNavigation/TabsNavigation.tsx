@@ -23,16 +23,16 @@ export const TabsNavigation = ({ routes }: Props) => {
     return isActive ? `${classes.link} ${classes.active}` : classes.link;
   };
 
-  const setBarValues = (index: number): void => {
-    const width = itemsEls?.current?.[index]?.clientWidth;
-    const posX = itemsEls?.current?.[index]?.offsetLeft;
+  const setBarValues = (index: number) => {
+    const width = itemsEls.current[index].clientWidth;
+    const posX = itemsEls.current[index].offsetLeft;
     if (width !== undefined && posX !== undefined) {
       setWidth(width);
       setXPos(posX);
     }
   };
 
-  const handleClick = (index: number): void => {
+  const handleClick = (index: number) => {
     setBarValues(index);
   };
 
@@ -57,7 +57,7 @@ export const TabsNavigation = ({ routes }: Props) => {
           <li
             key={i}
             ref={(element) => {
-              if (!!element) itemsEls.current[i] = element;
+              if (element) itemsEls.current[i] = element;
             }}
             onClick={() => handleClick(i)}
           >
