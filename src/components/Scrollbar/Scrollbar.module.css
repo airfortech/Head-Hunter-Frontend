@@ -1,0 +1,5 @@
+.ThumbVertical,
+.ThumbHorizontal {
+  background-color: var(--color-15);
+  border-radius: 20px;
+}

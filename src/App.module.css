@@ -1,9 +1,3 @@
 .App {
   height: 100vh;
 }
-
-.ThumbVertical,
-.ThumbHorizontal {
-  background-color: var(--color-15);
-  border-radius: 20px;
-}
