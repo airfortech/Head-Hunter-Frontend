@@ -1,8 +1,8 @@
-import React from 'react';
-import classes from './Input.module.css';
+import React from "react";
+import classes from "./Input.module.css";
 
 interface Props {
-  type: 'text' | 'password' | 'email';
+  type: "text" | "password" | "email";
   placeholder: string;
 }
 

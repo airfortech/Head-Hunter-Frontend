@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import classes from './TabsNavigation.module.css';
+import React, { useEffect, useRef, useState } from "react";
+import { NavLink } from "react-router-dom";
+import classes from "./TabsNavigation.module.css";
 
 interface Props {
   routes: {
@@ -38,7 +38,7 @@ export const TabsNavigation = ({ routes }: Props) => {
 
   useEffect(() => {
     itemsEls.current.forEach((item, index) => {
-      if ([...item.children[0].classList].join('').includes('active')) {
+      if ([...item.children[0].classList].join("").includes("active")) {
         setBarValues(index);
       }
     });
@@ -46,8 +46,8 @@ export const TabsNavigation = ({ routes }: Props) => {
 
   useEffect(() => {
     if (!barRef.current) return;
-    barRef.current.style.left = xPos + 'px';
-    barRef.current.style.width = width + 'px';
+    barRef.current.style.left = xPos + "px";
+    barRef.current.style.width = width + "px";
   }, [xPos, width]);
 
   return (

@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { Avatar } from '../../Avatar/Avatar';
-import classes from './Menu.module.css';
+import React, { useState, useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { Avatar } from "../../Avatar/Avatar";
+import classes from "./Menu.module.css";
 
 export const Menu = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -21,28 +21,28 @@ export const Menu = () => {
     tweenRef.current = gsap
       .timeline()
       .to(iconRef.current, {
-        ease: 'power3',
+        ease: "power3",
         rotation: 180,
         duration: 0.3,
       })
       .to(
         actionsRef.current,
         {
-          ease: 'power3',
-          height: 'auto',
+          ease: "power3",
+          height: "auto",
           duration: 0.2,
         },
-        '<-=0.05'
+        "<-=0.05"
       )
       .to(
         actionsItems,
         {
-          ease: 'power3',
+          ease: "power3",
           opacity: 1,
           duration: 0.3,
           stagger: 0.1,
         },
-        '<+=0.2'
+        "<+=0.2"
       );
     return () => {
       tweenRef.current?.kill();

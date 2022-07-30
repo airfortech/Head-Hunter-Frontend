@@ -1,6 +1,6 @@
-import React from 'react';
-import { Login } from '../../components/Login/Login';
-import classes from './LoginView.module.css';
+import React from "react";
+import { Login } from "../../components/Login/Login";
+import classes from "./LoginView.module.css";
 
 export const LoginView = () => {
   return (
