@@ -30,7 +30,7 @@
       "error",
       {
         "tabWidth": 2,
-        "singleQuote": true,
+        "singleQuote": false,
         "printWidth": 80,
         "endOfLine": "auto"
       }

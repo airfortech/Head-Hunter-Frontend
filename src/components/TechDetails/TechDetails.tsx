@@ -1,9 +1,9 @@
-import React from 'react';
-import { TechInfo } from './TechInfo/TechInfo';
-import { ExternalLink } from '../ExternalLink/ExternalLink';
-import { PreferencesCard } from '../PreferencesCard/PreferencesCard';
-import classes from './TechDetails.module.css';
-import { NoteCard } from '../NoteCard/NoteCard';
+import React from "react";
+import { TechInfo } from "./TechInfo/TechInfo";
+import { ExternalLink } from "../ExternalLink/ExternalLink";
+import { PreferencesCard } from "../PreferencesCard/PreferencesCard";
+import classes from "./TechDetails.module.css";
+import { NoteCard } from "../NoteCard/NoteCard";
 
 export const TechDetails = () => {
   return (

@@ -1,8 +1,8 @@
-import React from 'react';
-import { Avatar } from '../Avatar/Avatar';
-import { PrimaryButton } from '../buttons/PrimaryButton/PrimaryButton';
-import { ExternalLink } from '../ExternalLink/ExternalLink';
-import classes from './PersonalDetails.module.css';
+import React from "react";
+import { Avatar } from "../Avatar/Avatar";
+import { PrimaryButton } from "../buttons/PrimaryButton/PrimaryButton";
+import { ExternalLink } from "../ExternalLink/ExternalLink";
+import classes from "./PersonalDetails.module.css";
 
 export const PersonalDetails = () => {
   return (

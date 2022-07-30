@@ -1,19 +1,19 @@
-import React from 'react';
-import classes from './PrimaryButton.module.css';
+import React from "react";
+import classes from "./PrimaryButton.module.css";
 
 interface Props {
   children: string;
-  type?: 'button' | 'submit';
-  size?: 'small' | 'normal' | 'large';
+  type?: "button" | "submit";
+  size?: "small" | "normal" | "large";
   fullWidth?: boolean;
-  color?: 'primary' | 'secondary' | 'tertiary' | 'quaternary';
+  color?: "primary" | "secondary" | "tertiary" | "quaternary";
 }
 
 export const PrimaryButton = ({
   children,
-  type = 'button',
-  color = 'primary',
-  size = 'normal',
+  type = "button",
+  color = "primary",
+  size = "normal",
   fullWidth = false,
 }: Props) => {
   return (

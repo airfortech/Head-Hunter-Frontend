@@ -1,5 +1,5 @@
-import React from 'react';
-import classes from './NoteCard.module.css';
+import React from "react";
+import classes from "./NoteCard.module.css";
 
 interface Props {
   title: string;

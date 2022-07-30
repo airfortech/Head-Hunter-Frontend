@@ -1,8 +1,8 @@
-import React from 'react';
-import { PrimaryButton } from '../buttons/PrimaryButton/PrimaryButton';
-import { Input } from './Input/Input';
-import logo from '../../assets/images/logo.png';
-import classes from './Login.module.css';
+import React from "react";
+import { PrimaryButton } from "../buttons/PrimaryButton/PrimaryButton";
+import { Input } from "./Input/Input";
+import logo from "../../assets/images/logo.png";
+import classes from "./Login.module.css";
 
 export const Login = () => {
   return (

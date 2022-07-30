@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
-import Scrollbars from 'react-custom-scrollbars-2';
-import classes from './Scrollbar.module.css';
+import React, { useEffect, useRef, useState } from "react";
+import Scrollbars from "react-custom-scrollbars-2";
+import classes from "./Scrollbar.module.css";
 
 interface Props {
   children: JSX.Element | JSX.Element[];
