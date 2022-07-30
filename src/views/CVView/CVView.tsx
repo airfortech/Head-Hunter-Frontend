@@ -1,8 +1,8 @@
-import React from 'react';
-import { Header } from '../../components/Header/Header';
-import { PersonalDetails } from '../../components/PersonalDetails/PersonalDetails';
-import { TechDetails } from '../../components/TechDetails/TechDetails';
-import classes from './CVView.module.css';
+import React from "react";
+import { Header } from "../../components/Header/Header";
+import { PersonalDetails } from "../../components/PersonalDetails/PersonalDetails";
+import { TechDetails } from "../../components/TechDetails/TechDetails";
+import classes from "./CVView.module.css";
 
 export const CVView = () => {
   return (

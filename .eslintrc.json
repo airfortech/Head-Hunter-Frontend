@@ -22,6 +22,7 @@
   },
   "plugins": ["react", "@typescript-eslint", "prettier"],
   "rules": {
+    "@typescript-eslint/no-shadow": "off",
     "react/react-in-jsx-scope": ["off"],
     "react/jsx-uses-react": ["off"],
     "react/jsx-props-no-spreading": ["warn"],
@@ -30,7 +31,7 @@
       "error",
       {
         "tabWidth": 2,
-        "singleQuote": true,
+        "singleQuote": false,
         "printWidth": 80,
         "endOfLine": "auto"
       }

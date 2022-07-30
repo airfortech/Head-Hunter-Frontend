@@ -1,5 +1,5 @@
-import React from 'react';
-import classes from './PreferencesCard.module.css';
+import React from "react";
+import classes from "./PreferencesCard.module.css";
 
 interface Props {
   title: string;
