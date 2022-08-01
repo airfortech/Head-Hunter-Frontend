@@ -15,7 +15,7 @@ enum Icons {
 export const ExternalLink = ({ href, icon, children }: Props) => {
   return (
     <a href={href} className={classes.ExternalLink}>
-      {icon && <i className={Icons[icon]}></i>}
+      {icon && <i className={Icons[icon]} />}
       {children || href}
     </a>
   );

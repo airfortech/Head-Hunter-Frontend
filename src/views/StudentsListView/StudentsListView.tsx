@@ -16,6 +16,7 @@ export const StudentsListView = ({ path }: Props) => {
             { anchor: "Dostępni kursanci", route: "/students" },
             { anchor: "Do rozmowy", route: "/students/reserved" },
             { anchor: "Portfolio", route: "/cv" },
+            { anchor: "Login", route: "/" },
           ]}
         />
         <div>{path}</div>
