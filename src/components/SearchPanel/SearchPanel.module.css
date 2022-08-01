@@ -1,0 +1,9 @@
+.SearchPanel {
+  padding: 13px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--color-5);
+  border-top: 3px solid var(--color-4);
+  border-bottom: 3px solid var(--color-4);
+}

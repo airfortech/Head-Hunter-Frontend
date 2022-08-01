@@ -7,6 +7,11 @@ interface Props {
   size?: "small" | "normal" | "large";
   fullWidth?: boolean;
   color?: "primary" | "secondary" | "tertiary" | "quaternary";
+  icon?: "filter";
+}
+
+enum Icons {
+  filter = "bx bxl-github",
 }
 
 export const PrimaryButton = ({
@@ -14,6 +19,7 @@ export const PrimaryButton = ({
   type = "button",
   color = "primary",
   size = "normal",
+  icon,
   fullWidth = false,
 }: Props) => {
   return (
@@ -23,6 +29,7 @@ export const PrimaryButton = ({
         fullWidth && classes.fullWidth
       }`}
     >
+      {icon && <i className={Icons[icon]} />}
       {children}
     </button>
   );

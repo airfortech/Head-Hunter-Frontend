@@ -16,8 +16,8 @@ interface IsLinkActiveArgs {
 export const TabsNavigation = ({ routes }: Props) => {
   const itemsEls = useRef<HTMLLIElement[]>([]);
   const barRef = useRef<HTMLDivElement>(null);
-  const [xPos, setXPos] = useState(0);
-  const [width, setWidth] = useState(0);
+  const [xPos, setXPos] = useState<number>();
+  const [width, setWidth] = useState<number>();
 
   const isLinkActive = ({ isActive }: IsLinkActiveArgs): string => {
     return isActive ? `${classes.link} ${classes.active}` : classes.link;
@@ -61,7 +61,7 @@ export const TabsNavigation = ({ routes }: Props) => {
             }}
             onClick={() => handleClick(i)}
           >
-            <NavLink to={route} className={isLinkActive}>
+            <NavLink end to={route} className={isLinkActive}>
               {anchor}
             </NavLink>
           </li>

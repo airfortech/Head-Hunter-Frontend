@@ -1,0 +1,5 @@
+.UsersList {
+  padding: 13px 20px;
+  background-color: var(--color-5);
+  list-style: none;
+}

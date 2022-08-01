@@ -1,17 +1,16 @@
 import React from "react";
-import { Header } from "../../components/Header/Header";
+import { PanelLayout } from "../../Layouts/PanelLayout/PanelLayout";
 import { PersonalDetails } from "../../components/PersonalDetails/PersonalDetails";
 import { TechDetails } from "../../components/TechDetails/TechDetails";
 import classes from "./CVView.module.css";
 
 export const CVView = () => {
   return (
-    <div className={classes.CVView}>
-      <Header />
-      <div className={classes.wrapper}>
+    <PanelLayout>
+      <div className={classes.CVView}>
         <PersonalDetails />
         <TechDetails />
       </div>
-    </div>
+    </PanelLayout>
   );
 };

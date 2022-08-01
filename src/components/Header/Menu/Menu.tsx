@@ -21,28 +21,28 @@ export const Menu = () => {
     tweenRef.current = gsap
       .timeline()
       .to(iconRef.current, {
-        ease: "power3",
+        ease: "power2",
         rotation: 180,
         duration: 0.3,
       })
       .to(
         actionsRef.current,
         {
-          ease: "power3",
+          ease: "power2",
           height: "auto",
           duration: 0.2,
         },
-        "<-=0.05"
+        "<+=0.1"
       )
       .to(
         actionsItems,
         {
-          ease: "power3",
+          ease: "power2",
           opacity: 1,
           duration: 0.3,
           stagger: 0.1,
         },
-        "<+=0.2"
+        "<+=0.1"
       );
     return () => {
       tweenRef.current?.kill();
