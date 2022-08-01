@@ -61,7 +61,7 @@ export const TabsNavigation = ({ routes }: Props) => {
             }}
             onClick={() => handleClick(i)}
           >
-            <NavLink to={route} className={isLinkActive}>
+            <NavLink end to={route} className={isLinkActive}>
               {anchor}
             </NavLink>
           </li>
