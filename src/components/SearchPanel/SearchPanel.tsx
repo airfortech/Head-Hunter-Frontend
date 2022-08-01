@@ -13,9 +13,14 @@ export const SearchPanel = () => {
         icon="search"
         placeholder="Szukaj"
       />
-      <PrimaryButton size="large" color="tertiary" icon="filter">
-        Filtrowanie
-      </PrimaryButton>
+      <div className={classes.actions}>
+        <PrimaryButton size="large" color="tertiary" icon="sort">
+          Sortowanie
+        </PrimaryButton>
+        <PrimaryButton size="large" color="tertiary" icon="filter">
+          Filtrowanie
+        </PrimaryButton>
+      </div>
     </div>
   );
 };

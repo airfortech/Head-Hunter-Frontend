@@ -7,11 +7,12 @@ interface Props {
   size?: "small" | "normal" | "large";
   fullWidth?: boolean;
   color?: "primary" | "secondary" | "tertiary" | "quaternary";
-  icon?: "filter";
+  icon?: "filter" | "sort";
 }
 
 enum Icons {
   filter = "bx bxl-github",
+  sort = "bx bx-sort-alt-2",
 }
 
 export const PrimaryButton = ({
