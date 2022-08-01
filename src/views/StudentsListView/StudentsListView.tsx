@@ -20,11 +20,11 @@ export const StudentsListView = () => {
         />
         <SearchPanel />
         <UsersList>
-          <StudentItem />
-          <StudentItem />
-          <StudentItem />
-          <StudentItem />
-          <StudentItem />
+          <StudentItem status="available" />
+          <StudentItem status="available" />
+          <StudentItem status="available" />
+          <StudentItem status="toTalk" />
+          <StudentItem status="toTalk" />
         </UsersList>
       </div>
     </PanelLayout>

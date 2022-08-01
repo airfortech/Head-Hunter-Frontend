@@ -15,6 +15,22 @@
   align-items: center;
 }
 
+.personal {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.reservationDate {
+  margin-right: 60px;
+  display: flex;
+  flex-direction: column;
+}
+
+.reservationDate span {
+  font-weight: var(--font-weight-bold);
+}
+
 .name {
   font-size: var(--font-size-lg);
 }

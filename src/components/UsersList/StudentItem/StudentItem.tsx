@@ -4,12 +4,15 @@ import { PrimaryButton } from "../../buttons/PrimaryButton/PrimaryButton";
 import { NoteCard } from "../../NoteCard/NoteCard";
 import { PreferencesCard } from "../../PreferencesCard/PreferencesCard";
 import classes from "./StudentItem.module.css";
+import { Avatar } from "../../Avatar/Avatar";
+import { NavLink } from "react-router-dom";
 
 interface Props {
   open?: boolean;
+  status: "available" | "toTalk";
 }
 
-export const StudentItem = ({ open = false }: Props) => {
+export const StudentItem = ({ open = false, status }: Props) => {
   const [isDetailsOpen, setDetailsOpen] = useState(open);
   const iconRef = useRef<HTMLElement>(null);
   const detailsRef = useRef<HTMLDivElement>(null);
@@ -38,7 +41,7 @@ export const StudentItem = ({ open = false }: Props) => {
           height: "auto",
           duration: 0.2,
         },
-        "<-=0.15"
+        "<+=0.1"
       )
       .fromTo(
         detailsItems,
@@ -57,6 +60,8 @@ export const StudentItem = ({ open = false }: Props) => {
   }, []);
 
   useEffect(() => {
+    console.log("test", isDetailsOpen);
+
     if (isDetailsOpen) {
       tweenRef.current?.play();
     } else {
@@ -67,8 +72,25 @@ export const StudentItem = ({ open = false }: Props) => {
   return (
     <li className={classes.StudentItem}>
       <div className={classes.info}>
-        <p className={classes.name}>Jakub C.</p>
+        <div className={classes.personal}>
+          {status === "toTalk" && (
+            <p className={classes.reservationDate}>
+              Rezerwacja do
+              <span>11.07.2022r.</span>
+            </p>
+          )}
+          {status === "toTalk" && <Avatar name="Jakub C" />}
+          <p className={classes.name}>Jakub C.</p>
+        </div>
         <div className={classes.actions}>
+          {status === "toTalk" && (
+            <NavLink to="/cv">
+              <PrimaryButton size="normal">Pokaż CV</PrimaryButton>
+            </NavLink>
+          )}
+          {status === "toTalk" && (
+            <PrimaryButton size="normal">Brak zainteresowania</PrimaryButton>
+          )}
           <PrimaryButton size="normal">Zarezerwuj rozmowę</PrimaryButton>
           <button className={classes.button} onClick={handleClick}>
             <i className="bx bx-chevron-up" ref={iconRef}></i>
