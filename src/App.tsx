@@ -15,7 +15,14 @@ export const App = () => {
           <Route path="/" element={<LoginView />} />
           <Route path="/hr" element={<HRView />} />
           <Route path="/cv" element={<CVView />} />
-          <Route path="/students" element={<StudentsListView />} />
+          <Route
+            path="/students"
+            element={<StudentsListView path="active" />}
+          />
+          <Route
+            path="/students/reserved"
+            element={<StudentsListView path="reserved" />}
+          />
         </Routes>
       </Scrollbar>
     </div>

@@ -1,21 +1,25 @@
 import React from "react";
-import { Header } from "../../components/Header/Header";
 import { TabsNavigation } from "../../components/TabsNavigation/TabsNavigation";
+import { PanelLayout } from "../../Layouts/PanelLayout/PanelLayout";
 import classes from "./StudentsListView.module.css";
 
-export const StudentsListView = () => {
+interface Props {
+  path: string;
+}
+
+export const StudentsListView = ({ path }: Props) => {
   return (
-    <div className={classes.StudentsListView}>
-      <Header />
-      <div className={classes.wrapper}>
+    <PanelLayout>
+      <div className={classes.StudentsListView}>
         <TabsNavigation
           routes={[
             { anchor: "Dostępni kursanci", route: "/students" },
-            { anchor: "Do rozmowy", route: "/test" },
-            { anchor: "Portfolio", route: "/test" },
+            { anchor: "Do rozmowy", route: "/students/reserved" },
+            { anchor: "Portfolio", route: "/cv" },
           ]}
         />
+        <div>{path}</div>
       </div>
-    </div>
+    </PanelLayout>
   );
 };
