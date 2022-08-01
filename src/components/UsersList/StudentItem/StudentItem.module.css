@@ -1,0 +1,47 @@
+.StudentItem {
+  border-bottom: 17px solid var(--color-2);
+  overflow: hidden;
+}
+
+.StudentItem:last-child {
+  border-bottom: none;
+}
+
+.info {
+  padding: 0 18px;
+  min-height: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.name {
+  font-size: var(--font-size-lg);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.button {
+  display: flex;
+  cursor: pointer;
+}
+
+.button i {
+  font-size: var(--font-size-xxxl);
+  color: var(--color-10);
+  transition: color var(--transition-speed-fast) ease;
+}
+
+.button:hover i {
+  color: var(--color-12);
+}
+
+.details {
+  height: 0;
+  display: flex;
+  gap: 2px;
+}

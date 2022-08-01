@@ -3,7 +3,7 @@
 }
 
 .InputInput {
-  width: 100%;
+  max-width: 100%;
   color: var(--color-12);
   border: none;
   outline: 1px solid transparent;

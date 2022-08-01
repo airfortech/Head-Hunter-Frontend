@@ -21,14 +21,14 @@ export const Menu = () => {
     tweenRef.current = gsap
       .timeline()
       .to(iconRef.current, {
-        ease: "power3",
+        ease: "power2",
         rotation: 180,
         duration: 0.3,
       })
       .to(
         actionsRef.current,
         {
-          ease: "power3",
+          ease: "power2",
           height: "auto",
           duration: 0.2,
         },
@@ -37,7 +37,7 @@ export const Menu = () => {
       .to(
         actionsItems,
         {
-          ease: "power3",
+          ease: "power2",
           opacity: 1,
           duration: 0.3,
           stagger: 0.1,
