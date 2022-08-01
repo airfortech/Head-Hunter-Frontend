@@ -7,11 +7,16 @@
   color: var(--color-12);
   border: none;
   outline: 1px solid transparent;
-  transition: all var(--transition-speed-normal) ease;
+  transition: all var(--transition-speed-fast) ease;
 }
 
 .InputInput::placeholder {
   color: var(--color-9);
+  transition: all var(--transition-speed-fast) ease;
+}
+
+.InputInput:hover::placeholder {
+  color: var(--color-11);
 }
 
 .InputInput:focus {

@@ -1,4 +1,5 @@
 import React from "react";
+import { SearchPanel } from "../../components/SearchPanel/SearchPanel";
 import { TabsNavigation } from "../../components/TabsNavigation/TabsNavigation";
 import { PanelLayout } from "../../Layouts/PanelLayout/PanelLayout";
 import classes from "./StudentsListView.module.css";
@@ -19,6 +20,7 @@ export const StudentsListView = ({ path }: Props) => {
             { anchor: "Login", route: "/" },
           ]}
         />
+        <SearchPanel />
         <div>{path}</div>
       </div>
     </PanelLayout>

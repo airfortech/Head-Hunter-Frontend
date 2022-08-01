@@ -8,7 +8,7 @@
 
 :root {
   /* global fonts variables */
-  --primary-font: 'Catamaran', sans-serif;
+  --primary-font: "Catamaran", sans-serif;
 
   --font-size-sm: 1.2rem; /* 12px */
   --font-size-nm: 1.4rem; /* 14px */
@@ -25,13 +25,14 @@
   /* colors dark mode */
   --color-dark-mode-1: #0a0a0a;
   --color-dark-mode-2: #1e1e1f;
-  --color-dark-mode-2-hover: hsl(240, 2%, 17%);
+  --color-dark-mode-2-hover: hsl(240, 2%, 14%);
   --color-dark-mode-3: #202122;
   --color-dark-mode-4: #222224;
   --color-dark-mode-5: #292a2b;
   --color-dark-mode-5-hover: hsl(228, 4%, 21%);
   --color-dark-mode-6: #333333;
   --color-dark-mode-7: #4d4d4d;
+  --color-dark-mode-7-hover: hsl(0, 0%, 40%);
   --color-dark-mode-8: #666666;
   --color-dark-mode-9: #7e7e7e;
   --color-dark-mode-10: #9e9e9e;
@@ -58,6 +59,7 @@
   --color-5-hover: var(--color-dark-mode-5-hover);
   --color-6: var(--color-dark-mode-6);
   --color-7: var(--color-dark-mode-7);
+  --color-7-hover: var(--color-dark-mode-7-hover);
   --color-8: var(--color-dark-mode-8);
   --color-9: var(--color-dark-mode-9);
   --color-10: var(--color-dark-mode-10);
@@ -128,7 +130,7 @@ a {
 }
 
 button,
-[type='submit'] {
+[type="submit"] {
   padding: 0;
   border: none;
   background: none;
@@ -143,6 +145,6 @@ input {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
