@@ -50,7 +50,7 @@ export const StudentItem = ({ open = false, status }: Props) => {
           ease: "power2",
           opacity: 1,
           duration: 0.2,
-          stagger: 0.01,
+          stagger: 0.018,
         },
         "<+=0.1"
       );
