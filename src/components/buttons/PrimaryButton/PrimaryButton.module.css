@@ -10,6 +10,8 @@
   font-weight: var(--font-weight-regular);
   transition: all var(--transition-speed-fast) ease;
   line-height: 100%;
+  user-select: none;
+  cursor: pointer;
 }
 
 .PrimaryButton i {
@@ -40,6 +42,11 @@
 
 .primary {
   background-color: var(--color-15);
+}
+
+.primary i,
+.primary:hover i {
+  color: var(--color-11);
 }
 
 .primary:hover {

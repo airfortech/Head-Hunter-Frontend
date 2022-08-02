@@ -3,7 +3,7 @@ import classes from "./PrimaryButton.module.css";
 
 interface Props {
   children: string;
-  type?: "button" | "submit";
+  type?: "button" | "submit" | "checkbox" | "radio";
   size?: "small" | "normal" | "large";
   fullWidth?: boolean;
   color?: "primary" | "secondary" | "tertiary" | "quaternary";
@@ -23,7 +23,7 @@ export const PrimaryButton = ({
   icon,
   fullWidth = false,
 }: Props) => {
-  return (
+  return type === "button" || type === "submit" ? (
     <button
       type={type}
       className={`${classes.PrimaryButton} ${classes[size]} ${classes[color]} ${
@@ -33,5 +33,14 @@ export const PrimaryButton = ({
       {icon && <i className={Icons[icon]} />}
       {children}
     </button>
+  ) : (
+    <div
+      className={`${classes.PrimaryButton} ${classes[size]} ${classes[color]} ${
+        fullWidth && classes.fullWidth
+      }`}
+    >
+      {icon && <i className={Icons[icon]} />}
+      {children}
+    </div>
   );
 };

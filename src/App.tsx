@@ -6,6 +6,7 @@ import { HRView } from "./views/HRView/HRView";
 import { CVView } from "./views/CVView/CVView";
 import { StudentsListView } from "./views/StudentsListView/StudentsListView";
 import classes from "./App.module.css";
+import { SortForm } from "./components/SearchPanel/SortForm/SortForm";
 
 export const App = () => {
   return (
@@ -17,6 +18,7 @@ export const App = () => {
           <Route path="/cv" element={<CVView />} />
           <Route path="/students" element={<StudentsListView />} />
           <Route path="/students/reserved" element={<StudentsListView />} />
+          <Route path="/form" element={<SortForm />} />
         </Routes>
       </Scrollbar>
     </div>
