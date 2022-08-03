@@ -13,3 +13,7 @@
   display: flex;
   gap: 8px;
 }
+
+.displayColumn {
+  flex-direction: column;
+}

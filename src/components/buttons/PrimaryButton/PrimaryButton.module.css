@@ -30,15 +30,16 @@
 }
 
 .small {
-  height: 27px;
+  min-height: 27px;
+  padding: 5px 17px;
 }
 
 .normal {
-  height: 30px;
+  min-height: 30px;
 }
 
 .large {
-  height: 40px;
+  min-height: 40px;
 }
 
 .fullWidth {

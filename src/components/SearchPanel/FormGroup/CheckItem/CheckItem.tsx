@@ -5,33 +5,33 @@ import classes from "./CheckItem.module.css";
 interface Props {
   type: "checkbox" | "radio";
   value: string;
+  name: string;
   groupName: string;
   icon?: "star";
 }
 
-export const CheckItem = ({ value, groupName, type, icon }: Props) => {
+export const CheckItem = ({ value, name, groupName, type, icon }: Props) => {
   return (
     <label className={classes.CheckItem}>
       <Field type={type} name={groupName} value={value}>
-        {({ field }: FieldProps) => (
+        {({ field: { onChange, checked } }: FieldProps) => (
           <>
             <input
               type={type}
-              placeholder="Email"
               name={groupName}
-              onChange={field.onChange}
-              checked={field.checked}
+              onChange={onChange}
+              checked={checked}
               value={value}
               className={classes.input}
             />
             <PrimaryButton
               type={type}
               size="small"
-              color={field.checked ? "primary" : "secondary"}
+              color={checked ? "primary" : "secondary"}
               icon={icon}
               reversed
             >
-              {value}
+              {name}
             </PrimaryButton>
           </>
         )}
