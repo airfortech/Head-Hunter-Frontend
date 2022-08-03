@@ -1,0 +1,15 @@
+.FormGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.FormGroup h3 {
+  font-size: var(--font-size-nm);
+  font-weight: var(--font-weight-medium);
+}
+
+.items {
+  display: flex;
+  gap: 8px;
+}

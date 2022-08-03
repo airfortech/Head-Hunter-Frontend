@@ -1,6 +1,6 @@
 .PrimaryButton {
   padding: 10px 17px;
-  min-width: 80px;
+  /* min-width: 80px; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,8 +14,13 @@
   cursor: pointer;
 }
 
+.reversed {
+  flex-direction: row-reverse;
+  gap: 2px;
+}
+
 .PrimaryButton i {
-  font-size: calc(var(--font-size-md) * 1.3);
+  font-size: var(--font-size-md);
   color: var(--color-7);
   transition: all var(--transition-speed-fast) ease;
 }

@@ -1,83 +1,97 @@
-import { Field, Form, Formik } from "formik";
 import React from "react";
+import { Form, Formik } from "formik";
 import { PrimaryButton } from "../../buttons/PrimaryButton/PrimaryButton";
 import classes from "./SortForm.module.css";
+import { FormGroup } from "../FormGroup/FormGroup";
+import { CheckItem } from "../FormGroup/CheckItem/CheckItem";
 
-interface Props {
-  field: {
-    name: string;
-    value: string;
-    onChange: React.ChangeEventHandler<HTMLInputElement>;
-    onBlur: React.ChangeEventHandler<HTMLInputElement>;
-  };
-  id: string;
-  label: string;
-  className: string;
-}
-
-const RadioButton = ({
-  field: { name, value, onChange, onBlur },
-  id,
-  label,
-  className,
-  ...props
-}: Props) => {
-  return (
-    <div>
-      <input
-        name={name}
-        id={id}
-        type="radio"
-        value={id} // could be something else for output?
-        checked={id === value}
-        onChange={onChange}
-        onBlur={onBlur}
-        className={classes.input}
-        {...props}
-      />
-      <label htmlFor={id}>
-        <PrimaryButton
-          type="radio"
-          color={id === value ? "primary" : "secondary"}
-          icon="filter"
-        >
-          {label}
-        </PrimaryButton>
-      </label>
-    </div>
-  );
-};
+// interface Props {
+//   field: {
+//     name: string;
+//     value: string;
+//     onChange: React.ChangeEventHandler<HTMLInputElement>;
+//     onBlur: React.ChangeEventHandler<HTMLInputElement>;
+//   };
+//   id: string;
+//   label: string;
+//   className: string;
+// }
 
 export const SortForm = () => {
   return (
     <div className={classes.SortForm}>
+      <h1>Formik:</h1>
       <Formik
-        initialValues={{
-          picked: "",
-        }}
-        onSubmit={async (values) => {
-          await new Promise((r) => setTimeout(r, 500));
-          alert(JSON.stringify(values, null, 2));
-        }}
+        initialValues={{ courseNote: "4", activityNote: "4", checkbox: [] }}
+        onSubmit={(values) => console.log(values)}
       >
-        {({ values }) => (
-          <Form>
-            <Field
-              component={RadioButton}
-              name="picked"
-              id="radioOption1"
-              label="Choose this option"
+        <Form className={classes.form}>
+          <FormGroup title="Ocena przejścia kursu">
+            <CheckItem
+              type="radio"
+              groupName="courseNote"
+              value="5"
+              icon="star"
             />
-            <Field
-              component={RadioButton}
-              name="picked"
-              id="radioOption2"
-              label="Or choose this one"
+            <CheckItem
+              type="radio"
+              groupName="courseNote"
+              value="4"
+              icon="star"
             />
-            <div>Picked: {values.picked}</div>
-            <PrimaryButton type="submit">Submit</PrimaryButton>
-          </Form>
-        )}
+            <CheckItem
+              type="radio"
+              groupName="courseNote"
+              value="3"
+              icon="star"
+            />
+            <CheckItem
+              type="radio"
+              groupName="courseNote"
+              value="2"
+              icon="star"
+            />
+            <CheckItem
+              type="radio"
+              groupName="courseNote"
+              value="1"
+              icon="star"
+            />
+          </FormGroup>
+          <FormGroup title="Ocena aktywności i zaangażowania na kursie">
+            <CheckItem
+              type="radio"
+              groupName="activityNote"
+              value="5"
+              icon="star"
+            />
+            <CheckItem
+              type="radio"
+              groupName="activityNote"
+              value="4"
+              icon="star"
+            />
+            <CheckItem
+              type="radio"
+              groupName="activityNote"
+              value="3"
+              icon="star"
+            />
+            <CheckItem
+              type="radio"
+              groupName="activityNote"
+              value="2"
+              icon="star"
+            />
+            <CheckItem
+              type="radio"
+              groupName="activityNote"
+              value="1"
+              icon="star"
+            />
+          </FormGroup>
+          <PrimaryButton type="submit">Submit</PrimaryButton>
+        </Form>
       </Formik>
     </div>
   );

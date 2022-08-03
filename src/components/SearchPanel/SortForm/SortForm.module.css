@@ -1,7 +1,10 @@
 .SortForm {
   padding: 50px;
+  background-color: var(--color-1);
 }
 
-.SortForm input {
-  display: none;
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }

@@ -1,0 +1,7 @@
+.CheckItem {
+  display: flex;
+}
+
+.field {
+  display: none;
+}
