@@ -1,4 +1,4 @@
-import React from "react";
+import React, { MouseEventHandler } from "react";
 import { Form, Formik } from "formik";
 import { PrimaryButton } from "../../buttons/PrimaryButton/PrimaryButton";
 import { FormGroup } from "../FormGroup/FormGroup";
@@ -6,10 +6,19 @@ import { CheckItem } from "../FormGroup/CheckItem/CheckItem";
 import { sortByTypes, sortTypes } from "./sortFormData";
 import classes from "./SortForm.module.css";
 
-export const SortForm = () => {
+interface Props {
+  closeModal: MouseEventHandler;
+}
+
+export const SortForm = ({ closeModal }: Props) => {
   return (
     <div className={classes.SortForm}>
-      <h2>Sortowanie</h2>
+      <div className={classes.row}>
+        <h2>Sortowanie</h2>
+        <PrimaryButton size="normal" color="quaternary" onClick={closeModal}>
+          Anuluj
+        </PrimaryButton>
+      </div>
       <Formik
         initialValues={{
           sortType: sortTypes[1].value,
@@ -40,7 +49,11 @@ export const SortForm = () => {
               />
             ))}
           </FormGroup>
-          <PrimaryButton type="submit">Pokaż wyniki</PrimaryButton>
+          <div className={classes.submit}>
+            <PrimaryButton type="submit" onClick={closeModal}>
+              Pokaż wyniki
+            </PrimaryButton>
+          </div>
         </Form>
       </Formik>
     </div>

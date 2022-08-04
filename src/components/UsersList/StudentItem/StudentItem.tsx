@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
+import { NavLink } from "react-router-dom";
 import { gsap } from "gsap";
 import { PrimaryButton } from "../../buttons/PrimaryButton/PrimaryButton";
 import { NoteCard } from "../../NoteCard/NoteCard";
 import { PreferencesCard } from "../../PreferencesCard/PreferencesCard";
-import classes from "./StudentItem.module.css";
 import { Avatar } from "../../Avatar/Avatar";
-import { NavLink } from "react-router-dom";
+import classes from "./StudentItem.module.css";
 
 interface Props {
   open?: boolean;

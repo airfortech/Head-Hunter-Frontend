@@ -1,4 +1,4 @@
-import React from "react";
+import React, { MouseEventHandler } from "react";
 import classes from "./PrimaryButton.module.css";
 
 interface Props {
@@ -9,6 +9,7 @@ interface Props {
   color?: "primary" | "secondary" | "tertiary" | "quaternary";
   icon?: "filter" | "sort" | "star" | undefined;
   reversed?: boolean;
+  onClick?: MouseEventHandler;
 }
 
 enum Icons {
@@ -25,6 +26,7 @@ export const PrimaryButton = ({
   icon,
   fullWidth = false,
   reversed = false,
+  onClick,
 }: Props) => {
   return type === "button" || type === "submit" ? (
     <button
@@ -32,6 +34,7 @@ export const PrimaryButton = ({
       className={`${classes.PrimaryButton} ${classes[size]} ${classes[color]} ${
         fullWidth && classes.fullWidth
       } ${reversed && classes.reversed}`}
+      onClick={onClick}
     >
       {icon && <i className={Icons[icon]} />}
       {children}
@@ -41,6 +44,7 @@ export const PrimaryButton = ({
       className={`${classes.PrimaryButton} ${classes[size]} ${classes[color]} ${
         fullWidth && classes.fullWidth
       } ${reversed && classes.reversed}`}
+      onClick={onClick}
     >
       {icon && <i className={Icons[icon]} />}
       {children}

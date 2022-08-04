@@ -1,6 +1,6 @@
 .PrimaryButton {
-  padding: 10px 17px;
-  /* min-width: 80px; */
+  padding: 5px 17px;
+  /* padding: 10px 17px; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,7 +31,6 @@
 
 .small {
   min-height: 27px;
-  padding: 5px 17px;
 }
 
 .normal {
