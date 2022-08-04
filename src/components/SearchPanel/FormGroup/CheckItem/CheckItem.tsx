@@ -26,9 +26,10 @@ export const CheckItem = ({ value, name, groupName, type, icon }: Props) => {
             />
             <PrimaryButton
               type={type}
-              size="small"
+              size="form"
               color={checked ? "primary" : "secondary"}
               icon={icon}
+              iconColor={checked ? "secondary" : "tertiary"}
               reversed
             >
               {name}

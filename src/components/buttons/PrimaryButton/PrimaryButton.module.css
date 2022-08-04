@@ -21,7 +21,6 @@
 
 .PrimaryButton i {
   font-size: var(--font-size-md);
-  color: var(--color-7);
   transition: all var(--transition-speed-fast) ease;
 }
 
@@ -41,17 +40,23 @@
   min-height: 40px;
 }
 
+.form {
+  padding: 5px 9px;
+  min-height: 27px;
+  font-size: var(--font-size-nm);
+  font-weight: var(--font-weight-medium);
+}
+
+.form i {
+  font-size: var(--font-size-nm);
+}
+
 .fullWidth {
   width: 100%;
 }
 
 .primary {
   background-color: var(--color-15);
-}
-
-.primary i,
-.primary:hover i {
-  color: var(--color-11);
 }
 
 .primary:hover {
@@ -80,4 +85,28 @@
 
 .quaternary:hover {
   background-color: var(--color-14-hover);
+}
+
+.primaryIcon {
+  color: var(--color-7);
+}
+
+.PrimaryButton:hover .primaryIcon {
+  color: var(--color-7-hover);
+}
+
+.secondaryIcon {
+  color: var(--color-12);
+}
+
+.PrimaryButton:hover .secondaryIcon {
+  color: var(--color-12);
+}
+
+.tertiaryIcon {
+  color: var(--color-15);
+}
+
+.PrimaryButton:hover .tertiaryIcon {
+  color: var(--color-15-hover);
 }
