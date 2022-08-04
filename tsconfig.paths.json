@@ -1,10 +1,8 @@
 {
-  "compilerOptions" : {
+  "compilerOptions": {
     "baseUrl": ".",
-    "paths" : {
-      "types" : [
-        "../Head-Hunter-Backend/types"
-      ]
+    "paths": {
+      "types": ["../Head-Hunter-Backend/types"]
     }
   }
 }

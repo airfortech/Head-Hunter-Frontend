@@ -1,6 +1,6 @@
 .PrimaryButton {
-  padding: 10px 17px;
-  min-width: 80px;
+  padding: 5px 17px;
+  /* padding: 10px 17px; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,10 +10,17 @@
   font-weight: var(--font-weight-regular);
   transition: all var(--transition-speed-fast) ease;
   line-height: 100%;
+  user-select: none;
+  cursor: pointer;
+}
+
+.reversed {
+  flex-direction: row-reverse;
+  gap: 2px;
 }
 
 .PrimaryButton i {
-  font-size: calc(var(--font-size-md) * 1.3);
+  font-size: var(--font-size-md);
   color: var(--color-7);
   transition: all var(--transition-speed-fast) ease;
 }
@@ -23,15 +30,15 @@
 }
 
 .small {
-  height: 27px;
+  min-height: 27px;
 }
 
 .normal {
-  height: 30px;
+  min-height: 30px;
 }
 
 .large {
-  height: 40px;
+  min-height: 40px;
 }
 
 .fullWidth {
@@ -40,6 +47,11 @@
 
 .primary {
   background-color: var(--color-15);
+}
+
+.primary i,
+.primary:hover i {
+  color: var(--color-11);
 }
 
 .primary:hover {

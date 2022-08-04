@@ -71,6 +71,7 @@
   --color-14-hover: var(--color-dark-mode-14-hover);
   --color-15: var(--color-dark-mode-15);
   --color-15-hover: var(--color-dark-mode-15-hover);
+  --overlay-color: #0a0a0a80;
 
   /* margins */
   --margin-sm: 8px;
@@ -148,4 +149,9 @@ input {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.ReactModalPortal {
+  z-index: 99 !important;
+  position: relative;
 }

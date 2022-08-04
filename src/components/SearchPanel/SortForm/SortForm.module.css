@@ -1,0 +1,31 @@
+.SortForm {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  background-color: var(--color-1);
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.SortForm h2 {
+  font-size: var(--font-size-xxl);
+  font-weight: var(--font-weight-bold);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 24px;
+}
+
+.submit {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}

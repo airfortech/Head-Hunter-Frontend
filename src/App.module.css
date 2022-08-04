@@ -1,3 +1,7 @@
 .App {
   height: 100vh;
 }
+
+.App > div > div:last-child {
+  z-index: 2;
+}

@@ -1,0 +1,28 @@
+.Modal {
+  display: none;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--overlay-color);
+  z-index: 2;
+}
+
+.content {
+  position: absolute;
+  padding: 24px 18px;
+  width: calc(100% - 40px);
+  max-width: 520px;
+  max-height: calc(100vh - 40px);
+  display: flex;
+  justify-content: center;
+  background: var(--color-1);
+  outline: none;
+}

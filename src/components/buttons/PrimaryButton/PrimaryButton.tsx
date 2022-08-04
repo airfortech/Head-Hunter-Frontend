@@ -1,17 +1,21 @@
-import React from "react";
+import React, { MouseEventHandler } from "react";
 import classes from "./PrimaryButton.module.css";
 
 interface Props {
   children: string;
-  type?: "button" | "submit";
+  type?: "button" | "submit" | "checkbox" | "radio";
   size?: "small" | "normal" | "large";
   fullWidth?: boolean;
   color?: "primary" | "secondary" | "tertiary" | "quaternary";
-  icon?: "filter";
+  icon?: "filter" | "sort" | "star" | undefined;
+  reversed?: boolean;
+  onClick?: MouseEventHandler;
 }
 
 enum Icons {
   filter = "bx bxl-github",
+  sort = "bx bx-sort-alt-2",
+  star = "bx bxs-star",
 }
 
 export const PrimaryButton = ({
@@ -21,16 +25,29 @@ export const PrimaryButton = ({
   size = "normal",
   icon,
   fullWidth = false,
+  reversed = false,
+  onClick,
 }: Props) => {
-  return (
+  return type === "button" || type === "submit" ? (
     <button
       type={type}
       className={`${classes.PrimaryButton} ${classes[size]} ${classes[color]} ${
         fullWidth && classes.fullWidth
-      }`}
+      } ${reversed && classes.reversed}`}
+      onClick={onClick}
     >
       {icon && <i className={Icons[icon]} />}
       {children}
     </button>
+  ) : (
+    <div
+      className={`${classes.PrimaryButton} ${classes[size]} ${classes[color]} ${
+        fullWidth && classes.fullWidth
+      } ${reversed && classes.reversed}`}
+      onClick={onClick}
+    >
+      {icon && <i className={Icons[icon]} />}
+      {children}
+    </div>
   );
 };
