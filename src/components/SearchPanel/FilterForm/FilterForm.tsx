@@ -12,6 +12,7 @@ import {
   InitialValues,
 } from "./filterFormData";
 import classes from "./FilterForm.module.css";
+import { Input } from "../../Input/Input";
 
 interface Props {
   closeModal: MouseEventHandler;
@@ -44,7 +45,11 @@ export const FilterForm = ({ closeModal }: Props) => {
     <div className={classes.FilterForm}>
       <Formik
         initialValues={initialValues}
-        onSubmit={(values) => alert(printValues(values))}
+        onSubmit={(values) => {
+          console.log(values);
+
+          alert(printValues(values));
+        }}
       >
         {({ resetForm }) => (
           <Form className={classes.form}>
@@ -128,6 +133,12 @@ export const FilterForm = ({ closeModal }: Props) => {
                 />
               ))}
             </FormGroup>
+            <FormGroup title="Oczekiwane wynagrodzenie miesięczne netto">
+              <p>Od</p>
+              <Input type="text" placeholder="np. 1000zł" />
+              <p>Do</p>
+              <Input type="text" placeholder="np. 10000zł" />
+            </FormGroup>
             <FormGroup title="Zgoda na odbycie bezpłatnych praktyk/stażu na początek">
               {canTakeApprenticeship.map(({ value, name }) => (
                 <CheckItem
@@ -138,6 +149,14 @@ export const FilterForm = ({ closeModal }: Props) => {
                   key={value}
                 />
               ))}
+            </FormGroup>
+            <FormGroup title="Ilość miesięcy doświadczenia komercyjnego kandydata w programowaniu">
+              <Input
+                type="text"
+                name="monthsOfCommercialExp"
+                forFormik
+                placeholder="0 miesięcy"
+              />
             </FormGroup>
             <div className={classes.bottomButtons}>
               <PrimaryButton

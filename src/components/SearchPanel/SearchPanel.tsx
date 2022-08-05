@@ -29,9 +29,7 @@ export const SearchPanel = () => {
       modalType,
     });
 
-  useEffect(() => {
-    console.log(isModalOpen);
-  }, [isModalOpen]);
+  useEffect(() => {}, [isModalOpen]);
 
   return (
     <div className={classes.SearchPanel}>

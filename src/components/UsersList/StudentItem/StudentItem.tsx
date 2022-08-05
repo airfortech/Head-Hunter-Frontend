@@ -60,8 +60,6 @@ export const StudentItem = ({ open = false, status }: Props) => {
   }, []);
 
   useEffect(() => {
-    console.log("test", isDetailsOpen);
-
     if (isDetailsOpen) {
       tweenRef.current?.play();
     } else {

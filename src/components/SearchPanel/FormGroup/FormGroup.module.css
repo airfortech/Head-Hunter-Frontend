@@ -11,8 +11,14 @@
 
 .items {
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
   gap: 8px;
+}
+
+.items > p {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
 }
 
 .displayColumn {
