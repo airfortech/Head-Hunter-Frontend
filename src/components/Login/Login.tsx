@@ -19,9 +19,9 @@ const initialValues = {
 const ValidationSchema = yup.object().shape({
   login: yup
     .string()
-    .email("Niepoprawny adres email")
-    .typeError("Wprowadź liczbę!"),
-  password: yup.string().typeError("Wprowadź liczbę!"),
+    .email("Niepoprawny adres email!")
+    .required("Podaj adres email!"),
+  password: yup.string().required("Podaj hasło!"),
 });
 
 const printValues = (values: InitialValues) => {
@@ -60,7 +60,13 @@ export const Login = () => {
               size="large"
               placeholder="Password"
             />
-            <p className={classes.error}>{errors.login}</p>
+            <p className={classes.error}>
+              {errors.login
+                ? errors.login
+                : errors.password
+                ? errors.password
+                : null}
+            </p>
             <div className={classes.buttons}>
               <p className={classes.link}>Zapomniałeś hasła?</p>
               <PrimaryButton

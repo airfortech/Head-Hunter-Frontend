@@ -26,3 +26,11 @@
   align-items: flex-end;
   gap: 27px;
 }
+
+.error {
+  width: 100%;
+  height: var(--font-size-nm);
+  font-size: var(--font-size-nm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-15);
+}
