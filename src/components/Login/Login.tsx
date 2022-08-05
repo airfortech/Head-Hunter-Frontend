@@ -11,7 +11,7 @@ export interface InitialValues {
   password: string;
 }
 
-const initialValues = {
+const initialValues: InitialValues = {
   login: "",
   password: "",
 };
