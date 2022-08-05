@@ -39,7 +39,7 @@ export const Input = ({
           required={required}
         />
       ) : (
-        <Field name="monthsOfCommercialExp" type="text">
+        <Field name={name} type="text">
           {({ field: { onChange, value } }: FieldProps) => (
             <input
               type={type}

@@ -27,6 +27,9 @@ const printValues = (values: InitialValues) => {
     expectedTypeWork,
     expectedContractType,
     canTakeApprenticeship,
+    monthsOfCommercialExp,
+    expectedSalaryFrom,
+    expectedSalaryTo,
   } = values;
 
   return `
@@ -37,6 +40,9 @@ const printValues = (values: InitialValues) => {
     expectedTypeWork: ${expectedTypeWork.join(", ")}
     expectedContractType: ${expectedContractType.join(", ")}
     canTakeApprenticeship: ${canTakeApprenticeship}
+    expectedSalaryFrom: ${expectedSalaryFrom}
+    expectedSalaryTo: ${expectedSalaryTo}
+    monthsOfCommercialExp: ${monthsOfCommercialExp}
   `;
 };
 
@@ -135,9 +141,19 @@ export const FilterForm = ({ closeModal }: Props) => {
             </FormGroup>
             <FormGroup title="Oczekiwane wynagrodzenie miesięczne netto">
               <p>Od</p>
-              <Input type="text" placeholder="np. 1000zł" />
+              <Input
+                type="text"
+                name="expectedSalaryFrom"
+                forFormik
+                placeholder="np. 1000zł"
+              />
               <p>Do</p>
-              <Input type="text" placeholder="np. 10000zł" />
+              <Input
+                type="text"
+                name="expectedSalaryTo"
+                forFormik
+                placeholder="np. 10.000zł"
+              />
             </FormGroup>
             <FormGroup title="Zgoda na odbycie bezpłatnych praktyk/stażu na początek">
               {canTakeApprenticeship.map(({ value, name }) => (

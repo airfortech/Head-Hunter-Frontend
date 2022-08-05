@@ -38,6 +38,8 @@ export interface InitialValues {
   expectedContractType: string[];
   canTakeApprenticeship: "true" | "false";
   monthsOfCommercialExp: string;
+  expectedSalaryFrom: string;
+  expectedSalaryTo: string;
 }
 
 export const initialValues: InitialValues = {
@@ -48,5 +50,7 @@ export const initialValues: InitialValues = {
   expectedTypeWork: [],
   expectedContractType: [],
   canTakeApprenticeship: "false",
-  monthsOfCommercialExp: "3",
+  monthsOfCommercialExp: "",
+  expectedSalaryFrom: "",
+  expectedSalaryTo: "",
 };
