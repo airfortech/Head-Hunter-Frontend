@@ -2,6 +2,10 @@
   position: relative;
 }
 
+.Input {
+  position: relative;
+}
+
 .InputInput {
   max-width: 100%;
   color: var(--color-12);

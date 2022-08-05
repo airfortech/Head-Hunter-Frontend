@@ -4,10 +4,12 @@ import classes from "./PrimaryButton.module.css";
 interface Props {
   children: string;
   type?: "button" | "submit" | "checkbox" | "radio";
-  size?: "small" | "normal" | "large";
+  disabled?: boolean;
+  size?: "small" | "normal" | "large" | "form";
   fullWidth?: boolean;
   color?: "primary" | "secondary" | "tertiary" | "quaternary";
   icon?: "filter" | "sort" | "star" | undefined;
+  iconColor?: "primary" | "secondary" | "tertiary";
   reversed?: boolean;
   onClick?: MouseEventHandler;
 }
@@ -21,9 +23,11 @@ enum Icons {
 export const PrimaryButton = ({
   children,
   type = "button",
+  disabled = false,
   color = "primary",
   size = "normal",
   icon,
+  iconColor = "primary",
   fullWidth = false,
   reversed = false,
   onClick,
@@ -31,12 +35,15 @@ export const PrimaryButton = ({
   return type === "button" || type === "submit" ? (
     <button
       type={type}
+      disabled={disabled}
       className={`${classes.PrimaryButton} ${classes[size]} ${classes[color]} ${
         fullWidth && classes.fullWidth
       } ${reversed && classes.reversed}`}
       onClick={onClick}
     >
-      {icon && <i className={Icons[icon]} />}
+      {icon && (
+        <i className={`${Icons[icon]} ${classes[iconColor + "Icon"]}`} />
+      )}
       {children}
     </button>
   ) : (
@@ -46,7 +53,9 @@ export const PrimaryButton = ({
       } ${reversed && classes.reversed}`}
       onClick={onClick}
     >
-      {icon && <i className={Icons[icon]} />}
+      {icon && (
+        <i className={`${Icons[icon]} ${classes[iconColor + "Icon"]}`} />
+      )}
       {children}
     </div>
   );

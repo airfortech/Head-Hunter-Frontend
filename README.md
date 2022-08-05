@@ -59,6 +59,15 @@ https://www.npmjs.com/package/react-custom-scrollbars-2
 react-select
 https://www.npmjs.com/package/react-select
 
+formik
+https://www.npmjs.com/package/formik
+
+yup
+https://www.npmjs.com/package/yup
+
+react-modal
+https://www.npmjs.com/package/react-modal
+
 <br>
 
 ## Project Structure

@@ -2,7 +2,7 @@ import React from "react";
 import classes from "./FormGroup.module.css";
 
 interface Props {
-  children: JSX.Element[];
+  children: JSX.Element[] | JSX.Element;
   title: string;
   displayDirection?: "row" | "column";
 }

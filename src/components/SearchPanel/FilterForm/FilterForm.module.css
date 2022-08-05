@@ -1,0 +1,40 @@
+.FilterForm {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  background-color: var(--color-1);
+}
+
+.row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+
+.FilterForm h2 {
+  font-size: var(--font-size-xxl);
+  font-weight: var(--font-weight-bold);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 24px;
+}
+
+.bottomButtons {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  gap: 20px;
+}
+
+.FilterForm .error {
+  font-size: var(--font-size-nm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-15);
+}
