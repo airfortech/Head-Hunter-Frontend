@@ -1,3 +1,5 @@
+import * as yup from "yup";
+
 interface CheckItemType {
   value: string;
   name: string;
@@ -54,3 +56,22 @@ export const initialValues: InitialValues = {
   expectedSalaryFrom: "",
   expectedSalaryTo: "",
 };
+
+export const ValidationSchema = yup.object().shape({
+  monthsOfCommercialExp: yup
+    .number()
+    .min(0, "Liczba musi być dodatnia!")
+    .max(50, "Seniorzy pod innym adresem!")
+    .integer("Liczba musi być całkowita!")
+    .typeError("Wprowadź liczbę!"),
+  expectedSalaryFrom: yup
+    .number()
+    .min(0, "Zarobki muszą być dodatnie!")
+    .integer("Liczba musi być całkowita!")
+    .typeError("Wprowadź liczbę!"),
+  expectedSalaryTo: yup
+    .number()
+    .min(0, "Zarobki muszą być dodatnie!")
+    .integer("Liczba musi być całkowita!")
+    .typeError("Wprowadź liczbę!"),
+});

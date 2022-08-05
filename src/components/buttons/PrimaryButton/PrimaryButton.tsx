@@ -4,6 +4,7 @@ import classes from "./PrimaryButton.module.css";
 interface Props {
   children: string;
   type?: "button" | "submit" | "checkbox" | "radio";
+  disabled?: boolean;
   size?: "small" | "normal" | "large" | "form";
   fullWidth?: boolean;
   color?: "primary" | "secondary" | "tertiary" | "quaternary";
@@ -22,6 +23,7 @@ enum Icons {
 export const PrimaryButton = ({
   children,
   type = "button",
+  disabled = false,
   color = "primary",
   size = "normal",
   icon,
@@ -33,6 +35,7 @@ export const PrimaryButton = ({
   return type === "button" || type === "submit" ? (
     <button
       type={type}
+      disabled={disabled}
       className={`${classes.PrimaryButton} ${classes[size]} ${classes[color]} ${
         fullWidth && classes.fullWidth
       } ${reversed && classes.reversed}`}

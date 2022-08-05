@@ -10,6 +10,7 @@ import {
   degrees,
   initialValues,
   InitialValues,
+  ValidationSchema,
 } from "./filterFormData";
 import classes from "./FilterForm.module.css";
 import { Input } from "../../Input/Input";
@@ -51,13 +52,13 @@ export const FilterForm = ({ closeModal }: Props) => {
     <div className={classes.FilterForm}>
       <Formik
         initialValues={initialValues}
+        validationSchema={ValidationSchema}
         onSubmit={(values) => {
           console.log(values);
-
           alert(printValues(values));
         }}
       >
-        {({ resetForm }) => (
+        {({ resetForm, errors, isValid }) => (
           <Form className={classes.form}>
             <div className={classes.row}>
               <h2>Filtrowanie</h2>
@@ -154,6 +155,13 @@ export const FilterForm = ({ closeModal }: Props) => {
                 forFormik
                 placeholder="np. 10.000zł"
               />
+              <p className={classes.error}>
+                {errors.expectedSalaryFrom
+                  ? errors.expectedSalaryFrom
+                  : errors.expectedSalaryTo
+                  ? errors.expectedSalaryTo
+                  : null}
+              </p>
             </FormGroup>
             <FormGroup title="Zgoda na odbycie bezpłatnych praktyk/stażu na początek">
               {canTakeApprenticeship.map(({ value, name }) => (
@@ -173,6 +181,7 @@ export const FilterForm = ({ closeModal }: Props) => {
                 forFormik
                 placeholder="0 miesięcy"
               />
+              <p className={classes.error}>{errors.monthsOfCommercialExp}</p>
             </FormGroup>
             <div className={classes.bottomButtons}>
               <PrimaryButton
@@ -182,7 +191,11 @@ export const FilterForm = ({ closeModal }: Props) => {
               >
                 Anuluj
               </PrimaryButton>
-              <PrimaryButton type="submit" onClick={closeModal}>
+              <PrimaryButton
+                type="submit"
+                disabled={!isValid}
+                onClick={closeModal}
+              >
                 Pokaż wyniki
               </PrimaryButton>
             </div>

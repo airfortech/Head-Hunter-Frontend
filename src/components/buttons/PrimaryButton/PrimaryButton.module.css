@@ -13,6 +13,9 @@
   user-select: none;
   cursor: pointer;
 }
+.PrimaryButton:disabled {
+  cursor: not-allowed;
+}
 
 .reversed {
   flex-direction: row-reverse;
