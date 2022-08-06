@@ -3,6 +3,7 @@ import { Form, Formik } from "formik";
 import { PrimaryButton } from "../../buttons/PrimaryButton/PrimaryButton";
 import { FormGroup } from "../FormGroup/FormGroup";
 import { CheckItem } from "../FormGroup/CheckItem/CheckItem";
+import { Input } from "../../Input/Input";
 import {
   canTakeApprenticeship,
   expectedContractType,
@@ -13,7 +14,6 @@ import {
   ValidationSchema,
 } from "./filterFormData";
 import classes from "./FilterForm.module.css";
-import { Input } from "../../Input/Input";
 
 interface Props {
   closeModal: MouseEventHandler;
