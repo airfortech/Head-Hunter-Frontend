@@ -1,4 +1,5 @@
 import React from "react";
+import { Pagination } from "../../components/Pagination/Pagination";
 import { SearchPanel } from "../../components/SearchPanel/SearchPanel";
 import { TabsNavigation } from "../../components/TabsNavigation/TabsNavigation";
 import { StudentItem } from "../../components/UsersList/StudentItem/StudentItem";
@@ -19,6 +20,7 @@ export const StudentsListView = () => {
           ]}
         />
         <SearchPanel />
+        <Pagination />
         <UsersList>
           <StudentItem status="available" />
           <StudentItem status="available" />

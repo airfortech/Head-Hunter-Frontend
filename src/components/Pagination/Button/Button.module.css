@@ -1,0 +1,10 @@
+.Button {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: var(--font-size-xxl);
+  color: var(--color-5);
+  background-color: var(--color-11);
+}
