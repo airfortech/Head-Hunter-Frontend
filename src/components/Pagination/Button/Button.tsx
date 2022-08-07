@@ -3,6 +3,7 @@ import classes from "./Button.module.css";
 
 interface Props {
   icon: "prev" | "next";
+  disabled: boolean;
 }
 
 enum Icons {
@@ -10,9 +11,9 @@ enum Icons {
   next = "bx bx-chevron-right",
 }
 
-export const Button = ({ icon }: Props) => {
+export const Button = ({ icon, disabled }: Props) => {
   return (
-    <button className={classes.Button}>
+    <button className={classes.Button} disabled={disabled}>
       <i className={Icons[icon]}></i>
     </button>
   );

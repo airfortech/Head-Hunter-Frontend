@@ -11,3 +11,99 @@
 .Pagination p {
   font-size: var(--font-size-md);
 }
+
+.select {
+  height: 24px;
+  display: flex;
+  color: var(--color-12);
+  background-color: var(--color-5);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.select:focus {
+  outline: 1px solid red;
+}
+
+.select [class*="-control"] {
+  padding: 0 5px;
+  height: 24px;
+  min-height: auto;
+  display: flex;
+  align-items: center;
+  border-radius: 0;
+  background-color: var(--color-12);
+}
+
+.select [class$="-ValueContainer"] {
+  margin: 0;
+  padding: 0;
+  width: 20px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.select [class$="-singleValue"] {
+  display: flex;
+  align-items: center;
+}
+
+.select [class$="-Input"] {
+  display: none;
+}
+
+.select [class$="-indicatorContainer"] {
+  padding: 0;
+  margin: 0;
+  width: 12px;
+  color: var(--color-5);
+  cursor: pointer;
+}
+
+.select [class$="-indicatorContainer"]:hover {
+  padding: 0;
+  margin: 0;
+  color: var(--color-8);
+  width: 12px;
+}
+
+.select [class$="-indicatorSeparator"] {
+  display: none;
+}
+
+.select [class*="-menu"] {
+  right: 0;
+  border-radius: 0;
+  width: 200%;
+  background-color: var(--color-12);
+  box-shadow: none;
+}
+
+.select [class*="-MenuList"] {
+  border-radius: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+
+.select [class$="-option"] {
+  height: 24px;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-2);
+  background-color: var(--color-12);
+  cursor: pointer;
+  transition: all var(--transition-speed-fast) ease;
+}
+.select [class$="-option"]:hover {
+  background-color: var(--color-11);
+}
+
+.select [class$="-option"]:focus {
+  background-color: var(--color-15);
+}

@@ -20,7 +20,7 @@ export const StudentsListView = () => {
           ]}
         />
         <SearchPanel />
-        <Pagination />
+        <Pagination currentPage={1} totalPages={12} />
         <UsersList>
           <StudentItem status="available" />
           <StudentItem status="available" />
