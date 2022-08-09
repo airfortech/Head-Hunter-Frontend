@@ -5,37 +5,37 @@ import * as yup from "yup";
 import { PrimaryButton } from "../buttons/PrimaryButton/PrimaryButton";
 import { Input } from "../Input/Input";
 import logo from "../../assets/images/logo.png";
-import classes from "./Login.module.css";
+import classes from "./Register.module.css";
 
 export interface InitialValues {
-  login: string;
   password: string;
+  confirmPassword: string;
 }
 
 const initialValues: InitialValues = {
-  login: "",
   password: "",
+  confirmPassword: "",
 };
 
 const ValidationSchema = yup.object().shape({
-  login: yup
-    .string()
-    .email("Niepoprawny adres email!")
-    .required("Podaj adres email!"),
   password: yup.string().required("Podaj hasło!"),
+  confirmPassword: yup
+    .string()
+    .required("Powtórz hasło!")
+    .oneOf([yup.ref("password")], "Niepoprawne hasło!"),
 });
 
 const printValues = (values: InitialValues) => {
-  const { login, password } = values;
+  const { password, confirmPassword } = values;
   return `
-  login: ${login}
   password: ${password}
+  confirmPassword: ${confirmPassword}
   `;
 };
 
-export const Login = () => {
+export const Register = () => {
   return (
-    <main className={classes.Login}>
+    <main className={classes.Register}>
       <img src={logo} alt="MegaK Logo" className={classes.logo} />
       <Formik
         initialValues={initialValues}
@@ -48,29 +48,29 @@ export const Login = () => {
         {({ errors, isValid }) => (
           <Form className={classes.form}>
             <Input
-              type="text"
-              name="login"
-              forFormik
-              size="large"
-              placeholder="E-mail"
-            />
-            <Input
               type="password"
               name="password"
               forFormik
               size="large"
               placeholder="Password"
             />
+            <Input
+              type="password"
+              name="confirmPassword"
+              forFormik
+              size="large"
+              placeholder="Confirm password"
+            />
             <p className={classes.error}>
-              {errors.login
-                ? errors.login
-                : errors.password
+              {errors.password
                 ? errors.password
+                : errors.confirmPassword
+                ? errors.confirmPassword
                 : null}
             </p>
             <div className={classes.buttons}>
-              <NavLink to="/lostpassword" className={classes.link}>
-                Zapomniałeś hasła?
+              <NavLink to="/login" className={classes.link}>
+                Zaloguj się
               </NavLink>
               <PrimaryButton
                 type="submit"

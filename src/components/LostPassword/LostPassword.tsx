@@ -1,41 +1,37 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 import { Form, Formik } from "formik";
 import * as yup from "yup";
 import { PrimaryButton } from "../buttons/PrimaryButton/PrimaryButton";
 import { Input } from "../Input/Input";
 import logo from "../../assets/images/logo.png";
-import classes from "./Login.module.css";
+import classes from "./LostPassword.module.css";
+import { NavLink } from "react-router-dom";
 
 export interface InitialValues {
-  login: string;
-  password: string;
+  email: string;
 }
 
 const initialValues: InitialValues = {
-  login: "",
-  password: "",
+  email: "",
 };
 
 const ValidationSchema = yup.object().shape({
-  login: yup
+  email: yup
     .string()
     .email("Niepoprawny adres email!")
     .required("Podaj adres email!"),
-  password: yup.string().required("Podaj hasło!"),
 });
 
 const printValues = (values: InitialValues) => {
-  const { login, password } = values;
+  const { email } = values;
   return `
-  login: ${login}
-  password: ${password}
+  email: ${email}
   `;
 };
 
-export const Login = () => {
+export const LostPassword = () => {
   return (
-    <main className={classes.Login}>
+    <main className={classes.LostPassword}>
       <img src={logo} alt="MegaK Logo" className={classes.logo} />
       <Formik
         initialValues={initialValues}
@@ -48,29 +44,16 @@ export const Login = () => {
         {({ errors, isValid }) => (
           <Form className={classes.form}>
             <Input
-              type="text"
-              name="login"
+              type="email"
+              name="email"
               forFormik
               size="large"
-              placeholder="E-mail"
+              placeholder="Email"
             />
-            <Input
-              type="password"
-              name="password"
-              forFormik
-              size="large"
-              placeholder="Password"
-            />
-            <p className={classes.error}>
-              {errors.login
-                ? errors.login
-                : errors.password
-                ? errors.password
-                : null}
-            </p>
+            <p className={classes.error}>{errors.email}</p>
             <div className={classes.buttons}>
-              <NavLink to="/lostpassword" className={classes.link}>
-                Zapomniałeś hasła?
+              <NavLink to="/login" className={classes.link}>
+                Zaloguj się
               </NavLink>
               <PrimaryButton
                 type="submit"
@@ -78,7 +61,7 @@ export const Login = () => {
                 color="primary"
                 size="large"
               >
-                Zaloguj się
+                Odzyskaj hasło
               </PrimaryButton>
             </div>
           </Form>
