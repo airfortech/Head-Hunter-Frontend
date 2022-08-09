@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+import { RequireAuth } from "../components/RequireAuth/RequireAuth";
 import { CVView } from "../views/CVView/CVView";
 import { ListView } from "../views/ListView/ListView";
 import { NoMatch } from "../views/NoMatch/NoMatch";
@@ -16,14 +17,16 @@ const navLinks = [
 export const HRsRoutes = () => {
   return (
     <Routes>
-      <Route path="*" element={<PanelView />}>
-        <Route path="students/:id" element={<CVView />} />
-        <Route path="students" element={<ListView routes={navLinks} />}>
-          <Route path="available" element={<UsersListView />} />
-          <Route path="reserved" element={<UsersListView />} />
-          <Route path="hired" element={<UsersListView />} />
+      <Route path="*" element={<RequireAuth allowedRole="hr" />}>
+        <Route path="*" element={<PanelView />}>
+          <Route path="students/:id" element={<CVView />} />
+          <Route path="students" element={<ListView routes={navLinks} />}>
+            <Route path="available" element={<UsersListView />} />
+            <Route path="reserved" element={<UsersListView />} />
+            <Route path="hired" element={<UsersListView />} />
+          </Route>
+          <Route path="*" element={<NoMatch />} />
         </Route>
-        <Route path="*" element={<NoMatch />} />
       </Route>
     </Routes>
   );
