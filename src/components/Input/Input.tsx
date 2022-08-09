@@ -37,6 +37,7 @@ export const Input = ({
             classes[color]
           } ${icon && classes.extendedPadding}`}
           required={required}
+          autoComplete="off"
         />
       ) : (
         <Field name={name} type="text">
@@ -51,6 +52,7 @@ export const Input = ({
                 classes[color]
               } ${icon && classes.extendedPadding}`}
               required={required}
+              autoComplete="off"
             />
           )}
         </Field>
