@@ -1,11 +1,12 @@
 import React, { createContext, Dispatch, useState } from "react";
+import { UserRole } from "../types";
 
 interface Props {
   children: React.ReactNode;
 }
 
 interface LoginData {
-  role?: string;
+  role?: UserRole;
   id?: string;
   token?: string;
 }
