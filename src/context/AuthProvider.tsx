@@ -22,7 +22,10 @@ export const AuthContext = createContext<Auth>({
 });
 
 export const AuthProvider = ({ children }: Props) => {
-  const [auth, setAuth] = useState<LoginData>({});
+  const [auth, setAuth] = useState<LoginData>({
+    id: "3434",
+    role: UserRole.hr,
+  });
 
   return (
     <AuthContext.Provider value={{ auth, setAuth }}>

@@ -40,10 +40,11 @@ export const App = () => {
     <div className={classes.App}>
       <Scrollbar>
         <Routes>
-          <Route path="*" element={<UnprotectedRoutes />} />
+          {/* <Route path="/" element={<UnprotectedRoutes />} /> */}
           <Route path="panel/hr/*" element={<HRsRoutes />} />
           <Route path="panel/admin/*" element={<AdminRoutes />} />
           <Route path="panel/student/*" element={<StudentRoutes />} />
+          <Route path="*" element={<UnprotectedRoutes />} />
         </Routes>
       </Scrollbar>
     </div>
