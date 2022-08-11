@@ -13,6 +13,10 @@ export const Menu = () => {
     setMenuOpen((prevState) => !prevState);
   };
 
+  const handleLogout = async () => {
+    console.log("logout");
+  };
+
   useEffect(() => {
     const actionsItems = actionsRef.current?.children;
 
@@ -66,7 +70,7 @@ export const Menu = () => {
       </button>
       <div className={classes.actions} ref={actionsRef}>
         <p>Konto</p>
-        <p>Wyloguj</p>
+        <p onClick={handleLogout}>Wyloguj</p>
       </div>
     </menu>
   );
