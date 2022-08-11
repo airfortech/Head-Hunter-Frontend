@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Form, Formik } from "formik";
 import * as yup from "yup";
@@ -34,15 +34,23 @@ const printValues = (values: InitialValues) => {
 };
 
 export const Login = () => {
+  const [apiError, setApiError] = useState("");
+
+  useEffect(() => {
+    console.log(apiError);
+  }, [apiError]);
+
   return (
     <main className={classes.Login}>
       <img src={logo} alt="MegaK Logo" className={classes.logo} />
       <Formik
         initialValues={initialValues}
         validationSchema={ValidationSchema}
+        validate={() => setApiError("")}
         onSubmit={(values) => {
           console.log(values);
           alert(printValues(values));
+          setApiError("Niepoprawny email lub hasło!");
         }}
       >
         {({ errors, isValid }) => (
@@ -66,6 +74,8 @@ export const Login = () => {
                 ? errors.login
                 : errors.password
                 ? errors.password
+                : apiError
+                ? apiError
                 : null}
             </p>
             <div className={classes.buttons}>
