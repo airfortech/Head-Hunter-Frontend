@@ -1,44 +1,51 @@
-import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+// todo write/read login data in storage to work on refresh and delete on logout
+import React, { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Form, Formik } from "formik";
 import * as yup from "yup";
+import { useAuth } from "../../hooks/useAuth";
 import { PrimaryButton } from "../buttons/PrimaryButton/PrimaryButton";
 import { Input } from "../Input/Input";
+import { Spinner } from "../Spinner/Spinner";
 import logo from "../../assets/images/logo.png";
 import classes from "./Login.module.css";
+import { config } from "../../config/config";
 
-export interface InitialValues {
-  login: string;
+export interface SignIn {
+  email: string;
   password: string;
 }
 
-const initialValues: InitialValues = {
-  login: "",
+const initialValues: SignIn = {
+  email: "",
   password: "",
 };
 
 const ValidationSchema = yup.object().shape({
-  login: yup
+  email: yup
     .string()
     .email("Niepoprawny adres email!")
     .required("Podaj adres email!"),
   password: yup.string().required("Podaj hasło!"),
 });
 
-const printValues = (values: InitialValues) => {
-  const { login, password } = values;
-  return `
-  login: ${login}
-  password: ${password}
-  `;
+const fetchLoginData = async (data: SignIn) => {
+  const response = await fetch(config.apiUrl + "auth/login", {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  return response.json();
 };
 
 export const Login = () => {
+  const navigate = useNavigate();
+  const { setAuth } = useAuth();
   const [apiError, setApiError] = useState("");
-
-  useEffect(() => {
-    console.log(apiError);
-  }, [apiError]);
+  const [isSpinnerLoading, setIsSpinnerLoading] = useState(false);
 
   return (
     <main className={classes.Login}>
@@ -47,17 +54,31 @@ export const Login = () => {
         initialValues={initialValues}
         validationSchema={ValidationSchema}
         validate={() => setApiError("")}
-        onSubmit={(values) => {
-          console.log(values);
-          alert(printValues(values));
-          setApiError("Niepoprawny email lub hasło!");
+        onSubmit={async (values) => {
+          try {
+            setIsSpinnerLoading(true);
+            const { code, data } = await fetchLoginData(values);
+            if (code === 200) {
+              const { id, role, token } = data;
+              setIsSpinnerLoading(false);
+              setAuth({ id, role, token });
+              navigate("/");
+            }
+            if (code === 400) {
+              setApiError("Niepoprawny email lub hasło!");
+              setIsSpinnerLoading(false);
+            }
+          } catch (e) {
+            setApiError("Spróbuj później!");
+            setIsSpinnerLoading(false);
+          }
         }}
       >
         {({ errors, isValid }) => (
           <Form className={classes.form}>
             <Input
               type="text"
-              name="login"
+              name="email"
               forFormik
               size="large"
               placeholder="E-mail"
@@ -70,8 +91,8 @@ export const Login = () => {
               placeholder="Password"
             />
             <p className={classes.error}>
-              {errors.login
-                ? errors.login
+              {errors.email
+                ? errors.email
                 : errors.password
                 ? errors.password
                 : apiError
@@ -82,14 +103,17 @@ export const Login = () => {
               <NavLink to="/lostpassword" className={classes.link}>
                 Zapomniałeś hasła?
               </NavLink>
-              <PrimaryButton
-                type="submit"
-                disabled={!isValid}
-                color="primary"
-                size="large"
-              >
-                Zaloguj się
-              </PrimaryButton>
+              <div className={classes.row}>
+                {isSpinnerLoading && <Spinner />}
+                <PrimaryButton
+                  type="submit"
+                  disabled={!isValid}
+                  color="primary"
+                  size="large"
+                >
+                  Zaloguj się
+                </PrimaryButton>
+              </div>
             </div>
           </Form>
         )}
