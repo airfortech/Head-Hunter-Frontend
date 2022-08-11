@@ -1,9 +1,4 @@
-import { UserRole } from "../user";
-
-export enum JsonResponseStatus {
-  success = "success",
-  failed = "failed,",
-}
+import { JsonResponseStatus, UserRole } from "..";
 
 export interface LoginRequest {
   email: string;

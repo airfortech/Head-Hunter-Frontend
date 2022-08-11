@@ -1,9 +1,21 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { gsap } from "gsap";
+import { useAuth } from "../../../hooks/useAuth";
 import { Avatar } from "../../Avatar/Avatar";
+import { config } from "../../../config/config";
 import classes from "./Menu.module.css";
 
+const fetchLogout = async () => {
+  await fetch(config.apiUrl + "auth/logout", {
+    method: "GET",
+    credentials: "include",
+  });
+};
+
 export const Menu = () => {
+  const { setAuth } = useAuth();
+  const navigate = useNavigate();
   const [isMenuOpen, setMenuOpen] = useState(false);
   const actionsRef = useRef<HTMLDivElement>(null);
   const iconRef = useRef<HTMLElement>(null);
@@ -14,7 +26,9 @@ export const Menu = () => {
   };
 
   const handleLogout = async () => {
-    console.log("logout");
+    await fetchLogout();
+    setAuth({});
+    navigate("/");
   };
 
   useEffect(() => {

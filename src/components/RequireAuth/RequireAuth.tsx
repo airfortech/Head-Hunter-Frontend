@@ -8,7 +8,6 @@ interface Props {
 export const RequireAuth = ({ allowedRole }: Props) => {
   const { auth } = useAuth();
   const location = useLocation();
-  console.log(auth);
 
   return allowedRole === auth.role ? (
     <Outlet />
