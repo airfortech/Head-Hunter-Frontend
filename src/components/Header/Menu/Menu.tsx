@@ -9,7 +9,7 @@ export const Menu = () => {
   const iconRef = useRef<HTMLElement>(null);
   const tweenRef = useRef<GSAPTimeline>();
 
-  const handleClick = () => {
+  const handleMenuToggle = () => {
     setMenuOpen((prevState) => !prevState);
   };
 
@@ -63,7 +63,7 @@ export const Menu = () => {
 
   return (
     <menu className={classes.Menu}>
-      <button className={classes.userInfo} onClick={handleClick}>
+      <button className={classes.userInfo} onClick={handleMenuToggle}>
         <Avatar name="John Doe" />
         <p>John Doe</p>
         <i className="bx bx-caret-up" ref={iconRef}></i>
