@@ -11,11 +11,11 @@ export const UsersListView = () => {
       <SearchPanel />
       <Pagination currentPage={1} totalPages={12} />
       <UsersList>
-        <StudentItem status="available" />
-        <StudentItem status="available" />
-        <StudentItem status="available" />
-        <StudentItem status="toTalk" />
-        <StudentItem status="toTalk" />
+        <StudentItem type="adminHR" id="1" />
+        <StudentItem type="adminStudent" id="2" />
+        <StudentItem type="hrStudentAvailable" id="3" />
+        <StudentItem type="hrStudentToTalk" id="4" />
+        <StudentItem type="hrStudentHired" id="5" />
       </UsersList>
     </div>
   );

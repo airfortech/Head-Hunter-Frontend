@@ -9,17 +9,45 @@ import classes from "./StudentItem.module.css";
 
 interface Props {
   open?: boolean;
-  status: "available" | "toTalk";
+  type:
+    | "adminHR"
+    | "adminStudent"
+    | "hrStudentAvailable"
+    | "hrStudentToTalk"
+    | "hrStudentHired";
+  id: string;
 }
 
-export const StudentItem = ({ open = false, status }: Props) => {
+export const StudentItem = ({ open = false, type, id }: Props) => {
   const [isDetailsOpen, setDetailsOpen] = useState(open);
   const iconRef = useRef<HTMLElement>(null);
   const detailsRef = useRef<HTMLDivElement>(null);
   const tweenRef = useRef<GSAPTimeline>();
 
-  const handleClick = () => {
+  const linkToCV = (type: string) => {
+    if (type === "adminStudent") return "panel/admin/students/" + id;
+    if (type === "hrStudentToTalk") return "panel/admin/students/" + id;
+    if (type === "hrStudentHired") return "panel/hr/students/" + id;
+  };
+
+  const handleToggleMenu = () => {
     setDetailsOpen((prevState) => !prevState);
+  };
+
+  const handleDeleteUser = (id: string) => {
+    console.log("handleDeleteUser", id);
+  };
+  const handleReserveTalk = (id: string) => {
+    console.log("handleReserveTalk", id);
+  };
+  const handleNotInterest = (id: string) => {
+    console.log("handleNotInterest", id);
+  };
+  const handleHire = (id: string) => {
+    console.log("handleHire", id);
+  };
+  const handleCancelHire = (id: string) => {
+    console.log("handleCancelHire", id);
   };
 
   useEffect(() => {
@@ -71,26 +99,49 @@ export const StudentItem = ({ open = false, status }: Props) => {
     <li className={classes.StudentItem}>
       <div className={classes.info}>
         <div className={classes.personal}>
-          {status === "toTalk" && (
+          {type === "hrStudentToTalk" && (
             <p className={classes.reservationDate}>
               Rezerwacja do
               <span>11.07.2022r.</span>
             </p>
           )}
-          {status === "toTalk" && <Avatar name="Jakub C" />}
+          {type !== "hrStudentAvailable" && <Avatar name="Jakub C" />}
           <p className={classes.name}>Jakub C.</p>
         </div>
         <div className={classes.actions}>
-          {status === "toTalk" && (
-            <NavLink to="/cv">
+          {(type === "adminStudent" ||
+            type === "hrStudentToTalk" ||
+            type === "hrStudentHired") && (
+            <NavLink to={{ pathname: linkToCV(type) }}>
               <PrimaryButton size="normal">Pokaż CV</PrimaryButton>
             </NavLink>
           )}
-          {status === "toTalk" && (
-            <PrimaryButton size="normal">Brak zainteresowania</PrimaryButton>
+          {type === "hrStudentToTalk" && (
+            <PrimaryButton size="normal" onClick={() => handleNotInterest(id)}>
+              Brak zainteresowania
+            </PrimaryButton>
           )}
-          <PrimaryButton size="normal">Zarezerwuj rozmowę</PrimaryButton>
-          <button className={classes.button} onClick={handleClick}>
+          {type === "hrStudentAvailable" && (
+            <PrimaryButton size="normal" onClick={() => handleReserveTalk(id)}>
+              Zarezerwuj rozmowę
+            </PrimaryButton>
+          )}
+          {type === "hrStudentToTalk" && (
+            <PrimaryButton size="normal" onClick={() => handleHire(id)}>
+              Zatrudnij
+            </PrimaryButton>
+          )}
+          {type === "hrStudentHired" && (
+            <PrimaryButton size="normal" onClick={() => handleCancelHire(id)}>
+              Anuluj zatrudnienie
+            </PrimaryButton>
+          )}
+          {(type === "adminStudent" || type === "adminHR") && (
+            <PrimaryButton size="normal" onClick={() => handleDeleteUser(id)}>
+              Usuń użytkownika
+            </PrimaryButton>
+          )}
+          <button className={classes.button} onClick={handleToggleMenu}>
             <i className="bx bx-chevron-up" ref={iconRef}></i>
           </button>
         </div>
