@@ -78,7 +78,7 @@ export const Register = () => {
                 color="primary"
                 size="large"
               >
-                Zaloguj się
+                Zarejestruj się
               </PrimaryButton>
             </div>
           </Form>

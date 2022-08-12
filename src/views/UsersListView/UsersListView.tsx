@@ -19,13 +19,15 @@ export const UsersListView = ({ type }: Props) => {
     <div className={classes.UsersListView}>
       <SearchPanel />
       <Pagination currentPage={1} totalPages={12} />
-      <UsersList>
-        <StudentItem type={type} id="1" />
-        <StudentItem type={type} id="2" />
-        <StudentItem type={type} id="3" />
-        <StudentItem type={type} id="4" />
-        <StudentItem type={type} id="5" />
-      </UsersList>
+      <div className={classes.wrapper}>
+        <UsersList>
+          <StudentItem type={type} id="1" />
+          <StudentItem type={type} id="2" />
+          <StudentItem type={type} id="3" />
+          <StudentItem type={type} id="4" />
+          <StudentItem type={type} id="5" />
+        </UsersList>
+      </div>
     </div>
   );
 };
