@@ -14,7 +14,6 @@ const navLinks = [
   { anchor: "Dostępni kursanci", route: "students/available" },
   { anchor: "Do rozmowy", route: "students/reserved" },
   { anchor: "Zatrudnieni", route: "students/hired" },
-  { anchor: "Portfolio", route: "students/232242" },
 ];
 
 export const AdminRoutes = () => {
@@ -24,11 +23,23 @@ export const AdminRoutes = () => {
         <Route path="*" element={<PanelView />}>
           <Route path="students/:id" element={<CVView />} />
           <Route path="*" element={<ListView routes={navLinks} />}>
-            <Route path="hrs" element={<UsersListView />} />
-            <Route path="students" element={<UsersListView />} />
-            <Route path="students/available" element={<UsersListView />} />
-            <Route path="students/reserved" element={<UsersListView />} />
-            <Route path="students/hired" element={<UsersListView />} />
+            <Route path="hrs" element={<UsersListView type="adminHR" />} />
+            <Route
+              path="students"
+              element={<UsersListView type="adminStudent" />}
+            />
+            <Route
+              path="students/available"
+              element={<UsersListView type="adminStudent" />}
+            />
+            <Route
+              path="students/reserved"
+              element={<UsersListView type="adminStudent" />}
+            />
+            <Route
+              path="students/hired"
+              element={<UsersListView type="adminStudent" />}
+            />
           </Route>
           <Route path="*" element={<NoMatch />} />
         </Route>

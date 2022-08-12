@@ -12,7 +12,6 @@ const navLinks = [
   { anchor: "Dostępni kursanci", route: "available" },
   { anchor: "Do rozmowy", route: "reserved" },
   { anchor: "Zatrudnieni", route: "hired" },
-  { anchor: "Portfolio", route: "232242" },
 ];
 
 export const HRsRoutes = () => {
@@ -22,9 +21,18 @@ export const HRsRoutes = () => {
         <Route path="*" element={<PanelView />}>
           <Route path="students/:id" element={<CVView />} />
           <Route path="students" element={<ListView routes={navLinks} />}>
-            <Route path="available" element={<UsersListView />} />
-            <Route path="reserved" element={<UsersListView />} />
-            <Route path="hired" element={<UsersListView />} />
+            <Route
+              path="available"
+              element={<UsersListView type="hrStudentAvailable" />}
+            />
+            <Route
+              path="reserved"
+              element={<UsersListView type="hrStudentToTalk" />}
+            />
+            <Route
+              path="hired"
+              element={<UsersListView type="hrStudentHired" />}
+            />
           </Route>
           <Route path="*" element={<NoMatch />} />
         </Route>
