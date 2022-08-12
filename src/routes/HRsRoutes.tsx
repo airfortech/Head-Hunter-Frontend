@@ -12,7 +12,6 @@ const navLinks = [
   { anchor: "Dostępni kursanci", route: "available" },
   { anchor: "Do rozmowy", route: "reserved" },
   { anchor: "Zatrudnieni", route: "hired" },
-  { anchor: "Portfolio", route: "232242" },
 ];
 
 export const HRsRoutes = () => {

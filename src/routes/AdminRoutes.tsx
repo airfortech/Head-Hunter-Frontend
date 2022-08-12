@@ -14,7 +14,6 @@ const navLinks = [
   { anchor: "Dostępni kursanci", route: "students/available" },
   { anchor: "Do rozmowy", route: "students/reserved" },
   { anchor: "Zatrudnieni", route: "students/hired" },
-  { anchor: "Portfolio", route: "students/232242" },
 ];
 
 export const AdminRoutes = () => {
