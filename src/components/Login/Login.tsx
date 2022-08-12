@@ -10,13 +10,9 @@ import { Spinner } from "../Spinner/Spinner";
 import logo from "../../assets/images/logo.png";
 import classes from "./Login.module.css";
 import { config } from "../../config/config";
+import { LoginRequest, LoginResponse } from "../../types";
 
-export interface SignIn {
-  email: string;
-  password: string;
-}
-
-const initialValues: SignIn = {
+const initialValues: LoginRequest = {
   email: "",
   password: "",
 };
@@ -29,7 +25,7 @@ const ValidationSchema = yup.object().shape({
   password: yup.string().required("Podaj hasło!"),
 });
 
-const fetchLoginData = async (data: SignIn) => {
+const fetchLoginData = async (data: LoginRequest): Promise<LoginResponse> => {
   const response = await fetch(config.apiUrl + "auth/login", {
     method: "POST",
     credentials: "include",
