@@ -31,6 +31,10 @@ export const Menu = () => {
     navigate("/");
   };
 
+  const handleSettings = () => {
+    navigate("settings");
+  };
+
   useEffect(() => {
     const actionsItems = actionsRef.current?.children;
 
@@ -83,7 +87,7 @@ export const Menu = () => {
         <i className="bx bx-caret-up" ref={iconRef}></i>
       </button>
       <div className={classes.actions} ref={actionsRef}>
-        <p>Konto</p>
+        <p onClick={handleSettings}>Konto</p>
         <p onClick={handleLogout}>Wyloguj</p>
       </div>
     </menu>

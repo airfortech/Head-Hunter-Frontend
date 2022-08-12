@@ -6,6 +6,7 @@ import { ListView } from "../views/ListView/ListView";
 import { NoMatch } from "../views/NoMatch/NoMatch";
 import { PanelView } from "../views/PanelView/PanelView";
 import { UsersListView } from "../views/UsersListView/UsersListView";
+import { SettingsView } from "../views/SettingsView/SettingsView";
 import { UserRole } from "../types";
 
 const navLinks = [
@@ -20,6 +21,7 @@ export const HRsRoutes = () => {
       <Route path="*" element={<RequireAuth allowedRole={UserRole.hr} />}>
         <Route path="*" element={<PanelView />}>
           <Route path="students/:id" element={<CVView />} />
+          <Route path="settings" element={<SettingsView />} />
           <Route path="students" element={<ListView routes={navLinks} />}>
             <Route
               path="available"
