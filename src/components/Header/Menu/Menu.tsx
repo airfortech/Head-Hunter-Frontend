@@ -16,13 +16,13 @@ const fetchLogout = async () => {
 export const Menu = () => {
   const { setAuth } = useAuth();
   const navigate = useNavigate();
-  const [isMenuOpen, setMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const actionsRef = useRef<HTMLDivElement>(null);
   const iconRef = useRef<HTMLElement>(null);
   const tweenRef = useRef<GSAPTimeline>();
 
   const handleMenuToggle = () => {
-    setMenuOpen((prevState) => !prevState);
+    setIsMenuOpen((prevState) => !prevState);
   };
 
   const handleLogout = async () => {
@@ -33,6 +33,7 @@ export const Menu = () => {
 
   const handleSettings = () => {
     navigate("settings");
+    setIsMenuOpen(false);
   };
 
   useEffect(() => {

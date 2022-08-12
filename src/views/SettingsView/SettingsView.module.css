@@ -1,7 +1,30 @@
-.CVView {
+.SettingsView {
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   gap: 4px;
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.buttons {
+  align-self: end;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 27px;
+}
+
+.error {
+  width: 100%;
+  height: var(--font-size-nm);
+  font-size: var(--font-size-nm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-15);
 }
