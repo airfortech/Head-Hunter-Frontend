@@ -18,7 +18,7 @@ interface Props {
   id: string;
 }
 
-export const StudentItem = ({ open = false, type, id }: Props) => {
+export const StudentItem = ({ open = true, type, id }: Props) => {
   const [isDetailsOpen, setDetailsOpen] = useState(open);
   const iconRef = useRef<HTMLElement>(null);
   const detailsRef = useRef<HTMLDivElement>(null);
