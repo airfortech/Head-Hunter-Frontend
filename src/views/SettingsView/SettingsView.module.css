@@ -28,3 +28,9 @@
   font-weight: var(--font-weight-medium);
   color: var(--color-15);
 }
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
