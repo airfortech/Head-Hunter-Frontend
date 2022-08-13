@@ -29,7 +29,7 @@
 
 .error {
   width: 100%;
-  height: var(--font-size-nm);
+  height: var(--font-size-lg);
   font-size: var(--font-size-nm);
   font-weight: var(--font-weight-medium);
   color: var(--color-15);
