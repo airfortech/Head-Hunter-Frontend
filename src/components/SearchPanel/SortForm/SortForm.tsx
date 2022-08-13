@@ -8,9 +8,20 @@ import classes from "./SortForm.module.css";
 
 interface Props {
   closeModal: MouseEventHandler;
+  type?:
+    | "adminHR"
+    | "adminStudent"
+    | "adminStudentAvailable"
+    | "adminStudentToTalk"
+    | "adminStudentHired"
+    | "hrStudentAvailable"
+    | "hrStudentToTalk"
+    | "hrStudentHired";
 }
 
-export const SortForm = ({ closeModal }: Props) => {
+export const SortForm = ({ type, closeModal }: Props) => {
+  console.log(type);
+
   return (
     <div className={classes.SortForm}>
       <div className={classes.row}>

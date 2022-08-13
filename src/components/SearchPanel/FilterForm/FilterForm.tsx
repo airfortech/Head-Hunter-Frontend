@@ -17,6 +17,15 @@ import classes from "./FilterForm.module.css";
 
 interface Props {
   closeModal: MouseEventHandler;
+  type?:
+    | "adminHR"
+    | "adminStudent"
+    | "adminStudentAvailable"
+    | "adminStudentToTalk"
+    | "adminStudentHired"
+    | "hrStudentAvailable"
+    | "hrStudentToTalk"
+    | "hrStudentHired";
 }
 
 const printValues = (values: InitialValues) => {
@@ -47,7 +56,9 @@ const printValues = (values: InitialValues) => {
   `;
 };
 
-export const FilterForm = ({ closeModal }: Props) => {
+export const FilterForm = ({ type, closeModal }: Props) => {
+  console.log(type);
+
   return (
     <div className={classes.FilterForm}>
       <Formik

@@ -51,9 +51,12 @@ export const SearchPanel = ({ type }: Props) => {
     <div className={classes.SearchPanel}>
       <Modal opened={isModalOpen.active} name="Sort Modal">
         {isModalOpen.modalType === "sortModal" ? (
-          <SortForm closeModal={() => closeModal("sortModal")} />
+          <SortForm type={type} closeModal={() => closeModal("sortModal")} />
         ) : isModalOpen.modalType === "filterModal" ? (
-          <FilterForm closeModal={() => closeModal("filterModal")} />
+          <FilterForm
+            type={type}
+            closeModal={() => closeModal("filterModal")}
+          />
         ) : (
           <div></div>
         )}

@@ -12,7 +12,7 @@ interface Props {
     | "hrStudentAvailable"
     | "hrStudentToTalk"
     | "hrStudentHired";
-  searchType?:
+  searchType:
     | "adminHR"
     | "adminStudent"
     | "adminStudentAvailable"
