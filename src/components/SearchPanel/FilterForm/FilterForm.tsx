@@ -14,6 +14,7 @@ import {
 } from "./filterFormData";
 import { FilterValues } from "../../../types";
 import classes from "./FilterForm.module.css";
+import { initialFilterValues } from "../../../context/searchProviderData";
 
 interface Props {
   closeModal: MouseEventHandler;
@@ -58,7 +59,6 @@ const printValues = (values: FilterValues) => {
 
 export const FilterForm = ({ type, closeModal }: Props) => {
   const { filterOptions, setFilterOptions } = useSearch();
-  console.log(type);
 
   return (
     <div className={classes.FilterForm}>
@@ -96,14 +96,20 @@ export const FilterForm = ({ type, closeModal }: Props) => {
           alert(printValues(values));
         }}
       >
-        {({ resetForm, errors, isValid }) => (
+        {({ errors, isValid, resetForm }) => (
           <Form className={classes.form}>
             <div className={classes.row}>
               <h2>Filtrowanie</h2>
               <PrimaryButton
                 size="normal"
                 color="quaternary"
-                onClick={() => resetForm()}
+                onClick={() => {
+                  setFilterOptions({
+                    ...filterOptions,
+                    [type]: initialFilterValues,
+                  });
+                  resetForm({ values: initialFilterValues });
+                }}
               >
                 Wyczyść wszystkie
               </PrimaryButton>

@@ -14,7 +14,7 @@ const fetchLogout = async () => {
 };
 
 export const Menu = () => {
-  const { setAuth } = useAuth();
+  const { auth, setAuth } = useAuth();
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const actionsRef = useRef<HTMLDivElement>(null);
@@ -84,7 +84,7 @@ export const Menu = () => {
     <menu className={classes.Menu}>
       <button className={classes.userInfo} onClick={handleMenuToggle}>
         <Avatar name="John Doe" />
-        <p>John Doe</p>
+        <p>{auth.name}</p>
         <i className="bx bx-caret-up" ref={iconRef}></i>
       </button>
       <div className={classes.actions} ref={actionsRef}>
