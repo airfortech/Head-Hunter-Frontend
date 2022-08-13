@@ -16,19 +16,24 @@ const fetchLogout = async () => {
 export const Menu = () => {
   const { setAuth } = useAuth();
   const navigate = useNavigate();
-  const [isMenuOpen, setMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const actionsRef = useRef<HTMLDivElement>(null);
   const iconRef = useRef<HTMLElement>(null);
   const tweenRef = useRef<GSAPTimeline>();
 
   const handleMenuToggle = () => {
-    setMenuOpen((prevState) => !prevState);
+    setIsMenuOpen((prevState) => !prevState);
   };
 
   const handleLogout = async () => {
     await fetchLogout();
     setAuth({});
     navigate("/");
+  };
+
+  const handleSettings = () => {
+    navigate("settings");
+    setIsMenuOpen(false);
   };
 
   useEffect(() => {
@@ -83,7 +88,7 @@ export const Menu = () => {
         <i className="bx bx-caret-up" ref={iconRef}></i>
       </button>
       <div className={classes.actions} ref={actionsRef}>
-        <p>Konto</p>
+        <p onClick={handleSettings}>Konto</p>
         <p onClick={handleLogout}>Wyloguj</p>
       </div>
     </menu>

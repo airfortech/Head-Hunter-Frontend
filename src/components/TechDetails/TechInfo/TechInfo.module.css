@@ -1,6 +1,12 @@
 .TechInfo {
 }
 
+.TechInfo .center {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 .TechInfo h2 {
   padding: 0 26px;
   font-size: var(--font-size-xl);

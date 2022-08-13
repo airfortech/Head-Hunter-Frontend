@@ -5,6 +5,7 @@ import { CVView } from "../views/CVView/CVView";
 import { ListView } from "../views/ListView/ListView";
 import { PanelView } from "../views/PanelView/PanelView";
 import { UsersListView } from "../views/UsersListView/UsersListView";
+import { SettingsView } from "../views/SettingsView/SettingsView";
 import { NoMatch } from "../views/NoMatch/NoMatch";
 import { UserRole } from "../types";
 
@@ -22,6 +23,7 @@ export const AdminRoutes = () => {
       <Route path="*" element={<RequireAuth allowedRole={UserRole.admin} />}>
         <Route path="*" element={<PanelView />}>
           <Route path="students/:id" element={<CVView />} />
+          <Route path="settings" element={<SettingsView />} />
           <Route path="*" element={<ListView routes={navLinks} />}>
             <Route path="hrs" element={<UsersListView type="adminHR" />} />
             <Route

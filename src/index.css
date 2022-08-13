@@ -48,6 +48,7 @@
     75%,
     62%
   ); /* example hover state variable */
+  --color-dark-mode-16: #2be43a;
 
   /* colors (use this colors only in components!!!!) */
   --color-1: var(--color-dark-mode-1);
@@ -71,6 +72,7 @@
   --color-14-hover: var(--color-dark-mode-14-hover);
   --color-15: var(--color-dark-mode-15);
   --color-15-hover: var(--color-dark-mode-15-hover);
+  --color-16: var(--color-dark-mode-16);
   --overlay-color: #0a0a0a80;
 
   /* margins */
