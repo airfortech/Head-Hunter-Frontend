@@ -55,9 +55,9 @@ export const Login = () => {
             setIsSpinnerLoading(true);
             const { code, data } = await fetchLoginData(values);
             if (code === 200) {
-              const { id, role, token } = data;
+              const { id, name, role, token } = data;
               setIsSpinnerLoading(false);
-              setAuth({ id, role, token });
+              setAuth({ id, name, role, token });
               navigate("/");
             }
             if (code === 400) {

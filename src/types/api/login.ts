@@ -13,5 +13,6 @@ export interface LoginResponse {
     id: string;
     role: UserRole;
     token: string;
+    name: string;
   };
 }

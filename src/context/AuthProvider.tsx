@@ -8,6 +8,7 @@ interface Props {
 interface LoginData {
   role?: UserRole;
   id?: string;
+  name?: string;
   token?: string;
 }
 
