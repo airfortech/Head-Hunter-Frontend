@@ -1,22 +1,28 @@
 import React, { createContext, useState } from "react";
-import { SearchOptions, SortOptions } from "../types";
-import { initialSortValues } from "./searchProviderData";
+import { FilterOptions, SearchOptions, SortOptions } from "../types";
+import { initialFilterOptions, initialSortOptions } from "./searchProviderData";
 
 interface Props {
   children: React.ReactNode;
 }
 
 export const SearchContext = createContext<SearchOptions>({
-  sortOptions: initialSortValues,
+  sortOptions: initialSortOptions,
   setSortOptions: () => {},
+  filterOptions: initialFilterOptions,
+  setFilterOptions: () => {},
 });
 
 export const SearchProvider = ({ children }: Props) => {
   const [sortOptions, setSortOptions] =
-    useState<SortOptions>(initialSortValues);
+    useState<SortOptions>(initialSortOptions);
+  const [filterOptions, setFilterOptions] =
+    useState<FilterOptions>(initialFilterOptions);
 
   return (
-    <SearchContext.Provider value={{ sortOptions, setSortOptions }}>
+    <SearchContext.Provider
+      value={{ sortOptions, setSortOptions, filterOptions, setFilterOptions }}
+    >
       {children}
     </SearchContext.Provider>
   );

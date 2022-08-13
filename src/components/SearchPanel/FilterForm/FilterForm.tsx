@@ -1,5 +1,6 @@
 import React, { MouseEventHandler } from "react";
 import { Form, Formik } from "formik";
+import { useSearch } from "../../../hooks/useSearch";
 import { PrimaryButton } from "../../buttons/PrimaryButton/PrimaryButton";
 import { FormGroup } from "../FormGroup/FormGroup";
 import { CheckItem } from "../FormGroup/CheckItem/CheckItem";
@@ -9,15 +10,14 @@ import {
   expectedContractType,
   expectedTypeWork,
   degrees,
-  initialValues,
-  InitialValues,
   ValidationSchema,
 } from "./filterFormData";
+import { FilterValues } from "../../../types";
 import classes from "./FilterForm.module.css";
 
 interface Props {
   closeModal: MouseEventHandler;
-  type?:
+  type:
     | "adminHR"
     | "adminStudent"
     | "adminStudentAvailable"
@@ -28,7 +28,7 @@ interface Props {
     | "hrStudentHired";
 }
 
-const printValues = (values: InitialValues) => {
+const printValues = (values: FilterValues) => {
   const {
     courseCompletion,
     courseEngagment,
@@ -57,15 +57,42 @@ const printValues = (values: InitialValues) => {
 };
 
 export const FilterForm = ({ type, closeModal }: Props) => {
+  const { filterOptions, setFilterOptions } = useSearch();
   console.log(type);
 
   return (
     <div className={classes.FilterForm}>
       <Formik
-        initialValues={initialValues}
+        initialValues={filterOptions[type]}
         validationSchema={ValidationSchema}
         onSubmit={(values) => {
-          console.log(values);
+          const {
+            courseCompletion,
+            courseEngagment,
+            projectDegree,
+            teamProjectDegree,
+            expectedTypeWork,
+            expectedContractType,
+            canTakeApprenticeship,
+            monthsOfCommercialExp,
+            expectedSalaryFrom,
+            expectedSalaryTo,
+          } = values;
+          setFilterOptions({
+            ...filterOptions,
+            [type]: {
+              courseCompletion,
+              courseEngagment,
+              projectDegree,
+              teamProjectDegree,
+              expectedTypeWork,
+              expectedContractType,
+              canTakeApprenticeship,
+              monthsOfCommercialExp,
+              expectedSalaryFrom,
+              expectedSalaryTo,
+            },
+          });
           alert(printValues(values));
         }}
       >

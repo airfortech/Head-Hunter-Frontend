@@ -1,36 +1,41 @@
-import { SortOptions } from "../types";
+import { SortOptions, SortValues, FilterValues, FilterOptions } from "../types";
 
-export const initialSortValues: SortOptions = {
-  adminHR: {
-    sortType: "descending",
-    sortByType: "courseCompletion",
-  },
-  adminStudent: {
-    sortType: "descending",
-    sortByType: "courseCompletion",
-  },
-  adminStudentAvailable: {
-    sortType: "descending",
-    sortByType: "courseCompletion",
-  },
-  adminStudentToTalk: {
-    sortType: "descending",
-    sortByType: "courseCompletion",
-  },
-  adminStudentHired: {
-    sortType: "descending",
-    sortByType: "courseCompletion",
-  },
-  hrStudentAvailable: {
-    sortType: "descending",
-    sortByType: "courseCompletion",
-  },
-  hrStudentToTalk: {
-    sortType: "descending",
-    sortByType: "courseCompletion",
-  },
-  hrStudentHired: {
-    sortType: "descending",
-    sortByType: "courseCompletion",
-  },
+const initialSortValues: SortValues = {
+  sortType: "descending",
+  sortByType: "courseCompletion",
+};
+
+export const initialSortOptions: SortOptions = {
+  adminHR: initialSortValues,
+  adminStudent: initialSortValues,
+  adminStudentAvailable: initialSortValues,
+  adminStudentToTalk: initialSortValues,
+  adminStudentHired: initialSortValues,
+  hrStudentAvailable: initialSortValues,
+  hrStudentToTalk: initialSortValues,
+  hrStudentHired: initialSortValues,
+};
+
+export const initialFilterValues: FilterValues = {
+  courseCompletion: "1",
+  courseEngagment: "1",
+  projectDegree: "1",
+  teamProjectDegree: "1",
+  expectedTypeWork: [],
+  expectedContractType: [],
+  canTakeApprenticeship: "false",
+  monthsOfCommercialExp: "",
+  expectedSalaryFrom: "",
+  expectedSalaryTo: "",
+};
+
+export const initialFilterOptions: FilterOptions = {
+  adminHR: initialFilterValues,
+  adminStudent: initialFilterValues,
+  adminStudentAvailable: initialFilterValues,
+  adminStudentToTalk: initialFilterValues,
+  adminStudentHired: initialFilterValues,
+  hrStudentAvailable: initialFilterValues,
+  hrStudentToTalk: initialFilterValues,
+  hrStudentHired: initialFilterValues,
 };

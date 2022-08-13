@@ -1,11 +1,11 @@
 import React, { MouseEventHandler } from "react";
 import { Form, Formik } from "formik";
+import { useSearch } from "../../../hooks/useSearch";
 import { PrimaryButton } from "../../buttons/PrimaryButton/PrimaryButton";
 import { FormGroup } from "../FormGroup/FormGroup";
 import { CheckItem } from "../FormGroup/CheckItem/CheckItem";
 import { sortByTypes, sortTypes } from "./sortFormData";
 import classes from "./SortForm.module.css";
-import { useSearch } from "../../../hooks/useSearch";
 
 interface Props {
   closeModal: MouseEventHandler;
@@ -32,18 +32,21 @@ export const SortForm = ({ type, closeModal }: Props) => {
         </PrimaryButton>
       </div>
       <Formik
-        initialValues={{
-          sortType: sortOptions[type].sortType,
-          sortByType: sortOptions[type].sortByType,
-        }}
-        onSubmit={(values) => {
+        initialValues={sortOptions[type]}
+        onSubmit={({ sortType, sortByType }) => {
           const newSortOptions = sortOptions;
           newSortOptions[type] = {
-            sortType: values.sortType,
-            sortByType: values.sortByType,
+            sortType,
+            sortByType,
           };
-          setSortOptions(newSortOptions);
-          alert(values.sortType + ", " + values.sortByType);
+          setSortOptions({
+            ...sortOptions,
+            [type]: {
+              sortType,
+              sortByType,
+            },
+          });
+          alert(sortType + ", " + sortByType);
         }}
       >
         <Form className={classes.form}>
