@@ -1,5 +1,6 @@
 import React, { MouseEventHandler } from "react";
 import { Form, Formik } from "formik";
+import { useSearch } from "../../../hooks/useSearch";
 import { PrimaryButton } from "../../buttons/PrimaryButton/PrimaryButton";
 import { FormGroup } from "../FormGroup/FormGroup";
 import { CheckItem } from "../FormGroup/CheckItem/CheckItem";
@@ -8,9 +9,20 @@ import classes from "./SortForm.module.css";
 
 interface Props {
   closeModal: MouseEventHandler;
+  type:
+    | "adminHR"
+    | "adminStudent"
+    | "adminStudentAvailable"
+    | "adminStudentToTalk"
+    | "adminStudentHired"
+    | "hrStudentAvailable"
+    | "hrStudentToTalk"
+    | "hrStudentHired";
 }
 
-export const SortForm = ({ closeModal }: Props) => {
+export const SortForm = ({ type, closeModal }: Props) => {
+  const { sortOptions, setSortOptions } = useSearch();
+
   return (
     <div className={classes.SortForm}>
       <div className={classes.row}>
@@ -20,11 +32,22 @@ export const SortForm = ({ closeModal }: Props) => {
         </PrimaryButton>
       </div>
       <Formik
-        initialValues={{
-          sortType: sortTypes[1].value,
-          sortByType: sortByTypes[0].value,
+        initialValues={sortOptions[type]}
+        onSubmit={({ sortType, sortByType }) => {
+          const newSortOptions = sortOptions;
+          newSortOptions[type] = {
+            sortType,
+            sortByType,
+          };
+          setSortOptions({
+            ...sortOptions,
+            [type]: {
+              sortType,
+              sortByType,
+            },
+          });
+          alert(sortType + ", " + sortByType);
         }}
-        onSubmit={(values) => alert(values.sortType + ", " + values.sortByType)}
       >
         <Form className={classes.form}>
           <FormGroup title="Sortuj">

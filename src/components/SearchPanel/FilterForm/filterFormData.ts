@@ -31,32 +31,6 @@ export const canTakeApprenticeship: CheckItemType[] = [
   { value: "false", name: "Nie" },
 ];
 
-export interface InitialValues {
-  courseCompletion: string;
-  courseEngagment: string;
-  projectDegree: string;
-  teamProjectDegree: string;
-  expectedTypeWork: string[];
-  expectedContractType: string[];
-  canTakeApprenticeship: "true" | "false";
-  monthsOfCommercialExp: string;
-  expectedSalaryFrom: string;
-  expectedSalaryTo: string;
-}
-
-export const initialValues: InitialValues = {
-  courseCompletion: "1",
-  courseEngagment: "1",
-  projectDegree: "1",
-  teamProjectDegree: "1",
-  expectedTypeWork: [],
-  expectedContractType: [],
-  canTakeApprenticeship: "false",
-  monthsOfCommercialExp: "",
-  expectedSalaryFrom: "",
-  expectedSalaryTo: "",
-};
-
 export const ValidationSchema = yup.object().shape({
   monthsOfCommercialExp: yup
     .number()

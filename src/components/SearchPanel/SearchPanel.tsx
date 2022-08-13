@@ -8,12 +8,24 @@ import classes from "./SearchPanel.module.css";
 
 type ModalTypes = "sortModal" | "filterModal";
 
+interface Props {
+  type:
+    | "adminHR"
+    | "adminStudent"
+    | "adminStudentAvailable"
+    | "adminStudentToTalk"
+    | "adminStudentHired"
+    | "hrStudentAvailable"
+    | "hrStudentToTalk"
+    | "hrStudentHired";
+}
+
 interface IsModalOpen {
   active: boolean;
   modalType?: ModalTypes;
 }
 
-export const SearchPanel = () => {
+export const SearchPanel = ({ type }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState<IsModalOpen>({
     active: false,
   });
@@ -29,44 +41,63 @@ export const SearchPanel = () => {
       modalType,
     });
 
+  const handleAddHR = () => {
+    console.log("Add HR");
+  };
+
   useEffect(() => {}, [isModalOpen]);
 
   return (
     <div className={classes.SearchPanel}>
       <Modal opened={isModalOpen.active} name="Sort Modal">
         {isModalOpen.modalType === "sortModal" ? (
-          <SortForm closeModal={() => closeModal("sortModal")} />
+          <SortForm type={type} closeModal={() => closeModal("sortModal")} />
         ) : isModalOpen.modalType === "filterModal" ? (
-          <FilterForm closeModal={() => closeModal("filterModal")} />
+          <FilterForm
+            type={type}
+            closeModal={() => closeModal("filterModal")}
+          />
         ) : (
           <div></div>
         )}
       </Modal>
-      <Input
-        type="text"
-        size="large"
-        color="secondary"
-        icon="search"
-        placeholder="Szukaj"
-      />
-      <div className={classes.actions}>
+      {type !== "adminHR" ? (
+        <Input
+          type="text"
+          size="large"
+          color="secondary"
+          icon="search"
+          placeholder="Szukaj"
+        />
+      ) : (
         <PrimaryButton
           size="large"
-          color="tertiary"
-          icon="sort"
-          onClick={() => openModal("sortModal")}
+          color="primary"
+          onClick={() => handleAddHR()}
         >
-          Sortowanie
+          Dodaj HRowca
         </PrimaryButton>
-        <PrimaryButton
-          size="large"
-          color="tertiary"
-          icon="filter"
-          onClick={() => openModal("filterModal")}
-        >
-          Filtrowanie
-        </PrimaryButton>
-      </div>
+      )}
+      {type !== "adminHR" && (
+        <div className={classes.actions}>
+          <PrimaryButton
+            size="large"
+            color="tertiary"
+            icon="sort"
+            onClick={() => openModal("sortModal")}
+          >
+            Sortowanie
+          </PrimaryButton>
+          <PrimaryButton
+            size="large"
+            color="tertiary"
+            icon="filter"
+            onClick={() => openModal("filterModal")}
+          >
+            Filtrowanie
+          </PrimaryButton>
+        </div>
+      )}
     </div>
   );
 };
