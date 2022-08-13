@@ -21,12 +21,16 @@
   gap: 27px;
 }
 
-.error {
+.info {
   width: 100%;
   height: var(--font-size-nm);
   font-size: var(--font-size-nm);
   font-weight: var(--font-weight-medium);
   color: var(--color-15);
+}
+
+.info.success {
+  color: var(--color-16);
 }
 
 .row {

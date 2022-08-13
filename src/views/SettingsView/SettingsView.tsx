@@ -51,9 +51,19 @@ const fetchChangePassword = async (
   return response.json();
 };
 
+interface ApiInfo {
+  type: "success" | "error";
+  message: string;
+}
+
+const initialApiInfo: ApiInfo = {
+  type: "error",
+  message: "",
+};
+
 export const SettingsView = () => {
   const { auth } = useAuth();
-  const [apiError, setApiError] = useState("");
+  const [apiInfo, setApiInfo] = useState<ApiInfo>(initialApiInfo);
   const [isSpinnerLoading, setIsSpinnerLoading] = useState(false);
 
   return (
@@ -64,7 +74,7 @@ export const SettingsView = () => {
           <Formik
             initialValues={initialValues}
             validationSchema={ValidationSchema}
-            validate={() => setApiError("")}
+            validate={() => setApiInfo(initialApiInfo)}
             onSubmit={async (values, { resetForm }) => {
               try {
                 setIsSpinnerLoading(true);
@@ -73,23 +83,33 @@ export const SettingsView = () => {
                   oldPassword: values.password,
                   newPassword: values.newPassword,
                 });
-                console.log(message, status);
-
                 if (status === JsonResponseStatus.success) {
                   setIsSpinnerLoading(false);
-                  setApiError("Ustawiłeś nowe hasło!");
+                  setApiInfo({
+                    type: "success",
+                    message: "Ustawiłeś nowe hasło!",
+                  });
                   resetForm();
                 }
                 if (message === "New password must be different") {
-                  setApiError("Nie możesz ustawić takiego samego hasła!");
+                  setApiInfo({
+                    type: "error",
+                    message: "Nie możesz ustawić takiego samego hasła!",
+                  });
                   setIsSpinnerLoading(false);
                 }
                 if (message === "Bad Password") {
-                  setApiError("Podałeś złe aktualne hasło!");
+                  setApiInfo({
+                    type: "error",
+                    message: "Podałeś złe aktualne hasło!",
+                  });
                   setIsSpinnerLoading(false);
                 }
               } catch (e) {
-                setApiError("Spróbuj później!");
+                setApiInfo({
+                  type: "error",
+                  message: "Spróbuj później!",
+                });
                 setIsSpinnerLoading(false);
               }
             }}
@@ -117,15 +137,19 @@ export const SettingsView = () => {
                   size="large"
                   placeholder="Powtórz nowe hasło"
                 />
-                <p className={classes.error}>
+                <p
+                  className={`${classes.info} ${
+                    apiInfo.type === "success" && classes.success
+                  }`}
+                >
                   {errors.password
                     ? errors.password
                     : errors.newPassword
                     ? errors.newPassword
                     : errors.confirmNewPassword
                     ? errors.confirmNewPassword
-                    : apiError
-                    ? apiError
+                    : apiInfo.message
+                    ? apiInfo.message
                     : null}
                 </p>
                 <div className={classes.buttons}>
