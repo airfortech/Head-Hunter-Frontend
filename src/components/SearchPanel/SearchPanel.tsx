@@ -9,7 +9,7 @@ import classes from "./SearchPanel.module.css";
 type ModalTypes = "sortModal" | "filterModal";
 
 interface Props {
-  type?:
+  type:
     | "adminHR"
     | "adminStudent"
     | "adminStudentAvailable"

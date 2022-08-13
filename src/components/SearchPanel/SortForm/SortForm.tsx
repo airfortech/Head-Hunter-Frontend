@@ -5,10 +5,11 @@ import { FormGroup } from "../FormGroup/FormGroup";
 import { CheckItem } from "../FormGroup/CheckItem/CheckItem";
 import { sortByTypes, sortTypes } from "./sortFormData";
 import classes from "./SortForm.module.css";
+import { useSearch } from "../../../hooks/useSearch";
 
 interface Props {
   closeModal: MouseEventHandler;
-  type?:
+  type:
     | "adminHR"
     | "adminStudent"
     | "adminStudentAvailable"
@@ -20,7 +21,7 @@ interface Props {
 }
 
 export const SortForm = ({ type, closeModal }: Props) => {
-  console.log(type);
+  const { sortOptions, setSortOptions } = useSearch();
 
   return (
     <div className={classes.SortForm}>
@@ -32,10 +33,18 @@ export const SortForm = ({ type, closeModal }: Props) => {
       </div>
       <Formik
         initialValues={{
-          sortType: sortTypes[1].value,
-          sortByType: sortByTypes[0].value,
+          sortType: sortOptions[type].sortType,
+          sortByType: sortOptions[type].sortByType,
         }}
-        onSubmit={(values) => alert(values.sortType + ", " + values.sortByType)}
+        onSubmit={(values) => {
+          const newSortOptions = sortOptions;
+          newSortOptions[type] = {
+            sortType: values.sortType,
+            sortByType: values.sortByType,
+          };
+          setSortOptions(newSortOptions);
+          alert(values.sortType + ", " + values.sortByType);
+        }}
       >
         <Form className={classes.form}>
           <FormGroup title="Sortuj">

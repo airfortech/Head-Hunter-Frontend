@@ -1,31 +1,19 @@
-import React, { createContext, Dispatch, useState } from "react";
+import React, { createContext, useState } from "react";
+import { SearchOptions, SortOptions } from "../types";
+import { initialSortValues } from "./searchProviderData";
 
 interface Props {
   children: React.ReactNode;
 }
 
-interface CheckItemType {
-  value: string;
-  name: string;
-}
-
-interface SortType {
-  sortTypes: CheckItemType;
-  sortByTypes: CheckItemType;
-}
-
-interface SortOptions {
-  sortOptions: SortType[];
-  setSortOptions: Dispatch<React.SetStateAction<SortType[]>>;
-}
-
-export const SearchContext = createContext<SortOptions>({
-  sortOptions: [],
+export const SearchContext = createContext<SearchOptions>({
+  sortOptions: initialSortValues,
   setSortOptions: () => {},
 });
 
 export const SearchProvider = ({ children }: Props) => {
-  const [sortOptions, setSortOptions] = useState<SortType[]>([]);
+  const [sortOptions, setSortOptions] =
+    useState<SortOptions>(initialSortValues);
 
   return (
     <SearchContext.Provider value={{ sortOptions, setSortOptions }}>
