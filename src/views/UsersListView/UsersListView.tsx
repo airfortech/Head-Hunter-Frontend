@@ -6,26 +6,35 @@ import { UsersList } from "../../components/UsersList/UsersList";
 import classes from "./UsersListView.module.css";
 
 interface Props {
-  type:
+  listType:
     | "adminHR"
     | "adminStudent"
     | "hrStudentAvailable"
     | "hrStudentToTalk"
     | "hrStudentHired";
+  searchType?:
+    | "adminHR"
+    | "adminStudent"
+    | "adminStudentAvailable"
+    | "adminStudentToTalk"
+    | "adminStudentHired"
+    | "hrStudentAvailable"
+    | "hrStudentToTalk"
+    | "hrStudentHired";
 }
 
-export const UsersListView = ({ type }: Props) => {
+export const UsersListView = ({ listType, searchType }: Props) => {
   return (
     <div className={classes.UsersListView}>
-      <SearchPanel />
+      <SearchPanel type={searchType} />
       <Pagination currentPage={1} totalPages={12} />
       <div className={classes.wrapper}>
         <UsersList>
-          <StudentItem type={type} id="1" />
-          <StudentItem type={type} id="2" />
-          <StudentItem type={type} id="3" />
-          <StudentItem type={type} id="4" />
-          <StudentItem type={type} id="5" />
+          <StudentItem type={listType} id="1" />
+          <StudentItem type={listType} id="2" />
+          <StudentItem type={listType} id="3" />
+          <StudentItem type={listType} id="4" />
+          <StudentItem type={listType} id="5" />
         </UsersList>
       </div>
     </div>
