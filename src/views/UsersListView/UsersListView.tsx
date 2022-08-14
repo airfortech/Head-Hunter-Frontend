@@ -27,7 +27,7 @@ export const UsersListView = ({ listType, searchType }: Props) => {
   return (
     <div className={classes.UsersListView}>
       <SearchPanel type={searchType} />
-      <Pagination currentPage={1} totalPages={12} />
+      <Pagination type={searchType} currentPage={1} totalPages={12} />
       <div className={classes.wrapper}>
         <UsersList>
           <StudentItem type={listType} id="1" />

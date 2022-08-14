@@ -1,10 +1,12 @@
 import React, { MouseEventHandler } from "react";
 import { Form, Formik } from "formik";
 import { useSearch } from "../../../hooks/useSearch";
+import { useCurrentSearchParams } from "../../../hooks/useCurrentSearchParams";
 import { PrimaryButton } from "../../buttons/PrimaryButton/PrimaryButton";
 import { FormGroup } from "../FormGroup/FormGroup";
 import { CheckItem } from "../FormGroup/CheckItem/CheckItem";
 import { Input } from "../../Input/Input";
+import { FilterValues } from "../../../types";
 import {
   canTakeApprenticeship,
   expectedContractType,
@@ -12,9 +14,9 @@ import {
   degrees,
   ValidationSchema,
 } from "./filterFormData";
-import { FilterValues } from "../../../types";
-import classes from "./FilterForm.module.css";
+import { fetchStudentsList } from "../../../utils/fetchStudentsList";
 import { initialFilterValues } from "../../../context/searchProviderData";
+import classes from "./FilterForm.module.css";
 
 interface Props {
   closeModal: MouseEventHandler;
@@ -58,6 +60,7 @@ const printValues = (values: FilterValues) => {
 };
 
 export const FilterForm = ({ type, closeModal }: Props) => {
+  const params = useCurrentSearchParams(type);
   const { filterOptions, setFilterOptions } = useSearch();
 
   return (
@@ -92,6 +95,19 @@ export const FilterForm = ({ type, closeModal }: Props) => {
               expectedSalaryFrom,
               expectedSalaryTo,
             },
+          });
+          fetchStudentsList({
+            ...params,
+            courseCompletion,
+            courseEngagment,
+            projectDegree,
+            teamProjectDegree,
+            expectedTypeWork,
+            expectedContractType,
+            canTakeApprenticeship,
+            monthsOfCommercialExp,
+            expectedSalaryFrom,
+            expectedSalaryTo,
           });
           alert(printValues(values));
         }}
