@@ -1,0 +1,64 @@
+.TextArea {
+  position: relative;
+}
+
+.TextAreaField {
+  max-width: 100%;
+  line-height: 150%;
+  color: var(--color-12);
+  border: none;
+  outline: 1px solid transparent;
+  resize: none;
+  transition: all var(--transition-speed-fast) ease;
+}
+
+.TextAreaField::placeholder {
+  color: var(--color-9);
+  transition: all var(--transition-speed-fast) ease;
+}
+
+.TextAreaField:hover::placeholder {
+  color: var(--color-11);
+}
+
+.TextAreaField:focus {
+  outline: 1px solid var(--color-15);
+}
+
+.normal {
+  padding: 3px 9px;
+  width: 95px;
+  height: calc(var(--font-size-sm) * 1.5 * 4 + 6px);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.medium {
+  padding: 3px 12px;
+  width: 270px;
+  height: calc(var(--font-size-md) * 1.5 * 4 + 6px);
+  font-size: var(--font-size-md);
+}
+
+.large {
+  padding: 3px 12px;
+  width: 350px;
+  height: calc(var(--font-size-md) * 1.5 * 4 + 6px);
+  font-size: var(--font-size-md);
+}
+
+.primary {
+  background-color: var(--color-5);
+}
+
+.primary:hover {
+  background-color: var(--color-5-hover);
+}
+
+.secondary {
+  background-color: var(--color-2);
+}
+
+.secondary:hover {
+  background-color: var(--color-2-hover);
+}

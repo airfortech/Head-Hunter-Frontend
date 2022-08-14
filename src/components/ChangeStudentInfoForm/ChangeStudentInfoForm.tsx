@@ -2,6 +2,7 @@ import { Form, Formik } from "formik";
 import React from "react";
 import { PrimaryButton } from "../buttons/PrimaryButton/PrimaryButton";
 import { Input } from "../Input/Input";
+import { TextArea } from "../TextArea/TextArea";
 import { CheckItem } from "../SearchPanel/FormGroup/CheckItem/CheckItem";
 import { FormGroup } from "../SearchPanel/FormGroup/FormGroup";
 import {
@@ -45,8 +46,7 @@ export const ChangeStudentInfoForm = () => {
               />
             </FormGroup>
             <FormGroup title="O mnie">
-              <Input
-                type="text"
+              <TextArea
                 size="medium"
                 name="bio"
                 forFormik
@@ -54,8 +54,7 @@ export const ChangeStudentInfoForm = () => {
               />
             </FormGroup>
             <FormGroup title="Edukacja">
-              <Input
-                type="text"
+              <TextArea
                 size="medium"
                 name="education"
                 forFormik
@@ -72,8 +71,7 @@ export const ChangeStudentInfoForm = () => {
               />
             </FormGroup>
             <FormGroup title="Doświadczenie zawodowe">
-              <Input
-                type="text"
+              <TextArea
                 size="medium"
                 name="workExperience"
                 forFormik
