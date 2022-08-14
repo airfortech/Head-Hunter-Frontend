@@ -4,20 +4,13 @@ import { Input } from "../Input/Input";
 import { Modal } from "../Modal/Modal";
 import { SortForm } from "./SortForm/SortForm";
 import { FilterForm } from "./FilterForm/FilterForm";
+import { UsersListType } from "../../types";
 import classes from "./SearchPanel.module.css";
 
 type ModalTypes = "sortModal" | "filterModal";
 
 interface Props {
-  type:
-    | "adminHR"
-    | "adminStudent"
-    | "adminStudentAvailable"
-    | "adminStudentToTalk"
-    | "adminStudentHired"
-    | "hrStudentAvailable"
-    | "hrStudentToTalk"
-    | "hrStudentHired";
+  type: UsersListType;
 }
 
 interface IsModalOpen {

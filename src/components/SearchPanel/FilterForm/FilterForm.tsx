@@ -6,7 +6,7 @@ import { PrimaryButton } from "../../buttons/PrimaryButton/PrimaryButton";
 import { FormGroup } from "../FormGroup/FormGroup";
 import { CheckItem } from "../FormGroup/CheckItem/CheckItem";
 import { Input } from "../../Input/Input";
-import { FilterValues } from "../../../types";
+import { FilterValues, UsersListType } from "../../../types";
 import {
   canTakeApprenticeship,
   expectedContractType,
@@ -20,15 +20,7 @@ import classes from "./FilterForm.module.css";
 
 interface Props {
   closeModal: MouseEventHandler;
-  type:
-    | "adminHR"
-    | "adminStudent"
-    | "adminStudentAvailable"
-    | "adminStudentToTalk"
-    | "adminStudentHired"
-    | "hrStudentAvailable"
-    | "hrStudentToTalk"
-    | "hrStudentHired";
+  type: UsersListType;
 }
 
 const printValues = (values: FilterValues) => {

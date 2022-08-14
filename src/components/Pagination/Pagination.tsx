@@ -4,21 +4,14 @@ import { useSearch } from "../../hooks/useSearch";
 import { useCurrentSearchParams } from "../../hooks/useCurrentSearchParams";
 import { Button } from "./Button/Button";
 import { fetchStudentsList } from "../../utils/fetchStudentsList";
+import { UsersListType } from "../../types";
 import { config } from "../../config/config";
 import classes from "./Pagination.module.css";
 
 interface Props {
   currentPage: number;
   totalPages: number;
-  type:
-    | "adminHR"
-    | "adminStudent"
-    | "adminStudentAvailable"
-    | "adminStudentToTalk"
-    | "adminStudentHired"
-    | "hrStudentAvailable"
-    | "hrStudentToTalk"
-    | "hrStudentHired";
+  type: UsersListType;
 }
 
 interface Option {

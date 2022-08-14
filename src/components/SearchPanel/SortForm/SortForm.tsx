@@ -7,19 +7,12 @@ import { FormGroup } from "../FormGroup/FormGroup";
 import { CheckItem } from "../FormGroup/CheckItem/CheckItem";
 import { fetchStudentsList } from "../../../utils/fetchStudentsList";
 import { sortByTypes, sortTypes } from "./sortFormData";
+import { UsersListType } from "../../../types";
 import classes from "./SortForm.module.css";
 
 interface Props {
   closeModal: MouseEventHandler;
-  type:
-    | "adminHR"
-    | "adminStudent"
-    | "adminStudentAvailable"
-    | "adminStudentToTalk"
-    | "adminStudentHired"
-    | "hrStudentAvailable"
-    | "hrStudentToTalk"
-    | "hrStudentHired";
+  type: UsersListType;
 }
 
 export const SortForm = ({ type, closeModal }: Props) => {
