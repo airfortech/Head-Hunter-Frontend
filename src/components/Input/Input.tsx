@@ -6,7 +6,7 @@ interface Props {
   type: "text" | "password" | "email";
   forFormik?: boolean;
   name?: string;
-  size?: "normal" | "large";
+  size?: "normal" | "medium" | "large";
   color?: "primary" | "secondary" | "tertiary";
   icon?: "search";
   required?: boolean;

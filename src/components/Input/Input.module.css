@@ -64,6 +64,13 @@
   font-weight: var(--font-weight-medium);
 }
 
+.medium {
+  padding: 0 12px;
+  width: 270px;
+  height: 34px;
+  font-size: var(--font-size-md);
+}
+
 .large {
   padding: 0 12px;
   width: 350px;
