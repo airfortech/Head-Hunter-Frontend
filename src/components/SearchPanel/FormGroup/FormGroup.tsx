@@ -17,7 +17,7 @@ export const FormGroup = ({
       <h3>{title}</h3>
       <div
         className={`${classes.items} ${
-          displayDirection === "column" && classes.displayColumn
+          displayDirection === "column" ? classes.displayColumn : ""
         }`}
       >
         {children}

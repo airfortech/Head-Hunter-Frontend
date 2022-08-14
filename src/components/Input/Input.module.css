@@ -2,12 +2,7 @@
   position: relative;
 }
 
-.Input {
-  position: relative;
-}
-
 .InputInput {
-  max-width: 100%;
   color: var(--color-12);
   border: none;
   outline: 1px solid transparent;
@@ -76,6 +71,10 @@
   width: 350px;
   height: 40px;
   font-size: var(--font-size-md);
+}
+
+.fullWidth {
+  width: 100%;
 }
 
 .primary {

@@ -116,6 +116,7 @@ export const ChangePasswordForm = () => {
               name="password"
               forFormik
               size="large"
+              fullWidth
               placeholder="Aktualne hasło"
             />
             <Input
@@ -123,6 +124,7 @@ export const ChangePasswordForm = () => {
               name="newPassword"
               forFormik
               size="large"
+              fullWidth
               placeholder="Nowe hasło"
             />
             <Input
@@ -130,6 +132,7 @@ export const ChangePasswordForm = () => {
               name="confirmNewPassword"
               forFormik
               size="large"
+              fullWidth
               placeholder="Powtórz nowe hasło"
             />
             <p

@@ -39,12 +39,12 @@ export const PersonalDetails = () => {
           numquam.
         </p>
       </div>
-      {auth.role !== UserRole.trainee && (
+      {auth.role === UserRole.hr && (
         <PrimaryButton size="large" fullWidth>
           Brak zainteresowania
         </PrimaryButton>
       )}
-      {auth.role !== UserRole.trainee && (
+      {auth.role === UserRole.hr && (
         <PrimaryButton size="large" fullWidth>
           Zatrudniony
         </PrimaryButton>

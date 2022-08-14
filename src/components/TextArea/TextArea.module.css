@@ -1,5 +1,6 @@
 .TextArea {
   position: relative;
+  width: 100%;
 }
 
 .TextAreaField {
@@ -45,6 +46,10 @@
   width: 350px;
   height: calc(var(--font-size-md) * 1.5 * 4 + 6px);
   font-size: var(--font-size-md);
+}
+
+.fullWidth {
+  width: 100%;
 }
 
 .primary {

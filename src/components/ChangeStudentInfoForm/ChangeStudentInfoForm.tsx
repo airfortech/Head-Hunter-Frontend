@@ -31,6 +31,7 @@ export const ChangeStudentInfoForm = () => {
               <Input
                 type="text"
                 size="medium"
+                fullWidth
                 name="githubUsername"
                 forFormik
                 placeholder="np. joedeveloper"
@@ -40,6 +41,7 @@ export const ChangeStudentInfoForm = () => {
               <Input
                 type="text"
                 size="medium"
+                fullWidth
                 name="tel"
                 forFormik
                 placeholder="np. +48 333 333 334"
@@ -48,6 +50,7 @@ export const ChangeStudentInfoForm = () => {
             <FormGroup title="O mnie">
               <TextArea
                 size="medium"
+                fullWidth
                 name="bio"
                 forFormik
                 placeholder="Napisz coś o sobie"
@@ -56,6 +59,7 @@ export const ChangeStudentInfoForm = () => {
             <FormGroup title="Edukacja">
               <TextArea
                 size="medium"
+                fullWidth
                 name="education"
                 forFormik
                 placeholder="Edukacja"
@@ -65,6 +69,7 @@ export const ChangeStudentInfoForm = () => {
               <Input
                 type="text"
                 size="medium"
+                fullWidth
                 name="targetWorkCity"
                 forFormik
                 placeholder="np. Warszawa"
@@ -73,6 +78,7 @@ export const ChangeStudentInfoForm = () => {
             <FormGroup title="Doświadczenie zawodowe">
               <TextArea
                 size="medium"
+                fullWidth
                 name="workExperience"
                 forFormik
                 placeholder="Napis gdzie pracowałeś"
@@ -82,6 +88,7 @@ export const ChangeStudentInfoForm = () => {
               <Input
                 type="text"
                 size="medium"
+                fullWidth
                 name="portfolioUrl1"
                 forFormik
                 placeholder="np. www.joedeveloper.com"
@@ -89,6 +96,7 @@ export const ChangeStudentInfoForm = () => {
               <Input
                 type="text"
                 size="medium"
+                fullWidth
                 name="portfolioUrl2"
                 forFormik
                 placeholder="np. www.joedeveloper.com"
@@ -96,6 +104,7 @@ export const ChangeStudentInfoForm = () => {
               <Input
                 type="text"
                 size="medium"
+                fullWidth
                 name="portfolioUrl3"
                 forFormik
                 placeholder="np. www.joedeveloper.com"
@@ -103,6 +112,7 @@ export const ChangeStudentInfoForm = () => {
               <Input
                 type="text"
                 size="medium"
+                fullWidth
                 name="portfolioUrl4"
                 forFormik
                 placeholder="np. www.joedeveloper.com"
@@ -110,6 +120,7 @@ export const ChangeStudentInfoForm = () => {
               <Input
                 type="text"
                 size="medium"
+                fullWidth
                 name="portfolioUrl5"
                 forFormik
                 placeholder="np. www.joedeveloper.com"
@@ -119,6 +130,7 @@ export const ChangeStudentInfoForm = () => {
               <Input
                 type="text"
                 size="medium"
+                fullWidth
                 name="projectUrl1"
                 forFormik
                 placeholder="np. www.joeeproject.com"
@@ -126,6 +138,7 @@ export const ChangeStudentInfoForm = () => {
               <Input
                 type="text"
                 size="medium"
+                fullWidth
                 name="projectUrl2"
                 forFormik
                 placeholder="np. www.joeeproject.com"
@@ -133,6 +146,7 @@ export const ChangeStudentInfoForm = () => {
               <Input
                 type="text"
                 size="medium"
+                fullWidth
                 name="projectUrl3"
                 forFormik
                 placeholder="np. www.joeeproject.com"
@@ -140,6 +154,7 @@ export const ChangeStudentInfoForm = () => {
               <Input
                 type="text"
                 size="medium"
+                fullWidth
                 name="projectUrl4"
                 forFormik
                 placeholder="np. www.joeproject.com"
@@ -147,6 +162,7 @@ export const ChangeStudentInfoForm = () => {
               <Input
                 type="text"
                 size="medium"
+                fullWidth
                 name="projectUrl5"
                 forFormik
                 placeholder="np. www.joeeproject.com"
@@ -156,6 +172,7 @@ export const ChangeStudentInfoForm = () => {
               {expectedTypeWork.map(({ value, name }) => (
                 <CheckItem
                   type="checkbox"
+                  size="normal"
                   groupName="expectedTypeWork"
                   value={value}
                   name={name}
@@ -167,6 +184,7 @@ export const ChangeStudentInfoForm = () => {
               {expectedContractType.map(({ value, name }) => (
                 <CheckItem
                   type="checkbox"
+                  size="normal"
                   groupName="expectedContractType"
                   value={value}
                   name={name}
@@ -201,6 +219,7 @@ export const ChangeStudentInfoForm = () => {
               {canTakeApprenticeship.map(({ value, name }) => (
                 <CheckItem
                   type="radio"
+                  size="normal"
                   groupName="canTakeApprenticeship"
                   value={value}
                   name={name}
@@ -211,6 +230,7 @@ export const ChangeStudentInfoForm = () => {
             <FormGroup title="Ilość miesięcy doświadczenia komercyjnego kandydata w programowaniu">
               <Input
                 type="text"
+                size="medium"
                 name="monthsOfCommercialExp"
                 forFormik
                 placeholder="0 miesięcy"

@@ -6,6 +6,7 @@ interface Props {
   forFormik?: boolean;
   name?: string;
   size?: "normal" | "medium" | "large";
+  fullWidth?: boolean;
   color?: "primary" | "secondary" | "tertiary";
   required?: boolean;
   placeholder: string;
@@ -15,6 +16,7 @@ export const TextArea = ({
   forFormik = false,
   name,
   size = "normal",
+  fullWidth = false,
   color = "primary",
   required = false,
   placeholder,
@@ -24,10 +26,12 @@ export const TextArea = ({
       {!forFormik ? (
         <textarea
           placeholder={placeholder}
-          className={`${classes.TextAreaField} ${classes[size]} ${classes[color]}`}
+          className={`${classes.TextAreaField} ${classes[size]} ${
+            classes[color]
+          } ${fullWidth ? classes.fullWidth : ""}`}
           required={required}
           autoComplete="off"
-        ></textarea>
+        />
       ) : (
         <Field name={name} type="text">
           {({ field: { onChange, value } }: FieldProps) => (
@@ -36,10 +40,12 @@ export const TextArea = ({
               name={name}
               onChange={onChange}
               placeholder={placeholder}
-              className={`${classes.TextAreaField} ${classes[size]} ${classes[color]}`}
+              className={`${classes.TextAreaField} ${classes[size]} ${
+                classes[color]
+              } ${fullWidth ? classes.fullWidth : ""}`}
               required={required}
               autoComplete="off"
-            ></textarea>
+            />
           )}
         </Field>
       )}

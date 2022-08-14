@@ -7,6 +7,7 @@ interface Props {
   forFormik?: boolean;
   name?: string;
   size?: "normal" | "medium" | "large";
+  fullWidth?: boolean;
   color?: "primary" | "secondary" | "tertiary";
   icon?: "search";
   required?: boolean;
@@ -22,20 +23,23 @@ export const Input = ({
   forFormik = false,
   name,
   size = "normal",
+  fullWidth = false,
   color = "primary",
   icon,
   required = false,
   placeholder,
 }: Props) => {
   return (
-    <div className={classes.Input}>
+    <div className={`${classes.Input} ${fullWidth ? classes.fullWidth : ""}`}>
       {!forFormik ? (
         <input
           type={type}
           placeholder={placeholder}
           className={`${classes.InputInput} ${classes[size]} ${
             classes[color]
-          } ${icon && classes.extendedPadding}`}
+          } ${icon ? classes.extendedPadding : ""} ${
+            fullWidth ? classes.fullWidth : ""
+          }`}
           required={required}
           autoComplete="off"
         />
@@ -50,7 +54,9 @@ export const Input = ({
               placeholder={placeholder}
               className={`${classes.InputInput} ${classes[size]} ${
                 classes[color]
-              } ${icon && classes.extendedPadding}`}
+              } ${icon ? classes.extendedPadding : ""} ${
+                fullWidth ? classes.fullWidth : ""
+              }`}
               required={required}
               autoComplete="off"
             />
