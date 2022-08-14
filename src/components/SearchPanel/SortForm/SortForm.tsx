@@ -1,26 +1,22 @@
 import React, { MouseEventHandler } from "react";
 import { Form, Formik } from "formik";
+import { useCurrentSearchParams } from "../../../hooks/useCurrentSearchParams";
 import { useSearch } from "../../../hooks/useSearch";
 import { PrimaryButton } from "../../buttons/PrimaryButton/PrimaryButton";
 import { FormGroup } from "../FormGroup/FormGroup";
 import { CheckItem } from "../FormGroup/CheckItem/CheckItem";
+import { fetchStudentsList } from "../../../utils/fetchStudentsList";
 import { sortByTypes, sortTypes } from "./sortFormData";
+import { UsersListType } from "../../../types";
 import classes from "./SortForm.module.css";
 
 interface Props {
   closeModal: MouseEventHandler;
-  type:
-    | "adminHR"
-    | "adminStudent"
-    | "adminStudentAvailable"
-    | "adminStudentToTalk"
-    | "adminStudentHired"
-    | "hrStudentAvailable"
-    | "hrStudentToTalk"
-    | "hrStudentHired";
+  type: UsersListType;
 }
 
 export const SortForm = ({ type, closeModal }: Props) => {
+  const params = useCurrentSearchParams(type);
   const { sortOptions, setSortOptions } = useSearch();
 
   return (
@@ -46,7 +42,7 @@ export const SortForm = ({ type, closeModal }: Props) => {
               sortByType,
             },
           });
-          alert(sortType + ", " + sortByType);
+          fetchStudentsList({ ...params, sortType, sortByType });
         }}
       >
         <Form className={classes.form}>

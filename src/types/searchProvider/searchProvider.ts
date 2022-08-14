@@ -45,4 +45,6 @@ export interface SearchOptions {
   setSortOptions: Dispatch<React.SetStateAction<SortOptions>>;
   filterOptions: FilterOptions;
   setFilterOptions: Dispatch<React.SetStateAction<FilterOptions>>;
+  limit: string;
+  setLimit: Dispatch<React.SetStateAction<string>>;
 }

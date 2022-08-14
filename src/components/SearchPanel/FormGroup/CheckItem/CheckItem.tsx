@@ -4,13 +4,21 @@ import classes from "./CheckItem.module.css";
 
 interface Props {
   type: "checkbox" | "radio";
+  size?: "small" | "normal" | "large" | "form";
   value: string;
   name: string;
   groupName: string;
   icon?: "star";
 }
 
-export const CheckItem = ({ value, name, groupName, type, icon }: Props) => {
+export const CheckItem = ({
+  value,
+  name,
+  groupName,
+  type,
+  icon,
+  size = "form",
+}: Props) => {
   return (
     <label className={classes.CheckItem}>
       <Field type={type} name={groupName} value={value}>
@@ -26,7 +34,7 @@ export const CheckItem = ({ value, name, groupName, type, icon }: Props) => {
             />
             <PrimaryButton
               type={type}
-              size="form"
+              size={size}
               color={checked ? "primary" : "secondary"}
               icon={icon}
               iconColor={checked ? "secondary" : "tertiary"}

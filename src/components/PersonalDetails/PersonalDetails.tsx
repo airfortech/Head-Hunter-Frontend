@@ -1,10 +1,20 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
+import { UserRole } from "../../types";
 import { Avatar } from "../Avatar/Avatar";
 import { PrimaryButton } from "../buttons/PrimaryButton/PrimaryButton";
 import { ExternalLink } from "../ExternalLink/ExternalLink";
 import classes from "./PersonalDetails.module.css";
 
 export const PersonalDetails = () => {
+  const { auth } = useAuth();
+  const navigate = useNavigate();
+
+  const handleEditInfo = () => {
+    navigate("settings");
+  };
+
   return (
     <section className={classes.PersonalDetails}>
       <Avatar name="Jan Kowalski" size="large" />
@@ -29,12 +39,26 @@ export const PersonalDetails = () => {
           numquam.
         </p>
       </div>
-      <PrimaryButton size="large" fullWidth>
-        Brak zainteresowania
-      </PrimaryButton>
-      <PrimaryButton size="large" fullWidth>
-        Zatrudniony
-      </PrimaryButton>
+      {auth.role === UserRole.hr && (
+        <PrimaryButton size="large" fullWidth>
+          Brak zainteresowania
+        </PrimaryButton>
+      )}
+      {auth.role === UserRole.hr && (
+        <PrimaryButton size="large" fullWidth>
+          Zatrudniony
+        </PrimaryButton>
+      )}
+      {auth.role === UserRole.trainee && (
+        <PrimaryButton
+          size="large"
+          color="primary"
+          fullWidth
+          onClick={handleEditInfo}
+        >
+          Edytuj informacje
+        </PrimaryButton>
+      )}
     </section>
   );
 };

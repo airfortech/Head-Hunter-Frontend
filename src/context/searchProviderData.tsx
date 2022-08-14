@@ -1,3 +1,4 @@
+import { config } from "../config/config";
 import { SortOptions, SortValues, FilterValues, FilterOptions } from "../types";
 
 const initialSortValues: SortValues = {
@@ -39,3 +40,5 @@ export const initialFilterOptions: FilterOptions = {
   hrStudentToTalk: initialFilterValues,
   hrStudentHired: initialFilterValues,
 };
+
+export const initialLimit: string = config.resultsPerPageOptions[0].toString();

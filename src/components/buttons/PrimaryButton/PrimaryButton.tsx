@@ -37,8 +37,8 @@ export const PrimaryButton = ({
       type={type}
       disabled={disabled}
       className={`${classes.PrimaryButton} ${classes[size]} ${classes[color]} ${
-        fullWidth && classes.fullWidth
-      } ${reversed && classes.reversed}`}
+        fullWidth ? classes.fullWidth : ""
+      } ${reversed ? classes.reversed : ""}`}
       onClick={onClick}
     >
       {icon && (
@@ -49,8 +49,8 @@ export const PrimaryButton = ({
   ) : (
     <div
       className={`${classes.PrimaryButton} ${classes[size]} ${classes[color]} ${
-        fullWidth && classes.fullWidth
-      } ${reversed && classes.reversed}`}
+        fullWidth ? classes.fullWidth : ""
+      } ${reversed ? classes.reversed : ""}`}
       onClick={onClick}
     >
       {icon && (
