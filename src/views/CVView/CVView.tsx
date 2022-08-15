@@ -30,8 +30,6 @@ export const CVView = () => {
     convertStudentInfo({} as TraineeProfileEntity)
   );
 
-  console.log(convertStudentInfo({} as TraineeProfileEntity));
-
   useEffect(() => {
     (async () => {
       try {

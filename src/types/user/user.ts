@@ -4,11 +4,11 @@ export enum UserRole {
   trainee = "trainee",
 }
 
-enum TraineeExpectedTypeWork {
-  onsite = "onsite",
-  remote = "remote",
-  readyToMove = "readyToMove",
-  hybrid = "hybrid",
+export enum TraineeExpectedTypeWork {
+  onsite = "W biurze",
+  remote = "Zdalnie",
+  readyToMove = "Gotowy na relokację",
+  hybrid = "Hybrydowo",
 }
 
 enum TraineeExpectedContractType {
@@ -33,7 +33,11 @@ export interface TraineeProfileEntity {
   portfolioUrls?: string;
   projectUrls: string;
   bio?: string;
-  expectedTypeWork?: TraineeExpectedTypeWork | null;
+  courseCompletion?: number;
+  courseEngagment?: number;
+  projectDegree?: number;
+  teamProjectDegree?: number;
+  expectedTypeWork?: string | null;
   targetWorkCity?: string;
   expectedContractType?: TraineeExpectedContractType | null;
   expectedSalary?: string;
@@ -54,10 +58,15 @@ export interface ConvertStudentInfo {
   firstName: string;
   lastName: string;
   githubUsername: string;
-  githubSrc: string | null;
+  githubSrc: string;
+  githubAvatarSrc: string | null;
   portfolioUrls: string[] | null;
   projectUrls: string[] | null;
   bio: string;
+  courseCompletion: number;
+  courseEngagment: number;
+  projectDegree: number;
+  teamProjectDegree: number;
   expectedTypeWork: string;
   targetWorkCity: string;
   expectedContractType: string;

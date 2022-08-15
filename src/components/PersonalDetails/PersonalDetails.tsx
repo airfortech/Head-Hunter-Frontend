@@ -12,7 +12,16 @@ interface Props {
 }
 
 export const PersonalDetails = ({ traineeInfo }: Props) => {
-  const { firstName, lastName, tel, email, bio, githubUsername } = traineeInfo;
+  const {
+    firstName,
+    lastName,
+    tel,
+    email,
+    bio,
+    githubUsername,
+    githubSrc,
+    githubAvatarSrc,
+  } = traineeInfo;
   const { auth } = useAuth();
   const navigate = useNavigate();
 
@@ -24,11 +33,11 @@ export const PersonalDetails = ({ traineeInfo }: Props) => {
     <section className={classes.PersonalDetails}>
       <Avatar
         name={firstName + " " + lastName}
-        src={githubUsername && "https://github.com/" + githubUsername + ".png"}
+        src={githubAvatarSrc}
         size="large"
       />
       <h1>{firstName + " " + lastName}</h1>
-      <ExternalLink href={"https://github.com/" + githubUsername} icon="github">
+      <ExternalLink href={githubSrc} icon="github">
         {githubUsername}
       </ExternalLink>
       <div className={classes.contact}>
