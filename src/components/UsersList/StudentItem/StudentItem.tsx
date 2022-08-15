@@ -25,9 +25,9 @@ export const StudentItem = ({ open = true, type, id }: Props) => {
   const tweenRef = useRef<GSAPTimeline>();
 
   const linkToCV = (type: string) => {
-    if (type === "adminStudent") return "/panel/admin/students/" + id;
-    if (type === "hrStudentToTalk") return "/panel/hr/students/" + id;
-    if (type === "hrStudentHired") return "/panel/hr/students/" + id;
+    if (type === "adminStudent") return "/panel/admin/students/u" + id;
+    if (type === "hrStudentToTalk") return "/panel/hr/students/u" + id;
+    if (type === "hrStudentHired") return "/panel/hr/students/u" + id;
   };
 
   const handleToggleMenu = () => {
