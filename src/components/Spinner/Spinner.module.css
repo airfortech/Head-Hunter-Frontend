@@ -5,3 +5,8 @@
 .loader {
   border-color: var(--color-15) var(--color-15) transparent !important;
 }
+
+.large {
+  height: 80px !important;
+  width: 80px !important;
+}

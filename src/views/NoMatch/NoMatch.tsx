@@ -4,24 +4,30 @@ import { PrimaryButton } from "../../components/buttons/PrimaryButton/PrimaryBut
 import logo from "../../assets/images/logo.png";
 import classes from "./NoMatch.module.css";
 
+interface LocationState {
+  message: string;
+  back: number;
+}
+
 export const NoMatch = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const state = location.state as string;
+  const { message, back } = location?.state as LocationState;
+  console.log(back);
 
-  console.log(state);
+  console.log(message);
 
   return (
     <div className={classes.NoMatch}>
       <img src={logo} alt="MegaK Logo" className={classes.logo} />
-      <h1>{state ? state : "Ups! Nie znaleziono strony."}</h1>
+      <h1>{message ? message : "Ups! Nie znaleziono strony."}</h1>
       <PrimaryButton
         type="submit"
         color="primary"
         size="large"
         icon="back"
         iconColor="secondary"
-        onClick={() => navigate(-1)}
+        onClick={() => navigate(back ? back : -1)}
       >
         Wstecz
       </PrimaryButton>

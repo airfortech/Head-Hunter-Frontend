@@ -12,6 +12,7 @@ import { useAuth } from "../../hooks/useAuth";
 import { Back } from "../../components/Back/Back";
 import { PersonalDetails } from "../../components/PersonalDetails/PersonalDetails";
 import { TechDetails } from "../../components/TechDetails/TechDetails";
+import { PageLoader } from "../../components/PageLoader/PageLoader";
 import { config } from "../../config/config";
 import { convertStudentInfo } from "../../utils/convertStudentInfo";
 import classes from "./CVView.module.css";
@@ -29,6 +30,7 @@ export const CVView = () => {
   const navigate = useNavigate();
   const { auth } = useAuth();
   const { id } = useParams();
+  const [isLoading, setIsLoading] = useState(true);
   const [traineeInfo, setTraineeInfo] = useState<ConvertStudentInfo>(
     convertStudentInfo({
       monthsOfCommercialExp: 0,
@@ -42,11 +44,15 @@ export const CVView = () => {
           id: auth.role === UserRole.trainee ? auth.id : id,
         });
         console.log(message, data);
-        if (message === GetTraineeProfileResponseMessage.success)
+        if (message === GetTraineeProfileResponseMessage.success) {
           setTraineeInfo(convertStudentInfo(data.traineeProfile));
-        else if (message === GetTraineeProfileResponseMessage.notFound)
+          setIsLoading(false);
+        } else if (message === GetTraineeProfileResponseMessage.notFound)
           navigate("/notFound", {
-            state: "Nie ma takiego kursanta",
+            state: {
+              message: "Nie ma takiego kursanta",
+              back: -2,
+            },
           });
         else console.log("Something went wrong");
       } catch (e) {
@@ -58,10 +64,14 @@ export const CVView = () => {
   return (
     <div className={classes.CVView}>
       {auth.role !== UserRole.trainee && <Back />}
-      <div className={classes.row}>
-        <PersonalDetails traineeInfo={traineeInfo} />
-        <TechDetails traineeInfo={{ ...traineeInfo }} />
-      </div>
+      {isLoading ? (
+        <PageLoader />
+      ) : (
+        <div className={classes.row}>
+          <PersonalDetails traineeInfo={traineeInfo} />
+          <TechDetails traineeInfo={{ ...traineeInfo }} />
+        </div>
+      )}
     </div>
   );
 };
