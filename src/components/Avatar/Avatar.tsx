@@ -3,7 +3,7 @@ import avatar from "../../assets/images/avatar.svg";
 import classes from "./Avatar.module.css";
 
 interface Props {
-  src?: string;
+  src?: string | null;
   name: string;
   size?: "normal" | "large";
 }

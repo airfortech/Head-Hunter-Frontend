@@ -61,45 +61,15 @@ export const FilterForm = ({ type, closeModal }: Props) => {
         initialValues={filterOptions[type]}
         validationSchema={ValidationSchema}
         onSubmit={(values) => {
-          const {
-            courseCompletion,
-            courseEngagment,
-            projectDegree,
-            teamProjectDegree,
-            expectedTypeWork,
-            expectedContractType,
-            canTakeApprenticeship,
-            monthsOfCommercialExp,
-            expectedSalaryFrom,
-            expectedSalaryTo,
-          } = values;
           setFilterOptions({
             ...filterOptions,
             [type]: {
-              courseCompletion,
-              courseEngagment,
-              projectDegree,
-              teamProjectDegree,
-              expectedTypeWork,
-              expectedContractType,
-              canTakeApprenticeship,
-              monthsOfCommercialExp,
-              expectedSalaryFrom,
-              expectedSalaryTo,
+              ...values,
             },
           });
           fetchStudentsList({
             ...params,
-            courseCompletion,
-            courseEngagment,
-            projectDegree,
-            teamProjectDegree,
-            expectedTypeWork,
-            expectedContractType,
-            canTakeApprenticeship,
-            monthsOfCommercialExp,
-            expectedSalaryFrom,
-            expectedSalaryTo,
+            ...values,
           });
           alert(printValues(values));
         }}

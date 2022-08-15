@@ -3,3 +3,4 @@ export * from "./login";
 export * from "./logout";
 export * from "./changePassword";
 export * from "./lostPassword";
+export * from "./getTraineeProfile";

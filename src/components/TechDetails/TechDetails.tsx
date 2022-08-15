@@ -1,3 +1,4 @@
+import { ConvertStudentInfo } from "../../types";
 import React from "react";
 import { TechInfo } from "./TechInfo/TechInfo";
 import { ExternalLink } from "../ExternalLink/ExternalLink";
@@ -5,76 +6,93 @@ import { PreferencesCard } from "../PreferencesCard/PreferencesCard";
 import { NoteCard } from "../NoteCard/NoteCard";
 import classes from "./TechDetails.module.css";
 
-export const TechDetails = () => {
+interface Props {
+  traineeInfo: ConvertStudentInfo;
+}
+
+export const TechDetails = ({ traineeInfo }: Props) => {
+  const {
+    courseCompletion,
+    courseEngagment,
+    projectDegree,
+    teamProjectDegree,
+    expectedTypeWork,
+    targetWorkCity,
+    expectedContractType,
+    expectedSalary,
+    canTakeApprenticeship,
+    monthsOfCommercialExp,
+    education,
+    courses,
+    workExperience,
+    portfolioUrls,
+    projectUrls,
+  } = traineeInfo;
+
   return (
     <section className={classes.TechDetails}>
       <TechInfo title="Oceny" cards>
-        <NoteCard title="Ocena przejścia kursu" note={1.7} />
-        <NoteCard title="Ocena aktywności i zaangażowania na kursie" note={4} />
-        <NoteCard title="Ocena kodu w projekcie własnym" note={4.5} />
-        <NoteCard title="Ocena pracy w zespole w Scrum" note={5} />
+        <NoteCard title="Ocena przejścia kursu" note={courseCompletion} />
+        <NoteCard
+          title="Ocena aktywności i zaangażowania na kursie"
+          note={courseEngagment}
+        />
+        <NoteCard title="Ocena kodu w projekcie własnym" note={projectDegree} />
+        <NoteCard
+          title="Ocena pracy w zespole w Scrum"
+          note={teamProjectDegree}
+        />
       </TechInfo>
       <TechInfo title="Oczekiwanie w stosunku do zatrudnienia" cards>
-        <PreferencesCard title="Preferowane miejsce pracy" value="Biuro" />
+        <PreferencesCard
+          title="Preferowane miejsce pracy"
+          value={expectedTypeWork}
+        />
         <PreferencesCard
           title="Docelowe miasto, gdzie chce pracować kandydat"
-          value="Warszawa"
+          value={targetWorkCity}
           flex={1.2}
         />
         <PreferencesCard
           title="Oczekiwany typ kontraktu"
-          value="Umowa o pracę"
+          value={expectedContractType}
         />
         <PreferencesCard
           title="Oczekiwane wynagrodzenie miesięczne netto"
-          value="8000 zł"
+          value={expectedSalary}
           flex={1.2}
         />
         <PreferencesCard
           title="Zgoda na odbycie bezpłatnych praktyk/stażu na początek"
-          value="TAK"
+          value={canTakeApprenticeship}
           flex={1.4}
         />
         <PreferencesCard
           title="Komercyjne doświadczenie w programowaniu"
-          value="6 miesięcy"
+          value={monthsOfCommercialExp}
           flex={1.2}
         />
       </TechInfo>
-      <TechInfo title="Edukacja">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla sit
-        voluptas id odio error tempora suscipit assumenda consequatur
-        necessitatibus. Adipisci nisi est libero dolores saepe dignissimos modi
-        quaerat alias a.
-      </TechInfo>
-      <TechInfo title="Kursy">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore,
-        assumenda? Porro sint harum hic reiciendis sapiente itaque minus, ad
-        rem. Praesentium sunt culpa dicta. Maxime, provident necessitatibus!
-        Quam, praesentium nostrum.
-      </TechInfo>
-      <TechInfo title="Doświadczenie zawodowe">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Explicabo
-        aspernatur harum temporibus quasi at, neque fuga quisquam unde, illum
-        pariatur, sunt laudantium error tempora quod delectus. Aperiam non
-        dignissimos quod.
-      </TechInfo>
+      <TechInfo title="Edukacja">{education}</TechInfo>
+      <TechInfo title="Kursy">{courses}</TechInfo>
+      <TechInfo title="Doświadczenie zawodowe">{workExperience}</TechInfo>
       <TechInfo title="Portfolio">
-        <ExternalLink href="https://loremipsum/dolor/sit/amet" icon="web" />
-      </TechInfo>
-      <TechInfo title="Projekt w zespole Scrumowym">
-        <ExternalLink
-          href="https://github.com/Ami777/MegaKursTest/commits?author=Ami777"
-          icon="web"
-        />
-        <ExternalLink
-          href="https://github.com/Ami777/MegaKursTest/pulls?q=is%3Apr+reviewed-by%3AAmi777"
-          icon="web"
-        />
+        {portfolioUrls && portfolioUrls.length > 0 ? (
+          portfolioUrls.map((url, i) => (
+            <ExternalLink href={url} icon="web" key={i} />
+          ))
+        ) : (
+          <p className={classes.noLink}>Użytkownik jeszcze nie podał linków</p>
+        )}
       </TechInfo>
       <TechInfo title="Projekt na zaliczenie">
-        <ExternalLink href="https://Loremipsum/dolor/sit/amet" icon="web" />
-        <ExternalLink href="https://Loremipsum/dolor/sit/amet" icon="web" />
+        {projectUrls && projectUrls.length > 0 ? (
+          projectUrls.map((url, i) => (
+            <ExternalLink href={url} icon="web" key={i} />
+          ))
+        ) : (
+          <p className={classes.noLink}>Użytkownik jeszcze nie podał linków</p>
+        )}
       </TechInfo>
     </section>
   );
