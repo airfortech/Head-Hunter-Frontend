@@ -1,13 +1,18 @@
+import { ConvertStudentInfo, UserRole } from "../../types";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
-import { UserRole } from "../../types";
 import { Avatar } from "../Avatar/Avatar";
 import { PrimaryButton } from "../buttons/PrimaryButton/PrimaryButton";
 import { ExternalLink } from "../ExternalLink/ExternalLink";
 import classes from "./PersonalDetails.module.css";
 
-export const PersonalDetails = () => {
+interface Props {
+  traineeInfo: ConvertStudentInfo;
+}
+
+export const PersonalDetails = ({ traineeInfo }: Props) => {
+  const { firstName, lastName, tel, email, bio, githubUsername } = traineeInfo;
   const { auth } = useAuth();
   const navigate = useNavigate();
 
@@ -17,27 +22,28 @@ export const PersonalDetails = () => {
 
   return (
     <section className={classes.PersonalDetails}>
-      <Avatar name="Jan Kowalski" size="large" />
-      <h1>Jan Kowalski</h1>
-      <ExternalLink href="/" icon="github">
-        jankowalski
+      <Avatar
+        name={firstName + " " + lastName}
+        src={githubUsername && "https://github.com/" + githubUsername + ".png"}
+        size="large"
+      />
+      <h1>{firstName + " " + lastName}</h1>
+      <ExternalLink href={"https://github.com/" + githubUsername} icon="github">
+        {githubUsername}
       </ExternalLink>
       <div className={classes.contact}>
         <p>
-          <i className="bx bxs-phone"></i>+48 434 343 434
+          <i className="bx bxs-phone"></i>
+          {tel}
         </p>
         <p>
-          <i className="bx bxs-envelope"></i>jankowalski@dlala.pl
+          <i className="bx bxs-envelope"></i>
+          {email}
         </p>
       </div>
       <div className={classes.about}>
         <h2>O mnie</h2>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore a
-          architecto iusto rerum corporis molestias iste vitae ipsum adipisci
-          velit, neque consectetur natus provident nihil itaque magni officia in
-          numquam.
-        </p>
+        <p>{bio}</p>
       </div>
       {auth.role === UserRole.hr && (
         <PrimaryButton size="large" fullWidth>

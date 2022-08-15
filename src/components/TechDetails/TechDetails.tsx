@@ -1,3 +1,4 @@
+import { ConvertStudentInfo } from "../../types";
 import React from "react";
 import { TechInfo } from "./TechInfo/TechInfo";
 import { ExternalLink } from "../ExternalLink/ExternalLink";
@@ -5,7 +6,13 @@ import { PreferencesCard } from "../PreferencesCard/PreferencesCard";
 import { NoteCard } from "../NoteCard/NoteCard";
 import classes from "./TechDetails.module.css";
 
-export const TechDetails = () => {
+interface Props {
+  traineeInfo: ConvertStudentInfo;
+}
+
+export const TechDetails = ({ traineeInfo }: Props) => {
+  console.log(traineeInfo);
+
   return (
     <section className={classes.TechDetails}>
       <TechInfo title="Oceny" cards>

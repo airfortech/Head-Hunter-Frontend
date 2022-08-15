@@ -9,7 +9,6 @@ interface Props {
 export const RequireAuth = ({ allowedRole }: Props) => {
   const { auth } = useAuth();
   const location = useLocation();
-  console.log(!!Cookies.get("jwt"));
 
   return allowedRole === auth.role && !!Cookies.get("jwt") ? (
     <Outlet />
