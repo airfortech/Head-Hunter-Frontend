@@ -24,10 +24,10 @@ export const convertStudentInfo = (
     : null;
   data.projectUrls = info.projectUrls ? JSON.parse(info.projectUrls) : null;
   data.bio = info.bio || "Użytkownik jeszcze nic nie napisał o sobie.";
-  data.courseCompletion = info.courseCompletion;
-  data.courseEngagment = info.courseEngagment;
-  data.projectDegree = info.projectDegree;
-  data.teamProjectDegree = info.teamProjectDegree;
+  data.courseCompletion = info.courseCompletion || 1;
+  data.courseEngagment = info.courseEngagment || 1;
+  data.projectDegree = info.projectDegree || 1;
+  data.teamProjectDegree = info.teamProjectDegree || 1;
   data.expectedTypeWork = "Brak";
   if (info?.expectedTypeWork === "hybrid")
     data.expectedTypeWork = TraineeExpectedTypeWork.hybrid;
@@ -44,7 +44,11 @@ export const convertStudentInfo = (
   data.expectedSalary = info.expectedSalary || "Brak";
   data.canTakeApprenticeship = info.canTakeApprenticeship === 1 ? "Tak" : "Nie";
   data.monthsOfCommercialExp =
-    info.monthsOfCommercialExp?.toString() + " miesięcy" || "Nie podano";
+    info.monthsOfCommercialExp !== undefined
+      ? info.monthsOfCommercialExp.toString()
+        ? info.monthsOfCommercialExp.toString() + " miesięcy"
+        : "Nie podano"
+      : "Nie podano";
   data.education =
     info.education ||
     "Użytkownik jeszcze nic nie napisał na temat swojej edukacji.";

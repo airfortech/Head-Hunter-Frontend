@@ -8,7 +8,7 @@ interface Props {
   size?: "small" | "normal" | "large" | "form";
   fullWidth?: boolean;
   color?: "primary" | "secondary" | "tertiary" | "quaternary";
-  icon?: "filter" | "sort" | "star" | undefined;
+  icon?: "filter" | "sort" | "star" | "back" | undefined;
   iconColor?: "primary" | "secondary" | "tertiary";
   reversed?: boolean;
   onClick?: MouseEventHandler;
@@ -18,6 +18,7 @@ enum Icons {
   filter = "bx bxl-github",
   sort = "bx bx-sort-alt-2",
   star = "bx bxs-star",
+  back = "bx bxs-chevron-left",
 }
 
 export const PrimaryButton = ({

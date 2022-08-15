@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { IndexView } from "../views/IndexView/IndexView";
 import { LoginView } from "../views/LoginView/LoginView";
 import { LostPasswordView } from "../views/LostPasswordView/LostPasswordView";
@@ -15,7 +15,8 @@ export const UnprotectedRoutes = () => {
       <Route path="lostpassword" element={<LostPasswordView />} />
       <Route path="register" element={<RegisterView />} />
       <Route path="unauthorized" element={<UnauthorizedView />} />
-      <Route path="*" element={<NoMatch />} />
+      <Route path="notfound" element={<NoMatch />} />
+      <Route path="*" element={<Navigate replace to="/notfound" />} />
     </Routes>
   );
 };
