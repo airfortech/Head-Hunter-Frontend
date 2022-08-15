@@ -1,3 +1,7 @@
 .TechDetails {
   flex: 1;
 }
+
+.noLink {
+  font-size: var(--font-size-md);
+}

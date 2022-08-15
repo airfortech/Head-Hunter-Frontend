@@ -82,7 +82,7 @@ export const TechDetails = ({ traineeInfo }: Props) => {
             <ExternalLink href={url} icon="web" key={i} />
           ))
         ) : (
-          <p>Użytkownik jeszcze nie podał linków</p>
+          <p className={classes.noLink}>Użytkownik jeszcze nie podał linków</p>
         )}
       </TechInfo>
       <TechInfo title="Projekt na zaliczenie">
@@ -91,7 +91,7 @@ export const TechDetails = ({ traineeInfo }: Props) => {
             <ExternalLink href={url} icon="web" key={i} />
           ))
         ) : (
-          <p>Użytkownik jeszcze nie podał linków</p>
+          <p className={classes.noLink}>Użytkownik jeszcze nie podał linków</p>
         )}
       </TechInfo>
     </section>
