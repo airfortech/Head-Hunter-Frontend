@@ -1,6 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Switch from "react-switch";
 import classes from "./ThemeSwitcher.module.css";
+
+const changeTheme = (theme: boolean) => {
+  const colorScheme = theme ? "light" : "dark";
+  for (let i = 1; i < 17; i++) {
+    document.documentElement.style.setProperty(
+      `--color-${i}`,
+      `var(--color-${colorScheme}-mode-${i})`
+    );
+    document.documentElement.style.setProperty(
+      `--color-${i}-hover`,
+      `var(--color-${colorScheme}-mode-${i}-hover)`
+    );
+  }
+};
 
 const themeState =
   localStorage.getItem("theme") !== null
@@ -14,7 +28,12 @@ export const ThemeSwitcher = () => {
   const handleSwitchTheme = () => {
     setTheme((prevState) => !prevState);
     localStorage.setItem("theme", JSON.stringify(!theme));
+    changeTheme(!theme);
   };
+
+  useEffect(() => {
+    changeTheme(theme);
+  }, []);
   return (
     <div className={classes.ThemeSwitcher}>
       <Switch
