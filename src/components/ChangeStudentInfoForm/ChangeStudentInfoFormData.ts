@@ -1,4 +1,5 @@
 import * as yup from "yup";
+import { TraineeProfileRequest } from "../../types";
 
 interface CheckItemType {
   value: string;
@@ -24,10 +25,13 @@ export const canTakeApprenticeship: CheckItemType[] = [
 ];
 
 export interface InfoValues {
+  firstName: string;
+  lastName: string;
   githubUsername?: string;
   tel: string;
   bio: string;
   education: string;
+  courses: string;
   targetWorkCity: string;
   workExperience: string;
   portfolioUrl1: string;
@@ -40,19 +44,21 @@ export interface InfoValues {
   projectUrl3: string;
   projectUrl4: string;
   projectUrl5: string;
-  expectedTypeWork: string[];
+  expectedTypeWork: string;
   expectedContractType: string[];
   canTakeApprenticeship: "true" | "false";
   monthsOfCommercialExp: string;
-  expectedSalaryFrom: string;
-  expectedSalaryTo: string;
+  expectedSalary: string;
 }
 
-export const initialInfoValues: InfoValues = {
+export const initialInfoValues: TraineeProfileRequest = {
+  firstName: "",
+  lastName: "",
   githubUsername: "",
   tel: "",
   bio: "",
   education: "",
+  courses: "",
   targetWorkCity: "",
   workExperience: "",
   portfolioUrl1: "",
@@ -65,12 +71,11 @@ export const initialInfoValues: InfoValues = {
   projectUrl3: "",
   projectUrl4: "",
   projectUrl5: "",
-  expectedTypeWork: [],
+  expectedTypeWork: "",
   expectedContractType: [],
   canTakeApprenticeship: "false",
   monthsOfCommercialExp: "",
-  expectedSalaryFrom: "",
-  expectedSalaryTo: "",
+  expectedSalary: "",
 };
 
 export const ValidationSchema = yup.object().shape({
@@ -80,24 +85,22 @@ export const ValidationSchema = yup.object().shape({
     .max(50, "Seniorzy pod innym adresem!")
     .integer("Liczba musi być całkowita!")
     .typeError("Wprowadź liczbę!"),
-  expectedSalaryFrom: yup
-    .number()
-    .min(0, "Zarobki muszą być dodatnie!")
-    .integer("Liczba musi być całkowita!")
-    .typeError("Wprowadź liczbę!"),
-  expectedSalaryTo: yup
+  expectedSalary: yup
     .number()
     .min(0, "Zarobki muszą być dodatnie!")
     .integer("Liczba musi być całkowita!")
     .typeError("Wprowadź liczbę!"),
 });
 
-export const printValues = (values: InfoValues) => {
+export const printValues = (values: TraineeProfileRequest) => {
   const {
+    firstName,
+    lastName,
     githubUsername,
     tel,
     bio,
     education,
+    courses,
     targetWorkCity,
     workExperience,
     portfolioUrl1,
@@ -114,15 +117,17 @@ export const printValues = (values: InfoValues) => {
     expectedContractType,
     canTakeApprenticeship,
     monthsOfCommercialExp,
-    expectedSalaryFrom,
-    expectedSalaryTo,
+    expectedSalary,
   } = values;
 
   return `
+    firstName: ${firstName}
+    lastName: ${lastName}
     githubUsername: ${githubUsername}
     tel: ${tel}
     bio: ${bio}
     education: ${education}
+    courses: ${courses}
     targetWorkCity: ${targetWorkCity}
     workExperience: ${workExperience}
     portfolioUrl1: ${portfolioUrl1}
@@ -135,11 +140,10 @@ export const printValues = (values: InfoValues) => {
     projectUrl3: ${projectUrl3}
     projectUrl4: ${projectUrl4}
     projectUrl5: ${projectUrl5}
-    expectedTypeWork: ${expectedTypeWork.join(", ")}
+    expectedTypeWork: ${expectedTypeWork}
     expectedContractType: ${expectedContractType.join(", ")}
     canTakeApprenticeship: ${canTakeApprenticeship}
-    expectedSalaryFrom: ${expectedSalaryFrom}
-    expectedSalaryTo: ${expectedSalaryTo}
+    expectedSalaryFrom: ${expectedSalary}
     monthsOfCommercialExp: ${monthsOfCommercialExp}
   `;
 };

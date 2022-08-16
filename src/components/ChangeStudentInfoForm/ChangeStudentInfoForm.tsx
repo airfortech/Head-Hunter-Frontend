@@ -1,5 +1,11 @@
+import {
+  GetTraineeProfileResponseMessage,
+  TraineeProfileRequest,
+  UserRole,
+} from "../../types";
+import React, { useEffect, useState } from "react";
 import { Form, Formik } from "formik";
-import React from "react";
+import { useAuth } from "../../hooks/useAuth";
 import { PrimaryButton } from "../buttons/PrimaryButton/PrimaryButton";
 import { Input } from "../Input/Input";
 import { TextArea } from "../TextArea/TextArea";
@@ -13,13 +19,35 @@ import {
   printValues,
   ValidationSchema,
 } from "./ChangeStudentInfoFormData";
+import { fetchGetTraineeProfile } from "../../utils/fetchGetTraineeProfile";
+import { convertStudentInfoForEditing } from "../../utils/convertStudentInfo";
 import classes from "./ChangeStudentInfoForm.module.css";
 
 export const ChangeStudentInfoForm = () => {
+  const { auth } = useAuth();
+  const [traineeInfo, setTraineeInfo] =
+    useState<TraineeProfileRequest>(initialInfoValues);
+
+  console.log(auth.role, auth.id, traineeInfo);
+
+  useEffect(() => {
+    (async () => {
+      if (auth.role === UserRole.trainee) {
+        const { data, message } = await fetchGetTraineeProfile({
+          id: auth.id,
+        });
+        if (message === GetTraineeProfileResponseMessage.success)
+          setTraineeInfo(convertStudentInfoForEditing(data.traineeProfile));
+        console.log(convertStudentInfoForEditing(data.traineeProfile));
+      }
+    })();
+  }, []);
+
   return (
     <div className={classes.ChangeStudentInfoForm}>
       <Formik
-        initialValues={initialInfoValues}
+        enableReinitialize
+        initialValues={traineeInfo}
         validationSchema={ValidationSchema}
         onSubmit={(values) => {
           alert(printValues(values));
@@ -27,6 +55,26 @@ export const ChangeStudentInfoForm = () => {
       >
         {({ errors, isValid }) => (
           <Form className={classes.form}>
+            <FormGroup title="Imię">
+              <Input
+                type="text"
+                size="medium"
+                fullWidth
+                name="firstName"
+                forFormik
+                placeholder="np. Joe"
+              />
+            </FormGroup>
+            <FormGroup title="Nazwisko">
+              <Input
+                type="text"
+                size="medium"
+                fullWidth
+                name="lastName"
+                forFormik
+                placeholder="np. Doe"
+              />
+            </FormGroup>
             <FormGroup title="Nazwa użytkowanika na githubie">
               <Input
                 type="text"
@@ -65,6 +113,15 @@ export const ChangeStudentInfoForm = () => {
                 placeholder="Edukacja"
               />
             </FormGroup>
+            <FormGroup title="Kursy">
+              <TextArea
+                size="medium"
+                fullWidth
+                name="courses"
+                forFormik
+                placeholder="Napisz jakie kursy odbyłeś"
+              />
+            </FormGroup>
             <FormGroup title="Docelowe miasto, gdzie chccesz pracować">
               <Input
                 type="text"
@@ -81,7 +138,7 @@ export const ChangeStudentInfoForm = () => {
                 fullWidth
                 name="workExperience"
                 forFormik
-                placeholder="Napis gdzie pracowałeś"
+                placeholder="Napisz gdzie pracowałeś"
               />
             </FormGroup>
             <FormGroup title="Portfolio">
@@ -193,27 +250,14 @@ export const ChangeStudentInfoForm = () => {
               ))}
             </FormGroup>
             <FormGroup title="Oczekiwane wynagrodzenie miesięczne netto">
-              <p>Od</p>
               <Input
                 type="text"
-                name="expectedSalaryFrom"
-                forFormik
-                placeholder="np. 1000zł"
-              />
-              <p>Do</p>
-              <Input
-                type="text"
-                name="expectedSalaryTo"
+                size="medium"
+                name="expectedSalary"
                 forFormik
                 placeholder="np. 10.000zł"
               />
-              <p className={classes.error}>
-                {errors.expectedSalaryFrom
-                  ? errors.expectedSalaryFrom
-                  : errors.expectedSalaryTo
-                  ? errors.expectedSalaryTo
-                  : null}
-              </p>
+              <p className={classes.error}>{errors.expectedSalary}</p>
             </FormGroup>
             <FormGroup title="Zgoda na odbycie bezpłatnych praktyk/stażu na początek">
               {canTakeApprenticeship.map(({ value, name }) => (
