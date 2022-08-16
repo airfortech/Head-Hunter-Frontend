@@ -14,6 +14,7 @@ export const UnprotectedRoutes = () => {
       <Route path="login" element={<LoginView />} />
       <Route path="lostpassword" element={<LostPasswordView />} />
       <Route path="register" element={<RegisterView />} />
+      {/* <Route path="register/:id/:token" element={<RegisterView />} /> */}
       <Route path="unauthorized" element={<UnauthorizedView />} />
       <Route path="notfound" element={<NoMatch />} />
       <Route path="*" element={<Navigate replace to="/notfound" />} />

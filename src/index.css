@@ -50,6 +50,35 @@
   ); /* example hover state variable */
   --color-dark-mode-16: #2be43a;
 
+  /* colors light mode */
+  --color-light-mode-1: #f7f7f7;
+  --color-light-mode-2: #cfcfcf;
+  --color-light-mode-2-hover: hsl(0, 0%, 72%);
+  --color-light-mode-3: #b9b9b9;
+  --color-light-mode-4: #f0f0f0;
+  --color-light-mode-5: #cccaca;
+  --color-light-mode-5: #dddddd;
+  --color-light-mode-5-hover: hsl(0, 0%, 82%);
+  --color-light-mode-6: #4d4d4d;
+  --color-light-mode-7: #afafaf;
+  --color-light-mode-7-hover: hsl(0, 0%, 40%);
+  --color-light-mode-8: #292a2b;
+  --color-light-mode-9: #222224;
+  --color-light-mode-10: #202122;
+  --color-light-mode-11: #1e1e1f;
+  --color-light-mode-12: #0a0a0a;
+  --color-light-mode-13: #0b8bd4;
+  --color-light-mode-13-hover: hsl(202, 90%, 54%);
+  --color-light-mode-14: #172a35;
+  --color-light-mode-14-hover: hsl(202, 39%, 20%);
+  --color-light-mode-15: #e02735;
+  --color-light-mode-15-hover: hsl(
+    355,
+    75%,
+    62%
+  ); /* example hover state variable */
+  --color-light-mode-16: #2be43a;
+
   /* colors (use this colors only in components!!!!) */
   --color-1: var(--color-dark-mode-1);
   --color-2: var(--color-dark-mode-2);
@@ -74,6 +103,29 @@
   --color-15-hover: var(--color-dark-mode-15-hover);
   --color-16: var(--color-dark-mode-16);
   --overlay-color: #0a0a0a80;
+
+  /* --color-1: var(--color-light-mode-1);
+  --color-2: var(--color-light-mode-2);
+  --color-2-hover: var(--color-light-mode-2-hover);
+  --color-3: var(--color-light-mode-3);
+  --color-4: var(--color-light-mode-4);
+  --color-5: var(--color-light-mode-5);
+  --color-5-hover: var(--color-light-mode-5-hover);
+  --color-6: var(--color-light-mode-6);
+  --color-7: var(--color-light-mode-7);
+  --color-7-hover: var(--color-light-mode-7-hover);
+  --color-8: var(--color-light-mode-8);
+  --color-9: var(--color-light-mode-9);
+  --color-10: var(--color-light-mode-10);
+  --color-11: var(--color-light-mode-11);
+  --color-12: var(--color-light-mode-12);
+  --color-13: var(--color-light-mode-13);
+  --color-13-hover: var(--color-light-mode-13-hover);
+  --color-14: var(--color-light-mode-14);
+  --color-14-hover: var(--color-light-mode-14-hover);
+  --color-15: var(--color-light-mode-15);
+  --color-15-hover: var(--color-light-mode-15-hover);
+  --color-16: var(--color-light-mode-16); */
 
   /* margins */
   --margin-sm: 8px;
