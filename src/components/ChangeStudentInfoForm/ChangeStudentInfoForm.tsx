@@ -238,7 +238,12 @@ export const ChangeStudentInfoForm = () => {
               <p className={classes.error}>{errors.monthsOfCommercialExp}</p>
             </FormGroup>
             <div className={classes.bottomButtons}>
-              <PrimaryButton type="submit" size="large" disabled={!isValid}>
+              <PrimaryButton
+                type="submit"
+                fontColor="secondary"
+                size="large"
+                disabled={!isValid}
+              >
                 Zmień
               </PrimaryButton>
             </div>

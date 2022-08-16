@@ -23,7 +23,12 @@ export const SortForm = ({ type, closeModal }: Props) => {
     <div className={classes.SortForm}>
       <div className={classes.row}>
         <h2>Sortowanie</h2>
-        <PrimaryButton size="normal" color="quaternary" onClick={closeModal}>
+        <PrimaryButton
+          size="normal"
+          color="quaternary"
+          fontColor="secondary"
+          onClick={closeModal}
+        >
           Anuluj
         </PrimaryButton>
       </div>
@@ -69,7 +74,11 @@ export const SortForm = ({ type, closeModal }: Props) => {
             ))}
           </FormGroup>
           <div className={classes.submit}>
-            <PrimaryButton type="submit" onClick={closeModal}>
+            <PrimaryButton
+              type="submit"
+              fontColor="secondary"
+              onClick={closeModal}
+            >
               Pokaż wyniki
             </PrimaryButton>
           </div>

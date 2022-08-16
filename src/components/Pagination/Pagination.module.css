@@ -15,7 +15,7 @@
 .select {
   height: 24px;
   display: flex;
-  color: var(--color-12);
+  color: var(--font-color-3);
   background-color: var(--color-5);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
@@ -48,6 +48,7 @@
 .select [class$="-singleValue"] {
   display: flex;
   align-items: center;
+  color: var(--font-color-4);
 }
 
 .select [class$="-Input"] {

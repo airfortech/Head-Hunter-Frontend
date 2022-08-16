@@ -3,17 +3,16 @@ import { Route, Routes } from "react-router-dom";
 import { RequireAuth } from "../components/RequireAuth/RequireAuth";
 import { CVView } from "../views/CVView/CVView";
 import { ListView } from "../views/ListView/ListView";
-import { NoMatch } from "../views/NoMatch/NoMatch";
 import { PanelView } from "../views/PanelView/PanelView";
 import { UsersListView } from "../views/UsersListView/UsersListView";
 import { SettingsView } from "../views/SettingsView/SettingsView";
 import { UserRole } from "../types";
+import { NoMatchView } from "../views/NoMatchView/NoMatchView";
 
 const navLinks = [
   { anchor: "Dostępni kursanci", route: "available" },
   { anchor: "Do rozmowy", route: "reserved" },
   { anchor: "Zatrudnieni", route: "hired" },
-  { anchor: "test", route: "/hired" },
 ];
 
 export const HRsRoutes = () => {
@@ -52,7 +51,7 @@ export const HRsRoutes = () => {
               }
             />
           </Route>
-          <Route path="*" element={<NoMatch />} />
+          <Route path="*" element={<NoMatchView />} />
         </Route>
       </Route>
     </Routes>

@@ -55,12 +55,12 @@ export const PersonalDetails = ({ traineeInfo }: Props) => {
         <p>{bio}</p>
       </div>
       {auth.role === UserRole.hr && (
-        <PrimaryButton size="large" fullWidth>
+        <PrimaryButton size="large" fontColor="secondary" fullWidth>
           Brak zainteresowania
         </PrimaryButton>
       )}
       {auth.role === UserRole.hr && (
-        <PrimaryButton size="large" fullWidth>
+        <PrimaryButton size="large" fontColor="secondary" fullWidth>
           Zatrudniony
         </PrimaryButton>
       )}
@@ -68,6 +68,7 @@ export const PersonalDetails = ({ traineeInfo }: Props) => {
         <PrimaryButton
           size="large"
           color="primary"
+          fontColor="secondary"
           fullWidth
           onClick={handleEditInfo}
         >

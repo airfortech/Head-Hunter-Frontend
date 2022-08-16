@@ -8,6 +8,7 @@ interface Props {
   size?: "small" | "normal" | "large" | "form";
   fullWidth?: boolean;
   color?: "primary" | "secondary" | "tertiary" | "quaternary";
+  fontColor?: "primary" | "secondary";
   icon?: "filter" | "sort" | "star" | "back" | undefined;
   iconColor?: "primary" | "secondary" | "tertiary";
   reversed?: boolean;
@@ -26,6 +27,7 @@ export const PrimaryButton = ({
   type = "button",
   disabled = false,
   color = "primary",
+  fontColor = "primary",
   size = "normal",
   icon,
   iconColor = "primary",
@@ -38,8 +40,10 @@ export const PrimaryButton = ({
       type={type}
       disabled={disabled}
       className={`${classes.PrimaryButton} ${classes[size]} ${classes[color]} ${
-        fullWidth ? classes.fullWidth : ""
-      } ${reversed ? classes.reversed : ""}`}
+        classes[fontColor + "Font"]
+      } ${fullWidth ? classes.fullWidth : ""} ${
+        reversed ? classes.reversed : ""
+      }`}
       onClick={onClick}
     >
       {icon && (
@@ -50,8 +54,10 @@ export const PrimaryButton = ({
   ) : (
     <div
       className={`${classes.PrimaryButton} ${classes[size]} ${classes[color]} ${
-        fullWidth ? classes.fullWidth : ""
-      } ${reversed ? classes.reversed : ""}`}
+        classes[fontColor + "Font"]
+      } ${fullWidth ? classes.fullWidth : ""} ${
+        reversed ? classes.reversed : ""
+      }`}
       onClick={onClick}
     >
       {icon && (

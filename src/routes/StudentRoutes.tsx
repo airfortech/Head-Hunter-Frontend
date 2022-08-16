@@ -4,8 +4,8 @@ import { RequireAuth } from "../components/RequireAuth/RequireAuth";
 import { CVView } from "../views/CVView/CVView";
 import { PanelView } from "../views/PanelView/PanelView";
 import { SettingsView } from "../views/SettingsView/SettingsView";
-import { NoMatch } from "../views/NoMatch/NoMatch";
 import { UserRole } from "../types";
+import { NoMatchView } from "../views/NoMatchView/NoMatchView";
 
 export const StudentRoutes = () => {
   return (
@@ -14,7 +14,7 @@ export const StudentRoutes = () => {
         <Route path="*" element={<PanelView />}>
           <Route index element={<CVView />} />
           <Route path="settings" element={<SettingsView />} />
-          <Route path="*" element={<NoMatch />} />
+          <Route path="*" element={<NoMatchView />} />
         </Route>
       </Route>
     </Routes>

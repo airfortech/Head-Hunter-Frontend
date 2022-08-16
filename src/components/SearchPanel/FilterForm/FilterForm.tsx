@@ -81,6 +81,7 @@ export const FilterForm = ({ type, closeModal }: Props) => {
               <PrimaryButton
                 size="normal"
                 color="quaternary"
+                fontColor="secondary"
                 onClick={() => {
                   setFilterOptions({
                     ...filterOptions,
@@ -209,12 +210,14 @@ export const FilterForm = ({ type, closeModal }: Props) => {
               <PrimaryButton
                 size="normal"
                 color="quaternary"
+                fontColor="secondary"
                 onClick={closeModal}
               >
                 Anuluj
               </PrimaryButton>
               <PrimaryButton
                 type="submit"
+                fontColor="secondary"
                 disabled={!isValid}
                 onClick={closeModal}
               >

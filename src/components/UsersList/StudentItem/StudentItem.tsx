@@ -113,31 +113,53 @@ export const StudentItem = ({ open = true, type, id }: Props) => {
             type === "hrStudentToTalk" ||
             type === "hrStudentHired") && (
             <NavLink to={{ pathname: linkToCV(type) }}>
-              <PrimaryButton size="normal">Pokaż CV</PrimaryButton>
+              <PrimaryButton size="normal" fontColor="secondary">
+                Pokaż CV
+              </PrimaryButton>
             </NavLink>
           )}
           {type === "hrStudentToTalk" && (
-            <PrimaryButton size="normal" onClick={() => handleNotInterest(id)}>
+            <PrimaryButton
+              size="normal"
+              fontColor="secondary"
+              onClick={() => handleNotInterest(id)}
+            >
               Brak zainteresowania
             </PrimaryButton>
           )}
           {type === "hrStudentAvailable" && (
-            <PrimaryButton size="normal" onClick={() => handleReserveTalk(id)}>
+            <PrimaryButton
+              size="normal"
+              fontColor="secondary"
+              onClick={() => handleReserveTalk(id)}
+            >
               Zarezerwuj rozmowę
             </PrimaryButton>
           )}
           {type === "hrStudentToTalk" && (
-            <PrimaryButton size="normal" onClick={() => handleHire(id)}>
+            <PrimaryButton
+              size="normal"
+              fontColor="secondary"
+              onClick={() => handleHire(id)}
+            >
               Zatrudnij
             </PrimaryButton>
           )}
           {type === "hrStudentHired" && (
-            <PrimaryButton size="normal" onClick={() => handleCancelHire(id)}>
+            <PrimaryButton
+              size="normal"
+              fontColor="secondary"
+              onClick={() => handleCancelHire(id)}
+            >
               Anuluj zatrudnienie
             </PrimaryButton>
           )}
           {(type === "adminStudent" || type === "adminHR") && (
-            <PrimaryButton size="normal" onClick={() => handleDeleteUser(id)}>
+            <PrimaryButton
+              size="normal"
+              fontColor="secondary"
+              onClick={() => handleDeleteUser(id)}
+            >
               Usuń użytkownika
             </PrimaryButton>
           )}

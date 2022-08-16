@@ -6,8 +6,8 @@ import { ListView } from "../views/ListView/ListView";
 import { PanelView } from "../views/PanelView/PanelView";
 import { UsersListView } from "../views/UsersListView/UsersListView";
 import { SettingsView } from "../views/SettingsView/SettingsView";
-import { NoMatch } from "../views/NoMatch/NoMatch";
 import { UserRole } from "../types";
+import { NoMatchView } from "../views/NoMatchView/NoMatchView";
 
 const navLinks = [
   { anchor: "HRowcy", route: "hrs" },
@@ -68,7 +68,7 @@ export const AdminRoutes = () => {
               }
             />
           </Route>
-          <Route path="*" element={<NoMatch />} />
+          <Route path="*" element={<NoMatchView />} />
         </Route>
       </Route>
     </Routes>
