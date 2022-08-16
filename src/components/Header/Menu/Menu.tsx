@@ -5,6 +5,7 @@ import { useAuth } from "../../../hooks/useAuth";
 import { Avatar } from "../../Avatar/Avatar";
 import { config } from "../../../config/config";
 import classes from "./Menu.module.css";
+import { ThemeSwitcher } from "../../ThemeSwitcher/ThemeSwitcher";
 
 const fetchLogout = async () => {
   await fetch(config.apiUrl + "auth/logout", {
@@ -88,6 +89,9 @@ export const Menu = () => {
         <i className="bx bx-caret-up" ref={iconRef}></i>
       </button>
       <div className={classes.actions} ref={actionsRef}>
+        <div className={classes.switcher}>
+          <ThemeSwitcher />
+        </div>
         <p onClick={handleSettings}>Konto</p>
         <p onClick={handleLogout}>Wyloguj</p>
       </div>

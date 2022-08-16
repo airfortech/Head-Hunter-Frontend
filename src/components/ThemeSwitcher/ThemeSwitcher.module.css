@@ -1,0 +1,27 @@
+.ThemeSwitcher {
+  display: flex;
+}
+
+.switcher {
+  display: flex;
+  align-items: center;
+}
+
+.switcher :global(.react-switch-bg) {
+  background-color: transparent !important;
+  background-color: var(--color-15) !important;
+}
+
+.switcher :global(.react-switch-bg) div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkedIcon {
+  font-size: var(--font-size-xxl);
+}
+
+.uncheckedIcon {
+  font-size: var(--font-size-xxl);
+}

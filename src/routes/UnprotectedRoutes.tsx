@@ -6,18 +6,21 @@ import { LostPasswordView } from "../views/LostPasswordView/LostPasswordView";
 import { RegisterView } from "../views/RegisterView/RegisterView";
 import { UnauthorizedView } from "../views/UnauthorizedView/UnauthorizedView";
 import { NoMatch } from "../views/NoMatch/NoMatch";
+import { UnprotectedView } from "../views/UnprotectedView/UnprotectedView";
 
 export const UnprotectedRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<IndexView />} />
-      <Route path="login" element={<LoginView />} />
-      <Route path="lostpassword" element={<LostPasswordView />} />
-      <Route path="register" element={<RegisterView />} />
-      {/* <Route path="register/:id/:token" element={<RegisterView />} /> */}
-      <Route path="unauthorized" element={<UnauthorizedView />} />
-      <Route path="notfound" element={<NoMatch />} />
-      <Route path="*" element={<Navigate replace to="/notfound" />} />
+      <Route path="*" element={<UnprotectedView />}>
+        <Route path="login" element={<LoginView />} />
+        <Route path="lostpassword" element={<LostPasswordView />} />
+        <Route path="register" element={<RegisterView />} />
+        {/* <Route path="register/:id/:token" element={<RegisterView />} /> */}
+        <Route path="unauthorized" element={<UnauthorizedView />} />
+        <Route path="notfound" element={<NoMatch />} />
+        <Route path="*" element={<Navigate replace to="/notfound" />} />
+      </Route>
     </Routes>
   );
 };
