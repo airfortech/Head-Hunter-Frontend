@@ -131,6 +131,7 @@ export const LostPassword = () => {
                   type="submit"
                   disabled={!isValid}
                   color="primary"
+                  fontColor="secondary"
                   size="large"
                 >
                   Odzyskaj hasło

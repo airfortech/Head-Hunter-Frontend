@@ -14,6 +14,18 @@ const changeTheme = (theme: boolean) => {
       `var(--color-${colorScheme}-mode-${i}-hover)`
     );
   }
+  document.documentElement.style.setProperty(
+    `--font-color-2`,
+    `var(--font-color-${colorScheme}-mode-2)`
+  );
+  document.documentElement.style.setProperty(
+    `--font-color-3`,
+    `var(--font-color-${colorScheme}-mode-3)`
+  );
+  document.documentElement.style.setProperty(
+    `--font-color-4`,
+    `var(--font-color-${colorScheme}-mode-4)`
+  );
 };
 
 const themeState =

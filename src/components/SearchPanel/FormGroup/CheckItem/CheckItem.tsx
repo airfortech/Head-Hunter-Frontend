@@ -36,6 +36,7 @@ export const CheckItem = ({
               type={type}
               size={size}
               color={checked ? "primary" : "secondary"}
+              fontColor={checked ? "secondary" : "primary"}
               icon={icon}
               iconColor={checked ? "secondary" : "tertiary"}
               reversed

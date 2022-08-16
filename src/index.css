@@ -49,6 +49,9 @@
     62%
   ); /* example hover state variable */
   --color-dark-mode-16: #2be43a;
+  --font-color-dark-mode-2: #f7f7f7;
+  --font-color-dark-mode-3: #f7f7f7;
+  --font-color-dark-mode-4: #0a0a0a;
 
   /* colors light mode */
   --color-light-mode-1: #f7f7f7;
@@ -78,6 +81,9 @@
     62%
   ); /* example hover state variable */
   --color-light-mode-16: #2be43a;
+  --font-color-light-mode-2: #f7f7f7;
+  --font-color-light-mode-3: #0a0a0a;
+  --font-color-light-mode-4: #f7f7f7;
 
   /* colors (use this colors only in components!!!!) */
   --color-1: var(--color-dark-mode-1);
@@ -103,6 +109,8 @@
   --color-15-hover: var(--color-dark-mode-15-hover);
   --color-16: var(--color-dark-mode-16);
   --overlay-color: #0a0a0a80;
+  --font-color-2: var(--font-color-dark-mode-2);
+  --font-color-3: var(--font-color-dark-mode-3);
 
   /* --color-1: var(--color-light-mode-1);
   --color-2: var(--color-light-mode-2);

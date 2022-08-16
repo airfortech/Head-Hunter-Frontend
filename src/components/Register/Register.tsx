@@ -76,6 +76,7 @@ export const Register = () => {
                 type="submit"
                 disabled={!isValid}
                 color="primary"
+                fontColor="secondary"
                 size="large"
               >
                 Zarejestruj się

@@ -1,11 +1,9 @@
 .PrimaryButton {
   padding: 5px 17px;
-  /* padding: 10px 17px; */
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 10px;
-  color: var(--color-12);
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-regular);
   transition: all var(--transition-speed-fast) ease;
@@ -58,6 +56,14 @@
   width: 100%;
 }
 
+.primaryFont {
+  color: var(--font-color-3);
+}
+
+.secondaryFont {
+  color: var(--font-color-2);
+}
+
 .primary {
   background-color: var(--color-15);
 }
@@ -99,11 +105,11 @@
 }
 
 .secondaryIcon {
-  color: var(--color-12);
+  color: var(--font-color-2);
 }
 
 .PrimaryButton:hover .secondaryIcon {
-  color: var(--color-12);
+  color: var(--font-color-2);
 }
 
 .tertiaryIcon {

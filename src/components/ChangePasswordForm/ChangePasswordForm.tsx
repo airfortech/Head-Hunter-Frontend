@@ -157,6 +157,7 @@ export const ChangePasswordForm = () => {
                   type="submit"
                   disabled={!isValid}
                   color="primary"
+                  fontColor="secondary"
                   size="large"
                 >
                   Zmień hasło
