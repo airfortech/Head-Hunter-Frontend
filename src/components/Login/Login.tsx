@@ -105,6 +105,7 @@ export const Login = () => {
                   type="submit"
                   disabled={!isValid}
                   color="primary"
+                  fontColor="secondary"
                   size="large"
                 >
                   Zaloguj się
