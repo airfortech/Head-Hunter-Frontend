@@ -1,32 +1,118 @@
+import {
+  GetTraineeProfileResponseMessage,
+  JsonResponseStatus,
+  TraineeProfileRequest,
+  UserRole,
+} from "../../types";
+import React, { useEffect, useState } from "react";
 import { Form, Formik } from "formik";
-import React from "react";
+import { useAuth } from "../../hooks/useAuth";
 import { PrimaryButton } from "../buttons/PrimaryButton/PrimaryButton";
 import { Input } from "../Input/Input";
 import { TextArea } from "../TextArea/TextArea";
 import { CheckItem } from "../SearchPanel/FormGroup/CheckItem/CheckItem";
 import { FormGroup } from "../SearchPanel/FormGroup/FormGroup";
+import { Spinner } from "../Spinner/Spinner";
 import {
   canTakeApprenticeship,
   expectedContractType,
   expectedTypeWork,
   initialInfoValues,
-  printValues,
   ValidationSchema,
 } from "./ChangeStudentInfoFormData";
+import { fetchGetStudentProfile } from "../../utils/fetchGetStudentProfile";
+import { convertStudentInfoForEditing } from "../../utils/convertStudentInfo";
+import { fetchUpdateStudentProfile } from "../../utils/fetchUpdateStudentProfile";
+import { UpdateTraineeProfileResponseMessage } from "../../types/api/updateTraineeProfile";
 import classes from "./ChangeStudentInfoForm.module.css";
 
+interface ApiInfo {
+  type: "success" | "error";
+  message: string;
+}
+
+const initialApiInfo: ApiInfo = {
+  type: "error",
+  message: "",
+};
+
 export const ChangeStudentInfoForm = () => {
+  const { auth } = useAuth();
+  const [traineeInfo, setTraineeInfo] =
+    useState<TraineeProfileRequest>(initialInfoValues);
+  const [apiInfo, setApiInfo] = useState<ApiInfo>(initialApiInfo);
+  const [isSpinnerLoading, setIsSpinnerLoading] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      if (auth.role === UserRole.trainee) {
+        const { data, message } = await fetchGetStudentProfile({
+          id: auth.id,
+        });
+        if (message === GetTraineeProfileResponseMessage.success)
+          setTraineeInfo(convertStudentInfoForEditing(data.traineeProfile));
+      }
+    })();
+  }, []);
+
   return (
     <div className={classes.ChangeStudentInfoForm}>
       <Formik
-        initialValues={initialInfoValues}
+        enableReinitialize
+        initialValues={traineeInfo}
         validationSchema={ValidationSchema}
-        onSubmit={(values) => {
-          alert(printValues(values));
+        onSubmit={async (values) => {
+          try {
+            setIsSpinnerLoading(true);
+            const { message, status } = await fetchUpdateStudentProfile({
+              ...values,
+              userId: auth.id,
+            });
+            if (status === JsonResponseStatus.success) {
+              setIsSpinnerLoading(false);
+              setApiInfo({
+                type: "success",
+                message: "Zmieniłeś informacje!",
+              });
+            }
+            if (message === UpdateTraineeProfileResponseMessage.notFound) {
+              setApiInfo({
+                type: "error",
+                message: "Taki użytkownik nie istnieje!",
+              });
+              setIsSpinnerLoading(false);
+            }
+          } catch (e) {
+            setApiInfo({
+              type: "error",
+              message: "Spróbuj później!",
+            });
+            setIsSpinnerLoading(false);
+          }
         }}
       >
         {({ errors, isValid }) => (
           <Form className={classes.form}>
+            <FormGroup title="Imię">
+              <Input
+                type="text"
+                size="medium"
+                fullWidth
+                name="firstName"
+                forFormik
+                placeholder="np. Joe"
+              />
+            </FormGroup>
+            <FormGroup title="Nazwisko">
+              <Input
+                type="text"
+                size="medium"
+                fullWidth
+                name="lastName"
+                forFormik
+                placeholder="np. Doe"
+              />
+            </FormGroup>
             <FormGroup title="Nazwa użytkowanika na githubie">
               <Input
                 type="text"
@@ -65,6 +151,15 @@ export const ChangeStudentInfoForm = () => {
                 placeholder="Edukacja"
               />
             </FormGroup>
+            <FormGroup title="Kursy">
+              <TextArea
+                size="medium"
+                fullWidth
+                name="courses"
+                forFormik
+                placeholder="Napisz jakie kursy odbyłeś"
+              />
+            </FormGroup>
             <FormGroup title="Docelowe miasto, gdzie chccesz pracować">
               <Input
                 type="text"
@@ -81,7 +176,7 @@ export const ChangeStudentInfoForm = () => {
                 fullWidth
                 name="workExperience"
                 forFormik
-                placeholder="Napis gdzie pracowałeś"
+                placeholder="Napisz gdzie pracowałeś"
               />
             </FormGroup>
             <FormGroup title="Portfolio">
@@ -91,40 +186,45 @@ export const ChangeStudentInfoForm = () => {
                 fullWidth
                 name="portfolioUrl1"
                 forFormik
-                placeholder="np. www.joedeveloper.com"
+                placeholder="np. https://www.joedeveloper.com"
               />
+              <p className={classes.error}>{errors.portfolioUrl1}</p>
               <Input
                 type="text"
                 size="medium"
                 fullWidth
                 name="portfolioUrl2"
                 forFormik
-                placeholder="np. www.joedeveloper.com"
+                placeholder="np. https://www.joedeveloper.com"
               />
+              <p className={classes.error}>{errors.portfolioUrl2}</p>
               <Input
                 type="text"
                 size="medium"
                 fullWidth
                 name="portfolioUrl3"
                 forFormik
-                placeholder="np. www.joedeveloper.com"
+                placeholder="np. https://www.joedeveloper.com"
               />
+              <p className={classes.error}>{errors.portfolioUrl3}</p>
               <Input
                 type="text"
                 size="medium"
                 fullWidth
                 name="portfolioUrl4"
                 forFormik
-                placeholder="np. www.joedeveloper.com"
+                placeholder="np. https://www.joedeveloper.com"
               />
+              <p className={classes.error}>{errors.portfolioUrl4}</p>
               <Input
                 type="text"
                 size="medium"
                 fullWidth
                 name="portfolioUrl5"
                 forFormik
-                placeholder="np. www.joedeveloper.com"
+                placeholder="np. https://www.joedeveloper.com"
               />
+              <p className={classes.error}>{errors.portfolioUrl5}</p>
             </FormGroup>
             <FormGroup title="Projekt na zaliczenie">
               <Input
@@ -133,45 +233,50 @@ export const ChangeStudentInfoForm = () => {
                 fullWidth
                 name="projectUrl1"
                 forFormik
-                placeholder="np. www.joeeproject.com"
+                placeholder="np. https://www.joedeveloper.com"
               />
+              <p className={classes.error}>{errors.projectUrl1}</p>
               <Input
                 type="text"
                 size="medium"
                 fullWidth
                 name="projectUrl2"
                 forFormik
-                placeholder="np. www.joeeproject.com"
+                placeholder="np. https://www.joedeveloper.com"
               />
+              <p className={classes.error}>{errors.projectUrl2}</p>
               <Input
                 type="text"
                 size="medium"
                 fullWidth
                 name="projectUrl3"
                 forFormik
-                placeholder="np. www.joeeproject.com"
+                placeholder="np. https://www.joedeveloper.com"
               />
+              <p className={classes.error}>{errors.projectUrl3}</p>
               <Input
                 type="text"
                 size="medium"
                 fullWidth
                 name="projectUrl4"
                 forFormik
-                placeholder="np. www.joeproject.com"
+                placeholder="np. https://www.joedeveloper.com"
               />
+              <p className={classes.error}>{errors.projectUrl4}</p>
               <Input
                 type="text"
                 size="medium"
                 fullWidth
                 name="projectUrl5"
                 forFormik
-                placeholder="np. www.joeeproject.com"
+                placeholder="np. https://www.joedeveloper.com"
               />
+              <p className={classes.error}>{errors.projectUrl5}</p>
             </FormGroup>
             <FormGroup title="Preferowane miejsce pracy">
               {expectedTypeWork.map(({ value, name }) => (
                 <CheckItem
-                  type="checkbox"
+                  type="radio"
                   size="normal"
                   groupName="expectedTypeWork"
                   value={value}
@@ -193,27 +298,14 @@ export const ChangeStudentInfoForm = () => {
               ))}
             </FormGroup>
             <FormGroup title="Oczekiwane wynagrodzenie miesięczne netto">
-              <p>Od</p>
               <Input
                 type="text"
-                name="expectedSalaryFrom"
-                forFormik
-                placeholder="np. 1000zł"
-              />
-              <p>Do</p>
-              <Input
-                type="text"
-                name="expectedSalaryTo"
+                size="medium"
+                name="expectedSalary"
                 forFormik
                 placeholder="np. 10.000zł"
               />
-              <p className={classes.error}>
-                {errors.expectedSalaryFrom
-                  ? errors.expectedSalaryFrom
-                  : errors.expectedSalaryTo
-                  ? errors.expectedSalaryTo
-                  : null}
-              </p>
+              <p className={classes.error}>{errors.expectedSalary}</p>
             </FormGroup>
             <FormGroup title="Zgoda na odbycie bezpłatnych praktyk/stażu na początek">
               {canTakeApprenticeship.map(({ value, name }) => (
@@ -237,14 +329,22 @@ export const ChangeStudentInfoForm = () => {
               />
               <p className={classes.error}>{errors.monthsOfCommercialExp}</p>
             </FormGroup>
+            <p
+              className={`${classes.info} ${
+                apiInfo.type === "success" && classes.success
+              }`}
+            >
+              {apiInfo.message ? apiInfo.message : null}
+            </p>
             <div className={classes.bottomButtons}>
+              {isSpinnerLoading && <Spinner />}
               <PrimaryButton
                 type="submit"
                 fontColor="secondary"
                 size="large"
                 disabled={!isValid}
               >
-                Zmień
+                Zmień dane profilowe
               </PrimaryButton>
             </div>
           </Form>

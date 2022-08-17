@@ -2,6 +2,7 @@ import {
   ConvertStudentInfo,
   TraineeExpectedTypeWork,
   TraineeProfileEntity,
+  TraineeProfileRequest,
 } from "../types";
 
 export const convertStudentInfo = (
@@ -58,5 +59,48 @@ export const convertStudentInfo = (
   data.courses =
     info.courses ||
     "Użytkownik jeszcze nic nie napisał na temat odbytych kursów.";
+  return data;
+};
+
+export const convertStudentInfoForEditing = (
+  info: TraineeProfileEntity
+): TraineeProfileRequest => {
+  const data: any = {};
+  data.firstName = info.firstName || "";
+  data.lastName = info.lastName || "";
+  data.githubUsername = info.githubUsername || "";
+  data.tel = info.tel || "";
+  data.bio = info.bio || "";
+  data.education = info.education || "";
+  data.courses = info.courses || "";
+  data.targetWorkCity = info.targetWorkCity || "";
+  data.workExperience = info.workExperience || "";
+  const projectUrls = info.projectUrls ? JSON.parse(info.projectUrls) : [];
+  data.projectUrl1 = projectUrls[0] || "";
+  data.projectUrl2 = projectUrls[1] || "";
+  data.projectUrl3 = projectUrls[2] || "";
+  data.projectUrl4 = projectUrls[3] || "";
+  data.projectUrl5 = projectUrls[4] || "";
+  const portfolioUrls = info.portfolioUrls
+    ? JSON.parse(info.portfolioUrls)
+    : [];
+  data.portfolioUrl1 = portfolioUrls[0] || "";
+  data.portfolioUrl2 = portfolioUrls[1] || "";
+  data.portfolioUrl3 = portfolioUrls[2] || "";
+  data.portfolioUrl4 = portfolioUrls[3] || "";
+  data.portfolioUrl5 = portfolioUrls[4] || "";
+  data.expectedTypeWork = info.expectedTypeWork || "";
+  data.expectedContractType = info.expectedContractType
+    ? JSON.parse(info.expectedContractType)
+    : [];
+  data.expectedSalary = info.expectedSalary || "";
+  data.canTakeApprenticeship =
+    info.canTakeApprenticeship === 1 ? "true" : "false";
+  data.monthsOfCommercialExp =
+    info.monthsOfCommercialExp !== undefined
+      ? info.monthsOfCommercialExp.toString()
+        ? info.monthsOfCommercialExp.toString()
+        : ""
+      : "";
   return data;
 };
