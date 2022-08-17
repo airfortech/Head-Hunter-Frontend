@@ -3,7 +3,7 @@ import { Field, FieldProps } from "formik";
 import classes from "./Input.module.css";
 
 interface Props {
-  type: "text" | "password" | "email";
+  type: "text" | "password" | "email" | "file";
   forFormik?: boolean;
   name?: string;
   size?: "normal" | "medium" | "large";

@@ -1,0 +1,62 @@
+.UploadCsv {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.UploadCsv form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.info {
+  width: 100%;
+  height: var(--font-size-lg);
+  font-size: var(--font-size-nm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-15);
+}
+
+.info.success {
+  color: var(--color-16);
+}
+
+.end {
+  align-self: end;
+}
+
+.chooseFileButton::-webkit-file-upload-button {
+  display: none;
+}
+.chooseFileButton {
+  width: 100%;
+}
+
+.chooseFileButton {
+  padding: 5px 17px;
+  min-height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-regular);
+  color: var(--font-color-2);
+  background-color: var(--color-15);
+  user-select: none;
+  cursor: pointer;
+  outline: none;
+  transition: all var(--transition-speed-fast) ease;
+}
+
+.chooseFileButton:hover {
+  background-color: var(--color-15-hover);
+}
+
+.chooseFileButton input {
+  display: none;
+}
