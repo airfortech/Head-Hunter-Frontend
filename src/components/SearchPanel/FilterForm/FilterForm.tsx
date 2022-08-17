@@ -58,6 +58,7 @@ export const FilterForm = ({ type, closeModal }: Props) => {
   return (
     <div className={classes.FilterForm}>
       <Formik
+        enableReinitialize
         initialValues={filterOptions[type]}
         validationSchema={ValidationSchema}
         onSubmit={(values) => {
@@ -87,7 +88,7 @@ export const FilterForm = ({ type, closeModal }: Props) => {
                     ...filterOptions,
                     [type]: initialFilterValues,
                   });
-                  resetForm({ values: initialFilterValues });
+                  resetForm();
                 }}
               >
                 Wyczyść wszystkie
