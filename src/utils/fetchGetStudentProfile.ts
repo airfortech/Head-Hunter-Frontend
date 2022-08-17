@@ -1,7 +1,7 @@
 import { config } from "../config/config";
 import { GetTraineeProfileRequest, GetTraineeProfileResponse } from "../types";
 
-export const fetchGetTraineeProfile = async ({
+export const fetchGetStudentProfile = async ({
   id,
 }: GetTraineeProfileRequest): Promise<GetTraineeProfileResponse> => {
   const response = await fetch(config.apiUrl + "trainees/" + id, {

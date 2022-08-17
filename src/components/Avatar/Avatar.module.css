@@ -2,6 +2,9 @@
   display: block;
   border-radius: 50%;
   background-color: var(--color-10);
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .normal {

@@ -90,6 +90,56 @@ export const ValidationSchema = yup.object().shape({
     .min(0, "Zarobki muszą być dodatnie!")
     .integer("Liczba musi być całkowita!")
     .typeError("Wprowadź liczbę!"),
+  portfolioUrl1: yup
+    .string()
+    .url(
+      "Wprowadź adres rozpoczynający się od http:// lub https://, np. http://joedeveloper.com"
+    ),
+  portfolioUrl2: yup
+    .string()
+    .url(
+      "Wprowadź adres rozpoczynający się od http:// lub https://, np. http://joedeveloper.com"
+    ),
+  portfolioUrl3: yup
+    .string()
+    .url(
+      "Wprowadź adres rozpoczynający się od http:// lub https://, np. http://joedeveloper.com"
+    ),
+  portfolioUrl4: yup
+    .string()
+    .url(
+      "Wprowadź adres rozpoczynający się od http:// lub https://, np. http://joedeveloper.com"
+    ),
+  portfolioUrl5: yup
+    .string()
+    .url(
+      "Wprowadź adres rozpoczynający się od http:// lub https://, np. http://joedeveloper.com"
+    ),
+  projectUrl1: yup
+    .string()
+    .url(
+      "Wprowadź adres rozpoczynający się od http:// lub https://, np. http://joedeveloper.com"
+    ),
+  projectUrl2: yup
+    .string()
+    .url(
+      "Wprowadź adres rozpoczynający się od http:// lub https://, np. http://joedeveloper.com"
+    ),
+  projectUrl3: yup
+    .string()
+    .url(
+      "Wprowadź adres rozpoczynający się od http:// lub https://, np. http://joedeveloper.com"
+    ),
+  projectUrl4: yup
+    .string()
+    .url(
+      "Wprowadź adres rozpoczynający się od http:// lub https://, np. http://joedeveloper.com"
+    ),
+  projectUrl5: yup
+    .string()
+    .url(
+      "Wprowadź adres rozpoczynający się od http:// lub https://, np. http://joedeveloper.com"
+    ),
 });
 
 export const printValues = (values: TraineeProfileRequest) => {

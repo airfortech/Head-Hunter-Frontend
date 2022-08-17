@@ -11,9 +11,9 @@ import { Back } from "../../components/Back/Back";
 import { PersonalDetails } from "../../components/PersonalDetails/PersonalDetails";
 import { TechDetails } from "../../components/TechDetails/TechDetails";
 import { PageLoader } from "../../components/PageLoader/PageLoader";
+import { fetchGetStudentProfile } from "../../utils/fetchGetStudentProfile";
 import { convertStudentInfo } from "../../utils/convertStudentInfo";
 import classes from "./CVView.module.css";
-import { fetchGetTraineeProfile } from "../../utils/fetchGetTraineeProfile";
 
 export const CVView = () => {
   const navigate = useNavigate();
@@ -29,10 +29,9 @@ export const CVView = () => {
   useEffect(() => {
     (async () => {
       try {
-        const { data, message } = await fetchGetTraineeProfile({
+        const { data, message } = await fetchGetStudentProfile({
           id: auth.role === UserRole.trainee ? auth.id : id,
         });
-        console.log(message, data);
         if (message === GetTraineeProfileResponseMessage.success) {
           setTraineeInfo(convertStudentInfo(data.traineeProfile));
           setIsLoading(false);

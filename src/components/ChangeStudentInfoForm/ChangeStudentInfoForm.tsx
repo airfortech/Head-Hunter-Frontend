@@ -1,5 +1,6 @@
 import {
   GetTraineeProfileResponseMessage,
+  JsonResponseStatus,
   TraineeProfileRequest,
   UserRole,
 } from "../../types";
@@ -11,34 +12,45 @@ import { Input } from "../Input/Input";
 import { TextArea } from "../TextArea/TextArea";
 import { CheckItem } from "../SearchPanel/FormGroup/CheckItem/CheckItem";
 import { FormGroup } from "../SearchPanel/FormGroup/FormGroup";
+import { Spinner } from "../Spinner/Spinner";
 import {
   canTakeApprenticeship,
   expectedContractType,
   expectedTypeWork,
   initialInfoValues,
-  printValues,
   ValidationSchema,
 } from "./ChangeStudentInfoFormData";
-import { fetchGetTraineeProfile } from "../../utils/fetchGetTraineeProfile";
+import { fetchGetStudentProfile } from "../../utils/fetchGetStudentProfile";
 import { convertStudentInfoForEditing } from "../../utils/convertStudentInfo";
+import { fetchUpdateStudentProfile } from "../../utils/fetchUpdateStudentProfile";
+import { UpdateTraineeProfileResponseMessage } from "../../types/api/updateTraineeProfile";
 import classes from "./ChangeStudentInfoForm.module.css";
+
+interface ApiInfo {
+  type: "success" | "error";
+  message: string;
+}
+
+const initialApiInfo: ApiInfo = {
+  type: "error",
+  message: "",
+};
 
 export const ChangeStudentInfoForm = () => {
   const { auth } = useAuth();
   const [traineeInfo, setTraineeInfo] =
     useState<TraineeProfileRequest>(initialInfoValues);
-
-  console.log(auth.role, auth.id, traineeInfo);
+  const [apiInfo, setApiInfo] = useState<ApiInfo>(initialApiInfo);
+  const [isSpinnerLoading, setIsSpinnerLoading] = useState(false);
 
   useEffect(() => {
     (async () => {
       if (auth.role === UserRole.trainee) {
-        const { data, message } = await fetchGetTraineeProfile({
+        const { data, message } = await fetchGetStudentProfile({
           id: auth.id,
         });
         if (message === GetTraineeProfileResponseMessage.success)
           setTraineeInfo(convertStudentInfoForEditing(data.traineeProfile));
-        console.log(convertStudentInfoForEditing(data.traineeProfile));
       }
     })();
   }, []);
@@ -49,8 +61,34 @@ export const ChangeStudentInfoForm = () => {
         enableReinitialize
         initialValues={traineeInfo}
         validationSchema={ValidationSchema}
-        onSubmit={(values) => {
-          alert(printValues(values));
+        onSubmit={async (values) => {
+          try {
+            setIsSpinnerLoading(true);
+            const { message, status } = await fetchUpdateStudentProfile({
+              ...values,
+              userId: auth.id,
+            });
+            if (status === JsonResponseStatus.success) {
+              setIsSpinnerLoading(false);
+              setApiInfo({
+                type: "success",
+                message: "Zmieniłeś informacje!",
+              });
+            }
+            if (message === UpdateTraineeProfileResponseMessage.notFound) {
+              setApiInfo({
+                type: "error",
+                message: "Taki użytkownik nie istnieje!",
+              });
+              setIsSpinnerLoading(false);
+            }
+          } catch (e) {
+            setApiInfo({
+              type: "error",
+              message: "Spróbuj później!",
+            });
+            setIsSpinnerLoading(false);
+          }
         }}
       >
         {({ errors, isValid }) => (
@@ -148,40 +186,45 @@ export const ChangeStudentInfoForm = () => {
                 fullWidth
                 name="portfolioUrl1"
                 forFormik
-                placeholder="np. www.joedeveloper.com"
+                placeholder="np. https://www.joedeveloper.com"
               />
+              <p className={classes.error}>{errors.portfolioUrl1}</p>
               <Input
                 type="text"
                 size="medium"
                 fullWidth
                 name="portfolioUrl2"
                 forFormik
-                placeholder="np. www.joedeveloper.com"
+                placeholder="np. https://www.joedeveloper.com"
               />
+              <p className={classes.error}>{errors.portfolioUrl2}</p>
               <Input
                 type="text"
                 size="medium"
                 fullWidth
                 name="portfolioUrl3"
                 forFormik
-                placeholder="np. www.joedeveloper.com"
+                placeholder="np. https://www.joedeveloper.com"
               />
+              <p className={classes.error}>{errors.portfolioUrl3}</p>
               <Input
                 type="text"
                 size="medium"
                 fullWidth
                 name="portfolioUrl4"
                 forFormik
-                placeholder="np. www.joedeveloper.com"
+                placeholder="np. https://www.joedeveloper.com"
               />
+              <p className={classes.error}>{errors.portfolioUrl4}</p>
               <Input
                 type="text"
                 size="medium"
                 fullWidth
                 name="portfolioUrl5"
                 forFormik
-                placeholder="np. www.joedeveloper.com"
+                placeholder="np. https://www.joedeveloper.com"
               />
+              <p className={classes.error}>{errors.portfolioUrl5}</p>
             </FormGroup>
             <FormGroup title="Projekt na zaliczenie">
               <Input
@@ -190,45 +233,50 @@ export const ChangeStudentInfoForm = () => {
                 fullWidth
                 name="projectUrl1"
                 forFormik
-                placeholder="np. www.joeeproject.com"
+                placeholder="np. https://www.joedeveloper.com"
               />
+              <p className={classes.error}>{errors.projectUrl1}</p>
               <Input
                 type="text"
                 size="medium"
                 fullWidth
                 name="projectUrl2"
                 forFormik
-                placeholder="np. www.joeeproject.com"
+                placeholder="np. https://www.joedeveloper.com"
               />
+              <p className={classes.error}>{errors.projectUrl2}</p>
               <Input
                 type="text"
                 size="medium"
                 fullWidth
                 name="projectUrl3"
                 forFormik
-                placeholder="np. www.joeeproject.com"
+                placeholder="np. https://www.joedeveloper.com"
               />
+              <p className={classes.error}>{errors.projectUrl3}</p>
               <Input
                 type="text"
                 size="medium"
                 fullWidth
                 name="projectUrl4"
                 forFormik
-                placeholder="np. www.joeproject.com"
+                placeholder="np. https://www.joedeveloper.com"
               />
+              <p className={classes.error}>{errors.projectUrl4}</p>
               <Input
                 type="text"
                 size="medium"
                 fullWidth
                 name="projectUrl5"
                 forFormik
-                placeholder="np. www.joeeproject.com"
+                placeholder="np. https://www.joedeveloper.com"
               />
+              <p className={classes.error}>{errors.projectUrl5}</p>
             </FormGroup>
             <FormGroup title="Preferowane miejsce pracy">
               {expectedTypeWork.map(({ value, name }) => (
                 <CheckItem
-                  type="checkbox"
+                  type="radio"
                   size="normal"
                   groupName="expectedTypeWork"
                   value={value}
@@ -281,14 +329,22 @@ export const ChangeStudentInfoForm = () => {
               />
               <p className={classes.error}>{errors.monthsOfCommercialExp}</p>
             </FormGroup>
+            <p
+              className={`${classes.info} ${
+                apiInfo.type === "success" && classes.success
+              }`}
+            >
+              {apiInfo.message ? apiInfo.message : null}
+            </p>
             <div className={classes.bottomButtons}>
+              {isSpinnerLoading && <Spinner />}
               <PrimaryButton
                 type="submit"
                 fontColor="secondary"
                 size="large"
                 disabled={!isValid}
               >
-                Zmień
+                Zmień dane profilowe
               </PrimaryButton>
             </div>
           </Form>
