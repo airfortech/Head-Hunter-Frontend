@@ -34,20 +34,14 @@ export const SortForm = ({ type, closeModal }: Props) => {
       </div>
       <Formik
         initialValues={sortOptions[type]}
-        onSubmit={({ sortType, sortByType }) => {
-          const newSortOptions = sortOptions;
-          newSortOptions[type] = {
-            sortType,
-            sortByType,
-          };
+        onSubmit={(values) => {
           setSortOptions({
             ...sortOptions,
             [type]: {
-              sortType,
-              sortByType,
+              ...values,
             },
           });
-          fetchStudentsList({ ...params, sortType, sortByType });
+          fetchStudentsList({ ...params, ...values });
         }}
       >
         <Form className={classes.form}>
