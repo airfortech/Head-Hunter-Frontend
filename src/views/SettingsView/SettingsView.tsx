@@ -3,6 +3,7 @@ import { Back } from "../../components/Back/Back";
 import { ChangePasswordForm } from "../../components/ChangePasswordForm/ChangePasswordForm";
 import { ChangeStudentInfoForm } from "../../components/ChangeStudentInfoForm/ChangeStudentInfoForm";
 import { TechInfo } from "../../components/TechDetails/TechInfo/TechInfo";
+import { UploadCsv } from "../../components/UploadCsv/UploadCsv";
 import { useAuth } from "../../hooks/useAuth";
 import { UserRole } from "../../types";
 import classes from "./SettingsView.module.css";
@@ -18,6 +19,11 @@ export const SettingsView = () => {
       {auth.role === UserRole.trainee && (
         <TechInfo title="Zmiana informacji" center>
           <ChangeStudentInfoForm />
+        </TechInfo>
+      )}
+      {auth.role === UserRole.admin && (
+        <TechInfo title="Dodawanie kursantów" center>
+          <UploadCsv />
         </TechInfo>
       )}
     </div>
