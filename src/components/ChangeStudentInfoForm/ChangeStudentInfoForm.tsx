@@ -64,7 +64,6 @@ export const ChangeStudentInfoForm = () => {
         onSubmit={async (values) => {
           try {
             setIsSpinnerLoading(true);
-            console.log(values);
             const { message, status } = await fetchUpdateStudentProfile({
               ...values,
               userId: auth.id,
