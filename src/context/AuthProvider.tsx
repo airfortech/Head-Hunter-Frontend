@@ -9,6 +9,7 @@ interface LoginData {
   role?: UserRole;
   id?: string;
   name?: string;
+  avatar?: string;
   token?: string;
 }
 

@@ -84,7 +84,10 @@ export const Menu = () => {
   return (
     <menu className={classes.Menu}>
       <button className={classes.userInfo} onClick={handleMenuToggle}>
-        <Avatar name="John Doe" />
+        <Avatar
+          name={auth.name || "Anonymous"}
+          src={`https://github.com/${auth.avatar}.png`}
+        />
         <p>{auth.name}</p>
         <i className="bx bx-caret-up" ref={iconRef}></i>
       </button>

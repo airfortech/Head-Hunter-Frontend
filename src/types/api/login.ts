@@ -14,5 +14,6 @@ export interface LoginResponse {
     role: UserRole;
     token: string;
     name: string;
+    avatar: string;
   };
 }
