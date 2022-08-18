@@ -110,6 +110,10 @@ In progress...
 
 ![img](/res/hr-actions.png)
 
+### Animated menu and navigation tabs:
+
+![img](/res/animated-navigation.gif)
+
 ### Filtering and sorting modals with own state prefferences for each view:
 
 ![img](/res/sort-form.png)
