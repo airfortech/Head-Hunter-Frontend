@@ -10,10 +10,12 @@ interface Props {
 
 export const Avatar = ({ src, name, size = "normal" }: Props) => {
   return (
-    <img
+    <object
+      data={src === null ? undefined : src}
+      type="image/png"
       className={`${classes.Avatar} ${classes[size]}`}
-      src={src || avatar}
-      alt={name}
-    />
+    >
+      <img src={avatar} alt={name} />
+    </object>
   );
 };

@@ -82,7 +82,7 @@ export interface TraineeProfileRequest {
   userId?: string;
   firstName: string;
   lastName: string;
-  githubUsername?: string;
+  githubUsername: string;
   tel: string;
   bio: string;
   education: string;

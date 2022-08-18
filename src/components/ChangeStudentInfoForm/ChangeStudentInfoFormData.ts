@@ -79,6 +79,9 @@ export const initialInfoValues: TraineeProfileRequest = {
 };
 
 export const ValidationSchema = yup.object().shape({
+  firstName: yup.string().required("Imię jest wymagane!"),
+  lastName: yup.string().required("Nazwisko jest wymagane!"),
+  githubUsername: yup.string().required("To pole jest wymagane!"),
   monthsOfCommercialExp: yup
     .number()
     .min(0, "Liczba musi być dodatnia!")
@@ -119,7 +122,8 @@ export const ValidationSchema = yup.object().shape({
     .string()
     .url(
       "Wprowadź adres rozpoczynający się od http:// lub https://, np. http://joedeveloper.com"
-    ),
+    )
+    .required("Przynajmniej jeden adres do projektu jest wymagany!"),
   projectUrl2: yup
     .string()
     .url(

@@ -103,6 +103,7 @@ export const ChangeStudentInfoForm = () => {
                 placeholder="np. Joe"
               />
             </FormGroup>
+            <p className={classes.error}>{errors.firstName}</p>
             <FormGroup title="Nazwisko">
               <Input
                 type="text"
@@ -113,6 +114,7 @@ export const ChangeStudentInfoForm = () => {
                 placeholder="np. Doe"
               />
             </FormGroup>
+            <p className={classes.error}>{errors.lastName}</p>
             <FormGroup title="Nazwa użytkowanika na githubie">
               <Input
                 type="text"
@@ -122,6 +124,7 @@ export const ChangeStudentInfoForm = () => {
                 forFormik
                 placeholder="np. joedeveloper"
               />
+              <p className={classes.error}>{errors.githubUsername}</p>
             </FormGroup>
             <FormGroup title="Telefon">
               <Input
