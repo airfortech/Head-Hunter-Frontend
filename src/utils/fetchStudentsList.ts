@@ -1,7 +1,7 @@
 import { FetchStudentsList } from "../types";
 import { config } from "../config/config";
 
-export const fetchStudentsList = (params: FetchStudentsList) => {
+export const fetchStudentsListUrl = (params: FetchStudentsList) => {
   const {
     search = "",
     page = "1",
@@ -12,6 +12,7 @@ export const fetchStudentsList = (params: FetchStudentsList) => {
     teamProjectDegree = "1",
     canTakeApprenticeship = "false",
     monthsOfCommercialExp = "",
+    expectedTypeWork = "",
     expectedSalaryFrom = "",
     expectedSalaryTo = "",
     sortType = "descending",
@@ -19,7 +20,6 @@ export const fetchStudentsList = (params: FetchStudentsList) => {
   } = params;
 
   const expectedContractType = params.expectedContractType?.join(",") || "";
-  const expectedTypeWork = params.expectedTypeWork?.join(",") || "";
 
   const url = `${config.apiUrl}trainees?search=${search}&page=${page}&limit=${limit}&courseCompletion=${courseCompletion}&courseEngagment=${courseEngagment}&projectDegree=${projectDegree}&teamProjectDegree=${teamProjectDegree}&expectedTypeWork=${expectedTypeWork}&expectedContractType=${expectedContractType}&canTakeApprenticeship=${canTakeApprenticeship}&monthsOfCommercialExp=${monthsOfCommercialExp}&expectedSalaryFrom=${expectedSalaryFrom}&expectedSalaryTo=${expectedSalaryTo}&sortType=${sortType}&sortByType=${sortByType}`;
   console.log("fetching students list...");

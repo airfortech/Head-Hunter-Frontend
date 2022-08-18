@@ -14,7 +14,7 @@ import {
   degrees,
   ValidationSchema,
 } from "./filterFormData";
-import { fetchStudentsList } from "../../../utils/fetchStudentsList";
+import { fetchStudentsListUrl } from "../../../utils/fetchStudentsList";
 import { initialFilterValues } from "../../../context/searchProviderData";
 import classes from "./FilterForm.module.css";
 
@@ -42,7 +42,7 @@ const printValues = (values: FilterValues) => {
     courseEngagment: ${courseEngagment}
     projectDegree: ${projectDegree}
     teamProjectDegree: ${teamProjectDegree}
-    expectedTypeWork: ${expectedTypeWork.join(", ")}
+    expectedTypeWork: ${expectedTypeWork}
     expectedContractType: ${expectedContractType.join(", ")}
     canTakeApprenticeship: ${canTakeApprenticeship}
     expectedSalaryFrom: ${expectedSalaryFrom}
@@ -68,7 +68,7 @@ export const FilterForm = ({ type, closeModal }: Props) => {
               ...values,
             },
           });
-          fetchStudentsList({
+          fetchStudentsListUrl({
             ...params,
             ...values,
           });
@@ -145,7 +145,7 @@ export const FilterForm = ({ type, closeModal }: Props) => {
             <FormGroup title="Preferowane miejsce pracy">
               {expectedTypeWork.map(({ value, name }) => (
                 <CheckItem
-                  type="checkbox"
+                  type="radio"
                   groupName="expectedTypeWork"
                   value={value}
                   name={name}

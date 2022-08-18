@@ -5,7 +5,7 @@ import { useSearch } from "../../../hooks/useSearch";
 import { PrimaryButton } from "../../buttons/PrimaryButton/PrimaryButton";
 import { FormGroup } from "../FormGroup/FormGroup";
 import { CheckItem } from "../FormGroup/CheckItem/CheckItem";
-import { fetchStudentsList } from "../../../utils/fetchStudentsList";
+import { fetchStudentsListUrl } from "../../../utils/fetchStudentsList";
 import { sortByTypes, sortTypes } from "./sortFormData";
 import { UsersListType } from "../../../types";
 import classes from "./SortForm.module.css";
@@ -41,7 +41,7 @@ export const SortForm = ({ type, closeModal }: Props) => {
               ...values,
             },
           });
-          fetchStudentsList({ ...params, ...values });
+          fetchStudentsListUrl({ ...params, ...values });
         }}
       >
         <Form className={classes.form}>

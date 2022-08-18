@@ -6,7 +6,7 @@ export interface FetchStudentsList {
   courseEngagment?: string;
   projectDegree?: string;
   teamProjectDegree?: string;
-  expectedTypeWork?: string[];
+  expectedTypeWork?: string;
   expectedContractType?: string[];
   canTakeApprenticeship?: string;
   monthsOfCommercialExp?: string;

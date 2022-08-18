@@ -22,7 +22,7 @@ export const initialFilterValues: FilterValues = {
   courseEngagment: "1",
   projectDegree: "1",
   teamProjectDegree: "1",
-  expectedTypeWork: [],
+  expectedTypeWork: "",
   expectedContractType: [],
   canTakeApprenticeship: "false",
   monthsOfCommercialExp: "",

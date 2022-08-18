@@ -21,7 +21,7 @@ export interface FilterValues {
   courseEngagment: string;
   projectDegree: string;
   teamProjectDegree: string;
-  expectedTypeWork: string[];
+  expectedTypeWork: string;
   expectedContractType: string[];
   canTakeApprenticeship: "true" | "false";
   monthsOfCommercialExp: string;

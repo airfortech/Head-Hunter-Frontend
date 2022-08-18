@@ -4,7 +4,7 @@ import { Pagination } from "../../components/Pagination/Pagination";
 import { SearchPanel } from "../../components/SearchPanel/SearchPanel";
 import { StudentItem } from "../../components/UsersList/StudentItem/StudentItem";
 import { UsersList } from "../../components/UsersList/UsersList";
-import { fetchStudentsList } from "../../utils/fetchStudentsList";
+import { fetchStudentsListUrl } from "../../utils/fetchStudentsList";
 import { UsersListType } from "../../types";
 import classes from "./UsersListView.module.css";
 
@@ -22,7 +22,7 @@ export const UsersListView = ({ listType, searchType }: Props) => {
   const params = useCurrentSearchParams(searchType);
 
   useEffect(() => {
-    fetchStudentsList(params);
+    fetchStudentsListUrl(params);
   }, [searchType]);
   return (
     <div className={classes.UsersListView}>

@@ -3,7 +3,7 @@ import Select, { SingleValue } from "react-select";
 import { useSearch } from "../../hooks/useSearch";
 import { useCurrentSearchParams } from "../../hooks/useCurrentSearchParams";
 import { Button } from "./Button/Button";
-import { fetchStudentsList } from "../../utils/fetchStudentsList";
+import { fetchStudentsListUrl } from "../../utils/fetchStudentsList";
 import { UsersListType } from "../../types";
 import { config } from "../../config/config";
 import classes from "./Pagination.module.css";
@@ -37,12 +37,12 @@ export const Pagination = ({ type, currentPage, totalPages }: Props) => {
   const handleChange = (value: SingleValue<Option>) => {
     setValue(value);
     if (!value) return;
-    fetchStudentsList({ ...params, limit: value.label });
+    fetchStudentsListUrl({ ...params, limit: value.label });
     setLimit(value.label);
   };
 
   const handleChangePage = (page: number) => {
-    fetchStudentsList({ ...params, page: page.toString() });
+    fetchStudentsListUrl({ ...params, page: page.toString() });
   };
 
   return (
