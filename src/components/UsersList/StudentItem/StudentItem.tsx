@@ -30,7 +30,7 @@ export const StudentItem = ({ open = true, type, id }: Props) => {
     if (type === "hrStudentHired") return "/panel/hr/students/u" + id;
   };
 
-  const handleToggleMenu = () => {
+  const handleToggleDetails = () => {
     setDetailsOpen((prevState) => !prevState);
   };
 
@@ -163,55 +163,74 @@ export const StudentItem = ({ open = true, type, id }: Props) => {
               Usuń użytkownika
             </PrimaryButton>
           )}
-          <button className={classes.button} onClick={handleToggleMenu}>
+          <button className={classes.button} onClick={handleToggleDetails}>
             <i className="bx bx-chevron-up" ref={iconRef}></i>
           </button>
         </div>
       </div>
       <div className={classes.details} ref={detailsRef}>
-        <NoteCard title="Ocena przejścia kursu" note={1.7} stars={false} />
-        <NoteCard
-          title="Ocena aktywności i zaangażowania na kursie"
-          note={4}
-          stars={false}
-          flex={1.4}
-        />
-        <NoteCard
-          title="Ocena kodu w projekcie własnym"
-          note={4.5}
-          stars={false}
-        />
-        <NoteCard
-          title="Ocena pracy w zespole w Scrum"
-          note={5}
-          stars={false}
-        />
-        <PreferencesCard title="Preferowane miejsce pracy" value="Biuro" />
-        <PreferencesCard
-          title="Docelowe miasto, gdzie chce pracować kandydat"
-          value="Warszawa"
-          flex={1.5}
-        />
-        <PreferencesCard
-          title="Oczekiwany typ kontraktu"
-          value="Umowa o pracę"
-          flex={1.6}
-        />
-        <PreferencesCard
-          title="Oczekiwane wynagrodzenie miesięczne netto"
-          value="8000 zł"
-          flex={1.4}
-        />
-        <PreferencesCard
-          title="Zgoda na odbycie bezpłatnych praktyk/stażu na początek"
-          value="TAK"
-          flex={2}
-        />
-        <PreferencesCard
-          title="Komercyjne doświadczenie w programowaniu"
-          value="6 miesięcy"
-          flex={1.4}
-        />
+        {type === "adminHR" && (
+          <>
+            <PreferencesCard title="Nazwa firmy:" value="Just IT" flex={1.5} />
+            <PreferencesCard
+              title="E-mail:"
+              value="mail@google.com"
+              flex={1.5}
+            />
+            <PreferencesCard
+              title="Maksymalna liczba rezerwacji:"
+              value="9"
+              flex={1.5}
+            />
+          </>
+        )}
+        {type !== "adminHR" && (
+          <>
+            <NoteCard title="Ocena przejścia kursu" note={1.7} stars={false} />
+            <NoteCard
+              title="Ocena aktywności i zaangażowania na kursie"
+              note={4}
+              stars={false}
+              flex={1.4}
+            />
+            <NoteCard
+              title="Ocena kodu w projekcie własnym"
+              note={4.5}
+              stars={false}
+            />
+            <NoteCard
+              title="Ocena pracy w zespole w Scrum"
+              note={5}
+              stars={false}
+            />
+            <PreferencesCard title="Preferowane miejsce pracy" value="Biuro" />
+            <PreferencesCard
+              title="Docelowe miasto, gdzie chce pracować kandydat"
+              value="Warszawa"
+              flex={1.5}
+            />
+            <PreferencesCard
+              title="Oczekiwany typ kontraktu"
+              value="Umowa o pracę"
+              flex={1.6}
+            />
+            <PreferencesCard
+              title="Oczekiwane wynagrodzenie miesięczne netto"
+              value="8000 zł"
+              flex={1.4}
+            />
+            <PreferencesCard
+              title="Zgoda na odbycie bezpłatnych praktyk/stażu na początek"
+              value="TAK"
+              flex={2}
+            />
+            <PreferencesCard
+              title="Komercyjne doświadczenie w programowaniu"
+              value="6 miesięcy"
+              flex={1.4}
+            />
+          </>
+        )}
       </div>
     </li>
   );
