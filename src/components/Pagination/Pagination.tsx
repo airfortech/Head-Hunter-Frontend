@@ -29,7 +29,7 @@ const defaultOptionIndex = options.findIndex(
 
 export const Pagination = ({ type, currentPage, totalPages }: Props) => {
   const params = useCurrentSearchParams(type);
-  const { setLimit } = useSearch();
+  const { setLimit, currentPages, setCurrentPages } = useSearch();
   const [value, setValue] = useState<SingleValue<Option>>(
     defaultOptionIndex > -1 ? options[defaultOptionIndex] : options[0]
   );
@@ -42,6 +42,7 @@ export const Pagination = ({ type, currentPage, totalPages }: Props) => {
   };
 
   const handleChangePage = (page: number) => {
+    setCurrentPages({ ...currentPages, [type]: page });
     fetchStudentsListUrl({ ...params, page: page.toString() });
   };
 

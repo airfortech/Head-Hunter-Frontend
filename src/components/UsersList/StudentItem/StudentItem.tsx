@@ -6,15 +6,11 @@ import { NoteCard } from "../../NoteCard/NoteCard";
 import { PreferencesCard } from "../../PreferencesCard/PreferencesCard";
 import { Avatar } from "../../Avatar/Avatar";
 import classes from "./StudentItem.module.css";
+import { UsersListType } from "../../../types";
 
 interface Props {
   open?: boolean;
-  type:
-    | "adminHR"
-    | "adminStudent"
-    | "hrStudentAvailable"
-    | "hrStudentToTalk"
-    | "hrStudentHired";
+  type: UsersListType;
   id: string;
 }
 

@@ -1,8 +1,14 @@
 import React, { createContext, useState } from "react";
-import { FilterOptions, SearchOptions, SortOptions } from "../types";
+import {
+  FilterOptions,
+  PagesOptions,
+  SearchOptions,
+  SortOptions,
+} from "../types";
 import {
   initialFilterOptions,
   initialLimit,
+  initialPages,
   initialSortOptions,
 } from "./searchProviderData";
 
@@ -17,6 +23,8 @@ export const SearchContext = createContext<SearchOptions>({
   setFilterOptions: () => {},
   limit: initialLimit,
   setLimit: () => {},
+  currentPages: initialPages,
+  setCurrentPages: () => {},
 });
 
 export const SearchProvider = ({ children }: Props) => {
@@ -25,6 +33,7 @@ export const SearchProvider = ({ children }: Props) => {
   const [filterOptions, setFilterOptions] =
     useState<FilterOptions>(initialFilterOptions);
   const [limit, setLimit] = useState<string>(initialLimit);
+  const [currentPages, setCurrentPages] = useState<PagesOptions>(initialPages);
 
   return (
     <SearchContext.Provider
@@ -35,6 +44,8 @@ export const SearchProvider = ({ children }: Props) => {
         setFilterOptions,
         limit,
         setLimit,
+        currentPages,
+        setCurrentPages,
       }}
     >
       {children}

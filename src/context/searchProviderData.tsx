@@ -1,5 +1,11 @@
 import { config } from "../config/config";
-import { SortOptions, SortValues, FilterValues, FilterOptions } from "../types";
+import {
+  SortOptions,
+  SortValues,
+  FilterValues,
+  FilterOptions,
+  PagesOptions,
+} from "../types";
 
 const initialSortValues: SortValues = {
   sortType: "descending",
@@ -42,3 +48,16 @@ export const initialFilterOptions: FilterOptions = {
 };
 
 export const initialLimit: string = config.resultsPerPageOptions[0].toString();
+
+export const initialPage: number = 1;
+
+export const initialPages: PagesOptions = {
+  adminHR: initialPage,
+  adminStudent: initialPage,
+  adminStudentAvailable: initialPage,
+  adminStudentToTalk: initialPage,
+  adminStudentHired: initialPage,
+  hrStudentAvailable: initialPage,
+  hrStudentToTalk: initialPage,
+  hrStudentHired: initialPage,
+};

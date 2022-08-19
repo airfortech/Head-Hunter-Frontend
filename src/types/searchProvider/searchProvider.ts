@@ -40,6 +40,17 @@ export interface FilterOptions {
   hrStudentHired: FilterValues;
 }
 
+export interface PagesOptions {
+  adminHR: number;
+  adminStudent: number;
+  adminStudentAvailable: number;
+  adminStudentToTalk: number;
+  adminStudentHired: number;
+  hrStudentAvailable: number;
+  hrStudentToTalk: number;
+  hrStudentHired: number;
+}
+
 export interface SearchOptions {
   sortOptions: SortOptions;
   setSortOptions: Dispatch<React.SetStateAction<SortOptions>>;
@@ -47,4 +58,6 @@ export interface SearchOptions {
   setFilterOptions: Dispatch<React.SetStateAction<FilterOptions>>;
   limit: string;
   setLimit: Dispatch<React.SetStateAction<string>>;
+  currentPages: PagesOptions;
+  setCurrentPages: Dispatch<React.SetStateAction<PagesOptions>>;
 }
