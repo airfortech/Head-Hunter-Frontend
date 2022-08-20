@@ -5,6 +5,7 @@ import {
   FilterValues,
   FilterOptions,
   PagesOptions,
+  UsersListType,
 } from "../types";
 
 const initialSortValues: SortValues = {
@@ -50,6 +51,8 @@ export const initialFilterOptions: FilterOptions = {
 export const initialLimit: string = config.resultsPerPageOptions[0].toString();
 
 export const initialPage: number = 1;
+
+export const initialType: UsersListType = "adminHR";
 
 export const initialPages: PagesOptions = {
   adminHR: initialPage,

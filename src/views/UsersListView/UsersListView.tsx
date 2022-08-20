@@ -1,11 +1,9 @@
 import React, { useEffect } from "react";
-import { useCurrentSearchParams } from "../../hooks/useCurrentSearchParams";
 import { useSearch } from "../../hooks/useSearch";
 import { Pagination } from "../../components/Pagination/Pagination";
 import { SearchPanel } from "../../components/SearchPanel/SearchPanel";
 import { StudentItem } from "../../components/UsersList/StudentItem/StudentItem";
 import { UsersList } from "../../components/UsersList/UsersList";
-import { fetchStudentsListUrl } from "../../utils/fetchStudentsList";
 import { UsersListType } from "../../types";
 import classes from "./UsersListView.module.css";
 
@@ -14,12 +12,13 @@ interface Props {
 }
 
 export const UsersListView = ({ type }: Props) => {
-  const params = useCurrentSearchParams(type);
   const { currentPages } = useSearch();
+  const { setType } = useSearch();
 
   useEffect(() => {
-    fetchStudentsListUrl(params);
+    setType(type);
   }, [type]);
+
   return (
     <div className={classes.UsersListView}>
       <SearchPanel type={type} />

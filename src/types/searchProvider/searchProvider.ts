@@ -1,4 +1,5 @@
 import { Dispatch } from "react";
+import { UsersListType } from "../components";
 
 export interface SortValues {
   sortType: string;
@@ -58,6 +59,8 @@ export interface SearchOptions {
   setFilterOptions: Dispatch<React.SetStateAction<FilterOptions>>;
   limit: string;
   setLimit: Dispatch<React.SetStateAction<string>>;
+  type: UsersListType;
+  setType: Dispatch<React.SetStateAction<UsersListType>>;
   currentPages: PagesOptions;
   setCurrentPages: Dispatch<React.SetStateAction<PagesOptions>>;
 }

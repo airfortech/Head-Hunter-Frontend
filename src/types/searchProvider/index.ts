@@ -1,2 +1,2 @@
 export * from "./searchProvider";
-export * from "./fetchStudentsList";
+export * from "./fetchUsersList";

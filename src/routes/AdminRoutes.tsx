@@ -32,15 +32,15 @@ export const AdminRoutes = () => {
             />
             <Route
               path="students/available"
-              element={<UsersListView type="adminStudent" />}
+              element={<UsersListView type="adminStudentAvailable" />}
             />
             <Route
               path="students/reserved"
-              element={<UsersListView type="adminStudent" />}
+              element={<UsersListView type="adminStudentToTalk" />}
             />
             <Route
               path="students/hired"
-              element={<UsersListView type="adminStudent" />}
+              element={<UsersListView type="adminStudentHired" />}
             />
           </Route>
           <Route path="*" element={<NoMatchView />} />

@@ -1,12 +1,13 @@
-import { FetchStudentsList, FetchStudentsListRequest } from "../types";
+import { FetchUsersList, FetchUsersListRequest } from "../types";
 import { config } from "../config/config";
 
-export const fetchStudentsListUrl = (params: FetchStudentsList): string => {
-  const newParams: FetchStudentsListRequest = {};
+export const fetchUsersListUrl = (params: FetchUsersList): string => {
+  const newParams: FetchUsersListRequest = {};
 
   newParams.search = params.search || "";
-  newParams.page = params.page || "1";
-  newParams.limit = config.defaultResultsPerPageOption.toString();
+  newParams.page = params.page?.toString() || "1";
+  newParams.limit =
+    params.limit || config.defaultResultsPerPageOption.toString();
   newParams.courseCompletion = params.courseCompletion || "1";
   newParams.courseEngagment = params.courseEngagment || "1";
   newParams.projectDegree = params.projectDegree || "1";
@@ -28,7 +29,7 @@ export const fetchStudentsListUrl = (params: FetchStudentsList): string => {
     return `${qs}`.replace(/%2C/g, ",");
   };
 
-  console.log(config.apiUrl + "/trainees?" + generateQueryString().toString());
+  // console.log(config.apiUrl + "/trainees?" + generateQueryString().toString());
 
-  return config.apiUrl + "/trainees?" + newParams;
+  return generateQueryString().toString();
 };

@@ -1,6 +1,6 @@
-export interface FetchStudentsList {
+export interface FetchUsersList {
   search?: string;
-  page?: string;
+  page?: number;
   limit?: string;
   courseCompletion?: string;
   courseEngagment?: string;
@@ -16,7 +16,7 @@ export interface FetchStudentsList {
   sortByType?: string;
 }
 
-export interface FetchStudentsListRequest {
+export interface FetchUsersListRequest {
   search?: string;
   page?: string;
   limit?: string;
