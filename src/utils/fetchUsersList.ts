@@ -1,7 +1,14 @@
-import { FetchUsersList, FetchUsersListRequest } from "../types";
+import {
+  FetchListResponse,
+  FetchUsersList,
+  FetchUsersListRequest,
+  GetUsersListResponse,
+  UserRole,
+  UsersListType,
+} from "../types";
 import { config } from "../config/config";
 
-export const fetchUsersListUrl = (params: FetchUsersList): string => {
+const fetchUsersListUrl = (params: FetchUsersList): string => {
   const newParams: FetchUsersListRequest = {};
 
   newParams.search = params.search || "";
@@ -22,14 +29,34 @@ export const fetchUsersListUrl = (params: FetchUsersList): string => {
 
   newParams.expectedContractType = params.expectedContractType?.join(",") || "";
 
-  console.log("fetching students list...");
-
   const generateQueryString = () => {
     const qs = new URLSearchParams({ ...newParams });
     return `${qs}`.replace(/%2C/g, ",");
   };
 
-  // console.log(config.apiUrl + "/trainees?" + generateQueryString().toString());
-
   return generateQueryString().toString();
+};
+
+export const FetchList = async (
+  type: UsersListType,
+  role: UserRole,
+  params: FetchUsersList
+): Promise<FetchListResponse> => {
+  const page = type === "adminHR" ? "hr" : "hr";
+  try {
+    const url = `${config.apiUrl}${role}/${page}/?${fetchUsersListUrl(params)}`;
+    const response = await fetch(url, {
+      credentials: "include",
+    });
+    const data: GetUsersListResponse = await response.json();
+    return data.data;
+  } catch (e) {
+    console.log("error fetching");
+    return {
+      page: 0,
+      count: 0,
+      pages: 0,
+      users: [],
+    };
+  }
 };

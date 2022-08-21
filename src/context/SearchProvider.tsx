@@ -1,10 +1,12 @@
-import React, { createContext, useState } from "react";
-import { useFetchList } from "../hooks/useFetchList";
+import React, { createContext, useEffect, useState } from "react";
+import { useAuth } from "../hooks/useAuth";
+import { FetchList } from "../utils/fetchUsersList";
 import {
   FilterOptions,
   PagesOptions,
   SearchOptions,
   SortOptions,
+  UsersLists,
   UsersListType,
 } from "../types";
 import {
@@ -13,6 +15,7 @@ import {
   initialPages,
   initialSortOptions,
   initialType,
+  initialUsersLists,
 } from "./searchProviderData";
 
 interface Props {
@@ -30,6 +33,8 @@ export const SearchContext = createContext<SearchOptions>({
   setType: () => {},
   currentPages: initialPages,
   setCurrentPages: () => {},
+  usersLists: initialUsersLists,
+  setUsersLists: () => {},
 });
 
 export const SearchProvider = ({ children }: Props) => {
@@ -40,16 +45,29 @@ export const SearchProvider = ({ children }: Props) => {
   const [limit, setLimit] = useState<string>(initialLimit);
   const [type, setType] = useState<UsersListType>(initialType);
   const [currentPages, setCurrentPages] = useState<PagesOptions>(initialPages);
-  const data = useFetchList(type, {
-    ...sortOptions[type],
-    ...filterOptions[type],
-    limit,
-    page: currentPages[type],
-  });
+  const [usersLists, setUsersLists] = useState<UsersLists>(initialUsersLists);
+  const { auth } = useAuth();
 
-  console.log(type);
+  const getList = async () => {
+    if (!auth.role) return;
+    const data = await FetchList(type, auth.role, {
+      ...sortOptions[type],
+      ...filterOptions[type],
+      limit,
+      page: currentPages[type],
+    });
+    setUsersLists((prevState) => {
+      return { ...prevState, [type]: data };
+    });
+  };
 
-  console.log(data);
+  useEffect(() => {
+    getList();
+  }, [type, currentPages, filterOptions, sortOptions, limit]);
+
+  useEffect(() => {
+    getList();
+  }, [auth]);
 
   return (
     <SearchContext.Provider
@@ -64,6 +82,8 @@ export const SearchProvider = ({ children }: Props) => {
         setType,
         currentPages,
         setCurrentPages,
+        usersLists,
+        setUsersLists,
       }}
     >
       {children}

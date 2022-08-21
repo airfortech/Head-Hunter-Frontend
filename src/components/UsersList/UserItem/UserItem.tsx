@@ -1,3 +1,4 @@
+import { HrProfileEntity, UsersListType } from "../../../types";
 import React, { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { gsap } from "gsap";
@@ -5,45 +6,46 @@ import { PrimaryButton } from "../../buttons/PrimaryButton/PrimaryButton";
 import { NoteCard } from "../../NoteCard/NoteCard";
 import { PreferencesCard } from "../../PreferencesCard/PreferencesCard";
 import { Avatar } from "../../Avatar/Avatar";
-import classes from "./StudentItem.module.css";
-import { UsersListType } from "../../../types";
+import classes from "./UserItem.module.css";
 
 interface Props {
   open?: boolean;
   type: UsersListType;
-  id: string;
+  data: HrProfileEntity;
 }
 
-export const StudentItem = ({ open = true, type, id }: Props) => {
+export const UserItem = ({ open = false, type, data }: Props) => {
   const [isDetailsOpen, setDetailsOpen] = useState(open);
   const iconRef = useRef<HTMLElement>(null);
   const detailsRef = useRef<HTMLDivElement>(null);
   const tweenRef = useRef<GSAPTimeline>();
 
+  const { userId, fullName, company, maxReservedStudents } = data;
+
   const linkToCV = (type: string) => {
-    if (type === "adminStudent") return "/panel/admin/students/u" + id;
-    if (type === "hrStudentToTalk") return "/panel/hr/students/u" + id;
-    if (type === "hrStudentHired") return "/panel/hr/students/u" + id;
+    if (type === "adminStudent") return "/panel/admin/students/u" + userId;
+    if (type === "hrStudentToTalk") return "/panel/hr/students/u" + userId;
+    if (type === "hrStudentHired") return "/panel/hr/students/u" + userId;
   };
 
   const handleToggleDetails = () => {
     setDetailsOpen((prevState) => !prevState);
   };
 
-  const handleDeleteUser = (id: string) => {
-    console.log("handleDeleteUser", id);
+  const handleDeleteUser = (userId: string) => {
+    console.log("handleDeleteUser", userId);
   };
-  const handleReserveTalk = (id: string) => {
-    console.log("handleReserveTalk", id);
+  const handleReserveTalk = (userId: string) => {
+    console.log("handleReserveTalk", userId);
   };
-  const handleNotInterest = (id: string) => {
-    console.log("handleNotInterest", id);
+  const handleNotInterest = (userId: string) => {
+    console.log("handleNotInterest", userId);
   };
-  const handleHire = (id: string) => {
-    console.log("handleHire", id);
+  const handleHire = (userId: string) => {
+    console.log("handleHire", userId);
   };
-  const handleCancelHire = (id: string) => {
-    console.log("handleCancelHire", id);
+  const handleCancelHire = (userId: string) => {
+    console.log("handleCancelHire", userId);
   };
 
   useEffect(() => {
@@ -102,7 +104,7 @@ export const StudentItem = ({ open = true, type, id }: Props) => {
             </p>
           )}
           {type !== "hrStudentAvailable" && <Avatar name="Jakub C" />}
-          <p className={classes.name}>Jakub C.</p>
+          <p className={classes.name}>{fullName}</p>
         </div>
         <div className={classes.actions}>
           {(type === "adminStudent" ||
@@ -118,7 +120,7 @@ export const StudentItem = ({ open = true, type, id }: Props) => {
             <PrimaryButton
               size="normal"
               fontColor="secondary"
-              onClick={() => handleNotInterest(id)}
+              onClick={() => handleNotInterest(userId)}
             >
               Brak zainteresowania
             </PrimaryButton>
@@ -127,7 +129,7 @@ export const StudentItem = ({ open = true, type, id }: Props) => {
             <PrimaryButton
               size="normal"
               fontColor="secondary"
-              onClick={() => handleReserveTalk(id)}
+              onClick={() => handleReserveTalk(userId)}
             >
               Zarezerwuj rozmowę
             </PrimaryButton>
@@ -136,7 +138,7 @@ export const StudentItem = ({ open = true, type, id }: Props) => {
             <PrimaryButton
               size="normal"
               fontColor="secondary"
-              onClick={() => handleHire(id)}
+              onClick={() => handleHire(userId)}
             >
               Zatrudnij
             </PrimaryButton>
@@ -145,7 +147,7 @@ export const StudentItem = ({ open = true, type, id }: Props) => {
             <PrimaryButton
               size="normal"
               fontColor="secondary"
-              onClick={() => handleCancelHire(id)}
+              onClick={() => handleCancelHire(userId)}
             >
               Anuluj zatrudnienie
             </PrimaryButton>
@@ -154,7 +156,7 @@ export const StudentItem = ({ open = true, type, id }: Props) => {
             <PrimaryButton
               size="normal"
               fontColor="secondary"
-              onClick={() => handleDeleteUser(id)}
+              onClick={() => handleDeleteUser(userId)}
             >
               Usuń użytkownika
             </PrimaryButton>
@@ -167,7 +169,7 @@ export const StudentItem = ({ open = true, type, id }: Props) => {
       <div className={classes.details} ref={detailsRef}>
         {type === "adminHR" && (
           <>
-            <PreferencesCard title="Nazwa firmy:" value="Just IT" flex={1.5} />
+            <PreferencesCard title="Nazwa firmy:" value={company} flex={1.5} />
             <PreferencesCard
               title="E-mail:"
               value="mail@google.com"
@@ -175,7 +177,7 @@ export const StudentItem = ({ open = true, type, id }: Props) => {
             />
             <PreferencesCard
               title="Maksymalna liczba rezerwacji:"
-              value="9"
+              value={maxReservedStudents.toString()}
               flex={1.5}
             />
           </>

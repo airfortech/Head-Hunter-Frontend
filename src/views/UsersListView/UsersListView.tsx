@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { useSearch } from "../../hooks/useSearch";
 import { Pagination } from "../../components/Pagination/Pagination";
 import { SearchPanel } from "../../components/SearchPanel/SearchPanel";
-import { StudentItem } from "../../components/UsersList/StudentItem/StudentItem";
+import { UserItem } from "../../components/UsersList/UserItem/UserItem";
 import { UsersList } from "../../components/UsersList/UsersList";
-import { UsersListType } from "../../types";
+import { HrProfileEntity, UsersListType } from "../../types";
 import classes from "./UsersListView.module.css";
 
 interface Props {
@@ -12,8 +12,7 @@ interface Props {
 }
 
 export const UsersListView = ({ type }: Props) => {
-  const { currentPages } = useSearch();
-  const { setType } = useSearch();
+  const { setType, usersLists } = useSearch();
 
   useEffect(() => {
     setType(type);
@@ -24,16 +23,18 @@ export const UsersListView = ({ type }: Props) => {
       <SearchPanel type={type} />
       <Pagination
         type={type}
-        currentPage={currentPages[type]}
-        totalPages={12}
+        currentPage={usersLists[type].page}
+        totalPages={usersLists[type].pages}
       />
       <div className={classes.wrapper}>
         <UsersList>
-          <StudentItem type={type} id="1" />
-          <StudentItem type={type} id="2" />
-          <StudentItem type={type} id="3" />
-          <StudentItem type={type} id="4" />
-          <StudentItem type={type} id="5" />
+          {!usersLists[type].count ? (
+            <h2 className={classes.noResults}>Brak wyników.</h2>
+          ) : (
+            usersLists[type].users.map((user: HrProfileEntity) => (
+              <UserItem type={type} key={user.userId} data={user} />
+            ))
+          )}
         </UsersList>
       </div>
     </div>

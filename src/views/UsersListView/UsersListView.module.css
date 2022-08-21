@@ -8,3 +8,8 @@
   z-index: 0;
   overflow: hidden;
 }
+
+.noResults {
+  text-align: center;
+  line-height: 500%;
+}

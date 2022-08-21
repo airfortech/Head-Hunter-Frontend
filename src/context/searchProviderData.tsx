@@ -6,6 +6,8 @@ import {
   FilterOptions,
   PagesOptions,
   UsersListType,
+  FetchListResponse,
+  UsersLists,
 } from "../types";
 
 const initialSortValues: SortValues = {
@@ -48,7 +50,13 @@ export const initialFilterOptions: FilterOptions = {
   hrStudentHired: initialFilterValues,
 };
 
-export const initialLimit: string = config.resultsPerPageOptions[0].toString();
+const initLimit = config.resultsPerPageOptions.indexOf(
+  config.defaultResultsPerPageOption
+)
+  ? config.defaultResultsPerPageOption.toString()
+  : "10";
+
+export const initialLimit: string = initLimit;
 
 export const initialPage: number = 1;
 
@@ -63,4 +71,22 @@ export const initialPages: PagesOptions = {
   hrStudentAvailable: initialPage,
   hrStudentToTalk: initialPage,
   hrStudentHired: initialPage,
+};
+
+export const initialUsersList: FetchListResponse = {
+  page: 0,
+  count: 0,
+  pages: 0,
+  users: [],
+};
+
+export const initialUsersLists: UsersLists = {
+  adminHR: initialUsersList,
+  adminStudent: initialUsersList,
+  adminStudentAvailable: initialUsersList,
+  adminStudentToTalk: initialUsersList,
+  adminStudentHired: initialUsersList,
+  hrStudentAvailable: initialUsersList,
+  hrStudentToTalk: initialUsersList,
+  hrStudentHired: initialUsersList,
 };

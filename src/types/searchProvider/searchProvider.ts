@@ -1,4 +1,5 @@
 import { Dispatch } from "react";
+import { FetchListResponse } from "..";
 import { UsersListType } from "../components";
 
 export interface SortValues {
@@ -52,6 +53,17 @@ export interface PagesOptions {
   hrStudentHired: number;
 }
 
+export interface UsersLists {
+  adminHR: FetchListResponse;
+  adminStudent: FetchListResponse;
+  adminStudentAvailable: FetchListResponse;
+  adminStudentToTalk: FetchListResponse;
+  adminStudentHired: FetchListResponse;
+  hrStudentAvailable: FetchListResponse;
+  hrStudentToTalk: FetchListResponse;
+  hrStudentHired: FetchListResponse;
+}
+
 export interface SearchOptions {
   sortOptions: SortOptions;
   setSortOptions: Dispatch<React.SetStateAction<SortOptions>>;
@@ -63,4 +75,6 @@ export interface SearchOptions {
   setType: Dispatch<React.SetStateAction<UsersListType>>;
   currentPages: PagesOptions;
   setCurrentPages: Dispatch<React.SetStateAction<PagesOptions>>;
+  usersLists: UsersLists;
+  setUsersLists: Dispatch<React.SetStateAction<UsersLists>>;
 }
