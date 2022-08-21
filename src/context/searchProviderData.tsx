@@ -1,5 +1,14 @@
 import { config } from "../config/config";
-import { SortOptions, SortValues, FilterValues, FilterOptions } from "../types";
+import {
+  SortOptions,
+  SortValues,
+  FilterValues,
+  FilterOptions,
+  PagesOptions,
+  UsersListType,
+  FetchListResponse,
+  UsersLists,
+} from "../types";
 
 const initialSortValues: SortValues = {
   sortType: "descending",
@@ -22,7 +31,7 @@ export const initialFilterValues: FilterValues = {
   courseEngagment: "1",
   projectDegree: "1",
   teamProjectDegree: "1",
-  expectedTypeWork: [],
+  expectedTypeWork: "",
   expectedContractType: [],
   canTakeApprenticeship: "false",
   monthsOfCommercialExp: "",
@@ -41,4 +50,43 @@ export const initialFilterOptions: FilterOptions = {
   hrStudentHired: initialFilterValues,
 };
 
-export const initialLimit: string = config.resultsPerPageOptions[0].toString();
+const initLimit = config.resultsPerPageOptions.indexOf(
+  config.defaultResultsPerPageOption
+)
+  ? config.defaultResultsPerPageOption.toString()
+  : "10";
+
+export const initialLimit: string = initLimit;
+
+export const initialPage: number = 1;
+
+export const initialType: UsersListType = "adminHR";
+
+export const initialPages: PagesOptions = {
+  adminHR: initialPage,
+  adminStudent: initialPage,
+  adminStudentAvailable: initialPage,
+  adminStudentToTalk: initialPage,
+  adminStudentHired: initialPage,
+  hrStudentAvailable: initialPage,
+  hrStudentToTalk: initialPage,
+  hrStudentHired: initialPage,
+};
+
+export const initialUsersList: FetchListResponse = {
+  page: 0,
+  count: 0,
+  pages: 0,
+  users: [],
+};
+
+export const initialUsersLists: UsersLists = {
+  adminHR: initialUsersList,
+  adminStudent: initialUsersList,
+  adminStudentAvailable: initialUsersList,
+  adminStudentToTalk: initialUsersList,
+  adminStudentHired: initialUsersList,
+  hrStudentAvailable: initialUsersList,
+  hrStudentToTalk: initialUsersList,
+  hrStudentHired: initialUsersList,
+};

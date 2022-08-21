@@ -25,30 +25,15 @@ export const HRsRoutes = () => {
           <Route path="students" element={<ListView routes={navLinks} />}>
             <Route
               path="available"
-              element={
-                <UsersListView
-                  listType="hrStudentAvailable"
-                  searchType="hrStudentAvailable"
-                />
-              }
+              element={<UsersListView type="hrStudentAvailable" />}
             />
             <Route
               path="reserved"
-              element={
-                <UsersListView
-                  listType="hrStudentToTalk"
-                  searchType="hrStudentToTalk"
-                />
-              }
+              element={<UsersListView type="hrStudentToTalk" />}
             />
             <Route
               path="hired"
-              element={
-                <UsersListView
-                  listType="hrStudentHired"
-                  searchType="hrStudentHired"
-                />
-              }
+              element={<UsersListView type="hrStudentHired" />}
             />
           </Route>
           <Route path="*" element={<NoMatchView />} />

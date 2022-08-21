@@ -1,9 +1,21 @@
-import React, { createContext, useState } from "react";
-import { FilterOptions, SearchOptions, SortOptions } from "../types";
+import React, { createContext, useEffect, useState } from "react";
+import { useAuth } from "../hooks/useAuth";
+import { FetchList } from "../utils/fetchUsersList";
+import {
+  FilterOptions,
+  PagesOptions,
+  SearchOptions,
+  SortOptions,
+  UsersLists,
+  UsersListType,
+} from "../types";
 import {
   initialFilterOptions,
   initialLimit,
+  initialPages,
   initialSortOptions,
+  initialType,
+  initialUsersLists,
 } from "./searchProviderData";
 
 interface Props {
@@ -17,6 +29,12 @@ export const SearchContext = createContext<SearchOptions>({
   setFilterOptions: () => {},
   limit: initialLimit,
   setLimit: () => {},
+  type: initialType,
+  setType: () => {},
+  currentPages: initialPages,
+  setCurrentPages: () => {},
+  usersLists: initialUsersLists,
+  setUsersLists: () => {},
 });
 
 export const SearchProvider = ({ children }: Props) => {
@@ -25,6 +43,31 @@ export const SearchProvider = ({ children }: Props) => {
   const [filterOptions, setFilterOptions] =
     useState<FilterOptions>(initialFilterOptions);
   const [limit, setLimit] = useState<string>(initialLimit);
+  const [type, setType] = useState<UsersListType>(initialType);
+  const [currentPages, setCurrentPages] = useState<PagesOptions>(initialPages);
+  const [usersLists, setUsersLists] = useState<UsersLists>(initialUsersLists);
+  const { auth } = useAuth();
+
+  const getList = async () => {
+    if (!auth.role) return;
+    const data = await FetchList(type, auth.role, {
+      ...sortOptions[type],
+      ...filterOptions[type],
+      limit,
+      page: currentPages[type],
+    });
+    setUsersLists((prevState) => {
+      return { ...prevState, [type]: data };
+    });
+  };
+
+  useEffect(() => {
+    getList();
+  }, [type, currentPages, filterOptions, sortOptions, limit]);
+
+  useEffect(() => {
+    getList();
+  }, [auth]);
 
   return (
     <SearchContext.Provider
@@ -35,6 +78,12 @@ export const SearchProvider = ({ children }: Props) => {
         setFilterOptions,
         limit,
         setLimit,
+        type,
+        setType,
+        currentPages,
+        setCurrentPages,
+        usersLists,
+        setUsersLists,
       }}
     >
       {children}

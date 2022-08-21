@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import Select, { SingleValue } from "react-select";
 import { useSearch } from "../../hooks/useSearch";
-import { useCurrentSearchParams } from "../../hooks/useCurrentSearchParams";
 import { Button } from "./Button/Button";
-import { fetchStudentsList } from "../../utils/fetchStudentsList";
 import { UsersListType } from "../../types";
 import { config } from "../../config/config";
 import classes from "./Pagination.module.css";
@@ -28,21 +26,19 @@ const defaultOptionIndex = options.findIndex(
 );
 
 export const Pagination = ({ type, currentPage, totalPages }: Props) => {
-  const params = useCurrentSearchParams(type);
-  const { setLimit } = useSearch();
+  const { setLimit, currentPages, setCurrentPages } = useSearch();
   const [value, setValue] = useState<SingleValue<Option>>(
     defaultOptionIndex > -1 ? options[defaultOptionIndex] : options[0]
   );
 
-  const handleChange = (value: SingleValue<Option>) => {
+  const handleChangeLimit = (value: SingleValue<Option>) => {
     setValue(value);
     if (!value) return;
-    fetchStudentsList({ ...params, limit: value.label });
     setLimit(value.label);
   };
 
   const handleChangePage = (page: number) => {
-    fetchStudentsList({ ...params, page: page.toString() });
+    setCurrentPages({ ...currentPages, [type]: page });
   };
 
   return (
@@ -51,10 +47,10 @@ export const Pagination = ({ type, currentPage, totalPages }: Props) => {
       <Select
         options={options}
         value={value}
-        onChange={handleChange}
+        onChange={handleChangeLimit}
         className={classes.select}
       />
-      <p>
+      <p className={classes.site}>
         strona {currentPage} / {totalPages}
       </p>
       <Button

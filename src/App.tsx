@@ -20,6 +20,7 @@ const fetchRefreshAuthData = async (): Promise<LoginResponse> => {
 export const App = () => {
   const { setAuth } = useAuth();
   const navigate = useNavigate();
+
   useEffect(() => {
     (async () => {
       try {

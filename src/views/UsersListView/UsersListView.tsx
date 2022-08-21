@@ -1,40 +1,40 @@
 import React, { useEffect } from "react";
-import { useCurrentSearchParams } from "../../hooks/useCurrentSearchParams";
+import { useSearch } from "../../hooks/useSearch";
 import { Pagination } from "../../components/Pagination/Pagination";
 import { SearchPanel } from "../../components/SearchPanel/SearchPanel";
-import { StudentItem } from "../../components/UsersList/StudentItem/StudentItem";
+import { UserItem } from "../../components/UsersList/UserItem/UserItem";
 import { UsersList } from "../../components/UsersList/UsersList";
-import { fetchStudentsList } from "../../utils/fetchStudentsList";
-import { UsersListType } from "../../types";
+import { HrProfileEntity, UsersListType } from "../../types";
 import classes from "./UsersListView.module.css";
 
 interface Props {
-  listType:
-    | "adminHR"
-    | "adminStudent"
-    | "hrStudentAvailable"
-    | "hrStudentToTalk"
-    | "hrStudentHired";
-  searchType: UsersListType;
+  type: UsersListType;
 }
 
-export const UsersListView = ({ listType, searchType }: Props) => {
-  const params = useCurrentSearchParams(searchType);
+export const UsersListView = ({ type }: Props) => {
+  const { setType, usersLists } = useSearch();
 
   useEffect(() => {
-    fetchStudentsList(params);
-  }, [searchType]);
+    setType(type);
+  }, [type]);
+
   return (
     <div className={classes.UsersListView}>
-      <SearchPanel type={searchType} />
-      <Pagination type={searchType} currentPage={1} totalPages={12} />
+      <SearchPanel type={type} />
+      <Pagination
+        type={type}
+        currentPage={usersLists[type].page}
+        totalPages={usersLists[type].pages}
+      />
       <div className={classes.wrapper}>
         <UsersList>
-          <StudentItem type={listType} id="1" />
-          <StudentItem type={listType} id="2" />
-          <StudentItem type={listType} id="3" />
-          <StudentItem type={listType} id="4" />
-          <StudentItem type={listType} id="5" />
+          {!usersLists[type].count ? (
+            <h2 className={classes.noResults}>Brak wyników.</h2>
+          ) : (
+            usersLists[type].users.map((user: HrProfileEntity) => (
+              <UserItem type={type} key={user.userId} data={user} />
+            ))
+          )}
         </UsersList>
       </div>
     </div>

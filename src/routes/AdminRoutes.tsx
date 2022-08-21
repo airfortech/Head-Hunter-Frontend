@@ -25,47 +25,22 @@ export const AdminRoutes = () => {
           <Route path="students/:id" element={<CVView />} />
           <Route path="settings" element={<SettingsView />} />
           <Route path="*" element={<ListView routes={navLinks} />}>
-            <Route
-              path="hrs"
-              element={
-                <UsersListView listType="adminHR" searchType="adminHR" />
-              }
-            />
+            <Route path="hrs" element={<UsersListView type="adminHR" />} />
             <Route
               path="students"
-              element={
-                <UsersListView
-                  listType="adminStudent"
-                  searchType="adminStudent"
-                />
-              }
+              element={<UsersListView type="adminStudent" />}
             />
             <Route
               path="students/available"
-              element={
-                <UsersListView
-                  listType="adminStudent"
-                  searchType="adminStudentAvailable"
-                />
-              }
+              element={<UsersListView type="adminStudentAvailable" />}
             />
             <Route
               path="students/reserved"
-              element={
-                <UsersListView
-                  listType="adminStudent"
-                  searchType="adminStudentToTalk"
-                />
-              }
+              element={<UsersListView type="adminStudentToTalk" />}
             />
             <Route
               path="students/hired"
-              element={
-                <UsersListView
-                  listType="adminStudent"
-                  searchType="adminStudentHired"
-                />
-              }
+              element={<UsersListView type="adminStudentHired" />}
             />
           </Route>
           <Route path="*" element={<NoMatchView />} />

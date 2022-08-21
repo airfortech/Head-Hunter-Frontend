@@ -1,3 +1,4 @@
+import { HrProfileEntity, UsersListType } from "../../../types";
 import React, { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { gsap } from "gsap";
@@ -5,49 +6,46 @@ import { PrimaryButton } from "../../buttons/PrimaryButton/PrimaryButton";
 import { NoteCard } from "../../NoteCard/NoteCard";
 import { PreferencesCard } from "../../PreferencesCard/PreferencesCard";
 import { Avatar } from "../../Avatar/Avatar";
-import classes from "./StudentItem.module.css";
+import classes from "./UserItem.module.css";
 
 interface Props {
   open?: boolean;
-  type:
-    | "adminHR"
-    | "adminStudent"
-    | "hrStudentAvailable"
-    | "hrStudentToTalk"
-    | "hrStudentHired";
-  id: string;
+  type: UsersListType;
+  data: HrProfileEntity;
 }
 
-export const StudentItem = ({ open = true, type, id }: Props) => {
+export const UserItem = ({ open = false, type, data }: Props) => {
   const [isDetailsOpen, setDetailsOpen] = useState(open);
   const iconRef = useRef<HTMLElement>(null);
   const detailsRef = useRef<HTMLDivElement>(null);
   const tweenRef = useRef<GSAPTimeline>();
 
+  const { userId, fullName, company, maxReservedStudents } = data;
+
   const linkToCV = (type: string) => {
-    if (type === "adminStudent") return "/panel/admin/students/u" + id;
-    if (type === "hrStudentToTalk") return "/panel/hr/students/u" + id;
-    if (type === "hrStudentHired") return "/panel/hr/students/u" + id;
+    if (type === "adminStudent") return "/panel/admin/students/u" + userId;
+    if (type === "hrStudentToTalk") return "/panel/hr/students/u" + userId;
+    if (type === "hrStudentHired") return "/panel/hr/students/u" + userId;
   };
 
-  const handleToggleMenu = () => {
+  const handleToggleDetails = () => {
     setDetailsOpen((prevState) => !prevState);
   };
 
-  const handleDeleteUser = (id: string) => {
-    console.log("handleDeleteUser", id);
+  const handleDeleteUser = (userId: string) => {
+    console.log("handleDeleteUser", userId);
   };
-  const handleReserveTalk = (id: string) => {
-    console.log("handleReserveTalk", id);
+  const handleReserveTalk = (userId: string) => {
+    console.log("handleReserveTalk", userId);
   };
-  const handleNotInterest = (id: string) => {
-    console.log("handleNotInterest", id);
+  const handleNotInterest = (userId: string) => {
+    console.log("handleNotInterest", userId);
   };
-  const handleHire = (id: string) => {
-    console.log("handleHire", id);
+  const handleHire = (userId: string) => {
+    console.log("handleHire", userId);
   };
-  const handleCancelHire = (id: string) => {
-    console.log("handleCancelHire", id);
+  const handleCancelHire = (userId: string) => {
+    console.log("handleCancelHire", userId);
   };
 
   useEffect(() => {
@@ -106,7 +104,7 @@ export const StudentItem = ({ open = true, type, id }: Props) => {
             </p>
           )}
           {type !== "hrStudentAvailable" && <Avatar name="Jakub C" />}
-          <p className={classes.name}>Jakub C.</p>
+          <p className={classes.name}>{fullName}</p>
         </div>
         <div className={classes.actions}>
           {(type === "adminStudent" ||
@@ -122,7 +120,7 @@ export const StudentItem = ({ open = true, type, id }: Props) => {
             <PrimaryButton
               size="normal"
               fontColor="secondary"
-              onClick={() => handleNotInterest(id)}
+              onClick={() => handleNotInterest(userId)}
             >
               Brak zainteresowania
             </PrimaryButton>
@@ -131,7 +129,7 @@ export const StudentItem = ({ open = true, type, id }: Props) => {
             <PrimaryButton
               size="normal"
               fontColor="secondary"
-              onClick={() => handleReserveTalk(id)}
+              onClick={() => handleReserveTalk(userId)}
             >
               Zarezerwuj rozmowę
             </PrimaryButton>
@@ -140,7 +138,7 @@ export const StudentItem = ({ open = true, type, id }: Props) => {
             <PrimaryButton
               size="normal"
               fontColor="secondary"
-              onClick={() => handleHire(id)}
+              onClick={() => handleHire(userId)}
             >
               Zatrudnij
             </PrimaryButton>
@@ -149,7 +147,7 @@ export const StudentItem = ({ open = true, type, id }: Props) => {
             <PrimaryButton
               size="normal"
               fontColor="secondary"
-              onClick={() => handleCancelHire(id)}
+              onClick={() => handleCancelHire(userId)}
             >
               Anuluj zatrudnienie
             </PrimaryButton>
@@ -158,60 +156,79 @@ export const StudentItem = ({ open = true, type, id }: Props) => {
             <PrimaryButton
               size="normal"
               fontColor="secondary"
-              onClick={() => handleDeleteUser(id)}
+              onClick={() => handleDeleteUser(userId)}
             >
               Usuń użytkownika
             </PrimaryButton>
           )}
-          <button className={classes.button} onClick={handleToggleMenu}>
+          <button className={classes.button} onClick={handleToggleDetails}>
             <i className="bx bx-chevron-up" ref={iconRef}></i>
           </button>
         </div>
       </div>
       <div className={classes.details} ref={detailsRef}>
-        <NoteCard title="Ocena przejścia kursu" note={1.7} stars={false} />
-        <NoteCard
-          title="Ocena aktywności i zaangażowania na kursie"
-          note={4}
-          stars={false}
-          flex={1.4}
-        />
-        <NoteCard
-          title="Ocena kodu w projekcie własnym"
-          note={4.5}
-          stars={false}
-        />
-        <NoteCard
-          title="Ocena pracy w zespole w Scrum"
-          note={5}
-          stars={false}
-        />
-        <PreferencesCard title="Preferowane miejsce pracy" value="Biuro" />
-        <PreferencesCard
-          title="Docelowe miasto, gdzie chce pracować kandydat"
-          value="Warszawa"
-          flex={1.5}
-        />
-        <PreferencesCard
-          title="Oczekiwany typ kontraktu"
-          value="Umowa o pracę"
-          flex={1.6}
-        />
-        <PreferencesCard
-          title="Oczekiwane wynagrodzenie miesięczne netto"
-          value="8000 zł"
-          flex={1.4}
-        />
-        <PreferencesCard
-          title="Zgoda na odbycie bezpłatnych praktyk/stażu na początek"
-          value="TAK"
-          flex={2}
-        />
-        <PreferencesCard
-          title="Komercyjne doświadczenie w programowaniu"
-          value="6 miesięcy"
-          flex={1.4}
-        />
+        {type === "adminHR" && (
+          <>
+            <PreferencesCard title="Nazwa firmy:" value={company} flex={1.5} />
+            <PreferencesCard
+              title="E-mail:"
+              value="mail@google.com"
+              flex={1.5}
+            />
+            <PreferencesCard
+              title="Maksymalna liczba rezerwacji:"
+              value={maxReservedStudents.toString()}
+              flex={1.5}
+            />
+          </>
+        )}
+        {type !== "adminHR" && (
+          <>
+            <NoteCard title="Ocena przejścia kursu" note={1.7} stars={false} />
+            <NoteCard
+              title="Ocena aktywności i zaangażowania na kursie"
+              note={4}
+              stars={false}
+              flex={1.4}
+            />
+            <NoteCard
+              title="Ocena kodu w projekcie własnym"
+              note={4.5}
+              stars={false}
+            />
+            <NoteCard
+              title="Ocena pracy w zespole w Scrum"
+              note={5}
+              stars={false}
+            />
+            <PreferencesCard title="Preferowane miejsce pracy" value="Biuro" />
+            <PreferencesCard
+              title="Docelowe miasto, gdzie chce pracować kandydat"
+              value="Warszawa"
+              flex={1.5}
+            />
+            <PreferencesCard
+              title="Oczekiwany typ kontraktu"
+              value="Umowa o pracę"
+              flex={1.6}
+            />
+            <PreferencesCard
+              title="Oczekiwane wynagrodzenie miesięczne netto"
+              value="8000 zł"
+              flex={1.4}
+            />
+            <PreferencesCard
+              title="Zgoda na odbycie bezpłatnych praktyk/stażu na początek"
+              value="TAK"
+              flex={2}
+            />
+            <PreferencesCard
+              title="Komercyjne doświadczenie w programowaniu"
+              value="6 miesięcy"
+              flex={1.4}
+            />
+          </>
+        )}
       </div>
     </li>
   );

@@ -1,7 +1,6 @@
 import React, { MouseEventHandler } from "react";
 import { Form, Formik } from "formik";
 import { useSearch } from "../../../hooks/useSearch";
-import { useCurrentSearchParams } from "../../../hooks/useCurrentSearchParams";
 import { PrimaryButton } from "../../buttons/PrimaryButton/PrimaryButton";
 import { FormGroup } from "../FormGroup/FormGroup";
 import { CheckItem } from "../FormGroup/CheckItem/CheckItem";
@@ -14,7 +13,6 @@ import {
   degrees,
   ValidationSchema,
 } from "./filterFormData";
-import { fetchStudentsList } from "../../../utils/fetchStudentsList";
 import { initialFilterValues } from "../../../context/searchProviderData";
 import classes from "./FilterForm.module.css";
 
@@ -42,7 +40,7 @@ const printValues = (values: FilterValues) => {
     courseEngagment: ${courseEngagment}
     projectDegree: ${projectDegree}
     teamProjectDegree: ${teamProjectDegree}
-    expectedTypeWork: ${expectedTypeWork.join(", ")}
+    expectedTypeWork: ${expectedTypeWork}
     expectedContractType: ${expectedContractType.join(", ")}
     canTakeApprenticeship: ${canTakeApprenticeship}
     expectedSalaryFrom: ${expectedSalaryFrom}
@@ -52,7 +50,6 @@ const printValues = (values: FilterValues) => {
 };
 
 export const FilterForm = ({ type, closeModal }: Props) => {
-  const params = useCurrentSearchParams(type);
   const { filterOptions, setFilterOptions } = useSearch();
 
   return (
@@ -67,10 +64,6 @@ export const FilterForm = ({ type, closeModal }: Props) => {
             [type]: {
               ...values,
             },
-          });
-          fetchStudentsList({
-            ...params,
-            ...values,
           });
           alert(printValues(values));
         }}
@@ -145,7 +138,7 @@ export const FilterForm = ({ type, closeModal }: Props) => {
             <FormGroup title="Preferowane miejsce pracy">
               {expectedTypeWork.map(({ value, name }) => (
                 <CheckItem
-                  type="checkbox"
+                  type="radio"
                   groupName="expectedTypeWork"
                   value={value}
                   name={name}

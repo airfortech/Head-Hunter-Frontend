@@ -108,3 +108,8 @@
 .select [class$="-option"]:focus {
   background-color: var(--color-15);
 }
+
+.site {
+  min-width: 90px;
+  text-align: center;
+}
