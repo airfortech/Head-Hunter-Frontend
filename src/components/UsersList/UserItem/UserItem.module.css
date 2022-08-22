@@ -1,4 +1,5 @@
 .StudentItem {
+  position: relative;
   border-bottom: 17px solid var(--color-2);
   overflow: hidden;
 }

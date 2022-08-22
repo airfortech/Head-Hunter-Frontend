@@ -1,11 +1,15 @@
 import { HrProfileEntity, UsersListType } from "../../../types";
 import React, { useEffect, useRef, useState } from "react";
+import { useSearch } from "../../../hooks/useSearch";
 import { NavLink } from "react-router-dom";
 import { gsap } from "gsap";
 import { PrimaryButton } from "../../buttons/PrimaryButton/PrimaryButton";
 import { NoteCard } from "../../NoteCard/NoteCard";
 import { PreferencesCard } from "../../PreferencesCard/PreferencesCard";
 import { Avatar } from "../../Avatar/Avatar";
+import { Modal } from "../../Modal/Modal";
+import { ConfirmationPrompt } from "../../ConfirmationPrompt/ConfirmationPrompt";
+import { fetchDeleteUser } from "../../../utils/fetchDeleteuser";
 import classes from "./UserItem.module.css";
 
 interface Props {
@@ -19,6 +23,11 @@ export const UserItem = ({ open = false, type, data }: Props) => {
   const iconRef = useRef<HTMLElement>(null);
   const detailsRef = useRef<HTMLDivElement>(null);
   const tweenRef = useRef<GSAPTimeline>();
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const { refreshList } = useSearch();
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
   const { userId, fullName, company, maxReservedStudents } = data;
 
@@ -32,8 +41,15 @@ export const UserItem = ({ open = false, type, data }: Props) => {
     setDetailsOpen((prevState) => !prevState);
   };
 
-  const handleDeleteUser = (userId: string) => {
-    console.log("handleDeleteUser", userId);
+  const handleDeleteUser = async () => {
+    try {
+      await fetchDeleteUser({ id: userId });
+      closeModal();
+      refreshList();
+    } catch (e) {
+      console.log(e);
+      closeModal();
+    }
   };
   const handleReserveTalk = (userId: string) => {
     console.log("handleReserveTalk", userId);
@@ -95,6 +111,14 @@ export const UserItem = ({ open = false, type, data }: Props) => {
 
   return (
     <li className={classes.StudentItem}>
+      <Modal opened={isModalOpen} name="Sort Modal">
+        <ConfirmationPrompt
+          title="Usuwanie użytkownika"
+          question="Czy na pewno usunąć użytkownika?"
+          closeModal={closeModal}
+          onConfirm={handleDeleteUser}
+        />
+      </Modal>
       <div className={classes.info}>
         <div className={classes.personal}>
           {type === "hrStudentToTalk" && (
@@ -156,7 +180,7 @@ export const UserItem = ({ open = false, type, data }: Props) => {
             <PrimaryButton
               size="normal"
               fontColor="secondary"
-              onClick={() => handleDeleteUser(userId)}
+              onClick={openModal}
             >
               Usuń użytkownika
             </PrimaryButton>
