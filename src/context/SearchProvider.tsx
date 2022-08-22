@@ -76,7 +76,7 @@ export const SearchProvider = ({ children }: Props) => {
   }, [auth]);
 
   useEffect(() => {
-    getList();
+    if (refresh > 0) getList();
   }, [refresh]);
 
   return (
