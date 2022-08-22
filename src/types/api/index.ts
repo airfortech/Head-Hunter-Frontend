@@ -1,5 +1,7 @@
 export * from "./api";
 export * from "./changePassword";
+export * from "./deleteUser";
+export * from "./editHr";
 export * from "./getTraineeProfile";
 export * from "./getUsersList";
 export * from "./login";

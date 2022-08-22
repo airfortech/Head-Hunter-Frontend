@@ -25,10 +25,10 @@ export const ConfirmationPrompt = ({
       </div>
       <p className={classes.question}>{question}</p>
       <div className={classes.actions}>
-        <PrimaryButton color="primary" size="large" onClick={onConfirm}>
+        <PrimaryButton color="primary" onClick={onConfirm}>
           Tak
         </PrimaryButton>
-        <PrimaryButton color="secondary" size="large" onClick={closeModal}>
+        <PrimaryButton color="secondary" onClick={closeModal}>
           Nie
         </PrimaryButton>
       </div>

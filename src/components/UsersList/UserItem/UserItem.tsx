@@ -11,6 +11,7 @@ import { Modal } from "../../Modal/Modal";
 import { ConfirmationPrompt } from "../../ConfirmationPrompt/ConfirmationPrompt";
 import { fetchDeleteUser } from "../../../utils/fetchDeleteuser";
 import classes from "./UserItem.module.css";
+import { EditHrForm } from "../../EditHrForm/EditHrForm";
 
 interface Props {
   open?: boolean;
@@ -18,16 +19,34 @@ interface Props {
   data: HrProfileEntity;
 }
 
+type ModalTypes = "deleteUser" | "editHr" | "none";
+
+interface IsModalOpen {
+  active: boolean;
+  modalType?: ModalTypes;
+}
+
 export const UserItem = ({ open = false, type, data }: Props) => {
   const [isDetailsOpen, setDetailsOpen] = useState(open);
   const iconRef = useRef<HTMLElement>(null);
   const detailsRef = useRef<HTMLDivElement>(null);
   const tweenRef = useRef<GSAPTimeline>();
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<IsModalOpen>({
+    active: false,
+  });
   const { refreshList } = useSearch();
 
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
+  const openModal = (modalType: ModalTypes) =>
+    setIsModalOpen({
+      active: true,
+      modalType,
+    });
+
+  const closeModal = () =>
+    setIsModalOpen({
+      active: false,
+      modalType: "none",
+    });
 
   const { userId, fullName, company, maxReservedStudents } = data;
 
@@ -111,13 +130,19 @@ export const UserItem = ({ open = false, type, data }: Props) => {
 
   return (
     <li className={classes.StudentItem}>
-      <Modal opened={isModalOpen} name="Sort Modal">
-        <ConfirmationPrompt
-          title="Usuwanie użytkownika"
-          question="Czy na pewno usunąć użytkownika?"
-          closeModal={closeModal}
-          onConfirm={handleDeleteUser}
-        />
+      <Modal opened={isModalOpen.active} name="Sort Modal">
+        {isModalOpen.modalType === "deleteUser" ? (
+          <ConfirmationPrompt
+            title="Usuwanie użytkownika"
+            question="Czy na pewno usunąć użytkownika?"
+            closeModal={closeModal}
+            onConfirm={handleDeleteUser}
+          />
+        ) : isModalOpen.modalType === "editHr" ? (
+          <EditHrForm data={data} closeModal={closeModal} />
+        ) : (
+          <div></div>
+        )}
       </Modal>
       <div className={classes.info}>
         <div className={classes.personal}>
@@ -176,11 +201,20 @@ export const UserItem = ({ open = false, type, data }: Props) => {
               Anuluj zatrudnienie
             </PrimaryButton>
           )}
+          {type === "adminHR" && (
+            <PrimaryButton
+              size="normal"
+              fontColor="secondary"
+              onClick={() => openModal("editHr")}
+            >
+              Edytuj
+            </PrimaryButton>
+          )}
           {(type === "adminStudent" || type === "adminHR") && (
             <PrimaryButton
               size="normal"
               fontColor="secondary"
-              onClick={openModal}
+              onClick={() => openModal("deleteUser")}
             >
               Usuń użytkownika
             </PrimaryButton>
