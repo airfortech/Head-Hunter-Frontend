@@ -1,5 +1,6 @@
 import { HrProfileEntity, UsersListType } from "../../../types";
 import React, { useEffect, useRef, useState } from "react";
+import { useSearch } from "../../../hooks/useSearch";
 import { NavLink } from "react-router-dom";
 import { gsap } from "gsap";
 import { PrimaryButton } from "../../buttons/PrimaryButton/PrimaryButton";
@@ -8,8 +9,8 @@ import { PreferencesCard } from "../../PreferencesCard/PreferencesCard";
 import { Avatar } from "../../Avatar/Avatar";
 import { Modal } from "../../Modal/Modal";
 import { ConfirmationPrompt } from "../../ConfirmationPrompt/ConfirmationPrompt";
-import classes from "./UserItem.module.css";
 import { fetchDeleteUser } from "../../../utils/fetchDeleteuser";
+import classes from "./UserItem.module.css";
 
 interface Props {
   open?: boolean;
@@ -23,6 +24,7 @@ export const UserItem = ({ open = false, type, data }: Props) => {
   const detailsRef = useRef<HTMLDivElement>(null);
   const tweenRef = useRef<GSAPTimeline>();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const { refreshList } = useSearch();
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -40,11 +42,10 @@ export const UserItem = ({ open = false, type, data }: Props) => {
   };
 
   const handleDeleteUser = async () => {
-    console.log("handleDeleteUser", userId);
     try {
-      const response = await fetchDeleteUser({ id: userId });
-      console.log(response.message, response.data.deleteUserId);
+      await fetchDeleteUser({ id: userId });
       closeModal();
+      refreshList();
     } catch (e) {
       console.log(e);
       closeModal();

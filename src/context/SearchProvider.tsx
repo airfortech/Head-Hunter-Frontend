@@ -35,6 +35,7 @@ export const SearchContext = createContext<SearchOptions>({
   setCurrentPages: () => {},
   usersLists: initialUsersLists,
   setUsersLists: () => {},
+  refreshList: () => {},
 });
 
 export const SearchProvider = ({ children }: Props) => {
@@ -46,6 +47,7 @@ export const SearchProvider = ({ children }: Props) => {
   const [type, setType] = useState<UsersListType>(initialType);
   const [currentPages, setCurrentPages] = useState<PagesOptions>(initialPages);
   const [usersLists, setUsersLists] = useState<UsersLists>(initialUsersLists);
+  const [refresh, setRefresh] = useState<number>(0);
   const { auth } = useAuth();
 
   const getList = async () => {
@@ -61,6 +63,10 @@ export const SearchProvider = ({ children }: Props) => {
     });
   };
 
+  const refreshList = () => {
+    setRefresh((prevState) => prevState + 1);
+  };
+
   useEffect(() => {
     getList();
   }, [type, currentPages, filterOptions, sortOptions, limit]);
@@ -68,6 +74,10 @@ export const SearchProvider = ({ children }: Props) => {
   useEffect(() => {
     getList();
   }, [auth]);
+
+  useEffect(() => {
+    getList();
+  }, [refresh]);
 
   return (
     <SearchContext.Provider
@@ -84,6 +94,7 @@ export const SearchProvider = ({ children }: Props) => {
         setCurrentPages,
         usersLists,
         setUsersLists,
+        refreshList,
       }}
     >
       {children}

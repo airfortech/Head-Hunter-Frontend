@@ -77,4 +77,5 @@ export interface SearchOptions {
   setCurrentPages: Dispatch<React.SetStateAction<PagesOptions>>;
   usersLists: UsersLists;
   setUsersLists: Dispatch<React.SetStateAction<UsersLists>>;
+  refreshList: Dispatch<void>;
 }
