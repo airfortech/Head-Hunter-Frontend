@@ -1,17 +1,13 @@
-import { HrProfileEntity } from "../../types";
 import React, { MouseEventHandler, useState } from "react";
-import { useSearch } from "../../hooks/useSearch";
 import { Form, Formik } from "formik";
 import { PrimaryButton } from "../buttons/PrimaryButton/PrimaryButton";
 import { Input } from "../Input/Input";
 import { FormGroup } from "../SearchPanel/FormGroup/FormGroup";
 import { Spinner } from "../Spinner/Spinner";
-import { ValidationSchema } from "./EditHrFormData";
-import { fetchEditHr } from "../../utils/fetchEditHr";
-import classes from "./EditHrForm.module.css";
+import { ValidationSchema } from "./AddHrFormData";
+import classes from "./AddHrForm.module.css";
 
 interface Props {
-  data: HrProfileEntity;
   closeModal: MouseEventHandler;
 }
 
@@ -25,17 +21,14 @@ const initialApiInfo: ApiInfo = {
   message: "",
 };
 
-export const EditHrForm = ({ data, closeModal }: Props) => {
+export const AddHrForm = ({ closeModal }: Props) => {
   const [apiInfo, setApiInfo] = useState<ApiInfo>(initialApiInfo);
-  const [isSpinnerLoading, setIsSpinnerLoading] = useState(false);
-  const { refreshList } = useSearch();
-
-  const { userId, maxReservedStudents, fullName } = data;
+  const [isSpinnerLoading /* setIsSpinnerLoading */] = useState(false);
 
   return (
-    <div className={classes.EditHrForm}>
+    <div className={classes.AddHrForm}>
       <div className={classes.row}>
-        <h2>{`Edycja ${fullName}`}</h2>
+        <h2>Dodawanie Hrowca</h2>
         <PrimaryButton
           size="normal"
           color="quaternary"
@@ -46,29 +39,31 @@ export const EditHrForm = ({ data, closeModal }: Props) => {
         </PrimaryButton>
       </div>
       <Formik
-        initialValues={{ maxReservedStudents: maxReservedStudents }}
+        initialValues={{ test: "test" }}
         validationSchema={ValidationSchema}
         validate={() => setApiInfo(initialApiInfo)}
-        onSubmit={async ({ maxReservedStudents }) => {
-          try {
-            setIsSpinnerLoading(true);
-            await fetchEditHr({
-              id: userId,
-              maxReservedStudents,
-            });
-            setIsSpinnerLoading(false);
-            setApiInfo({
-              type: "success",
-              message: "Zmieniłeś dane Hrowca!",
-            });
-            refreshList();
-          } catch (e) {
-            setApiInfo({
-              type: "error",
-              message: "Spróbuj później!",
-            });
-            setIsSpinnerLoading(false);
-          }
+        onSubmit={async () => {
+          console.log("addHr");
+
+          // try {
+          //   setIsSpinnerLoading(true);
+          //   await fetchEditHr({
+          //     id: userId,
+          //     maxReservedStudents,
+          //   });
+          //   setIsSpinnerLoading(false);
+          //   setApiInfo({
+          //     type: "success",
+          //     message: "Zmieniłeś dane Hrowca!",
+          //   });
+          //   refreshList();
+          // } catch (e) {
+          //   setApiInfo({
+          //     type: "error",
+          //     message: "Spróbuj później!",
+          //   });
+          //   setIsSpinnerLoading(false);
+          // }
         }}
       >
         {({ errors, isValid }) => (
@@ -77,7 +72,7 @@ export const EditHrForm = ({ data, closeModal }: Props) => {
               <Input
                 type="text"
                 size="normal"
-                name="maxReservedStudents"
+                name="test"
                 forFormik
                 placeholder="np. 9"
               />
@@ -87,8 +82,8 @@ export const EditHrForm = ({ data, closeModal }: Props) => {
                 apiInfo.type === "success" && classes.success
               }`}
             >
-              {errors.maxReservedStudents
-                ? errors.maxReservedStudents
+              {errors.test
+                ? errors.test
                 : apiInfo.message
                 ? apiInfo.message
                 : null}
