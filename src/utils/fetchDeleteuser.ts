@@ -1,5 +1,5 @@
-import { config } from "../config/config";
 import { DeleteUserRequest, DeleteUserResponse } from "../types/api/deleteUser";
+import { config } from "../config/config";
 
 export const fetchDeleteUser = async (
   data: DeleteUserRequest

@@ -1,11 +1,13 @@
 import { HrProfileEntity } from "../../types";
 import React, { MouseEventHandler, useState } from "react";
+import { useSearch } from "../../hooks/useSearch";
 import { Form, Formik } from "formik";
 import { PrimaryButton } from "../buttons/PrimaryButton/PrimaryButton";
 import { Input } from "../Input/Input";
 import { FormGroup } from "../SearchPanel/FormGroup/FormGroup";
 import { Spinner } from "../Spinner/Spinner";
 import { ValidationSchema } from "./EditHrFormData";
+import { fetchEditHr } from "../../utils/fetchEditHr";
 import classes from "./EditHrForm.module.css";
 
 interface Props {
@@ -24,8 +26,11 @@ const initialApiInfo: ApiInfo = {
 };
 
 export const EditHrForm = ({ data, closeModal }: Props) => {
-  const [apiInfo /* setApiInfo */] = useState<ApiInfo>(initialApiInfo);
-  const [isSpinnerLoading /* setIsSpinnerLoading */] = useState(false);
+  const [apiInfo, setApiInfo] = useState<ApiInfo>(initialApiInfo);
+  const [isSpinnerLoading, setIsSpinnerLoading] = useState(false);
+  const { refreshList } = useSearch();
+
+  const { userId, maxReservedStudents } = data;
 
   return (
     <div className={classes.EditHrForm}>
@@ -41,10 +46,29 @@ export const EditHrForm = ({ data, closeModal }: Props) => {
         </PrimaryButton>
       </div>
       <Formik
-        initialValues={{ maxReservedStudents: data.maxReservedStudents }}
+        initialValues={{ maxReservedStudents: maxReservedStudents }}
         validationSchema={ValidationSchema}
-        onSubmit={(values) => {
-          console.log("editHr", values);
+        validate={() => setApiInfo(initialApiInfo)}
+        onSubmit={async ({ maxReservedStudents }) => {
+          try {
+            setIsSpinnerLoading(true);
+            await fetchEditHr({
+              id: userId,
+              maxReservedStudents,
+            });
+            setIsSpinnerLoading(false);
+            setApiInfo({
+              type: "success",
+              message: "Zmieniłeś dane Hrowca!",
+            });
+            refreshList();
+          } catch (e) {
+            setApiInfo({
+              type: "error",
+              message: "Spróbuj później!",
+            });
+            setIsSpinnerLoading(false);
+          }
         }}
       >
         {({ errors, isValid }) => (
