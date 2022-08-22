@@ -108,6 +108,7 @@ export interface TraineeProfileRequest {
 
 export interface HrProfileEntity {
   id: string;
+  email: string;
   fullName: string;
   company: string;
   maxReservedStudents: number;

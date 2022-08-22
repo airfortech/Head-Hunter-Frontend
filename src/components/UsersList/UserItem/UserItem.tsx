@@ -48,7 +48,7 @@ export const UserItem = ({ open = false, type, data }: Props) => {
       modalType: "none",
     });
 
-  const { userId, fullName, company, maxReservedStudents } = data;
+  const { userId, email, fullName, company, maxReservedStudents } = data;
 
   const linkToCV = (type: string) => {
     if (type === "adminStudent") return "/panel/admin/students/u" + userId;
@@ -228,11 +228,7 @@ export const UserItem = ({ open = false, type, data }: Props) => {
         {type === "adminHR" && (
           <>
             <PreferencesCard title="Nazwa firmy:" value={company} flex={1.5} />
-            <PreferencesCard
-              title="E-mail:"
-              value="mail@google.com"
-              flex={1.5}
-            />
+            <PreferencesCard title="E-mail:" value={email} flex={1.5} />
             <PreferencesCard
               title="Maksymalna liczba rezerwacji:"
               value={maxReservedStudents.toString()}
