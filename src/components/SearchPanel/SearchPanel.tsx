@@ -6,8 +6,9 @@ import { SortForm } from "./SortForm/SortForm";
 import { FilterForm } from "./FilterForm/FilterForm";
 import { UsersListType } from "../../types";
 import classes from "./SearchPanel.module.css";
+import { AddHrForm } from "../AddHrForm/AddHrForm";
 
-type ModalTypes = "sortModal" | "filterModal";
+type ModalTypes = "sortModal" | "filterModal" | "addHrModal";
 
 interface Props {
   type: UsersListType;
@@ -34,10 +35,6 @@ export const SearchPanel = ({ type }: Props) => {
       modalType,
     });
 
-  const handleAddHR = () => {
-    console.log("Add HR");
-  };
-
   useEffect(() => {}, [isModalOpen]);
 
   return (
@@ -50,6 +47,8 @@ export const SearchPanel = ({ type }: Props) => {
             type={type}
             closeModal={() => closeModal("filterModal")}
           />
+        ) : isModalOpen.modalType === "addHrModal" ? (
+          <AddHrForm closeModal={() => closeModal("addHrModal")} />
         ) : (
           <div></div>
         )}
@@ -66,7 +65,7 @@ export const SearchPanel = ({ type }: Props) => {
         <PrimaryButton
           size="large"
           color="primary"
-          onClick={() => handleAddHR()}
+          onClick={() => openModal("addHrModal")}
         >
           Dodaj HRowca
         </PrimaryButton>

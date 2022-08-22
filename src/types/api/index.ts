@@ -1,3 +1,4 @@
+export * from "./addHr";
 export * from "./api";
 export * from "./changePassword";
 export * from "./deleteUser";

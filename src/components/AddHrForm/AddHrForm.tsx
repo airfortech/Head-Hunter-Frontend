@@ -1,4 +1,3 @@
-import { HrProfileEntity } from "../../types";
 import React, { MouseEventHandler, useState } from "react";
 import { useSearch } from "../../hooks/useSearch";
 import { Form, Formik } from "formik";
@@ -6,12 +5,12 @@ import { PrimaryButton } from "../buttons/PrimaryButton/PrimaryButton";
 import { Input } from "../Input/Input";
 import { FormGroup } from "../SearchPanel/FormGroup/FormGroup";
 import { Spinner } from "../Spinner/Spinner";
-import { ValidationSchema } from "./EditHrFormData";
-import { fetchEditHr } from "../../utils/fetchEditHr";
-import classes from "./EditHrForm.module.css";
+import { initialHrInfoValues, ValidationSchema } from "./AddHrFormData";
+import { fetchAddHr } from "../../utils/fetchAddHr";
+import classes from "./AddHrForm.module.css";
+import { AddHrResponseMessage, JsonResponseStatus } from "../../types";
 
 interface Props {
-  data: HrProfileEntity;
   closeModal: MouseEventHandler;
 }
 
@@ -25,17 +24,15 @@ const initialApiInfo: ApiInfo = {
   message: "",
 };
 
-export const EditHrForm = ({ data, closeModal }: Props) => {
+export const AddHrForm = ({ closeModal }: Props) => {
   const [apiInfo, setApiInfo] = useState<ApiInfo>(initialApiInfo);
   const [isSpinnerLoading, setIsSpinnerLoading] = useState(false);
   const { refreshList } = useSearch();
 
-  const { userId, maxReservedStudents, fullName } = data;
-
   return (
-    <div className={classes.EditHrForm}>
+    <div className={classes.AddHrForm}>
       <div className={classes.row}>
-        <h2>{`Edycja ${fullName}`}</h2>
+        <h2>Dodawanie Hrowca</h2>
         <PrimaryButton
           size="normal"
           color="quaternary"
@@ -46,22 +43,39 @@ export const EditHrForm = ({ data, closeModal }: Props) => {
         </PrimaryButton>
       </div>
       <Formik
-        initialValues={{ maxReservedStudents: maxReservedStudents }}
+        initialValues={initialHrInfoValues}
         validationSchema={ValidationSchema}
         validate={() => setApiInfo(initialApiInfo)}
-        onSubmit={async ({ maxReservedStudents }) => {
+        onSubmit={async (
+          { fullName, email, company, maxReservedStudents },
+          { resetForm }
+        ) => {
+          console.log("addHr");
+
           try {
             setIsSpinnerLoading(true);
-            await fetchEditHr({
-              id: userId,
+            const { status, message } = await fetchAddHr({
+              fullName,
+              email,
+              company,
               maxReservedStudents,
             });
-            setIsSpinnerLoading(false);
-            setApiInfo({
-              type: "success",
-              message: "Zmieniłeś dane Hrowca!",
-            });
-            refreshList();
+            if (status === JsonResponseStatus.success) {
+              setIsSpinnerLoading(false);
+              setApiInfo({
+                type: "success",
+                message: "Dodałeś użytkownika Hr!",
+              });
+              resetForm();
+              refreshList();
+            }
+            if (message === AddHrResponseMessage.hrAlreadyExist) {
+              setIsSpinnerLoading(false);
+              setApiInfo({
+                type: "error",
+                message: "Użytkownik o takim adresie email już istnieje!",
+              });
+            }
           } catch (e) {
             setApiInfo({
               type: "error",
@@ -73,10 +87,37 @@ export const EditHrForm = ({ data, closeModal }: Props) => {
       >
         {({ errors, isValid }) => (
           <Form className={classes.form}>
+            <FormGroup title="Imię i nazwisko">
+              <Input
+                type="text"
+                size="large"
+                name="fullName"
+                forFormik
+                placeholder="np. Joe Doe"
+              />
+            </FormGroup>
+            <FormGroup title="Adres e-mail">
+              <Input
+                type="text"
+                size="large"
+                name="email"
+                forFormik
+                placeholder="np. joedoe@gmail.com"
+              />
+            </FormGroup>
+            <FormGroup title="Nazwa firmy">
+              <Input
+                type="text"
+                size="large"
+                name="company"
+                forFormik
+                placeholder="np. Google"
+              />
+            </FormGroup>
             <FormGroup title="Maksymalna liczba rezerwacji do interview">
               <Input
                 type="text"
-                size="normal"
+                size="large"
                 name="maxReservedStudents"
                 forFormik
                 placeholder="np. 9"
@@ -87,7 +128,13 @@ export const EditHrForm = ({ data, closeModal }: Props) => {
                 apiInfo.type === "success" && classes.success
               }`}
             >
-              {errors.maxReservedStudents
+              {errors.fullName
+                ? errors.fullName
+                : errors.email
+                ? errors.email
+                : errors.company
+                ? errors.company
+                : errors.maxReservedStudents
                 ? errors.maxReservedStudents
                 : apiInfo.message
                 ? apiInfo.message

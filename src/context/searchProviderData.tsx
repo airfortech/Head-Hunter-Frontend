@@ -50,11 +50,10 @@ export const initialFilterOptions: FilterOptions = {
   hrStudentHired: initialFilterValues,
 };
 
-const initLimit = config.resultsPerPageOptions.indexOf(
-  config.defaultResultsPerPageOption
-)
-  ? config.defaultResultsPerPageOption.toString()
-  : "10";
+const initLimit =
+  config.resultsPerPageOptions.indexOf(config.defaultResultsPerPageOption) > -1
+    ? config.defaultResultsPerPageOption.toString()
+    : "10";
 
 export const initialLimit: string = initLimit;
 

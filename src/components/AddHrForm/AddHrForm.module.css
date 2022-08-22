@@ -1,11 +1,11 @@
-.EditHrForm {
+.AddHrForm {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
 
-.EditHrForm h2 {
+.AddHrForm h2 {
   font-size: var(--font-size-xxl);
   font-weight: var(--font-weight-bold);
 }
@@ -14,7 +14,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   gap: 24px;
 }
 
