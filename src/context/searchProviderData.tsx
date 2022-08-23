@@ -8,6 +8,7 @@ import {
   UsersListType,
   FetchListResponse,
   UsersLists,
+  SearchesOptions,
 } from "../types";
 
 const initialSortValues: SortValues = {
@@ -70,6 +71,17 @@ export const initialPages: PagesOptions = {
   hrStudentAvailable: initialPage,
   hrStudentToTalk: initialPage,
   hrStudentHired: initialPage,
+};
+
+export const initialSearches: SearchesOptions = {
+  adminHR: "",
+  adminStudent: "",
+  adminStudentAvailable: "",
+  adminStudentToTalk: "",
+  adminStudentHired: "",
+  hrStudentAvailable: "",
+  hrStudentToTalk: "",
+  hrStudentHired: "",
 };
 
 export const initialUsersList: FetchListResponse = {

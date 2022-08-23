@@ -4,6 +4,7 @@ import { FetchList } from "../utils/fetchUsersList";
 import {
   FilterOptions,
   PagesOptions,
+  SearchesOptions,
   SearchOptions,
   SortOptions,
   UsersLists,
@@ -13,6 +14,7 @@ import {
   initialFilterOptions,
   initialLimit,
   initialPages,
+  initialSearches,
   initialSortOptions,
   initialType,
   initialUsersLists,
@@ -29,6 +31,8 @@ export const SearchContext = createContext<SearchOptions>({
   setFilterOptions: () => {},
   limit: initialLimit,
   setLimit: () => {},
+  search: initialSearches,
+  setSearch: () => {},
   type: initialType,
   setType: () => {},
   currentPages: initialPages,
@@ -44,6 +48,7 @@ export const SearchProvider = ({ children }: Props) => {
   const [filterOptions, setFilterOptions] =
     useState<FilterOptions>(initialFilterOptions);
   const [limit, setLimit] = useState<string>(initialLimit);
+  const [search, setSearch] = useState<SearchesOptions>(initialSearches);
   const [type, setType] = useState<UsersListType>(initialType);
   const [currentPages, setCurrentPages] = useState<PagesOptions>(initialPages);
   const [usersLists, setUsersLists] = useState<UsersLists>(initialUsersLists);
@@ -69,7 +74,7 @@ export const SearchProvider = ({ children }: Props) => {
 
   useEffect(() => {
     getList();
-  }, [type, currentPages, filterOptions, sortOptions, limit]);
+  }, [type, currentPages, filterOptions, sortOptions, limit, search]);
 
   useEffect(() => {
     getList();
@@ -88,6 +93,8 @@ export const SearchProvider = ({ children }: Props) => {
         setFilterOptions,
         limit,
         setLimit,
+        search,
+        setSearch,
         type,
         setType,
         currentPages,
