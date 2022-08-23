@@ -26,6 +26,7 @@
 }
 
 .select [class*="-control"] {
+  box-shadow: none;
   padding: 0 5px;
   height: 24px;
   min-height: auto;
@@ -33,6 +34,7 @@
   align-items: center;
   border-radius: 0;
   background-color: var(--color-12);
+  border: none;
 }
 
 .select [class$="-ValueContainer"] {
@@ -46,13 +48,21 @@
 }
 
 .select [class$="-singleValue"] {
+  position: relative;
   display: flex;
   align-items: center;
   color: var(--font-color-4);
 }
 
 .select [class$="-Input"] {
-  display: none;
+  position: absolute;
+  opacity: 0;
+}
+
+.select [class$="-Input"] input {
+  position: absolute;
+  opacity: 0;
+  outline: none;
 }
 
 .select [class$="-indicatorContainer"] {
