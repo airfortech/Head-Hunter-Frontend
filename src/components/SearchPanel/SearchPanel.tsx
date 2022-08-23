@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { useSearch } from "../../hooks/useSearch";
 import { PrimaryButton } from "../buttons/PrimaryButton/PrimaryButton";
 import { Input } from "../Input/Input";
 import { Modal } from "../Modal/Modal";
 import { SortForm } from "./SortForm/SortForm";
 import { FilterForm } from "./FilterForm/FilterForm";
 import { UsersListType } from "../../types";
-import classes from "./SearchPanel.module.css";
 import { AddHrForm } from "../AddHrForm/AddHrForm";
+import classes from "./SearchPanel.module.css";
 
 type ModalTypes = "sortModal" | "filterModal" | "addHrModal";
 
@@ -20,6 +21,7 @@ interface IsModalOpen {
 }
 
 export const SearchPanel = ({ type }: Props) => {
+  const { search, setSearch } = useSearch();
   const [isModalOpen, setIsModalOpen] = useState<IsModalOpen>({
     active: false,
   });
@@ -60,6 +62,8 @@ export const SearchPanel = ({ type }: Props) => {
           color="secondary"
           icon="search"
           placeholder="Szukaj"
+          value={search[type]}
+          onChange={(e) => setSearch({ ...search, [type]: e.target.value })}
         />
       ) : (
         <PrimaryButton

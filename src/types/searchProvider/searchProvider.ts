@@ -53,6 +53,17 @@ export interface PagesOptions {
   hrStudentHired: number;
 }
 
+export interface SearchesOptions {
+  adminHR: string;
+  adminStudent: string;
+  adminStudentAvailable: string;
+  adminStudentToTalk: string;
+  adminStudentHired: string;
+  hrStudentAvailable: string;
+  hrStudentToTalk: string;
+  hrStudentHired: string;
+}
+
 export interface UsersLists {
   adminHR: FetchListResponse;
   adminStudent: FetchListResponse;
@@ -71,6 +82,8 @@ export interface SearchOptions {
   setFilterOptions: Dispatch<React.SetStateAction<FilterOptions>>;
   limit: string;
   setLimit: Dispatch<React.SetStateAction<string>>;
+  search: SearchesOptions;
+  setSearch: Dispatch<React.SetStateAction<SearchesOptions>>;
   type: UsersListType;
   setType: Dispatch<React.SetStateAction<UsersListType>>;
   currentPages: PagesOptions;

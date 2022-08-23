@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEventHandler } from "react";
 import { Field, FieldProps } from "formik";
 import classes from "./Input.module.css";
 
@@ -12,6 +12,8 @@ interface Props {
   icon?: "search";
   required?: boolean;
   placeholder: string;
+  value?: string;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
 }
 
 enum Icons {
@@ -28,6 +30,8 @@ export const Input = ({
   icon,
   required = false,
   placeholder,
+  value,
+  onChange,
 }: Props) => {
   return (
     <div className={`${classes.Input} ${fullWidth ? classes.fullWidth : ""}`}>
@@ -42,6 +46,8 @@ export const Input = ({
           }`}
           required={required}
           autoComplete="off"
+          value={value}
+          onChange={onChange}
         />
       ) : (
         <Field name={name} type="text">
