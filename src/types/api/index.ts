@@ -8,5 +8,6 @@ export * from "./getUsersList";
 export * from "./login";
 export * from "./logout";
 export * from "./lostPassword";
+export * from "./register";
 export * from "./updateTraineeProfile";
 export * from "./uploadCsv";

@@ -1,5 +1,5 @@
-import { config } from "../config/config";
 import { AddHrRequest, AddHrResponse } from "../types";
+import { config } from "../config/config";
 
 export const fetchAddHr = async (
   data: AddHrRequest

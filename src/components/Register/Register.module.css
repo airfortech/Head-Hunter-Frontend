@@ -27,14 +27,6 @@
   gap: 27px;
 }
 
-.error {
-  width: 100%;
-  height: var(--font-size-nm);
-  font-size: var(--font-size-nm);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-15);
-}
-
 .link {
   font-size: var(--font-size-nm);
   color: var(--color-12);
@@ -44,4 +36,22 @@
 
 .link:hover {
   border-bottom: 1px solid var(--color-12);
+}
+
+.info {
+  width: 100%;
+  height: var(--font-size-lg);
+  font-size: var(--font-size-nm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-15);
+}
+
+.info.success {
+  color: var(--color-16);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
