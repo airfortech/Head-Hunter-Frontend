@@ -65,8 +65,6 @@ export const UserItem = ({ open = false, type, data }: Props) => {
     monthsOfCommercialExp,
   } = data;
 
-  console.log(githubAvatarSrc);
-
   const linkToCV = (type: string) => {
     if (type === "adminStudent") return "/panel/admin/students/" + id;
     return "/panel/hr/students/" + id;
