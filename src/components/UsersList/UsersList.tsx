@@ -9,7 +9,8 @@ interface Props {
 
 export const UsersList = ({ children }: Props) => {
   const ref = useRef<HTMLUListElement>(null);
-  const { type, currentPages, limit } = useSearch();
+  const { type, currentPages, limit, filterOptions, sortOptions, search } =
+    useSearch();
 
   useEffect(() => {
     const refCopy = ref.current;
@@ -23,7 +24,15 @@ export const UsersList = ({ children }: Props) => {
         ease: "sine.in",
       }
     );
-  }, [type, currentPages, limit]);
+
+    return () => {
+      gsap.to(refCopy, {
+        opacity: 0,
+        duration: 0,
+        ease: "sine.in",
+      });
+    };
+  }, [type, currentPages, limit, filterOptions, sortOptions, search]);
 
   return (
     <ul className={classes.UsersList} ref={ref}>

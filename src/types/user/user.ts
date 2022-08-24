@@ -52,7 +52,26 @@ export interface TraineeProfileEntity {
   createdAt?: Date;
 }
 
+export interface TraineeShortProfileEntity {
+  id?: string;
+  email?: string;
+  firstName?: string;
+  lastName?: string;
+  githubUsername?: string;
+  courseCompletion?: number;
+  courseEngagment?: number;
+  projectDegree?: number;
+  teamProjectDegree?: number;
+  expectedTypeWork?: string | null;
+  targetWorkCity?: string;
+  expectedContractType?: string;
+  expectedSalary?: string;
+  canTakeApprenticeship?: number;
+  monthsOfCommercialExp?: number;
+}
+
 export interface ConvertStudentInfo {
+  id: string;
   tel: string;
   email: string;
   firstName: string;
@@ -71,8 +90,8 @@ export interface ConvertStudentInfo {
   targetWorkCity: string;
   expectedContractType: string;
   expectedSalary: string;
-  canTakeApprenticeship: string;
-  monthsOfCommercialExp: string;
+  canTakeApprenticeship: number;
+  monthsOfCommercialExp: number;
   education: string;
   workExperience: string;
   courses: string;

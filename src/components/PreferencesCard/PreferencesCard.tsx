@@ -3,7 +3,7 @@ import classes from "./PreferencesCard.module.css";
 
 interface Props {
   title: string;
-  value: string;
+  value: string | number;
   flex?: number;
 }
 

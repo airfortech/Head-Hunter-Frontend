@@ -9,6 +9,7 @@ import {
   FetchListResponse,
   UsersLists,
   SearchesOptions,
+  FetchHrListResponse,
 } from "../types";
 
 const initialSortValues: SortValues = {
@@ -91,8 +92,15 @@ export const initialUsersList: FetchListResponse = {
   users: [],
 };
 
+export const initialHrUsersList: FetchHrListResponse = {
+  page: 0,
+  count: 0,
+  pages: 0,
+  users: [],
+};
+
 export const initialUsersLists: UsersLists = {
-  adminHR: initialUsersList,
+  adminHR: initialHrUsersList,
   adminStudent: initialUsersList,
   adminStudentAvailable: initialUsersList,
   adminStudentToTalk: initialUsersList,

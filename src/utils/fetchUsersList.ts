@@ -1,12 +1,14 @@
 import {
+  FetchHrListResponse,
   FetchListResponse,
   FetchUsersList,
   FetchUsersListRequest,
+  GetHrUsersListResponse,
   GetUsersListResponse,
-  UserRole,
   UsersListType,
 } from "../types";
 import { config } from "../config/config";
+import { convertShortStudentInfo } from "./convertStudentInfo";
 
 const fetchUsersListUrl = (params: FetchUsersList): string => {
   const newParams: FetchUsersListRequest = {};
@@ -26,8 +28,8 @@ const fetchUsersListUrl = (params: FetchUsersList): string => {
   newParams.expectedSalaryTo = params.expectedSalaryTo || "";
   newParams.sortType = params.sortType || "descending";
   newParams.sortByType = params.sortByType || "courseCompletion";
-
   newParams.expectedContractType = params.expectedContractType?.join(",") || "";
+  newParams.status = params.status || "";
 
   const generateQueryString = () => {
     const qs = new URLSearchParams({ ...newParams });
@@ -39,16 +41,53 @@ const fetchUsersListUrl = (params: FetchUsersList): string => {
 
 export const FetchList = async (
   type: UsersListType,
-  role: UserRole,
   params: FetchUsersList
 ): Promise<FetchListResponse> => {
-  const page = type === "adminHR" ? "hr" : "hr";
+  const status =
+    type === "adminStudentAvailable" || type === "hrStudentAvailable"
+      ? "available"
+      : type === "adminStudentToTalk" || type === "hrStudentToTalk"
+      ? "interviewed"
+      : type === "adminStudentHired" || type === "hrStudentHired"
+      ? "hired"
+      : "";
   try {
-    const url = `${config.apiUrl}${role}/${page}/?${fetchUsersListUrl(params)}`;
+    const url = `${config.apiUrl}trainees/?${fetchUsersListUrl({
+      ...params,
+      status,
+    })}`;
     const response = await fetch(url, {
       credentials: "include",
     });
     const data: GetUsersListResponse = await response.json();
+    return {
+      count: data.data.count,
+      page: data.data.page,
+      pages: data.data.pages,
+      users: data.data.users.map((user) => convertShortStudentInfo(user)),
+    };
+  } catch (e) {
+    console.log("error fetching");
+    return {
+      page: 0,
+      count: 0,
+      pages: 0,
+      users: [],
+    };
+  }
+};
+
+export const FetchHrList = async (
+  params: FetchUsersList
+): Promise<FetchHrListResponse> => {
+  try {
+    const url = `${config.apiUrl}admin/hr/?${fetchUsersListUrl({
+      ...params,
+    })}`;
+    const response = await fetch(url, {
+      credentials: "include",
+    });
+    const data: GetHrUsersListResponse = await response.json();
     return data.data;
   } catch (e) {
     console.log("error fetching");

@@ -14,7 +14,8 @@ interface Props {
 }
 
 export const SortForm = ({ type, closeModal }: Props) => {
-  const { sortOptions, setSortOptions } = useSearch();
+  const { sortOptions, setSortOptions, currentPages, setCurrentPages } =
+    useSearch();
 
   return (
     <div className={classes.SortForm}>
@@ -38,6 +39,7 @@ export const SortForm = ({ type, closeModal }: Props) => {
               ...values,
             },
           });
+          setCurrentPages({ ...currentPages, [type]: 1 });
         }}
       >
         <Form className={classes.form}>

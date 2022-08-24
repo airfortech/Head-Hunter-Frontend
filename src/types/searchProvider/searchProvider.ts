@@ -1,5 +1,5 @@
 import { Dispatch } from "react";
-import { FetchListResponse } from "..";
+import { FetchHrListResponse, FetchListResponse } from "..";
 import { UsersListType } from "../components";
 
 export interface SortValues {
@@ -65,7 +65,7 @@ export interface SearchesOptions {
 }
 
 export interface UsersLists {
-  adminHR: FetchListResponse;
+  adminHR: FetchHrListResponse;
   adminStudent: FetchListResponse;
   adminStudentAvailable: FetchListResponse;
   adminStudentToTalk: FetchListResponse;

@@ -5,7 +5,7 @@ import { PrimaryButton } from "../../buttons/PrimaryButton/PrimaryButton";
 import { FormGroup } from "../FormGroup/FormGroup";
 import { CheckItem } from "../FormGroup/CheckItem/CheckItem";
 import { Input } from "../../Input/Input";
-import { FilterValues, UsersListType } from "../../../types";
+import { UsersListType } from "../../../types";
 import {
   canTakeApprenticeship,
   expectedContractType,
@@ -21,36 +21,9 @@ interface Props {
   type: UsersListType;
 }
 
-const printValues = (values: FilterValues) => {
-  const {
-    courseCompletion,
-    courseEngagment,
-    projectDegree,
-    teamProjectDegree,
-    expectedTypeWork,
-    expectedContractType,
-    canTakeApprenticeship,
-    monthsOfCommercialExp,
-    expectedSalaryFrom,
-    expectedSalaryTo,
-  } = values;
-
-  return `
-    courseCompletion: ${courseCompletion}
-    courseEngagment: ${courseEngagment}
-    projectDegree: ${projectDegree}
-    teamProjectDegree: ${teamProjectDegree}
-    expectedTypeWork: ${expectedTypeWork}
-    expectedContractType: ${expectedContractType.join(", ")}
-    canTakeApprenticeship: ${canTakeApprenticeship}
-    expectedSalaryFrom: ${expectedSalaryFrom}
-    expectedSalaryTo: ${expectedSalaryTo}
-    monthsOfCommercialExp: ${monthsOfCommercialExp}
-  `;
-};
-
 export const FilterForm = ({ type, closeModal }: Props) => {
-  const { filterOptions, setFilterOptions } = useSearch();
+  const { filterOptions, setFilterOptions, currentPages, setCurrentPages } =
+    useSearch();
 
   return (
     <div className={classes.FilterForm}>
@@ -65,7 +38,7 @@ export const FilterForm = ({ type, closeModal }: Props) => {
               ...values,
             },
           });
-          alert(printValues(values));
+          setCurrentPages({ ...currentPages, [type]: 1 });
         }}
       >
         {({ errors, isValid, resetForm }) => (
@@ -81,6 +54,7 @@ export const FilterForm = ({ type, closeModal }: Props) => {
                     ...filterOptions,
                     [type]: initialFilterValues,
                   });
+                  setCurrentPages({ ...currentPages, [type]: 1 });
                   resetForm();
                 }}
               >

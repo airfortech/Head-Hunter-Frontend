@@ -14,6 +14,7 @@ export interface FetchUsersList {
   expectedSalaryTo?: string;
   sortType?: string;
   sortByType?: string;
+  status?: string;
 }
 
 export interface FetchUsersListRequest {
@@ -32,4 +33,5 @@ export interface FetchUsersListRequest {
   expectedSalaryTo?: string;
   sortType?: string;
   sortByType?: string;
+  status?: string;
 }
