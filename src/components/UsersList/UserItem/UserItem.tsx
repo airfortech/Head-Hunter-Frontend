@@ -134,7 +134,7 @@ export const UserItem = ({ open = false, type, data }: Props) => {
         {isModalOpen.modalType === "deleteUser" ? (
           <ConfirmationPrompt
             title="Usuwanie użytkownika"
-            question="Czy na pewno usunąć użytkownika?"
+            question={`Czy na pewno usunąć użytkownika ${fullName}?`}
             closeModal={closeModal}
             onConfirm={handleDeleteUser}
           />

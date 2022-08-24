@@ -147,7 +147,7 @@ export const AddHrForm = ({ closeModal }: Props) => {
                 fontColor="secondary"
                 disabled={!isValid}
               >
-                Zmień dane
+                Dodaj Hrowca
               </PrimaryButton>
             </div>
           </Form>

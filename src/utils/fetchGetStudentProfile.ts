@@ -1,5 +1,5 @@
-import { config } from "../config/config";
 import { GetTraineeProfileRequest, GetTraineeProfileResponse } from "../types";
+import { config } from "../config/config";
 
 export const fetchGetStudentProfile = async ({
   id,
