@@ -57,12 +57,15 @@ export const SearchProvider = ({ children }: Props) => {
 
   const getList = async () => {
     if (!auth.role) return;
-    const data = await FetchList(type, auth.role, {
+    const data = await FetchList(type, {
       ...sortOptions[type],
       ...filterOptions[type],
       limit,
       page: currentPages[type],
+      search: search[type],
     });
+    console.log(data.count);
+
     setUsersLists((prevState) => {
       return { ...prevState, [type]: data };
     });

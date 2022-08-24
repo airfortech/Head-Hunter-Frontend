@@ -3,7 +3,6 @@ import {
   FetchUsersList,
   FetchUsersListRequest,
   GetUsersListResponse,
-  UserRole,
   UsersListType,
 } from "../types";
 import { config } from "../config/config";
@@ -26,8 +25,8 @@ const fetchUsersListUrl = (params: FetchUsersList): string => {
   newParams.expectedSalaryTo = params.expectedSalaryTo || "";
   newParams.sortType = params.sortType || "descending";
   newParams.sortByType = params.sortByType || "courseCompletion";
-
   newParams.expectedContractType = params.expectedContractType?.join(",") || "";
+  newParams.status = params.status || "";
 
   const generateQueryString = () => {
     const qs = new URLSearchParams({ ...newParams });
@@ -39,12 +38,24 @@ const fetchUsersListUrl = (params: FetchUsersList): string => {
 
 export const FetchList = async (
   type: UsersListType,
-  role: UserRole,
   params: FetchUsersList
 ): Promise<FetchListResponse> => {
-  const page = type === "adminHR" ? "hr" : "hr";
+  const pageUrl = type === "adminHR" ? "admin/hr" : "trainees";
+  const status =
+    type === "adminStudentAvailable" || type === "hrStudentAvailable"
+      ? "available"
+      : type === "adminStudentToTalk" || type === "hrStudentToTalk"
+      ? "interviewed"
+      : type === "adminStudentHired" || type === "hrStudentHired"
+      ? "hired"
+      : "";
+  console.log(status);
+
   try {
-    const url = `${config.apiUrl}${role}/${page}/?${fetchUsersListUrl(params)}`;
+    const url = `${config.apiUrl}${pageUrl}/?${fetchUsersListUrl({
+      ...params,
+      status,
+    })}`;
     const response = await fetch(url, {
       credentials: "include",
     });
