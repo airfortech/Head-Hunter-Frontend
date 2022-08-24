@@ -21,7 +21,7 @@ interface IsModalOpen {
 }
 
 export const SearchPanel = ({ type }: Props) => {
-  const { search, setSearch } = useSearch();
+  const { search, setSearch, currentPages, setCurrentPages } = useSearch();
   const [isModalOpen, setIsModalOpen] = useState<IsModalOpen>({
     active: false,
   });
@@ -63,7 +63,10 @@ export const SearchPanel = ({ type }: Props) => {
           icon="search"
           placeholder="Szukaj"
           value={search[type]}
-          onChange={(e) => setSearch({ ...search, [type]: e.target.value })}
+          onChange={(e) => {
+            setSearch({ ...search, [type]: e.target.value });
+            setCurrentPages({ ...currentPages, [type]: 1 });
+          }}
         />
       ) : (
         <PrimaryButton

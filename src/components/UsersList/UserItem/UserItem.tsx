@@ -1,4 +1,4 @@
-import { HrProfileEntity, UsersListType } from "../../../types";
+import { ConvertStudentInfo, UsersListType } from "../../../types";
 import React, { useEffect, useRef, useState } from "react";
 import { useSearch } from "../../../hooks/useSearch";
 import { NavLink } from "react-router-dom";
@@ -11,12 +11,11 @@ import { Modal } from "../../Modal/Modal";
 import { ConfirmationPrompt } from "../../ConfirmationPrompt/ConfirmationPrompt";
 import { fetchDeleteUser } from "../../../utils/fetchDeleteuser";
 import classes from "./UserItem.module.css";
-import { EditHrForm } from "../../EditHrForm/EditHrForm";
 
 interface Props {
   open?: boolean;
   type: UsersListType;
-  data: HrProfileEntity;
+  data: ConvertStudentInfo;
 }
 
 type ModalTypes = "deleteUser" | "editHr" | "none";
@@ -48,12 +47,25 @@ export const UserItem = ({ open = false, type, data }: Props) => {
       modalType: "none",
     });
 
-  const { userId, email, fullName, company, maxReservedStudents } = data;
+  const {
+    id,
+    firstName,
+    lastName,
+    courseCompletion,
+    courseEngagment,
+    projectDegree,
+    teamProjectDegree,
+    expectedContractType,
+    expectedTypeWork,
+    targetWorkCity,
+    expectedSalary,
+    canTakeApprenticeship,
+    monthsOfCommercialExp,
+  } = data;
 
   const linkToCV = (type: string) => {
-    if (type === "adminStudent") return "/panel/admin/students/u" + userId;
-    if (type === "hrStudentToTalk") return "/panel/hr/students/u" + userId;
-    if (type === "hrStudentHired") return "/panel/hr/students/u" + userId;
+    if (type === "adminStudent") return "/panel/admin/students/" + id;
+    return "/panel/hr/students/" + id;
   };
 
   const handleToggleDetails = () => {
@@ -62,7 +74,7 @@ export const UserItem = ({ open = false, type, data }: Props) => {
 
   const handleDeleteUser = async () => {
     try {
-      await fetchDeleteUser({ id: userId });
+      await fetchDeleteUser({ id });
       closeModal();
       refreshList();
     } catch (e) {
@@ -131,18 +143,12 @@ export const UserItem = ({ open = false, type, data }: Props) => {
   return (
     <li className={classes.StudentItem}>
       <Modal opened={isModalOpen.active} name="Sort Modal">
-        {isModalOpen.modalType === "deleteUser" ? (
-          <ConfirmationPrompt
-            title="Usuwanie użytkownika"
-            question={`Czy na pewno usunąć użytkownika ${fullName}?`}
-            closeModal={closeModal}
-            onConfirm={handleDeleteUser}
-          />
-        ) : isModalOpen.modalType === "editHr" ? (
-          <EditHrForm data={data} closeModal={closeModal} />
-        ) : (
-          <div></div>
-        )}
+        <ConfirmationPrompt
+          title="Usuwanie użytkownika"
+          question={`Czy na pewno usunąć użytkownika ${firstName} ${lastName}?`}
+          closeModal={closeModal}
+          onConfirm={handleDeleteUser}
+        />
       </Modal>
       <div className={classes.info}>
         <div className={classes.personal}>
@@ -153,10 +159,13 @@ export const UserItem = ({ open = false, type, data }: Props) => {
             </p>
           )}
           {type !== "hrStudentAvailable" && <Avatar name="Jakub C" />}
-          <p className={classes.name}>{fullName}</p>
+          <p className={classes.name}>{`${firstName} ${
+            type === "hrStudentAvailable" ? lastName[0] + "." : lastName
+          }`}</p>
         </div>
         <div className={classes.actions}>
           {(type === "adminStudent" ||
+            type === "hrStudentAvailable" ||
             type === "hrStudentToTalk" ||
             type === "hrStudentHired") && (
             <NavLink to={{ pathname: linkToCV(type) }}>
@@ -169,7 +178,7 @@ export const UserItem = ({ open = false, type, data }: Props) => {
             <PrimaryButton
               size="normal"
               fontColor="secondary"
-              onClick={() => handleNotInterest(userId)}
+              onClick={() => handleNotInterest(id)}
             >
               Brak zainteresowania
             </PrimaryButton>
@@ -178,7 +187,7 @@ export const UserItem = ({ open = false, type, data }: Props) => {
             <PrimaryButton
               size="normal"
               fontColor="secondary"
-              onClick={() => handleReserveTalk(userId)}
+              onClick={() => handleReserveTalk(id)}
             >
               Zarezerwuj rozmowę
             </PrimaryButton>
@@ -187,7 +196,7 @@ export const UserItem = ({ open = false, type, data }: Props) => {
             <PrimaryButton
               size="normal"
               fontColor="secondary"
-              onClick={() => handleHire(userId)}
+              onClick={() => handleHire(id)}
             >
               Zatrudnij
             </PrimaryButton>
@@ -196,7 +205,7 @@ export const UserItem = ({ open = false, type, data }: Props) => {
             <PrimaryButton
               size="normal"
               fontColor="secondary"
-              onClick={() => handleCancelHire(userId)}
+              onClick={() => handleCancelHire(id)}
             >
               Anuluj zatrudnienie
             </PrimaryButton>
@@ -225,64 +234,56 @@ export const UserItem = ({ open = false, type, data }: Props) => {
         </div>
       </div>
       <div className={classes.details} ref={detailsRef}>
-        {type === "adminHR" && (
-          <>
-            <PreferencesCard title="Nazwa firmy:" value={company} flex={1.5} />
-            <PreferencesCard title="E-mail:" value={email} flex={1.5} />
-            <PreferencesCard
-              title="Maksymalna liczba rezerwacji:"
-              value={maxReservedStudents.toString()}
-              flex={1.5}
-            />
-          </>
-        )}
-        {type !== "adminHR" && (
-          <>
-            <NoteCard title="Ocena przejścia kursu" note={1.7} stars={false} />
-            <NoteCard
-              title="Ocena aktywności i zaangażowania na kursie"
-              note={4}
-              stars={false}
-              flex={1.4}
-            />
-            <NoteCard
-              title="Ocena kodu w projekcie własnym"
-              note={4.5}
-              stars={false}
-            />
-            <NoteCard
-              title="Ocena pracy w zespole w Scrum"
-              note={5}
-              stars={false}
-            />
-            <PreferencesCard title="Preferowane miejsce pracy" value="Biuro" />
-            <PreferencesCard
-              title="Docelowe miasto, gdzie chce pracować kandydat"
-              value="Warszawa"
-              flex={1.5}
-            />
-            <PreferencesCard
-              title="Oczekiwany typ kontraktu"
-              value="Umowa o pracę"
-              flex={1.6}
-            />
-            <PreferencesCard
-              title="Oczekiwane wynagrodzenie miesięczne netto"
-              value="8000 zł"
-              flex={1.4}
-            />
-            <PreferencesCard
-              title="Zgoda na odbycie bezpłatnych praktyk/stażu na początek"
-              value="TAK"
-              flex={2}
-            />
-            <PreferencesCard
-              title="Komercyjne doświadczenie w programowaniu"
-              value="6 miesięcy"
-              flex={1.4}
-            />
-          </>
-        )}
+        <NoteCard
+          title="Ocena przejścia kursu"
+          note={courseCompletion}
+          stars={false}
+        />
+        <NoteCard
+          title="Ocena aktywności i zaangażowania na kursie"
+          note={courseEngagment}
+          stars={false}
+          flex={1.4}
+        />
+        <NoteCard
+          title="Ocena kodu w projekcie własnym"
+          note={projectDegree}
+          stars={false}
+        />
+        <NoteCard
+          title="Ocena pracy w zespole w Scrum"
+          note={teamProjectDegree}
+          stars={false}
+        />
+        <PreferencesCard
+          title="Preferowane miejsce pracy"
+          value={expectedTypeWork}
+        />
+        <PreferencesCard
+          title="Docelowe miasto, gdzie chce pracować kandydat"
+          value={targetWorkCity}
+          flex={1.5}
+        />
+        <PreferencesCard
+          title="Oczekiwany typ kontraktu"
+          value={expectedContractType}
+          flex={1.6}
+        />
+        <PreferencesCard
+          title="Oczekiwane wynagrodzenie miesięczne netto"
+          value={expectedSalary + "zł"}
+          flex={1.4}
+        />
+        <PreferencesCard
+          title="Zgoda na odbycie bezpłatnych praktyk/stażu na początek"
+          value={canTakeApprenticeship}
+          flex={2}
+        />
+        <PreferencesCard
+          title="Komercyjne doświadczenie w programowaniu"
+          value={monthsOfCommercialExp}
+          flex={1.4}
+        />
       </div>
     </li>
   );

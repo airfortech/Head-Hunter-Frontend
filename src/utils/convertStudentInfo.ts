@@ -3,6 +3,7 @@ import {
   TraineeExpectedTypeWork,
   TraineeProfileEntity,
   TraineeProfileRequest,
+  TraineeShortProfileEntity,
 } from "../types";
 
 export const convertStudentInfo = (
@@ -102,5 +103,44 @@ export const convertStudentInfoForEditing = (
         ? info.monthsOfCommercialExp.toString()
         : ""
       : "";
+  return data;
+};
+
+export const convertShortStudentInfo = (
+  info: TraineeShortProfileEntity
+): ConvertStudentInfo => {
+  const data: any = {};
+  data.id = info.id;
+  data.email = info.email || "Nie podano";
+  data.firstName = info.firstName || "John";
+  data.lastName = info.lastName || "Doe";
+  data.githubAvatarSrc = info.githubUsername
+    ? "https://github.com/" + info.githubUsername + ".png"
+    : null;
+  data.courseCompletion = info.courseCompletion || 1;
+  data.courseEngagment = info.courseEngagment || 1;
+  data.projectDegree = info.projectDegree || 1;
+  data.teamProjectDegree = info.teamProjectDegree || 1;
+  data.expectedTypeWork = "Brak";
+  if (info?.expectedTypeWork === "hybrid")
+    data.expectedTypeWork = TraineeExpectedTypeWork.hybrid;
+  if (info?.expectedTypeWork === "remote")
+    data.expectedTypeWork = TraineeExpectedTypeWork.remote;
+  if (info?.expectedTypeWork === "readyToMove")
+    data.expectedTypeWork = TraineeExpectedTypeWork.readyToMove;
+  if (info?.expectedTypeWork === "onsite")
+    data.expectedTypeWork = TraineeExpectedTypeWork.onsite;
+  data.targetWorkCity = info.targetWorkCity || "Brak";
+  data.expectedContractType = info.expectedContractType
+    ? JSON.parse(info.expectedContractType).join(", ")
+    : "Brak";
+  data.expectedSalary = info.expectedSalary || "Brak";
+  data.canTakeApprenticeship = info.canTakeApprenticeship === 1 ? "Tak" : "Nie";
+  data.monthsOfCommercialExp =
+    info.monthsOfCommercialExp !== undefined
+      ? info.monthsOfCommercialExp.toString()
+        ? info.monthsOfCommercialExp.toString() + " miesięcy"
+        : "Nie podano"
+      : "Nie podano";
   return data;
 };

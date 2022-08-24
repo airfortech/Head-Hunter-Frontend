@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import { useAuth } from "../hooks/useAuth";
-import { FetchList } from "../utils/fetchUsersList";
+import { FetchHrList, FetchList } from "../utils/fetchUsersList";
 import {
   FilterOptions,
   PagesOptions,
@@ -57,14 +57,19 @@ export const SearchProvider = ({ children }: Props) => {
 
   const getList = async () => {
     if (!auth.role) return;
-    const data = await FetchList(type, {
-      ...sortOptions[type],
-      ...filterOptions[type],
-      limit,
-      page: currentPages[type],
-      search: search[type],
-    });
-    console.log(data.count);
+    const data =
+      type === "adminHR"
+        ? await FetchHrList({
+            limit,
+            page: currentPages[type],
+          })
+        : await FetchList(type, {
+            ...sortOptions[type],
+            ...filterOptions[type],
+            limit,
+            page: currentPages[type],
+            search: search[type],
+          });
 
     setUsersLists((prevState) => {
       return { ...prevState, [type]: data };
