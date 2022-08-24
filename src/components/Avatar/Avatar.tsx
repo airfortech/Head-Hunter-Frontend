@@ -1,6 +1,5 @@
 import React from "react";
 import avatar from "../../assets/images/avatar.svg";
-import { useAuth } from "../../hooks/useAuth";
 import { UserRole } from "../../types";
 import classes from "./Avatar.module.css";
 
@@ -8,13 +7,18 @@ interface Props {
   src?: string | null;
   name: string;
   size?: "normal" | "large";
+  role?: UserRole;
 }
 
-export const Avatar = ({ src, name, size = "normal" }: Props) => {
-  const { auth } = useAuth();
+export const Avatar = ({
+  src,
+  name,
+  size = "normal",
+  role = UserRole.trainee,
+}: Props) => {
   return (
     <>
-      {auth.role === UserRole.trainee ? (
+      {role === UserRole.trainee ? (
         <object
           data={src === null ? undefined : src}
           type="image/png"

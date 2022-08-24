@@ -87,6 +87,7 @@ export const Menu = () => {
         <Avatar
           name={auth.name || "Anonymous"}
           src={`https://github.com/${auth.avatar}.png`}
+          role={auth.role}
         />
         <p>{auth.name}</p>
         <i className="bx bx-caret-up" ref={iconRef}></i>

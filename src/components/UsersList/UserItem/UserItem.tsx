@@ -11,6 +11,7 @@ import { Modal } from "../../Modal/Modal";
 import { ConfirmationPrompt } from "../../ConfirmationPrompt/ConfirmationPrompt";
 import { fetchDeleteUser } from "../../../utils/fetchDeleteuser";
 import classes from "./UserItem.module.css";
+import { InfoPrompt } from "../../InfoPrompt/InfoPrompt";
 
 interface Props {
   open?: boolean;
@@ -18,7 +19,7 @@ interface Props {
   data: ConvertStudentInfo;
 }
 
-type ModalTypes = "deleteUser" | "editHr" | "none";
+type ModalTypes = "deleteUser" | "addInterview" | "editHr" | "none";
 
 interface IsModalOpen {
   active: boolean;
@@ -51,6 +52,7 @@ export const UserItem = ({ open = false, type, data }: Props) => {
     id,
     firstName,
     lastName,
+    githubAvatarSrc,
     courseCompletion,
     courseEngagment,
     projectDegree,
@@ -62,6 +64,8 @@ export const UserItem = ({ open = false, type, data }: Props) => {
     canTakeApprenticeship,
     monthsOfCommercialExp,
   } = data;
+
+  console.log(githubAvatarSrc);
 
   const linkToCV = (type: string) => {
     if (type === "adminStudent") return "/panel/admin/students/" + id;
@@ -82,9 +86,9 @@ export const UserItem = ({ open = false, type, data }: Props) => {
       closeModal();
     }
   };
-  const handleReserveTalk = (userId: string) => {
-    console.log("handleReserveTalk", userId);
-  };
+  // const handleReserveTalk = (userId: string) => {
+  //   console.log("handleReserveTalk", userId);
+  // };
   const handleNotInterest = (userId: string) => {
     console.log("handleNotInterest", userId);
   };
@@ -143,12 +147,23 @@ export const UserItem = ({ open = false, type, data }: Props) => {
   return (
     <li className={classes.StudentItem}>
       <Modal opened={isModalOpen.active} name="Sort Modal">
-        <ConfirmationPrompt
-          title="Usuwanie użytkownika"
-          question={`Czy na pewno usunąć użytkownika ${firstName} ${lastName}?`}
-          closeModal={closeModal}
-          onConfirm={handleDeleteUser}
-        />
+        {isModalOpen.modalType === "deleteUser" ? (
+          <ConfirmationPrompt
+            title="Usuwanie użytkownika"
+            question={`Czy na pewno usunąć użytkownika ${firstName} ${lastName}?`}
+            closeModal={closeModal}
+            onConfirm={handleDeleteUser}
+          />
+        ) : isModalOpen.modalType === "addInterview" ? (
+          <InfoPrompt
+            title="Potwierdzenie interview"
+            info={`Użytkownik: ${firstName} ${lastName}`}
+            id={id}
+            closeModal={closeModal}
+          />
+        ) : (
+          <div></div>
+        )}
       </Modal>
       <div className={classes.info}>
         <div className={classes.personal}>
@@ -158,7 +173,9 @@ export const UserItem = ({ open = false, type, data }: Props) => {
               <span>11.07.2022r.</span>
             </p>
           )}
-          {type !== "hrStudentAvailable" && <Avatar name="Jakub C" />}
+          {type !== "hrStudentAvailable" && (
+            <Avatar name="Jakub C" src={githubAvatarSrc} />
+          )}
           <p className={classes.name}>{`${firstName} ${
             type === "hrStudentAvailable" ? lastName[0] + "." : lastName
           }`}</p>
@@ -187,7 +204,7 @@ export const UserItem = ({ open = false, type, data }: Props) => {
             <PrimaryButton
               size="normal"
               fontColor="secondary"
-              onClick={() => handleReserveTalk(id)}
+              onClick={() => openModal("addInterview")}
             >
               Zarezerwuj rozmowę
             </PrimaryButton>
