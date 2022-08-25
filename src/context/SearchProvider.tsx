@@ -35,6 +35,8 @@ export const SearchContext = createContext<SearchOptions>({
   setSearch: () => {},
   type: initialType,
   setType: () => {},
+  isLoading: false,
+  setIsLoading: () => {},
   currentPages: initialPages,
   setCurrentPages: () => {},
   usersLists: initialUsersLists,
@@ -50,6 +52,7 @@ export const SearchProvider = ({ children }: Props) => {
   const [limit, setLimit] = useState<string>(initialLimit);
   const [search, setSearch] = useState<SearchesOptions>(initialSearches);
   const [type, setType] = useState<UsersListType>(initialType);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [currentPages, setCurrentPages] = useState<PagesOptions>(initialPages);
   const [usersLists, setUsersLists] = useState<UsersLists>(initialUsersLists);
   const [refresh, setRefresh] = useState<number>(0);
@@ -57,6 +60,7 @@ export const SearchProvider = ({ children }: Props) => {
 
   const getList = async () => {
     if (!auth.role) return;
+    setIsLoading(true);
     const data =
       type === "adminHR"
         ? await FetchHrList({
@@ -74,6 +78,7 @@ export const SearchProvider = ({ children }: Props) => {
     setUsersLists((prevState) => {
       return { ...prevState, [type]: data };
     });
+    setIsLoading(false);
   };
 
   const refreshList = () => {
@@ -110,6 +115,8 @@ export const SearchProvider = ({ children }: Props) => {
         usersLists,
         setUsersLists,
         refreshList,
+        isLoading,
+        setIsLoading,
       }}
     >
       {children}

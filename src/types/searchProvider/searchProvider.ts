@@ -86,6 +86,8 @@ export interface SearchOptions {
   setSearch: Dispatch<React.SetStateAction<SearchesOptions>>;
   type: UsersListType;
   setType: Dispatch<React.SetStateAction<UsersListType>>;
+  isLoading: boolean;
+  setIsLoading: Dispatch<React.SetStateAction<boolean>>;
   currentPages: PagesOptions;
   setCurrentPages: Dispatch<React.SetStateAction<PagesOptions>>;
   usersLists: UsersLists;
