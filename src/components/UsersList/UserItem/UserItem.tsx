@@ -66,7 +66,13 @@ export const UserItem = ({ open = false, type, data }: Props) => {
   } = data;
 
   const linkToCV = (type: string) => {
-    if (type === "adminStudent") return "/panel/admin/students/" + id;
+    if (
+      type === "adminStudent" ||
+      type === "adminStudentAvailable" ||
+      type === "adminStudentToTalk" ||
+      type === "adminStudentHired"
+    )
+      return "/panel/admin/students/" + id;
     return "/panel/hr/students/" + id;
   };
 
@@ -171,10 +177,7 @@ export const UserItem = ({ open = false, type, data }: Props) => {
           }`}</p>
         </div>
         <div className={classes.actions}>
-          {(type === "adminStudent" ||
-            type === "hrStudentAvailable" ||
-            type === "hrStudentToTalk" ||
-            type === "hrStudentHired") && (
+          {type !== "adminHR" && (
             <NavLink to={{ pathname: linkToCV(type) }}>
               <PrimaryButton size="normal" fontColor="secondary">
                 Pokaż CV
