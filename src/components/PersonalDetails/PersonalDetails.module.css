@@ -8,6 +8,7 @@
   justify-items: start;
   gap: 12px;
   background-color: var(--color-5);
+  overflow: hidden;
 }
 
 .PersonalDetails h1 {
@@ -31,6 +32,7 @@
   gap: 14px;
   font-size: var(--font-size-md);
   line-height: 150%;
+  word-break: break-all;
 }
 
 .contact i {

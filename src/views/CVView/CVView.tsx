@@ -25,6 +25,7 @@ export const CVView = () => {
       monthsOfCommercialExp: 0,
     } as TraineeProfileEntity)
   );
+  const [refresh, setRefresh] = useState<number>(0);
 
   useEffect(() => {
     (async () => {
@@ -47,7 +48,7 @@ export const CVView = () => {
         console.log("error");
       }
     })();
-  }, []);
+  }, [refresh]);
 
   return (
     <div className={classes.CVView}>
@@ -56,7 +57,11 @@ export const CVView = () => {
         <PageLoader />
       ) : (
         <div className={classes.row}>
-          <PersonalDetails traineeInfo={traineeInfo} />
+          <PersonalDetails
+            traineeInfo={traineeInfo}
+            id={id}
+            setRefresh={setRefresh}
+          />
           <TechDetails traineeInfo={{ ...traineeInfo }} />
         </div>
       )}
