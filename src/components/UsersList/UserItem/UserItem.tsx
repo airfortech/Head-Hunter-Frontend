@@ -19,7 +19,12 @@ interface Props {
   data: ConvertStudentInfo;
 }
 
-type ModalTypes = "deleteUser" | "addInterview" | "editHr" | "none";
+type ModalTypes =
+  | "deleteUser"
+  | "addInterview"
+  | "deleteInterview"
+  | "editHr"
+  | "none";
 
 interface IsModalOpen {
   active: boolean;
@@ -91,9 +96,6 @@ export const UserItem = ({ open = false, type, data }: Props) => {
     }
   };
 
-  const handleNotInterest = (userId: string) => {
-    console.log("handleNotInterest", userId);
-  };
   const handleHire = (userId: string) => {
     console.log("handleHire", userId);
   };
@@ -159,6 +161,15 @@ export const UserItem = ({ open = false, type, data }: Props) => {
         ) : isModalOpen.modalType === "addInterview" ? (
           <InfoPrompt
             title="Potwierdzenie interview"
+            purpose="addInterview"
+            info={`Użytkownik: ${firstName} ${lastName}`}
+            id={id}
+            closeModal={closeModal}
+          />
+        ) : isModalOpen.modalType === "deleteInterview" ? (
+          <InfoPrompt
+            title="Potwierdzenie rezygnacji"
+            purpose="deleteInterview"
             info={`Użytkownik: ${firstName} ${lastName}`}
             id={id}
             closeModal={closeModal}
@@ -188,7 +199,7 @@ export const UserItem = ({ open = false, type, data }: Props) => {
             <PrimaryButton
               size="normal"
               fontColor="secondary"
-              onClick={() => handleNotInterest(id)}
+              onClick={() => openModal("deleteInterview")}
             >
               Brak zainteresowania
             </PrimaryButton>

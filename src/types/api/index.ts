@@ -2,6 +2,7 @@ export * from "./addHr";
 export * from "./addInterview";
 export * from "./api";
 export * from "./changePassword";
+export * from "./deleteInterview";
 export * from "./deleteUser";
 export * from "./editHr";
 export * from "./getTraineeProfile";

@@ -17,7 +17,7 @@ enum TraineeExpectedContractType {
   uzuod = "uz/uod",
 }
 
-enum TraineeStatus {
+export enum TraineeStatus {
   available = "available",
   interviewed = "interviewed",
   hired = "hired",
@@ -95,6 +95,7 @@ export interface ConvertStudentInfo {
   education: string;
   workExperience: string;
   courses: string;
+  status: TraineeStatus;
 }
 
 export interface TraineeProfileRequest {

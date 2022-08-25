@@ -1,17 +1,28 @@
-import { ConvertStudentInfo, UserRole } from "../../types";
-import React from "react";
+import { ConvertStudentInfo, TraineeStatus, UserRole } from "../../types";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { Avatar } from "../Avatar/Avatar";
 import { PrimaryButton } from "../buttons/PrimaryButton/PrimaryButton";
 import { ExternalLink } from "../ExternalLink/ExternalLink";
 import classes from "./PersonalDetails.module.css";
+import { InfoPrompt } from "../InfoPrompt/InfoPrompt";
+import { Modal } from "../Modal/Modal";
 
 interface Props {
   traineeInfo: ConvertStudentInfo;
+  id: string | undefined;
+  setRefresh: Dispatch<SetStateAction<number>>;
 }
 
-export const PersonalDetails = ({ traineeInfo }: Props) => {
+type ModalTypes = "addInterview" | "deleteInterview" | "none";
+
+interface IsModalOpen {
+  active: boolean;
+  modalType?: ModalTypes;
+}
+
+export const PersonalDetails = ({ traineeInfo, id, setRefresh }: Props) => {
   const {
     firstName,
     lastName,
@@ -21,9 +32,27 @@ export const PersonalDetails = ({ traineeInfo }: Props) => {
     githubUsername,
     githubSrc,
     githubAvatarSrc,
+    status,
   } = traineeInfo;
   const { auth } = useAuth();
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState<IsModalOpen>({
+    active: false,
+  });
+
+  const openModal = (modalType: ModalTypes) =>
+    setIsModalOpen({
+      active: true,
+      modalType,
+    });
+
+  const closeModal = () => {
+    setIsModalOpen({
+      active: false,
+      modalType: "none",
+    });
+    setRefresh((prevState) => prevState + 1);
+  };
 
   const handleEditInfo = () => {
     navigate("settings");
@@ -31,6 +60,27 @@ export const PersonalDetails = ({ traineeInfo }: Props) => {
 
   return (
     <section className={classes.PersonalDetails}>
+      <Modal opened={isModalOpen.active} name="Sort Modal">
+        {isModalOpen.modalType === "addInterview" ? (
+          <InfoPrompt
+            title="Potwierdzenie interview"
+            purpose="addInterview"
+            info={`Użytkownik: ${firstName} ${lastName}`}
+            id={id}
+            closeModal={closeModal}
+          />
+        ) : isModalOpen.modalType === "deleteInterview" ? (
+          <InfoPrompt
+            title="Potwierdzenie rezygnacji"
+            purpose="deleteInterview"
+            info={`Użytkownik: ${firstName} ${lastName}`}
+            id={id}
+            closeModal={closeModal}
+          />
+        ) : (
+          <div></div>
+        )}
+      </Modal>
       <Avatar
         name={firstName + " " + lastName}
         src={githubAvatarSrc}
@@ -54,8 +104,23 @@ export const PersonalDetails = ({ traineeInfo }: Props) => {
         <h2>O mnie</h2>
         <p>{bio}</p>
       </div>
-      {auth.role === UserRole.hr && (
-        <PrimaryButton size="large" fontColor="secondary" fullWidth>
+      {auth.role === UserRole.hr && status === TraineeStatus.available && (
+        <PrimaryButton
+          size="large"
+          fontColor="secondary"
+          fullWidth
+          onClick={() => openModal("addInterview")}
+        >
+          Zarezerwuj rozmowę
+        </PrimaryButton>
+      )}
+      {auth.role === UserRole.hr && status === TraineeStatus.interviewed && (
+        <PrimaryButton
+          size="large"
+          fontColor="secondary"
+          fullWidth
+          onClick={() => openModal("deleteInterview")}
+        >
           Brak zainteresowania
         </PrimaryButton>
       )}

@@ -1,15 +1,18 @@
 import React, { MouseEventHandler, useEffect, useState } from "react";
+import { useAuth } from "../../hooks/useAuth";
 import { useSearch } from "../../hooks/useSearch";
 import { AddInterviewResponseMessage, JsonResponseStatus } from "../../types";
 import { fetchAddInterview } from "../../utils/fetchAddInterview";
+import { fetchDeleteInterview } from "../../utils/fetchAddInterview copy";
 import { PrimaryButton } from "../buttons/PrimaryButton/PrimaryButton";
 import { Spinner } from "../Spinner/Spinner";
 import classes from "./InfoPrompt.module.css";
 
 interface Props {
   title: string;
+  purpose?: "addInterview" | "deleteInterview";
   info: string;
-  id: string;
+  id: string | undefined;
   closeModal: MouseEventHandler;
 }
 
@@ -23,10 +26,11 @@ const initialApiInfo: ApiInfo = {
   message: "",
 };
 
-export const InfoPrompt = ({ title, info, id, closeModal }: Props) => {
+export const InfoPrompt = ({ title, purpose, info, id, closeModal }: Props) => {
   const [apiInfo, setApiInfo] = useState<ApiInfo>(initialApiInfo);
   const [isSpinnerLoading, setIsSpinnerLoading] = useState(false);
   const { refreshList } = useSearch();
+  const { auth } = useAuth();
 
   const addInterview = async (id: string) => {
     console.log(id);
@@ -64,8 +68,38 @@ export const InfoPrompt = ({ title, info, id, closeModal }: Props) => {
     }
   };
 
+  const deleteInterview = async (hrId: string, traineeId: string) => {
+    console.log(hrId);
+    console.log(traineeId);
+
+    try {
+      setIsSpinnerLoading(true);
+      const { status } = await fetchDeleteInterview({
+        hrId,
+        traineeId,
+      });
+      if (status === JsonResponseStatus.success) {
+        setIsSpinnerLoading(false);
+        setApiInfo({
+          type: "success",
+          message: "Usunąłeś użytkownika z interview!",
+        });
+      }
+    } catch (e) {
+      setApiInfo({
+        type: "error",
+        message: "Spróbuj później!",
+      });
+      setIsSpinnerLoading(false);
+    }
+  };
+
   useEffect(() => {
-    (async () => addInterview(id))();
+    (async () => {
+      if (purpose === "addInterview" && id) addInterview(id);
+      if (purpose === "deleteInterview" && auth.id && id)
+        deleteInterview(auth.id, id);
+    })();
   }, []);
 
   return (
@@ -86,7 +120,7 @@ export const InfoPrompt = ({ title, info, id, closeModal }: Props) => {
         <PrimaryButton
           color="primary"
           onClick={(e) => {
-            refreshList();
+            if (apiInfo.type === "success") refreshList();
             closeModal(e);
           }}
         >

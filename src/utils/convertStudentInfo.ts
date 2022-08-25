@@ -10,6 +10,7 @@ export const convertStudentInfo = (
   info: TraineeProfileEntity
 ): ConvertStudentInfo => {
   const data: any = {};
+  data.status = info.status;
   data.tel = info.tel || "Nie podano";
   data.email = info.email || "Nie podano";
   data.firstName = info.firstName || "John";
