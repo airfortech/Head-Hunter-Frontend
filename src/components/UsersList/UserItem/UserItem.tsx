@@ -84,9 +84,7 @@ export const UserItem = ({ open = false, type, data }: Props) => {
       closeModal();
     }
   };
-  // const handleReserveTalk = (userId: string) => {
-  //   console.log("handleReserveTalk", userId);
-  // };
+
   const handleNotInterest = (userId: string) => {
     console.log("handleNotInterest", userId);
   };
@@ -165,12 +163,6 @@ export const UserItem = ({ open = false, type, data }: Props) => {
       </Modal>
       <div className={classes.info}>
         <div className={classes.personal}>
-          {type === "hrStudentToTalk" && (
-            <p className={classes.reservationDate}>
-              Rezerwacja do
-              <span>11.07.2022r.</span>
-            </p>
-          )}
           {type !== "hrStudentAvailable" && (
             <Avatar name="Jakub C" src={githubAvatarSrc} />
           )}

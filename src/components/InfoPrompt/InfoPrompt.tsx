@@ -1,4 +1,5 @@
 import React, { MouseEventHandler, useEffect, useState } from "react";
+import { useSearch } from "../../hooks/useSearch";
 import { AddInterviewResponseMessage, JsonResponseStatus } from "../../types";
 import { fetchAddInterview } from "../../utils/fetchAddInterview";
 import { PrimaryButton } from "../buttons/PrimaryButton/PrimaryButton";
@@ -25,18 +26,19 @@ const initialApiInfo: ApiInfo = {
 export const InfoPrompt = ({ title, info, id, closeModal }: Props) => {
   const [apiInfo, setApiInfo] = useState<ApiInfo>(initialApiInfo);
   const [isSpinnerLoading, setIsSpinnerLoading] = useState(false);
+  const { refreshList } = useSearch();
 
   const addInterview = async (id: string) => {
     console.log(id);
 
     try {
       setIsSpinnerLoading(true);
-      const { status, message, data } = await fetchAddInterview(id);
+      const { status, message } = await fetchAddInterview(id);
       if (status === JsonResponseStatus.success) {
         setIsSpinnerLoading(false);
         setApiInfo({
           type: "success",
-          message: "Interview powinno się odbyć do " + data.date,
+          message: "Dodałeś użytkownika do interview!",
         });
       }
       if (message === AddInterviewResponseMessage.isHired) {
@@ -81,7 +83,13 @@ export const InfoPrompt = ({ title, info, id, closeModal }: Props) => {
       </p>
       <div className={classes.actions}>
         {isSpinnerLoading && <Spinner />}
-        <PrimaryButton color="primary" onClick={closeModal}>
+        <PrimaryButton
+          color="primary"
+          onClick={(e) => {
+            refreshList();
+            closeModal(e);
+          }}
+        >
           OK
         </PrimaryButton>
       </div>
