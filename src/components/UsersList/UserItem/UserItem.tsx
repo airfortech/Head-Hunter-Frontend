@@ -9,9 +9,9 @@ import { PreferencesCard } from "../../PreferencesCard/PreferencesCard";
 import { Avatar } from "../../Avatar/Avatar";
 import { Modal } from "../../Modal/Modal";
 import { ConfirmationPrompt } from "../../ConfirmationPrompt/ConfirmationPrompt";
+import { InfoPrompt } from "../../InfoPrompt/InfoPrompt";
 import { fetchDeleteUser } from "../../../utils/fetchDeleteuser";
 import classes from "./UserItem.module.css";
-import { InfoPrompt } from "../../InfoPrompt/InfoPrompt";
 
 interface Props {
   open?: boolean;
@@ -24,6 +24,7 @@ type ModalTypes =
   | "addInterview"
   | "deleteInterview"
   | "editHr"
+  | "hire"
   | "none";
 
 interface IsModalOpen {
@@ -94,13 +95,6 @@ export const UserItem = ({ open = false, type, data }: Props) => {
       console.log(e);
       closeModal();
     }
-  };
-
-  const handleHire = (userId: string) => {
-    console.log("handleHire", userId);
-  };
-  const handleCancelHire = (userId: string) => {
-    console.log("handleCancelHire", userId);
   };
 
   useEffect(() => {
@@ -174,6 +168,14 @@ export const UserItem = ({ open = false, type, data }: Props) => {
             id={id}
             closeModal={closeModal}
           />
+        ) : isModalOpen.modalType === "hire" ? (
+          <InfoPrompt
+            title="Potwierdzenie zatrudnienia"
+            purpose="hire"
+            info={`Czy chcesz zatrudnić użytkownika ${firstName} ${lastName}?`}
+            id={id}
+            closeModal={closeModal}
+          />
         ) : (
           <div></div>
         )}
@@ -217,18 +219,9 @@ export const UserItem = ({ open = false, type, data }: Props) => {
             <PrimaryButton
               size="normal"
               fontColor="secondary"
-              onClick={() => handleHire(id)}
+              onClick={() => openModal("hire")}
             >
               Zatrudnij
-            </PrimaryButton>
-          )}
-          {type === "hrStudentHired" && (
-            <PrimaryButton
-              size="normal"
-              fontColor="secondary"
-              onClick={() => handleCancelHire(id)}
-            >
-              Anuluj zatrudnienie
             </PrimaryButton>
           )}
           {type === "adminHR" && (
