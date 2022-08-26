@@ -13,18 +13,12 @@ export const UsersList = ({ children }: Props) => {
 
   useEffect(() => {
     const refCopy = ref.current;
-    if (isLoading) {
-      gsap.to(refCopy, {
-        opacity: 0,
-        duration: 0,
-        ease: "sine.in",
-      });
-    } else {
+    if (!isLoading) {
       gsap.fromTo(
         refCopy,
-        { opacity: 0, translateY: "-100%" },
+        { autoAlpha: 0, translateY: "-100%" },
         {
-          opacity: 1,
+          autoAlpha: 1,
           translateY: "0",
           duration: 0.3,
           delay: 0.1,
