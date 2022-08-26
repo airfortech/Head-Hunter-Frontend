@@ -5,9 +5,9 @@ import { useAuth } from "../../hooks/useAuth";
 import { Avatar } from "../Avatar/Avatar";
 import { PrimaryButton } from "../buttons/PrimaryButton/PrimaryButton";
 import { ExternalLink } from "../ExternalLink/ExternalLink";
-import classes from "./PersonalDetails.module.css";
 import { InfoPrompt } from "../InfoPrompt/InfoPrompt";
 import { Modal } from "../Modal/Modal";
+import classes from "./PersonalDetails.module.css";
 
 interface Props {
   traineeInfo: ConvertStudentInfo;

@@ -97,10 +97,6 @@ export const UserItem = ({ open = false, type, data }: Props) => {
     }
   };
 
-  const handleCancelHire = (userId: string) => {
-    console.log("handleCancelHire", userId);
-  };
-
   useEffect(() => {
     const detailsItems = detailsRef.current?.children;
 
@@ -226,15 +222,6 @@ export const UserItem = ({ open = false, type, data }: Props) => {
               onClick={() => openModal("hire")}
             >
               Zatrudnij
-            </PrimaryButton>
-          )}
-          {type === "hrStudentHired" && (
-            <PrimaryButton
-              size="normal"
-              fontColor="secondary"
-              onClick={() => handleCancelHire(id)}
-            >
-              Anuluj zatrudnienie
             </PrimaryButton>
           )}
           {type === "adminHR" && (

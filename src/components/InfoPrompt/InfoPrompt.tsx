@@ -1,4 +1,5 @@
 import React, { MouseEventHandler, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { useSearch } from "../../hooks/useSearch";
 import { AddInterviewResponseMessage, JsonResponseStatus } from "../../types";
@@ -9,7 +10,6 @@ import { fetchDeleteInterview } from "../../utils/fetchAddInterview copy";
 import { fetchApproveHire } from "../../utils/fetchApproveHire";
 import { fetchHire } from "../../utils/fetchHire";
 import classes from "./InfoPrompt.module.css";
-import { useNavigate } from "react-router-dom";
 
 interface Props {
   title: string;
@@ -71,9 +71,6 @@ export const InfoPrompt = ({ title, purpose, info, id, closeModal }: Props) => {
   };
 
   const deleteInterview = async (hrId: string, traineeId: string) => {
-    console.log(hrId);
-    console.log(traineeId);
-
     try {
       setIsSpinnerLoading(true);
       const { status } = await fetchDeleteInterview({
@@ -170,9 +167,15 @@ export const InfoPrompt = ({ title, purpose, info, id, closeModal }: Props) => {
         <PrimaryButton
           color="primary"
           onClick={(e) => {
-            if (apiInfo.type === "success" && purpose !== "hire") refreshList();
-            closeModal(e);
-            navigate("/");
+            if (apiInfo.type === "success" && purpose !== "hire") {
+              refreshList();
+              closeModal(e);
+            }
+            if (apiInfo.type === "success" && purpose === "approveHire") {
+              refreshList();
+              closeModal(e);
+              navigate("/");
+            }
           }}
         >
           OK
