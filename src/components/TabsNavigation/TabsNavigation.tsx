@@ -31,9 +31,7 @@ export const TabsNavigation = ({ routes }: Props) => {
     setBarValues(index);
     if (pathname.endsWith(route)) return;
     setIsLoading(true);
-    setTimeout(() => {
-      navigate(route);
-    }, 0);
+    navigate(route);
   };
 
   useEffect(() => {
