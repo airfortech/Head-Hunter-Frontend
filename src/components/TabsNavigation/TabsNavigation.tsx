@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useSearch } from "../../hooks/useSearch";
 import classes from "./TabsNavigation.module.css";
 
 interface Props {
@@ -8,20 +9,14 @@ interface Props {
     route: string;
   }[];
 }
-
-interface IsLinkActiveArgs {
-  isActive: boolean;
-}
-
 export const TabsNavigation = ({ routes }: Props) => {
   const itemsEls = useRef<HTMLLIElement[]>([]);
   const barRef = useRef<HTMLDivElement>(null);
   const [xPos, setXPos] = useState<number>();
   const [width, setWidth] = useState<number>();
-
-  const isLinkActive = ({ isActive }: IsLinkActiveArgs): string => {
-    return isActive ? `${classes.link} ${classes.active}` : classes.link;
-  };
+  const navigate = useNavigate();
+  const { setIsLoading } = useSearch();
+  const { pathname } = useLocation();
 
   const setBarValues = (index: number) => {
     const width = itemsEls.current[index].clientWidth;
@@ -32,8 +27,13 @@ export const TabsNavigation = ({ routes }: Props) => {
     }
   };
 
-  const handleClick = (index: number) => {
+  const handleClick = (index: number, route: string) => {
     setBarValues(index);
+    if (pathname.endsWith(route)) return;
+    setIsLoading(true);
+    setTimeout(() => {
+      navigate(route);
+    }, 0);
   };
 
   useEffect(() => {
@@ -59,11 +59,17 @@ export const TabsNavigation = ({ routes }: Props) => {
             ref={(element) => {
               if (element) itemsEls.current[i] = element;
             }}
-            onClick={() => handleClick(i)}
+            onClick={() => handleClick(i, route)}
           >
-            <NavLink end to={route} className={isLinkActive}>
+            <p
+              className={
+                pathname.endsWith(route)
+                  ? `${classes.link} ${classes.active}`
+                  : `${classes.link}`
+              }
+            >
               {anchor}
-            </NavLink>
+            </p>
           </li>
         ))}
       </ul>

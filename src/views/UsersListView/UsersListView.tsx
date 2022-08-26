@@ -17,7 +17,7 @@ interface Props {
 }
 
 export const UsersListView = ({ type }: Props) => {
-  const { setType, usersLists } = useSearch();
+  const { setType, usersLists, isLoading } = useSearch();
 
   useEffect(() => {
     setType(type);
@@ -31,21 +31,23 @@ export const UsersListView = ({ type }: Props) => {
         currentPage={usersLists[type].page}
         totalPages={usersLists[type].pages}
       />
-      <div className={classes.wrapper}>
-        <UsersList>
-          {!usersLists[type].count ? (
-            <h2 className={classes.noResults}>Brak wyników.</h2>
-          ) : type === "adminHR" ? (
-            usersLists[type].users.map((user: HrProfileEntity) => (
-              <UserItemHr type={type} key={user.userId} data={user} />
-            ))
-          ) : (
-            usersLists[type].users.map((user: ConvertStudentInfo) => (
-              <UserItem type={type} key={user.id} data={user} />
-            ))
-          )}
-        </UsersList>
-      </div>
+      {!isLoading && (
+        <div className={classes.wrapper}>
+          <UsersList>
+            {!usersLists[type].count ? (
+              <h2 className={classes.noResults}>Brak wyników.</h2>
+            ) : type === "adminHR" ? (
+              usersLists[type].users.map((user: HrProfileEntity) => (
+                <UserItemHr type={type} key={user.userId} data={user} />
+              ))
+            ) : (
+              usersLists[type].users.map((user: ConvertStudentInfo) => (
+                <UserItem type={type} key={user.id} data={user} />
+              ))
+            )}
+          </UsersList>
+        </div>
+      )}
     </div>
   );
 };
