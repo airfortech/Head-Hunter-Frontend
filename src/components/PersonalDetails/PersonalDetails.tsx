@@ -15,7 +15,12 @@ interface Props {
   setRefresh: Dispatch<SetStateAction<number>>;
 }
 
-type ModalTypes = "addInterview" | "deleteInterview" | "none";
+type ModalTypes =
+  | "addInterview"
+  | "deleteInterview"
+  | "hire"
+  | "approveHire"
+  | "none";
 
 interface IsModalOpen {
   active: boolean;
@@ -77,6 +82,22 @@ export const PersonalDetails = ({ traineeInfo, id, setRefresh }: Props) => {
             id={id}
             closeModal={closeModal}
           />
+        ) : isModalOpen.modalType === "hire" ? (
+          <InfoPrompt
+            title="Potwierdzenie zatrudnienia"
+            purpose="hire"
+            info={`Czy chcesz zatrudnić użytkownika ${firstName} ${lastName}?`}
+            id={id}
+            closeModal={closeModal}
+          />
+        ) : isModalOpen.modalType === "approveHire" ? (
+          <InfoPrompt
+            title="Potwierdzenie zatrudnienia"
+            purpose="approveHire"
+            info={`Czy chcesz potwierdzić zatrudnienie? Czynność ta spowoduje blokadę dostępu do platformy.`}
+            id={id}
+            closeModal={closeModal}
+          />
         ) : (
           <div></div>
         )}
@@ -124,8 +145,23 @@ export const PersonalDetails = ({ traineeInfo, id, setRefresh }: Props) => {
           Brak zainteresowania
         </PrimaryButton>
       )}
-      {auth.role === UserRole.hr && (
-        <PrimaryButton size="large" fontColor="secondary" fullWidth>
+      {auth.role === UserRole.hr && status === TraineeStatus.interviewed && (
+        <PrimaryButton
+          size="large"
+          fontColor="secondary"
+          fullWidth
+          onClick={() => openModal("hire")}
+        >
+          Zatrudnij
+        </PrimaryButton>
+      )}
+      {auth.role === UserRole.trainee && (
+        <PrimaryButton
+          size="large"
+          fontColor="secondary"
+          fullWidth
+          onClick={() => openModal("approveHire")}
+        >
           Zatrudniony
         </PrimaryButton>
       )}
