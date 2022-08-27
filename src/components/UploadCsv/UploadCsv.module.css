@@ -10,6 +10,10 @@
   font-size: var(--font-size-md);
 }
 
+.UploadCsv img {
+  max-width: 100%;
+}
+
 .wrapper {
   width: 100%;
   max-width: 480px;

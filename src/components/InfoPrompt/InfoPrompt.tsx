@@ -167,15 +167,14 @@ export const InfoPrompt = ({ title, purpose, info, id, closeModal }: Props) => {
         <PrimaryButton
           color="primary"
           onClick={(e) => {
-            if (apiInfo.type === "success" && purpose !== "hire") {
-              refreshList();
-              closeModal(e);
-            }
             if (apiInfo.type === "success" && purpose === "approveHire") {
               refreshList();
               closeModal(e);
               navigate("/");
-            }
+            } else if (apiInfo.type === "success" && purpose !== "hire") {
+              refreshList();
+              closeModal(e);
+            } else closeModal(e);
           }}
         >
           OK
