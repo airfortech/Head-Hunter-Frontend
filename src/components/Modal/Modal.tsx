@@ -17,9 +17,6 @@ export const Modal = ({ children, opened, name }: Props) => {
 
   const openModal = () => {
     setIsOpen(true);
-    // todo: change animation using
-    // modalRef.current.node
-
     if (!modalRef.current) return;
     gsap.fromTo(
       modalRef.current.node,
@@ -47,6 +44,7 @@ export const Modal = ({ children, opened, name }: Props) => {
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         shouldCloseOnOverlayClick={false}
+        shouldCloseOnEsc={false}
         contentLabel={name}
         overlayClassName={classes.overlay}
         className={classes.content}

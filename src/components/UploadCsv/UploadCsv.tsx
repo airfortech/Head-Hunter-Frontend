@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState } from "react";
-import { JsonResponseStatus } from "../../types";
+import { JsonResponseStatus, UploadCsvResponseMessage } from "../../types";
 import { fetchUploadCsv } from "../../utils/fetchUploadCsv";
 import { PrimaryButton } from "../buttons/PrimaryButton/PrimaryButton";
 import { Spinner } from "../Spinner/Spinner";
@@ -27,15 +27,35 @@ export const UploadCsv = () => {
 
     try {
       setIsSpinnerLoading(true);
-      const { status } = await fetchUploadCsv(file);
+      const { status, data, message } = await fetchUploadCsv(file);
       if (status === JsonResponseStatus.success) {
         setIsSpinnerLoading(false);
+        if (data.traineeWithBadData.length > 0)
+          setApiInfo({
+            type: "success",
+            message: `Liczba dodanych kursantów: ${
+              data.countOfAddedTrainee
+            }. Błędnie wypełnieni kursanci: ${data.traineeWithBadData
+              .map((row) => row.trainee.email)
+              .join(", ")}.`,
+          });
+        else
+          setApiInfo({
+            type: "success",
+            message: "Liczba dodanych kursantów: " + data.countOfAddedTrainee,
+          });
+      }
+      if (message === UploadCsvResponseMessage.incorrectColumn) {
         setApiInfo({
-          type: "success",
-          message: "Kursanci zostali pomyślnie dodani!",
+          type: "error",
+          message:
+            "Niepoprawne nazwy kolumn! Zerknij na powyższy przykład struktury.",
         });
+        setIsSpinnerLoading(false);
       }
     } catch (e) {
+      console.log(e);
+
       setApiInfo({
         type: "error",
         message: "Spróbuj później!",
