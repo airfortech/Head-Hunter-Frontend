@@ -8,6 +8,7 @@ import { ExternalLink } from "../ExternalLink/ExternalLink";
 import { InfoPrompt } from "../InfoPrompt/InfoPrompt";
 import { Modal } from "../Modal/Modal";
 import classes from "./PersonalDetails.module.css";
+import { ConfirmationPrompt } from "../ConfirmationPrompt/ConfirmationPrompt";
 
 interface Props {
   traineeInfo: ConvertStudentInfo;
@@ -19,7 +20,8 @@ type ModalTypes =
   | "addInterview"
   | "deleteInterview"
   | "hire"
-  | "approveHire"
+  | "approveHireConfirmation"
+  | "approveHireInfo"
   | "none";
 
 interface IsModalOpen {
@@ -44,6 +46,11 @@ export const PersonalDetails = ({ traineeInfo, id, setRefresh }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState<IsModalOpen>({
     active: false,
   });
+
+  const name =
+    firstName + lastName === "emptyempty"
+      ? "Użytkownik anonimowy"
+      : firstName + " " + lastName;
 
   const openModal = (modalType: ModalTypes) =>
     setIsModalOpen({
@@ -90,24 +97,27 @@ export const PersonalDetails = ({ traineeInfo, id, setRefresh }: Props) => {
             id={id}
             closeModal={closeModal}
           />
-        ) : isModalOpen.modalType === "approveHire" ? (
+        ) : isModalOpen.modalType === "approveHireInfo" ? (
           <InfoPrompt
             title="Potwierdzenie zatrudnienia"
-            purpose="approveHire"
-            info={`Czy chcesz potwierdzić zatrudnienie? Czynność ta spowoduje blokadę dostępu do platformy.`}
+            purpose="approveHireInfo"
+            info={`Za chwilę stracisz dostęp do platformy.`}
             id={id}
             closeModal={closeModal}
+          />
+        ) : isModalOpen.modalType === "approveHireConfirmation" ? (
+          <ConfirmationPrompt
+            title="Potwierdzenie zatrudnienia"
+            question={`Czy chcesz potwierdzić zatrudnienie? Czynność ta spowoduje blokadę dostępu do platformy.`}
+            closeModal={closeModal}
+            onConfirm={() => openModal("approveHireInfo")}
           />
         ) : (
           <div></div>
         )}
       </Modal>
-      <Avatar
-        name={firstName + " " + lastName}
-        src={githubAvatarSrc}
-        size="large"
-      />
-      <h1>{firstName + " " + lastName}</h1>
+      <Avatar name={name} src={githubAvatarSrc} size="large" />
+      <h1>{name}</h1>
       <ExternalLink href={githubSrc} icon="github">
         {githubUsername}
       </ExternalLink>
@@ -160,7 +170,7 @@ export const PersonalDetails = ({ traineeInfo, id, setRefresh }: Props) => {
           size="large"
           fontColor="secondary"
           fullWidth
-          onClick={() => openModal("approveHire")}
+          onClick={() => openModal("approveHireConfirmation")}
         >
           Zatrudniony
         </PrimaryButton>

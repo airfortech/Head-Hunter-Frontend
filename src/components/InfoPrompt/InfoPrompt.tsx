@@ -13,7 +13,7 @@ import classes from "./InfoPrompt.module.css";
 
 interface Props {
   title: string;
-  purpose?: "addInterview" | "deleteInterview" | "hire" | "approveHire";
+  purpose?: "addInterview" | "deleteInterview" | "hire" | "approveHireInfo";
   info: string;
   id: string | undefined;
   closeModal: MouseEventHandler;
@@ -145,7 +145,7 @@ export const InfoPrompt = ({ title, purpose, info, id, closeModal }: Props) => {
       if (purpose === "deleteInterview" && auth.id && id)
         deleteInterview(auth.id, id);
       if (purpose === "hire" && id) hire(id);
-      if (purpose === "approveHire") approveHire();
+      if (purpose === "approveHireInfo") approveHire();
     })();
   }, []);
 
@@ -167,7 +167,7 @@ export const InfoPrompt = ({ title, purpose, info, id, closeModal }: Props) => {
         <PrimaryButton
           color="primary"
           onClick={(e) => {
-            if (apiInfo.type === "success" && purpose === "approveHire") {
+            if (apiInfo.type === "success" && purpose === "approveHireInfo") {
               refreshList();
               closeModal(e);
               navigate("/");

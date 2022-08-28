@@ -92,6 +92,12 @@ export const Register = () => {
                 message: "Hasło musi mieć przynajmniej 6 znaków!",
               });
               setIsSpinnerLoading(false);
+            } else {
+              setApiInfo({
+                type: "error",
+                message: "Spróbuj później!",
+              });
+              setIsSpinnerLoading(false);
             }
           } catch (e) {
             setApiInfo({

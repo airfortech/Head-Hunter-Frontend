@@ -41,9 +41,10 @@ export const convertStudentInfo = (
   if (info?.expectedTypeWork === "onsite")
     data.expectedTypeWork = TraineeExpectedTypeWork.onsite;
   data.targetWorkCity = info.targetWorkCity || "Brak";
-  data.expectedContractType = info.expectedContractType
-    ? JSON.parse(info.expectedContractType).join(", ")
-    : "Brak";
+  data.expectedContractType =
+    info.expectedContractType && JSON.parse(info.expectedContractType) > 0
+      ? JSON.parse(info.expectedContractType).join(", ")
+      : "Brak";
   data.expectedSalary = info.expectedSalary || "Brak";
   data.canTakeApprenticeship = info.canTakeApprenticeship === 1 ? "Tak" : "Nie";
   data.monthsOfCommercialExp =
@@ -68,8 +69,8 @@ export const convertStudentInfoForEditing = (
   info: TraineeProfileEntity
 ): TraineeProfileRequest => {
   const data: any = {};
-  data.firstName = info.firstName || "";
-  data.lastName = info.lastName || "";
+  data.firstName = info.firstName !== "empty" || "";
+  data.lastName = info.lastName !== "empty" || "";
   data.githubUsername = info.githubUsername || "";
   data.tel = info.tel || "";
   data.bio = info.bio || "";
@@ -113,8 +114,10 @@ export const convertShortStudentInfo = (
   const data: any = {};
   data.id = info.id;
   data.email = info.email || "Nie podano";
-  data.firstName = info.firstName || "John";
-  data.lastName = info.lastName || "Doe";
+  data.firstName =
+    info.firstName === "empty" ? "Użytkownik" : info.firstName || "Użytkownik";
+  data.lastName =
+    info.lastName === "empty" ? "Anonimowy" : info.lastName || "Anonimowy";
   data.githubAvatarSrc = info.githubUsername
     ? "https://github.com/" + info.githubUsername + ".png"
     : null;
@@ -132,9 +135,10 @@ export const convertShortStudentInfo = (
   if (info?.expectedTypeWork === "onsite")
     data.expectedTypeWork = TraineeExpectedTypeWork.onsite;
   data.targetWorkCity = info.targetWorkCity || "Brak";
-  data.expectedContractType = info.expectedContractType
-    ? JSON.parse(info.expectedContractType).join(", ")
-    : "Brak";
+  data.expectedContractType =
+    info.expectedContractType && JSON.parse(info.expectedContractType) > 0
+      ? JSON.parse(info.expectedContractType).join(", ")
+      : "Brak";
   data.expectedSalary = info.expectedSalary || "Brak";
   data.canTakeApprenticeship = info.canTakeApprenticeship === 1 ? "Tak" : "Nie";
   data.monthsOfCommercialExp =
