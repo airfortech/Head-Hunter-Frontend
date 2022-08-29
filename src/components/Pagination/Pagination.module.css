@@ -25,7 +25,7 @@
   outline: 1px solid red;
 }
 
-.select [class*="-control"] {
+.select :global(.select__control) {
   box-shadow: none;
   padding: 0 5px;
   height: 24px;
@@ -37,7 +37,7 @@
   border: none;
 }
 
-.select [class$="-ValueContainer"] {
+.select :global(.select__value-container) {
   margin: 0;
   padding: 0;
   width: 20px;
@@ -47,25 +47,25 @@
   align-items: center;
 }
 
-.select [class$="-singleValue"] {
+.select :global(.select__single-value) {
   position: relative;
   display: flex;
   align-items: center;
   color: var(--font-color-4);
 }
 
-.select [class$="-Input"] {
+.select :global(.select__input-container) {
   position: absolute;
   opacity: 0;
 }
 
-.select [class$="-Input"] input {
+.select :global(.select__input-container) input {
   position: absolute;
   opacity: 0;
   outline: none;
 }
 
-.select [class$="-indicatorContainer"] {
+.select :global(.select__indicator) {
   padding: 0;
   margin: 0;
   width: 12px;
@@ -73,18 +73,18 @@
   cursor: pointer;
 }
 
-.select [class$="-indicatorContainer"]:hover {
+.select :global(.select__indicators):hover {
   padding: 0;
   margin: 0;
   color: var(--color-8);
   width: 12px;
 }
 
-.select [class$="-indicatorSeparator"] {
+.select :global(.select__indicator-separator) {
   display: none;
 }
 
-.select [class*="-menu"] {
+.select :global(.select__menu) {
   right: 0;
   border-radius: 0;
   width: 200%;
@@ -92,7 +92,7 @@
   box-shadow: none;
 }
 
-.select [class*="-MenuList"] {
+.select :global(.select__menu-list) {
   border-radius: 0;
   padding: 0;
   display: flex;
@@ -100,7 +100,7 @@
   overflow: hidden;
 }
 
-.select [class$="-option"] {
+.select :global(.select__option) {
   height: 24px;
   width: 50%;
   display: flex;
@@ -111,11 +111,11 @@
   cursor: pointer;
   transition: all var(--transition-speed-fast) ease;
 }
-.select [class$="-option"]:hover {
+.select :global(.select__option):hover {
   background-color: var(--color-11);
 }
 
-.select [class$="-option"]:focus {
+.select :global(.select__option):focus {
   background-color: var(--color-15);
 }
 

@@ -49,6 +49,7 @@ export const Pagination = ({ type, currentPage, totalPages }: Props) => {
         value={value}
         onChange={handleChangeLimit}
         className={classes.select}
+        classNamePrefix="select"
       />
       <p className={classes.site}>
         strona {currentPage} / {totalPages}
