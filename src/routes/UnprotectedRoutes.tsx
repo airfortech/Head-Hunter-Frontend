@@ -11,7 +11,7 @@ import { NoMatchView } from "../views/NoMatchView/NoMatchView";
 export const UnprotectedRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<IndexView />} />
+      <Route index element={<IndexView />} />
       <Route path="*" element={<UnprotectedView />}>
         <Route path="login" element={<LoginView />} />
         <Route path="lostpassword" element={<LostPasswordView />} />

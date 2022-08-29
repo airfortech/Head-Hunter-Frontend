@@ -7,3 +7,9 @@
   top: 20px;
   right: 20px;
 }
+
+.authors {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}

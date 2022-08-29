@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import ReactModal from "react-modal";
 import { gsap } from "gsap";
 import classes from "./Modal.module.css";
+import { ScrollableWrapper } from "../ScrollableWrapper/ScrollableWrapper";
 
 interface Props {
   children: JSX.Element | JSX.Element[];
@@ -17,6 +18,9 @@ export const Modal = ({ children, opened, name }: Props) => {
 
   const openModal = () => {
     setIsOpen(true);
+    // todo: change animation using
+    // modalRef.current.node
+
     if (!modalRef.current) return;
     gsap.fromTo(
       modalRef.current.node,
@@ -44,13 +48,12 @@ export const Modal = ({ children, opened, name }: Props) => {
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         shouldCloseOnOverlayClick={false}
-        shouldCloseOnEsc={false}
         contentLabel={name}
         overlayClassName={classes.overlay}
         className={classes.content}
         ref={modalRef}
       >
-        {children}
+        <ScrollableWrapper>{children}</ScrollableWrapper>
       </ReactModal>
     </div>
   );

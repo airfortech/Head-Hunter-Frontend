@@ -285,7 +285,9 @@ export const UserItem = ({ open = false, type, data }: Props) => {
         />
         <PreferencesCard
           title="Oczekiwane wynagrodzenie miesięczne netto"
-          value={expectedSalary + "zł"}
+          value={
+            expectedSalary === "Brak" ? expectedSalary : expectedSalary + "zł"
+          }
           flex={1.4}
         />
         <PreferencesCard

@@ -59,7 +59,9 @@ export const TechDetails = ({ traineeInfo }: Props) => {
         />
         <PreferencesCard
           title="Oczekiwane wynagrodzenie miesięczne netto"
-          value={expectedSalary + "zł"}
+          value={
+            expectedSalary === "Brak" ? expectedSalary : expectedSalary + "zł"
+          }
           flex={1.2}
         />
         <PreferencesCard

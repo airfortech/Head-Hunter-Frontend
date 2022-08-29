@@ -89,7 +89,9 @@ export const Menu = () => {
           src={`https://github.com/${auth.avatar}.png`}
           role={auth.role}
         />
-        <p>{auth.name}</p>
+        <p>
+          {auth.name === "empty empty" ? "Użytkownik anonimowy" : auth.name}
+        </p>
         <i className="bx bx-caret-up" ref={iconRef}></i>
       </button>
       <div className={classes.actions} ref={actionsRef}>
