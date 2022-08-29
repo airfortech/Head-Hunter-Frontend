@@ -15,6 +15,7 @@ import {
 } from "./filterFormData";
 import { initialFilterValues } from "../../../context/searchProviderData";
 import classes from "./FilterForm.module.css";
+// import { ScrollableWrapper } from "../../ScrollableWrapper/ScrollableWrapper";
 
 interface Props {
   closeModal: MouseEventHandler;
@@ -26,6 +27,7 @@ export const FilterForm = ({ type, closeModal }: Props) => {
     useSearch();
 
   return (
+    // <ScrollableWrapper>
     <div className={classes.FilterForm}>
       <Formik
         enableReinitialize
@@ -196,5 +198,6 @@ export const FilterForm = ({ type, closeModal }: Props) => {
         )}
       </Formik>
     </div>
+    // </ScrollableWrapper>
   );
 };

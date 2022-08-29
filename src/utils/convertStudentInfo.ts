@@ -147,5 +147,6 @@ export const convertShortStudentInfo = (
         ? info.monthsOfCommercialExp.toString() + " miesięcy"
         : "Nie podano"
       : "Nie podano";
+
   return data;
 };
