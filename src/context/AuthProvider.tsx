@@ -1,4 +1,4 @@
-import React, { createContext, Dispatch, useState } from "react";
+import React, { createContext, useState } from "react";
 import { UserRole } from "../types";
 
 interface Props {
@@ -15,13 +15,11 @@ interface LoginData {
 
 interface Auth {
   auth: LoginData;
-  setAuth: Dispatch<React.SetStateAction<LoginData>>;
+  // setAuth: Dispatch<React.SetStateAction<LoginData>>;
+  setAuth: (newAuth: LoginData) => void;
 }
 
-export const AuthContext = createContext<Auth>({
-  auth: {},
-  setAuth: () => {},
-});
+export const AuthContext = createContext<Auth | undefined>(undefined);
 
 export const AuthProvider = ({ children }: Props) => {
   const [auth, setAuth] = useState<LoginData>({});

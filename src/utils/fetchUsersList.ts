@@ -87,10 +87,12 @@ export const FetchHrList = async (
     const response = await fetch(url, {
       credentials: "include",
     });
+    // dopisac ponizsze w kazdym fetchu, albo axios
+    if (!response.ok) throw new Error();
     const data: GetHrUsersListResponse = await response.json();
     return data.data;
   } catch (e) {
-    console.log("error fetching");
+    console.error("error fetching");
     return {
       page: 0,
       count: 0,
