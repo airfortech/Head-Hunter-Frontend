@@ -74,7 +74,7 @@ export const SearchPanel = ({ type }: Props) => {
           color="primary"
           onClick={() => openModal("addHrModal")}
         >
-          Dodaj HRowca
+          Dodaj użytkownika HR
         </PrimaryButton>
       )}
       {type !== "adminHR" && (

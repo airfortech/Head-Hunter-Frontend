@@ -32,7 +32,7 @@ export const AddHrForm = ({ closeModal }: Props) => {
   return (
     <div className={classes.AddHrForm}>
       <div className={classes.row}>
-        <h2>Dodawanie Hrowca</h2>
+        <h2>Dodawanie użytkownika HR</h2>
         <PrimaryButton
           size="normal"
           color="quaternary"
@@ -147,7 +147,7 @@ export const AddHrForm = ({ closeModal }: Props) => {
                 fontColor="secondary"
                 disabled={!isValid}
               >
-                Dodaj Hrowca
+                Dodaj użytkownika HR
               </PrimaryButton>
             </div>
           </Form>
