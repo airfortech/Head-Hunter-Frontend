@@ -76,6 +76,13 @@ export const LostPassword = () => {
               });
               setIsSpinnerLoading(false);
             }
+            if (message === LostPasswordResponseMessage.cantRestorePassword) {
+              setApiInfo({
+                type: "error",
+                message: "Nie możesz odzyskać hasła dla tego użytkownika!",
+              });
+              setIsSpinnerLoading(false);
+            }
             if (
               message === LostPasswordResponseMessage.userWithThatEmailNotExist
             ) {

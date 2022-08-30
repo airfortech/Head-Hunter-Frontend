@@ -8,6 +8,7 @@ import { Spinner } from "../Spinner/Spinner";
 import {
   ChangePasswordRequest,
   ChangePasswordResponse,
+  ChangePasswordResponseMessage,
   JsonResponseStatus,
 } from "../../types";
 import { config } from "../../config/config";
@@ -86,17 +87,25 @@ export const ChangePasswordForm = () => {
               });
               resetForm();
             }
-            if (message === "New password must be different") {
+            if (message === ChangePasswordResponseMessage.passwordIsTheSame) {
               setApiInfo({
                 type: "error",
                 message: "Nie możesz ustawić takiego samego hasła!",
               });
               setIsSpinnerLoading(false);
             }
-            if (message === "Bad Password") {
+            if (message === ChangePasswordResponseMessage.incorrectPassword) {
               setApiInfo({
                 type: "error",
                 message: "Podałeś złe aktualne hasło!",
+              });
+              setIsSpinnerLoading(false);
+            }
+            if (message === ChangePasswordResponseMessage.cantChangePassword) {
+              setApiInfo({
+                type: "error",
+                message:
+                  "Nie możesz zmienić hasła tego użytkownika w wersji demo!",
               });
               setIsSpinnerLoading(false);
             }

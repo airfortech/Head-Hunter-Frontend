@@ -10,7 +10,7 @@ import { UserRole } from "../types";
 import { NoMatchView } from "../views/NoMatchView/NoMatchView";
 
 const navLinks = [
-  { anchor: "HRowcy", route: "hrs" },
+  { anchor: "HR", route: "hrs" },
   { anchor: "Kursanci", route: "students" },
   { anchor: "Dostępni kursanci", route: "students/available" },
   { anchor: "Do rozmowy", route: "students/reserved" },

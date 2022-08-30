@@ -59,7 +59,7 @@ export const EditHrForm = ({ data, closeModal }: Props) => {
             setIsSpinnerLoading(false);
             setApiInfo({
               type: "success",
-              message: "Zmieniłeś dane Hrowca!",
+              message: "Zmieniłeś dane użytkownika HR!",
             });
             refreshList();
           } catch (e) {

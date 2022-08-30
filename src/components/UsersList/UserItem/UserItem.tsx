@@ -1,4 +1,8 @@
-import { ConvertStudentInfo, UsersListType } from "../../../types";
+import {
+  ConvertStudentInfo,
+  DeleteUserResponseMessage,
+  UsersListType,
+} from "../../../types";
 import React, { useEffect, useRef, useState } from "react";
 import { useSearch } from "../../../hooks/useSearch";
 import { NavLink } from "react-router-dom";
@@ -25,7 +29,8 @@ type ModalTypes =
   | "deleteInterview"
   | "editHr"
   | "hire"
-  | "none";
+  | "none"
+  | "demoDelete";
 
 interface IsModalOpen {
   active: boolean;
@@ -88,9 +93,11 @@ export const UserItem = ({ open = false, type, data }: Props) => {
 
   const handleDeleteUser = async () => {
     try {
-      await fetchDeleteUser({ id });
+      const { message } = await fetchDeleteUser({ id });
       closeModal();
-      refreshList();
+      if (message === DeleteUserResponseMessage.userCantBeDeleted) {
+        openModal("demoDelete");
+      } else refreshList();
     } catch (e) {
       console.log(e);
       closeModal();
@@ -151,6 +158,13 @@ export const UserItem = ({ open = false, type, data }: Props) => {
             question={`Czy na pewno usunąć użytkownika ${firstName} ${lastName}?`}
             closeModal={closeModal}
             onConfirm={handleDeleteUser}
+          />
+        ) : isModalOpen.modalType === "demoDelete" ? (
+          <InfoPrompt
+            title="Demo"
+            info={`Użytkownik ${firstName} ${lastName} nie może zostać usunięty w wersji demo. Spróbuj z innym użytkownikiem!`}
+            id={id}
+            closeModal={closeModal}
           />
         ) : isModalOpen.modalType === "addInterview" ? (
           <InfoPrompt

@@ -1,4 +1,8 @@
-import { HrProfileEntity, UsersListType } from "../../../types";
+import {
+  DeleteUserResponseMessage,
+  HrProfileEntity,
+  UsersListType,
+} from "../../../types";
 import React, { useEffect, useRef, useState } from "react";
 import { useSearch } from "../../../hooks/useSearch";
 import { gsap } from "gsap";
@@ -9,6 +13,7 @@ import { ConfirmationPrompt } from "../../ConfirmationPrompt/ConfirmationPrompt"
 import { fetchDeleteUser } from "../../../utils/fetchDeleteuser";
 import { EditHrForm } from "../../EditHrForm/EditHrForm";
 import classes from "./UserItem.module.css";
+import { InfoPrompt } from "../../InfoPrompt/InfoPrompt";
 
 interface Props {
   open?: boolean;
@@ -16,7 +21,7 @@ interface Props {
   data: HrProfileEntity;
 }
 
-type ModalTypes = "deleteUser" | "editHr" | "none";
+type ModalTypes = "deleteUser" | "editHr" | "demoDelete" | "none";
 
 interface IsModalOpen {
   active: boolean;
@@ -53,9 +58,11 @@ export const UserItemHr = ({ open = false, data }: Props) => {
 
   const handleDeleteUser = async () => {
     try {
-      await fetchDeleteUser({ id: userId });
+      const { message } = await fetchDeleteUser({ id: userId });
       closeModal();
-      refreshList();
+      if (message === DeleteUserResponseMessage.userCantBeDeleted) {
+        openModal("demoDelete");
+      } else refreshList();
     } catch (e) {
       console.log(e);
       closeModal();
@@ -116,6 +123,13 @@ export const UserItemHr = ({ open = false, data }: Props) => {
             question={`Czy na pewno usunąć użytkownika ${fullName}?`}
             closeModal={closeModal}
             onConfirm={handleDeleteUser}
+          />
+        ) : isModalOpen.modalType === "demoDelete" ? (
+          <InfoPrompt
+            title="Demo"
+            info={`Użytkownik ${fullName} nie może zostać usunięty w wersji demo. Spróbuj z innym użytkownikiem!`}
+            id={userId}
+            closeModal={closeModal}
           />
         ) : isModalOpen.modalType === "editHr" ? (
           <EditHrForm data={data} closeModal={closeModal} />
